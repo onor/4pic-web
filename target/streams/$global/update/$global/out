@@ -1,0 +1,14 @@
+[0m[[0minfo[0m] [0mUpdating {file:/Users/piyushshah/Development/git/fourpic-web/}angular-seed-play...[0m
+[0m[[0minfo[0m] [0mdownloading http://repo.typesafe.com/typesafe/releases/play/play_2.10/2.1.4/play_2.10-2.1.4.jar ...[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] play#play_2.10;2.1.4!play_2.10.jar (6229ms)[0m
+[0m[[0minfo[0m] [0mdownloading http://repo.typesafe.com/typesafe/releases/play/templates_2.10/2.1.4/templates_2.10-2.1.4.jar ...[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] play#templates_2.10;2.1.4!templates_2.10.jar (498ms)[0m
+[0m[[0minfo[0m] [0mdownloading http://repo.typesafe.com/typesafe/releases/play/play-iteratees_2.10/2.1.4/play-iteratees_2.10-2.1.4.jar ...[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] play#play-iteratees_2.10;2.1.4!play-iteratees_2.10.jar (1129ms)[0m
+[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0.jar ...[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] xerces#xercesImpl;2.11.0!xercesImpl.jar (778ms)[0m
+[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/org/webjars/jquery/1.9.0/jquery-1.9.0.jar ...[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.webjars#jquery;1.9.0!jquery.jar (170ms)[0m
+[0m[[0minfo[0m] [0mdownloading http://repo.typesafe.com/typesafe/releases/play/play-test_2.10/2.1.4/play-test_2.10-2.1.4.jar ...[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] play#play-test_2.10;2.1.4!play-test_2.10.jar (1184ms)[0m
+[0m[[0minfo[0m] [0mDone updating.[0m
