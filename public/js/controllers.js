@@ -1,7 +1,7 @@
 'use strict';
 
 function LevelPacksCtrl($scope, $cookieStore, Game) {
-	$scope.game = Game.get({id: '97679232'}, function (game) {
+	$scope.game = Game.get({id: '238246943'}, function (game) {
 		$scope.game = game;
 
 		if ($cookieStore.get('state') == null) {
