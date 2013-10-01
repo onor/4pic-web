@@ -37,29 +37,28 @@ object Facebook extends Controller {
 
   val FBAppId = "304111289726859"
   val FBAppSecret = "bd5fa38e026ac2f5f65ce048d2d3f054"
-  val FBAppCallback = "http://localhost:9000/facebook/login"
-  val FBAppUrl = ""
-  val FBHome = ""
+  def FBAppCallback(gameKey:Int) = s"http://localhost:9000/gameKey/$gameKey/facebook/login"
+  def FBAppUrl = "http://apps.facebook.com/fourpicbeauty-dev"
+  val FBHome = "todo"
 
   val NETWORK_NAME = "Facebook"
   val PROTECTED_RESOURCE_URL = "https://graph.facebook.com/me"
-  val EMPTY_TOKEN: Token = null;
-
-  val service: OAuthService = new ServiceBuilder()
-    .provider(classOf[FacebookApi])
-    .apiKey(FBAppId)
-    .apiSecret(FBAppSecret)
-    .callback(FBAppCallback)
-    .scope("email,friends_online_presence")
-    .build()
-
+  val EMPTY_TOKEN: Token = null
   val scope = "email,friends_online_presence"
 
-  val authorizationUrl = service.getAuthorizationUrl(EMPTY_TOKEN);
+  def fbLoginCode(gameKey:Int) = Action { implicit request =>
+    val service: OAuthService = new ServiceBuilder()
+      .provider(classOf[FacebookApi])
+      .apiKey(FBAppId)
+      .apiSecret(FBAppSecret)
+      .callback(FBAppCallback(gameKey))
+      .scope("email,friends_online_presence")
+      .build()
 
-  def fbLoginCode = Action {
-    implicit request =>
-      try {
+    val authorizationUrl = service.getAuthorizationUrl(EMPTY_TOKEN);
+
+
+    try {
         (request.queryString.get("code"), request.queryString.get("error_reason")) match {
           case (Some(Seq(code)), _) =>
             val verifier: Verifier = new Verifier(code)

@@ -4,17 +4,18 @@
 
 # Obtain require.js with built-in knowledge of how webjars resources can be
 # resolved
-GET         /lib/require.js           controllers.WebJarAssets.requirejs
+GET         /lib/require.js                          controllers.WebJarAssets.requirejs
 
 # Enable webjar based resources to be returned
-GET         /webjars/*file            controllers.WebJarAssets.at(file)
+GET         /webjars/*file                           controllers.WebJarAssets.at(file)
 
 # Home page
 #GET       /                      controllers.Assets.at(path="/public", file="index.html")
-GET         /                         controllers.Application.index
-GET        /game              controllers.Application.game
-POST        /gameKey/:gameKey/        controllers.Application.indexPost(gameKey:Int)
+GET         /                                        controllers.Application.index
+GET         /game                                    controllers.Application.game
+POST        /gameKey/:gameKey/                       controllers.Application.indexPost(gameKey:Int)
+GET         /gameKey/:gameKey/facebook/login         controllers.Facebook.fbLoginCode(gameKey:Int)
 
 
 # Map the JS resource paths
-GET         /*file                    controllers.Assets.at(path="/public", file)
+GET         /*file                                   controllers.Assets.at(path="/public", file)

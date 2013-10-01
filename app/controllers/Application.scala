@@ -23,7 +23,7 @@ object Application extends Controller {
       }
       case None => {
         Logger.info("DIDNT GET SIGNED REQUEST")
-        Ok(views.html.redirect(Facebook.FBAppId, Facebook.FBAppSecret, Facebook.FBAppCallback))
+        Ok(views.html.redirect(Facebook.FBAppId, Facebook.FBAppCallback(gameKey), Facebook.scope))
       }
     }
   }
