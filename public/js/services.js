@@ -11,7 +11,7 @@ define(['angular'], function(angular) {
 angular.module('myApp.services', ['ngResource']).
   value('version', '0.1').factory('Game', function($resource){
         return $resource(
-            "http://www.onor.net/client/v1/games/4pics1word/:id?userKey=917428ade2027c3f3e28b6c9074bb695",
+            "http://www.onor.net/client/v1/games/4pics1word/:id?userKey=4b1469e3ff90b438ef0134b1cb266c06",
             {
                 id: "@id"
             }

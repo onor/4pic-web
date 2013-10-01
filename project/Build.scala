@@ -13,7 +13,8 @@ object ApplicationBuild extends Build {
     "org.webjars" % "bootstrap" % "2.3.1-1",
     "org.webjars" % "angular-ui" % "0.4.0-1",
     "org.webjars" % "angular-ui-bootstrap" % "0.3.0-1",
-    "org.webjars" %% "webjars-play" % "2.1.0-3")
+     "org.webjars" %% "webjars-play" % "2.1.0-3"
+    )
 
   val main = play.Project(appName, appVersion, appDependencies).
     settings(cloudBeesSettings: _*).
