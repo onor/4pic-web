@@ -1,0 +1,14 @@
+bin
+project/project
+project/target
+target
+logs
+dist
+.target
+.history
+.settings
+.project
+.classpath
+.cache
+.idea
+.idea_modules
