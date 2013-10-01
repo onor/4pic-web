@@ -2,22 +2,38 @@ package controllers
 
 import play.api.mvc._
 import play.api.Logger
+import play.api.libs.ws.WS
+import play.api.libs.concurrent.Execution.Implicits._
 
 object Application extends Controller {
+
+  val GAMEKEY = "gameKey"
 
   def index = Action { implicit request =>
     Ok(views.html.index())
   }
 
-  def indexPost = Action { implicit request =>
+  def indexPost(gameKey:Int) = Action { implicit request =>
     val sr = request.body.asFormUrlEncoded.get("signed_request").head
     components.SignedRequestUtils.parseSignedRequest(sr, Facebook.FBAppSecret) match {
       case Some(signedRequest) => {
-        Redirect(routes.Application.index()).withSession(("fbid", signedRequest.user_id))
+        Redirect(routes.Application.index()).withSession(("fbid", signedRequest.user_id), (GAMEKEY, gameKey.toString))
       }
       case None => {
         Ok(views.html.redirect(Facebook.FBAppId, Facebook.FBAppSecret, Facebook.FBAppCallback))
       }
+    }
+  }
+
+  def game = Action { implicit request  =>
+    request.session.get(GAMEKEY).map(_.toInt) match {
+      case Some(gameKey) => Async {
+          WS.
+            url(s"http://www.onor.net/client/v1/games/4pics1word/$gameKey?userKey=4b1469e3ff90b438ef0134b1cb266c06").
+            get.map(res => Ok(res.json))
+        }
+
+      case None => BadRequest("")
     }
   }
 
