@@ -14,12 +14,15 @@ object Application extends Controller {
   }
 
   def indexPost(gameKey:Int) = Action { implicit request =>
+    Logger.info("INDEX POST")
     val sr = request.body.asFormUrlEncoded.get("signed_request").head
     components.SignedRequestUtils.parseSignedRequest(sr, Facebook.FBAppSecret) match {
       case Some(signedRequest) => {
+        Logger.info("GOT SIGNED REQUEST")
         Redirect(routes.Application.index()).withSession(("fbid", signedRequest.user_id), (GAMEKEY, gameKey.toString))
       }
       case None => {
+        Logger.info("DIDNT GET SIGNED REQUEST")
         Ok(views.html.redirect(Facebook.FBAppId, Facebook.FBAppSecret, Facebook.FBAppCallback))
       }
     }

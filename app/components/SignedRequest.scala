@@ -37,7 +37,7 @@ object SignedRequestUtils {
     implicit val reads = Json.reads[SignedRequest]
     val signedRequest = reads.reads(json).fold(
       invalid => {
-        Logger.error("Invalid " + invalid); None
+        Logger.error("Invalid Request" + invalid); None
       },
       signed => Some(signed))
 
