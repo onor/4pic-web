@@ -10,8 +10,10 @@ GET        /lib/require.js        controllers.WebJarAssets.requirejs
 GET        /webjars/*file         controllers.WebJarAssets.at(file)
 
 # Home page
-#GET        /                      controllers.Assets.at(path="/public", file="index.html")
+#GET       /                      controllers.Assets.at(path="/public", file="index.html")
 GET        /                      controllers.Application.index
+POST	   /					  controllers.Application.indexPost
+
 
 # Map the JS resource paths
 GET        /*file                 controllers.Assets.at(path="/public", file)
