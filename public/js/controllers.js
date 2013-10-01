@@ -42,7 +42,6 @@ function LevelPackCtrl($scope, $routeParams, $cookieStore, $location, Game) {
 		$scope.state = $cookieStore.get('state');
 	});
 
-$log.log('reached here');
 	$scope.back = function () {
 		$location.path("/levelpacks");
 	}
