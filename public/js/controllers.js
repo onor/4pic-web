@@ -1,5 +1,8 @@
 'use strict';
 
+//curl -v  -X 
+//GET "http://www.onor.net/client/v1/games/4pics1word/238246943/levelPack/1?userKey=4b1469e3ff90b438ef0134b1cb266c06"
+
 function LevelPacksCtrl($scope, $cookieStore, Game) {
 	$scope.game = Game.get({id: '238246943'}, function (game) {
 		$scope.game = game;
@@ -33,12 +36,13 @@ function LevelPacksCtrl($scope, $cookieStore, Game) {
 }
 
 function LevelPackCtrl($scope, $routeParams, $cookieStore, $location, Game) {
-	$scope.game = Game.get({id: '97679232'}, function (game) {
+	$scope.game = Game.get({id: '238246943'}, function (game) {
 		$scope.game = game;
 		$scope.levelPack = game.levelPacks[$routeParams.levelPack - 1];
 		$scope.state = $cookieStore.get('state');
 	});
 
+$log.log('reached here');
 	$scope.back = function () {
 		$location.path("/levelpacks");
 	}
@@ -53,7 +57,7 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game)
 
 	var levelPack = parseInt($routeParams.levelPack);
 	var level = parseInt($routeParams.level);
-	$scope.game = Game.get({id: '97679232'}, function (game) {
+	$scope.game = Game.get({id: '238246943'}, function (game) {
 		$scope.game = game;
 		$scope.level = game.levelPacks[levelPack - 1].levels[level];
 
