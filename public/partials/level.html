@@ -1,15 +1,19 @@
 <button class="btn" ng-click="back()">
     <i class="icon-arrow-left"></i>
 </button>
-
+<div  style="width:20px;height:20px;border:5px;color:blue; solid;border-radius:5px;">
 Score:{{state.score}}
-
+</div>
 {{remains}} seconds
 <timer interval="1000" countdown="30">
     <div class="progress progress-striped active">
         <div class="bar" style="width:{{seconds * 3.3}}%;"></div>
     </div>
 </timer>
+
+<style type="text/css">
+    .invalidClass {background-color:red;}
+</style>
 
 <div class="row">
     <div class="span6">
@@ -29,29 +33,26 @@ Score:{{state.score}}
     </div>
 </div>
 
-<style type="text/css">
-    .invalidClass {background-color:red;}
-</style>
-
-<div class="row">
+    <div class="row">
     <div class="span12">
     <ul class="inline" ng-class="{'invalidClass': invalid}">
         <li ng-repeat="letter in answer track by $index">
-            <div ng-click="remove($index)" style="width:20px;height:20px;border:2px solid;border-radius:5px;">
+            <div ng-click="remove($index)" style="width:20px;height:20px;border:5px;color:blue; solid;border-radius:5px;">
                 {{letter}}
             </div>
         </li>
     </ul>
     </div>
-</div>
+    </div>
 
 <ul class="inline">
     <li ng-repeat="letter in other track by $index">
-        <div ng-click="add($index)" style="width:20px;height:20px;border:2px solid;border-radius:5px;">
+        <div ng-click="add($index)" style="width:20px;height:20px;border:2px;color:white; solid;border-radius:5px;">
             {{letter}}
         </div>
     </li>
 </ul>
+
 
 
 
