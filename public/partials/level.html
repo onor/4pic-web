@@ -2,17 +2,12 @@
     <i class="icon-arrow-left"></i>
 </button>
 
-<div app-version></div>
-
-<div >
-
-
-<timer interval="1000">{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
-    
-
-</div>
-
-<timer interval="1000"><div class="progress progress-striped active"> <div class="bar" style="width: {{seconds}}%;"></div> </div></timer>
+<timer interval="1000" countdown="30">
+    {{seconds}} seconds.
+    <div class="progress progress-striped active">
+        <div class="bar" style="width:{{seconds * 3.3}}%;"></div>
+    </div>
+</timer>
 
 <div class="row">
     <div class="span6">

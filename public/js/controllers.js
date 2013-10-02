@@ -31,7 +31,6 @@ function LevelPacksCtrl($scope, $cookieStore, Game) {
 			}
 			$scope.completed.push(count * 4);
 		}
-		debugger;
 	});
 }
 
@@ -137,7 +136,6 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
 
 	function countController( $scope, $timeout )
 	{
-		debugger;
 	    // Provide ternary like support for controller...
 	    $scope.when  = function( booleanExpr, trueValue, falseValue) {       
 	          return booleanExpr ? trueValue : falseValue;
@@ -165,8 +163,6 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
 	            runCounter();    
 	        };
 
-	    //debugger;
-	    
 	    $scope.countDown = 30;
 	    
 	    $scope.pause     = pause;
