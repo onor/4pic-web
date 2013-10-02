@@ -1,52 +1,23 @@
 'use strict';
 
-//curl -v  -X 
-//GET "http://www.onor.net/client/v1/games/4pics1word/238246943/levelPack/1?userKey=4b1469e3ff90b438ef0134b1cb266c06"
-
-function LevelPacksCtrl($scope, $cookieStore, Game) {
+function SplashCtrl($scope, $cookieStore, $location, Game) {
 	$scope.game = Game.get({}, function (game) {
 		$scope.game = game;
 
 		if ($cookieStore.get('state') == null) {
-			var state = {progress:[], score:0};
-
-			for (var i = 0; i < $scope.game.levelPacks.length; i++) {
-				var blank = [];
-				for (var j = 0; j < 25; j++) {
-					blank.push(false);
-				}
-				state.progress.push(blank);
-			}
-
+			var state = {levelPack:0, level:0, score:0};
 			$cookieStore.put('state', state);
 		}
 
 		$scope.state = $cookieStore.get('state');
-
-		$scope.completed = [];
-		for (var i = 0; i < $scope.state.progress.length; i++) {
-			var count = 0;
-			for (var j = 0; j < 25; j++) {
-				if ($scope.state.progress[i][j]) count++;
-			}
-			$scope.completed.push(count * 4);
-		}
-	});
-}
-
-function LevelPackCtrl($scope, $routeParams, $cookieStore, $location, Game) {
-	$scope.game = Game.get({}, function (game) {
-		$scope.game = game;
-		$scope.levelPack = game.levelPacks[$routeParams.levelPack - 1];
-		$scope.state = $cookieStore.get('state');
 	});
 
-	$scope.back = function () {
-		$location.path("/levelpacks");
-	}
+    $scope.go = function() {
+        $location.path('/levelpack/' + $scope.state.levelPack + '/level/' + $scope.state.level)
+    }
 }
 
-function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $timeout, Game) {
+function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game) {
 
     $scope.state = $cookieStore.get('state');
 
@@ -61,7 +32,7 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
 	$scope.game = Game.get({}, function (game) {
 		
 		$scope.game = game;
-		$scope.level = game.levelPacks[levelPack - 1].levels[level];
+		$scope.level = game.levelPacks[levelPack].levels[level];
 
 		$scope.answer = [];
 
@@ -128,7 +99,7 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
 		modalInstance.open().then(function (points) {
 			if (points) {
 				$scope.state = $cookieStore.get('state');
-				$scope.state.progress[levelPack - 1][level] = true;
+				$scope.state.level = $scope.state.level + 1;
                 $scope.state.score = $scope.state.score + points;
 				$cookieStore.put('state', $scope.state);
 
@@ -140,7 +111,7 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
 
 
 	$scope.back = function () {
-		$location.path("/levelpack/" + levelPack);
+		$location.path("/splash");
 	}
 
     $scope.$on('timer-tick', function (event, data){

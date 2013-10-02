@@ -14,12 +14,11 @@ require(['angular', , 'ui.bootstrap', './controllers', './directives', './filter
 
 // Declare app level module which depends on filters, and services
 
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngCookies' , 'ui.bootstrap', 'btford.dragon-drop']).
+angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngCookies' , 'ui.bootstrap']).
   config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/levelpacks', {templateUrl: 'partials/levelpacks.html', controller: LevelPacksCtrl});
-    $routeProvider.when('/levelpack/:levelPack', {templateUrl: 'partials/levelpack.html', controller: LevelPackCtrl});
+    $routeProvider.when('/splash', {templateUrl: 'partials/splash.html', controller: SplashCtrl});
     $routeProvider.when('/levelpack/:levelPack/level/:level', {templateUrl: 'partials/level.html', controller: LevelCtrl});
-    $routeProvider.otherwise({redirectTo: '/levelpacks'});
+    $routeProvider.otherwise({redirectTo: '/splash'});
 }]);
 
 
