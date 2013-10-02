@@ -8,14 +8,14 @@ function LevelPacksCtrl($scope, $cookieStore, Game) {
 		$scope.game = game;
 
 		if ($cookieStore.get('state') == null) {
-			var state = [];x
+			var state = {progress:[], score:0};
 
 			for (var i = 0; i < $scope.game.levelPacks.length; i++) {
 				var blank = [];
 				for (var j = 0; j < 25; j++) {
 					blank.push(false);
 				}
-				state.push(blank);
+				state.progress.push(blank);
 			}
 
 			$cookieStore.put('state', state);
@@ -24,10 +24,10 @@ function LevelPacksCtrl($scope, $cookieStore, Game) {
 		$scope.state = $cookieStore.get('state');
 
 		$scope.completed = [];
-		for (var i = 0; i < $scope.state.length; i++) {
+		for (var i = 0; i < $scope.state.progress.length; i++) {
 			var count = 0;
 			for (var j = 0; j < 25; j++) {
-				if ($scope.state[i][j]) count++;
+				if ($scope.state.progress[i][j]) count++;
 			}
 			$scope.completed.push(count * 4);
 		}
@@ -47,6 +47,8 @@ function LevelPackCtrl($scope, $routeParams, $cookieStore, $location, Game) {
 }
 
 function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $timeout, Game) {
+
+    $scope.state = $cookieStore.get('state');
 
 	function shuffle(o) { //v1.0
 		for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
@@ -122,10 +124,11 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
         }
 		});
 
-		modalInstance.open().then(function (result) {
-			if (result) {
+		modalInstance.open().then(function (points) {
+			if (points) {
 				$scope.state = $cookieStore.get('state');
-				$scope.state[levelPack - 1][level] = true;
+				$scope.state.progress[levelPack - 1][level] = true;
+                $scope.state.score = $scope.state.score + points;
 				$cookieStore.put('state', $scope.state);
 
 				$location.path('/levelpack/' + levelPack + '/level/' + (level + 1))
@@ -147,7 +150,7 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
 function NextLevelCtrl($scope, dialog, points) {
     $scope.points = points;
 	$scope.next = function () {
-		dialog.close(true);
+		dialog.close(points);
 	}
 
 }

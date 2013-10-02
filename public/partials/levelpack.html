@@ -6,7 +6,7 @@
 <ul class="inline">
     <li ng-repeat="level in levelPack.levels">
         <a class="btn" href="#/levelpack/{{levelPack.pack}}/level/{{$index}}">
-            <i class="icon-ok" ng-show="state[levelPack.pack - 1][$index]"></i>
+            <i class="icon-ok" ng-show="state.progress[levelPack.pack - 1][$index]"></i>
             {{$index + 1}}
         </a>
     </li>
