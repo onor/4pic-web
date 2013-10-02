@@ -134,46 +134,9 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
 		$location.path("/levelpack/" + levelPack);
 	}
 
-	function countController( $scope, $timeout )
-	{
-	    // Provide ternary like support for controller...
-	    $scope.when  = function( booleanExpr, trueValue, falseValue) {       
-	          return booleanExpr ? trueValue : falseValue;
-	    };
-	    
-	    
-	    var isPaused  = false,
-	        pause = function() {
-	            isPaused = true;
-	        },
-	        resume = function() {
-	            isPaused = false;
-	            runCounter();
-	        },
-	        runCounter = function() {
-	            if ( isPaused ) return;
-	                
-	            $scope.countDown -= 1; 
-	            
-	            if ( $scope.countDown > 0)        
-	                $timeout(runCounter, 1000); 
-	        },
-	        toggleCounter = function() {
-	            isPaused = !isPaused;
-	            runCounter();    
-	        };
-
-	    $scope.countDown = 30;
-	    
-	    $scope.pause     = pause;
-	    $scope.resume    = resume;
-	    $scope.isPaused  = function() { 
-	        return isPaused; 
-	    };
-	    $scope.onToggleCounter = toggleCounter;
-	    
-	    runCounter();
-	}
+    $scope.$on('timer-tick', function (event, data){
+        $scope.remains = data.millis / 1000;
+    });
 }
 
 function NextLevelCtrl($scope, dialog) {
