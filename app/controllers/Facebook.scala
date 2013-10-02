@@ -33,13 +33,25 @@ case class FacebookUser(
   birthday: Option[String],
   link: String)
 
+case class FacebookSettings(appId:String, appSecret:String, appCallback:String, appUrl:String, appHome:String)
+
 object Facebook extends Controller {
 
-  val FBAppId = "304111289726859"
-  val FBAppSecret = "bd5fa38e026ac2f5f65ce048d2d3f054"
-  def FBAppCallback(gameKey:Int) = s"http://localhost:9000/gameKey/$gameKey/facebook/login"
-  def FBAppUrl = "http://apps.facebook.com/fourpicbeauty-dev"
-  val FBHome = "todo"
+  def facebookSettings(gameKey:Int) = if (play.api.Play.isDev(play.api.Play.current)) {
+     FacebookSettings(
+       "304111289726859",
+       "bd5fa38e026ac2f5f65ce048d2d3f054",
+       s"http://localhost:9000/gameKey/$gameKey/facebook/login",
+       "http://apps.facebook.com/fourpicbeauty-dev",
+       "todo")
+  } else {
+    FacebookSettings(
+      "583608191697375",
+      "618a6da80479f556e7a72c9780fcbefa",
+      s"http://fourpic-web.zalzero.cloudbees.net/gameKey/$gameKey/facebook/login",
+      "http://apps.facebook.com/fourpicweb",
+      "todo")
+  }
 
   val NETWORK_NAME = "Facebook"
   val PROTECTED_RESOURCE_URL = "https://graph.facebook.com/me"
@@ -47,11 +59,14 @@ object Facebook extends Controller {
   val scope = "email,friends_online_presence"
 
   def fbLoginCode(gameKey:Int) = Action { implicit request =>
+
+    val settings = facebookSettings(gameKey)
+
     val service: OAuthService = new ServiceBuilder()
       .provider(classOf[FacebookApi])
-      .apiKey(FBAppId)
-      .apiSecret(FBAppSecret)
-      .callback(FBAppCallback(gameKey))
+      .apiKey(settings.appId)
+      .apiSecret(settings.appSecret)
+      .callback(settings.appCallback)
       .scope("email,friends_online_presence")
       .build()
 
@@ -71,17 +86,12 @@ object Facebook extends Controller {
             implicit val reads = Json.reads[FacebookUser]
             reads.reads(Json.parse(body)).asOpt match {
               case Some(fUser) => {
-                //val fuser = FUser(uid = fUser.id, name =fUser.name, first_name = fUser.first_name, last_name = fUser.last_name )
-
-                //database.withSession { implicit session:Session =>
-                //UserService.createUserWithGameSummary(fuser, Active, None)
-                //}
-
-                Redirect(FBAppUrl).withSession(("fbid", fUser.id))
+                //todo
+                Redirect(settings.appUrl).withSession(("fbid", fUser.id))
               }
               case None => BadRequest("TODO")
             }
-          case (_, Some(Seq("user_denied"))) => Redirect(FBHome)
+          case (_, Some(Seq("user_denied"))) => Redirect(settings.appHome)
           case _ =>
             Logger.debug("I should not be here => Code received is invalid or empty")
             BadRequest("Unknown Error")
