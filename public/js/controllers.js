@@ -77,6 +77,7 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
 
 			$scope.correct = $scope.level.answer.toUpperCase() == newValue.join("");
 			if ($scope.correct) {
+                $scope.$broadcast('timer-stop');
 				$scope.nextLevel($scope.remains * 10);
 			}
 
