@@ -8,7 +8,7 @@ function LevelPacksCtrl($scope, $cookieStore, Game) {
 		$scope.game = game;
 
 		if ($cookieStore.get('state') == null) {
-			var state = [];
+			var state = [];x
 
 			for (var i = 0; i < $scope.game.levelPacks.length; i++) {
 				var blank = [];
@@ -47,7 +47,7 @@ function LevelPackCtrl($scope, $routeParams, $cookieStore, $location, Game) {
 	}
 }
 
-function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game) {
+function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $timeout, Game) {
 
 	function shuffle(o) { //v1.0
 		for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
@@ -56,7 +56,9 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game)
 
 	var levelPack = parseInt($routeParams.levelPack);
 	var level = parseInt($routeParams.level);
+	
 	$scope.game = Game.get({}, function (game) {
+		
 		$scope.game = game;
 		$scope.level = game.levelPacks[levelPack - 1].levels[level];
 
@@ -128,8 +130,53 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game)
 
 	}
 
+
 	$scope.back = function () {
 		$location.path("/levelpack/" + levelPack);
+	}
+
+	function countController( $scope, $timeout )
+	{
+		debugger;
+	    // Provide ternary like support for controller...
+	    $scope.when  = function( booleanExpr, trueValue, falseValue) {       
+	          return booleanExpr ? trueValue : falseValue;
+	    };
+	    
+	    
+	    var isPaused  = false,
+	        pause = function() {
+	            isPaused = true;
+	        },
+	        resume = function() {
+	            isPaused = false;
+	            runCounter();
+	        },
+	        runCounter = function() {
+	            if ( isPaused ) return;
+	                
+	            $scope.countDown -= 1; 
+	            
+	            if ( $scope.countDown > 0)        
+	                $timeout(runCounter, 1000); 
+	        },
+	        toggleCounter = function() {
+	            isPaused = !isPaused;
+	            runCounter();    
+	        };
+
+	    //debugger;
+	    
+	    $scope.countDown = 30;
+	    
+	    $scope.pause     = pause;
+	    $scope.resume    = resume;
+	    $scope.isPaused  = function() { 
+	        return isPaused; 
+	    };
+	    $scope.onToggleCounter = toggleCounter;
+	    
+	    runCounter();
 	}
 }
 
@@ -137,4 +184,5 @@ function NextLevelCtrl($scope, dialog) {
 	$scope.next = function () {
 		dialog.close(true);
 	}
+
 }

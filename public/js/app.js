@@ -21,7 +21,8 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
     $routeProvider.when('/levelpack/:levelPack/level/:level', {templateUrl: 'partials/level.html', controller: LevelCtrl});
     $routeProvider.otherwise({redirectTo: '/levelpacks'});
 }]);
-  
+
+
 angular.bootstrap(document, ['myApp']);
 
 });
