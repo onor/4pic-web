@@ -13,8 +13,25 @@ function SplashCtrl($scope, $cookieStore, $location, Game) {
 	});
 
     $scope.go = function() {
-        $location.path('/levelpack/' + $scope.state.levelPack + '/level/' + $scope.state.level)
+        $location.path('/levelpack/' + $scope.state.levelPack + '/level/' + $scope.state.level);
     }
+}
+
+function LeaderboardCtrl($scope, $location, $cookieStore, $routeParams) {
+    $scope.state = $cookieStore.get('state');
+
+    var levelPack = parseInt($routeParams.levelPack);
+
+    $scope.playAgain = function() {
+         $location.path('/levelpack/' + (levelPack + 1) + '/level/' + 0);
+     }
+    $scope.getPrize = function() {
+        $location.path('/prize')
+    }
+}
+
+function PrizeCtrl() {
+
 }
 
 function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game) {
@@ -85,6 +102,10 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game)
 
 	$scope.nextLevel = function (points2) {
 
+        if (level == 1) {
+            $location.path('/leaderboard/' + levelPack);
+        } else {
+
 		var modalInstance = $dialog.dialog({
 			templateUrl: 'partials/nextlevel.html',
 			controller: NextLevelCtrl,
@@ -106,6 +127,7 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game)
 				$location.path('/levelpack/' + levelPack + '/level/' + (level + 1))
 			}
 		});
+        }
 
 	}
 
