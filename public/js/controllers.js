@@ -75,7 +75,7 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
 
 			$scope.correct = $scope.level.answer.toUpperCase() == newValue.join("");
 			if ($scope.correct) {
-				$scope.nextLevel();
+				$scope.nextLevel($scope.remains * 10);
 			}
 
 			if ($scope.level.answer.length == newValue.join("").length && !$scope.correct) {
@@ -109,12 +109,17 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
 		}
 	}
 
-	$scope.nextLevel = function () {
+	$scope.nextLevel = function (points2) {
 
 		var modalInstance = $dialog.dialog({
 			templateUrl: 'partials/nextlevel.html',
 			controller: NextLevelCtrl,
-			dialogClass: 'modal'
+			dialogClass: 'modal',
+            resolve: {
+            points: function () {
+                return points2;
+            }
+        }
 		});
 
 		modalInstance.open().then(function (result) {
@@ -139,7 +144,8 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, $time
     });
 }
 
-function NextLevelCtrl($scope, dialog) {
+function NextLevelCtrl($scope, dialog, points) {
+    $scope.points = points;
 	$scope.next = function () {
 		dialog.close(true);
 	}
