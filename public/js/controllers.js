@@ -43,6 +43,12 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game)
 		return o;
 	};
 
+    function randomString(length, chars) {
+        var result = '';
+        for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+        return result;
+    };
+
 	var levelPack = parseInt($routeParams.levelPack);
 	var level = parseInt($routeParams.level);
 	
@@ -56,7 +62,10 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game)
 		for (var i = 0; i < $scope.level.answer.length; i++) {
 			$scope.answer.push('');
 		}
-		$scope.other = shuffle(($scope.level.answer.toUpperCase() + 'ABH').split(''));
+
+        var generated =  randomString((12 - $scope.level.answer.length), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+
+        $scope.other = shuffle(($scope.level.answer.toUpperCase() + generated).split(''));
 
 		$scope.invalid = false;
 
