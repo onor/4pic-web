@@ -17,6 +17,10 @@ body {
   color: #fff !important;
 }
 .invalidClass {background-color:red;}
+.modal {
+  color: #000;
+  padding: 10px;
+}
 
 /* Landing Page CSS */
 #logo {
@@ -94,18 +98,22 @@ header p.tagline {
   margin-bottom: 20px;
 }
 #letter-placeholder {
-  background: url("../img/phillz/ingame/tileplacementbase.png") no-repeat;
+  background: #d0c5b9;
+  border-radius: 10px;
   width: 424px;
   height: 46px;
   padding: 23px 24px;
   color: #25221d;
 }
 #letter-placeholder li {
-  width: 47px;
-  height: 47px;
+  width: 43px;
+  height: 43px;
   margin-right: 14px;
   padding: 0;
   float: left;
+  border: 2px solid #191918;
+  background: #eee8d8;
+  border-radius: 4px;
 }
 #letter-placeholder li:last-child {
   margin-right: 0;
