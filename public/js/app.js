@@ -9,19 +9,22 @@ define('angular', ['webjars!angular-locale_en-us.js','webjars!angular-resource.j
     return angular;
 });
 
-require(['angular', , 'ui.bootstrap', './controllers', './directives', './filters', './services', './dragon-drop'],
+require(['angular', 'ui.bootstrap', './controllers', './directives', './filters', './services', './ngFacebook'],
   function(angular) {
 
 // Declare app level module which depends on filters, and services
 
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngCookies' , 'ui.bootstrap']).
+angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngCookies' , 'ui.bootstrap', 'ngFacebook']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/splash', {templateUrl: 'partials/splash.html', controller: SplashCtrl});
     $routeProvider.when('/prize', {templateUrl: 'partials/prize.html', controller: PrizeCtrl});
     $routeProvider.when('/leaderboard/:levelPack', {templateUrl: 'partials/leaderboard.html', controller: LeaderboardCtrl});
     $routeProvider.when('/levelpack/:levelPack/level/:level', {templateUrl: 'partials/level.html', controller: LevelCtrl});
     $routeProvider.otherwise({redirectTo: '/splash'});
-}]);
+  }]).
+  config(['$facebookProvider', function($facebookProvider) {
+    $facebookProvider.setAppId(304111289726859);
+  }]);
 
 
 angular.bootstrap(document, ['myApp']);

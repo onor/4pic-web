@@ -9,6 +9,19 @@
         <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
     </head>
     <body background="img/phillz/landingpage/bgimage.png">
+
+        <div id="fb-root"></div>
+        <script>
+        // Load the SDK asynchronously
+        (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
+
         <header role="banner" class="header">
         <center>
             <img src="img/phillz/landingpage/picphilzlogo.png">
