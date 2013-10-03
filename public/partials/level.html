@@ -1,15 +1,5 @@
-<button class="btn" ng-click="back()">
-    <i class="icon-arrow-left"></i>
-</button>
-
-<div  style="width:20px;height:20px;border:5px;color:blue; solid;border-radius:5px;">
 
 
-Level {{state.level + 1}}
-
-
-Score:{{state.score}}
-</div>
 {{remains}} seconds
 <timer interval="1000" countdown="30">
     <div class="progress progress-striped active">
@@ -17,48 +7,68 @@ Score:{{state.score}}
     </div>
 </timer>
 
-<style type="text/css">
-    .invalidClass {background-color:red;}
-</style>
 
 <div class="row">
     <div class="span6">
-        <img class="btn" ng-src="{{level.photo1}}"/>
-    </div>
-
-    <div class="span6">
-        <img class="btn" ng-src="{{level.photo2}}"/>
-    </div>
-</div>
-<div class="row">
-    <div class="span6">
-        <img class="btn" ng-src="{{level.photo3}}"/>
-    </div>
-    <div class="span6">
-        <img class="btn" ng-src="{{level.photo4}}"/>
-    </div>
-</div>
-
-    <div class="row">
-    <div class="span12">
-    <ul class="inline" ng-class="{'invalidClass': invalid}">
-        <li ng-repeat="letter in answer track by $index">
-            <div ng-click="remove($index)" style="width:20px;height:20px;border:5px;color:blue; solid;border-radius:5px;">
-                {{letter}}
+        <div class="image-holder">
+            <div class="row-fluid">
+                <div class="span6">
+                    <img ng-src="{{level.photo1}}"/>
+                </div>
+                <div class="span6">
+                    <img ng-src="{{level.photo2}}"/>
+                </div>
             </div>
-        </li>
-    </ul>
-    </div>
-    </div>
-
-<ul class="inline">
-    <li ng-repeat="letter in other track by $index">
-        <div ng-click="add($index)" style="width:20px;height:20px;border:2px;color:white; solid;border-radius:5px;">
-            {{letter}}
+            <div class="row-fluid">
+                <div class="span6">
+                    <img ng-src="{{level.photo3}}"/>
+                </div>
+                <div class="span6">
+                    <img ng-src="{{level.photo4}}"/>
+                </div>
+            </div>
         </div>
-    </li>
-</ul>
+    </div>
 
+    <div class="span6">
+        <div id="top-board">
+            <div class="row-fluid">
+                <div class="span6">
+                    <h2>Level- {{state.level + 1}}</h2>
+                </div>
+                <div class="span6">
+                    <div id="hudscore">
+                        <span class="score">{{state.score}}</span>
+                    </div>
+                </div>
+            </div>    
+        </div>
 
+        <div id="letter-board" class="clearfix">
+            <ul id="letter-placeholder" class="inline" ng-class="{'invalidClass': invalid}">
+                <li ng-repeat="letter in answer track by $index">
+                    <div ng-click="remove($index)">
+                        {{letter}}
+                    </div>
+                </li>
+            </ul>
+            
+            <div id="letter-selections" class="clearfix">
+                <ul class="inline">
+                    <li ng-repeat="letter in other track by $index">
+                        <div ng-click="add($index)">
+                            {{letter}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
+        <div>
+            <button class="btn" ng-click="back()">
+                <i class="icon-arrow-left"></i>
+            </button>
+        </div>
+    </div>
+</div>
 
