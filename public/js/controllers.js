@@ -42,9 +42,17 @@ function PrizeCtrl() {
 
 }
 
+function PrizeListCtrl($scope, Campaign) {
+    $scope.campaigns = Campaign.query();
+}
+
 function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game) {
 
     $scope.state = $cookieStore.get('state');
+
+    $scope.prizeList = function() {
+       $location.path('/prize/list');
+    }
 
 	function shuffle(o) { //v1.0
 		for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);

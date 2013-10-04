@@ -20,6 +20,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/splash', {templateUrl: 'partials/splash.html', controller: SplashCtrl});
     $routeProvider.when('/prize', {templateUrl: 'partials/prize.html', controller: PrizeCtrl});
+    $routeProvider.when('/prize/list', {templateUrl: 'partials/prize-list.html', controller: PrizeListCtrl});
     $routeProvider.when('/leaderboard/:levelPack', {templateUrl: 'partials/leaderboard.html', controller: LeaderboardCtrl});
     $routeProvider.when('/levelpack/:levelPack/level/:level', {templateUrl: 'partials/level.html', controller: LevelCtrl});
     $routeProvider.otherwise({redirectTo: '/splash'});
