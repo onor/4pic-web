@@ -13,10 +13,28 @@
 		</div>
 		<div class="span6">
 			<div class="score-block best-score">
-				You best score {{bestScore}}
+				You best score
 			</div>
 		</div>
 	</div>
+
+    <table>
+        <caption>Scores</caption>
+        <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="value in scores.data track by $index">
+            <td>{{$index}}</td>
+            <td>{{value.user.name}}</td>
+            <td>{{value.score}}</td>
+        </tr>
+        </tbody>
+    </table>
 
 	<div class="row">
 		<div class="span6">

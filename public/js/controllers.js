@@ -22,6 +22,8 @@ function SplashCtrl($scope, $cookieStore, $location, Game, $facebook) {
 
 function LeaderboardCtrl($scope, $location, $cookieStore, $routeParams, $facebook) {
 
+    $scope.scores = $facebook.api('/' + appConfig.appId + '/scores');
+
     $scope.me = $facebook.api('/me');
 
     $scope.state = $cookieStore.get('state');
