@@ -5,11 +5,13 @@
 // Declare here that angular is the US version - other locales can be easily substituted.
 define('ui.bootstrap', ['webjars!ui-bootstrap.js'], function(uibootstrap) {return uibootstrap;});
 
+define('4picword.config', ['config/angular'], function(config) {return config;});
+
 define('angular', ['webjars!angular-locale_en-us.js','webjars!angular-resource.js', 'webjars!angular-cookies.js'], function() {
     return angular;
 });
 
-require(['angular', 'ui.bootstrap', './controllers', './directives', './filters', './services', './angular-facebook.min'],
+require(['angular', 'ui.bootstrap', './controllers', './directives', './filters', './services', './angular-facebook.min', '4picword.config'],
   function(angular) {
 
 // Declare app level module which depends on filters, and services
@@ -24,7 +26,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
   }]).
   config(['$facebookProvider', function($facebookProvider) {
         $facebookProvider.init({
-            appId: '304111289726859'//,
+            appId: appConfig.appId//,
             //channel: '//path/to/channel.html'
         });
   }]);

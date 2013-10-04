@@ -41,4 +41,15 @@ object Application extends Controller {
     }
   }
 
+  def angularConfig = Action { implicit request =>
+    request.session.get(GAMEKEY).map(_.toInt) match {
+      case Some(gameKey) => {
+        val settings = Facebook.facebookSettings(gameKey)
+        Ok(views.txt.config(settings.appId))
+      }
+
+      case None => BadRequest("")
+    }
+  }
+
 }
