@@ -1,6 +1,9 @@
 'use strict';
 
-function SplashCtrl($scope, $cookieStore, $location, Game) {
+function SplashCtrl($scope, $cookieStore, $location, Game, $facebook) {
+
+    $facebook.getLoginStatus();
+
 	$scope.game = Game.get({}, function (game) {
 		$scope.game = game;
 
@@ -17,7 +20,10 @@ function SplashCtrl($scope, $cookieStore, $location, Game) {
     }
 }
 
-function LeaderboardCtrl($scope, $location, $cookieStore, $routeParams) {
+function LeaderboardCtrl($scope, $location, $cookieStore, $routeParams, $facebook) {
+
+    $scope.me = $facebook.api('/me');
+
     $scope.state = $cookieStore.get('state');
 
     var levelPack = parseInt($routeParams.levelPack);

@@ -9,12 +9,12 @@ define('angular', ['webjars!angular-locale_en-us.js','webjars!angular-resource.j
     return angular;
 });
 
-require(['angular', 'ui.bootstrap', './controllers', './directives', './filters', './services', './ngFacebook'],
+require(['angular', 'ui.bootstrap', './controllers', './directives', './filters', './services', './angular-facebook.min'],
   function(angular) {
 
 // Declare app level module which depends on filters, and services
 
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngCookies' , 'ui.bootstrap', 'ngFacebook']).
+angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngCookies' , 'ui.bootstrap', 'facebook']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/splash', {templateUrl: 'partials/splash.html', controller: SplashCtrl});
     $routeProvider.when('/prize', {templateUrl: 'partials/prize.html', controller: PrizeCtrl});
@@ -23,7 +23,10 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
     $routeProvider.otherwise({redirectTo: '/splash'});
   }]).
   config(['$facebookProvider', function($facebookProvider) {
-    $facebookProvider.setAppId(304111289726859);
+        $facebookProvider.init({
+            appId: '304111289726859'//,
+            //channel: '//path/to/channel.html'
+        });
   }]);
 
 
