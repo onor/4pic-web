@@ -48,7 +48,7 @@ object Facebook extends Controller {
     FacebookSettings(
       "583608191697375",
       "618a6da80479f556e7a72c9780fcbefa",
-      s"http://fourpic-web.zalzero.cloudbees.net/gameKey/$gameKey/facebook/login",
+      s"http://4picweb.onor.net/gameKey/$gameKey/facebook/login",
       "http://apps.facebook.com/fourpicweb",
       "todo")
   }
