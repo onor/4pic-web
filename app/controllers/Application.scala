@@ -52,4 +52,16 @@ object Application extends Controller {
     }
   }
 
+  def appCss = Action { implicit request =>
+    request.session.get(GAMEKEY).map(_.toInt) match {
+      case Some(gameKey) => Async {
+        WS.
+          url(s"http://www.onor.net/client/v1/games/4pics1word/$gameKey?userKey=4b1469e3ff90b438ef0134b1cb266c06").
+          get.map(res => Ok(views.txt.app((res.json \ "backgroundUrl").as[String])).as(CSS))
+      }
+
+      case None => BadRequest("")
+    }
+  }
+
 }

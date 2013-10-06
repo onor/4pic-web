@@ -16,6 +16,7 @@ GET         /game                                   controllers.Application.game
 POST        /gameKey/:gameKey/                      controllers.Application.indexPost(gameKey:Int)
 GET         /gameKey/:gameKey/facebook/login        controllers.Facebook.fbLoginCode(gameKey:Int)
 GET         /js/config/angular.js                   controllers.Application.angularConfig
+GET         /css/app.css                            controllers.Application.appCss
 
 
 # Map the JS resource paths
