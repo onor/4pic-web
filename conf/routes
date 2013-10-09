@@ -18,6 +18,15 @@ GET         /gameKey/:gameKey/facebook/login        controllers.Facebook.fbLogin
 GET         /js/config/angular.js                   controllers.Application.angularConfig
 GET         /css/app.css                            controllers.Application.appCss
 
+#scores proxy
+GET         /scores/levelpack/:lp                   controllers.ScoreService.show(lp:Int)
+POST        /scores/levelpack/:lp                   controllers.ScoreService.create(lp:Int)
+PUT         /scores/levelpack/:lp                   controllers.ScoreService.update(lp:Int)
+GET         /leaderboards                           controllers.ScoreService.leaderboard(lp:Option[Int])
+
+
+
+
 
 # Map the JS resource paths
 GET         /*file                                  controllers.Assets.at(path="/public", file)

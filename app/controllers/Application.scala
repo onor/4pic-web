@@ -5,63 +5,55 @@ import play.api.Logger
 import play.api.libs.ws.WS
 import play.api.libs.concurrent.Execution.Implicits._
 
-object Application extends Controller {
+object Application extends Controller with GameController {
 
-  val GAMEKEY = "gameKey"
-
-  def index = Action { implicit request =>
-    Ok(views.html.index())
+  def index = Action {
+    implicit request =>
+      Ok(views.html.index())
   }
 
-  def indexPost(gameKey:Int) = Action { implicit request =>
-    Logger.info("INDEX POST")
-    val settings = Facebook.facebookSettings(gameKey)
-    val sr = request.body.asFormUrlEncoded.get("signed_request").head
-    components.SignedRequestUtils.parseSignedRequest(sr, settings.appSecret) match {
-      case Some(signedRequest) => {
-        Logger.info("GOT SIGNED REQUEST")
-        Redirect(routes.Application.index()).withSession(("fbid", signedRequest.user_id), (GAMEKEY, gameKey.toString))
-      }
-      case None => {
-        Logger.info("DIDNT GET SIGNED REQUEST")
-        Ok(views.html.redirect(settings.appId, settings.appCallback, Facebook.scope))
-      }
-    }
-  }
+  def indexPost(gameKey: Int) = Action {
+    implicit request =>
+      Logger.info("INDEX POST")
 
-  def game = Action { implicit request  =>
-    request.session.get(GAMEKEY).map(_.toInt) match {
-      case Some(gameKey) => Async {
-          WS.
-            url(s"http://www.onor.net/client/v1/games/4pics1word/$gameKey?userKey=4b1469e3ff90b438ef0134b1cb266c06").
-            get.map(res => Ok(res.json))
+      def callback(gameKey: Int) = s"http://${request.host}/gameKey/$gameKey/facebook/login"
+
+      val settings = Facebook.facebookSettings(gameKey)
+      val sr = request.body.asFormUrlEncoded.get("signed_request").head
+      components.SignedRequestUtils.parseSignedRequest(sr, settings.appSecret) match {
+        case Some(signedRequest) => {
+          Logger.info("GOT SIGNED REQUEST")
+          Redirect(routes.Application.index()).withSession(("fbid", signedRequest.user_id), (GAMEKEY, gameKey.toString))
         }
-
-      case None => BadRequest("")
-    }
-  }
-
-  def angularConfig = Action { implicit request =>
-    request.session.get(GAMEKEY).map(_.toInt) match {
-      case Some(gameKey) => {
-        val settings = Facebook.facebookSettings(gameKey)
-        Ok(views.txt.config(settings.appId))
+        case None => {
+          Logger.info("DIDNT GET SIGNED REQUEST")
+          Ok(views.html.redirect(settings.appId, callback(gameKey), Facebook.fscope))
+        }
       }
-
-      case None => BadRequest("")
-    }
   }
 
-  def appCss = Action { implicit request =>
-    request.session.get(GAMEKEY).map(_.toInt) match {
-      case Some(gameKey) => Async {
+  def game = WithGameKey(p = parse.anyContent) {
+    implicit request =>
+      Async {
         WS.
-          url(s"http://www.onor.net/client/v1/games/4pics1word/$gameKey?userKey=4b1469e3ff90b438ef0134b1cb266c06").
+          url(s"$onorUrl/client/v1/games/4pics1word/${request.gameKey}?userKey=$userKey").
+          get.map(res => Ok(res.json))
+      }
+  }
+
+  def angularConfig = WithGameKey(p = parse.anyContent) {
+    implicit request =>
+      val settings = Facebook.facebookSettings(request.gameKey)
+      Ok(views.txt.config(settings.appId))
+  }
+
+  def appCss = WithGameKey(p = parse.anyContent) {
+    implicit request =>
+      Async {
+        WS.
+          url(s"$onorUrl/client/v1/games/4pics1word/${request.gameKey}?userKey=$userKey").
           get.map(res => Ok(views.txt.app((res.json \ "backgroundUrl").as[String])).as(CSS))
       }
-
-      case None => BadRequest("")
-    }
   }
 
 }

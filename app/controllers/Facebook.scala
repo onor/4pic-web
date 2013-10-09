@@ -33,32 +33,34 @@ case class FacebookUser(
   birthday: Option[String],
   link: String)
 
-case class FacebookSettings(appId:String, appSecret:String, appCallback:String, appUrl:String, appHome:String)
+case class FacebookSettings(namespace:String, appId:String, appSecret:String) {
+  val appUrl = s"http://apps.facebook.com/$namespace"
+  val appHome = s"http://www.facebook.com/appcenter/$namespace"
+}
 
 object Facebook extends Controller {
 
   def facebookSettings(gameKey:Int) = if (play.api.Play.isDev(play.api.Play.current)) {
      FacebookSettings(
+       "fourpicbeauty-dev",
        "304111289726859",
-       "bd5fa38e026ac2f5f65ce048d2d3f054",
-       s"http://localhost:9000/gameKey/$gameKey/facebook/login",
-       "http://apps.facebook.com/fourpicbeauty-dev",
-       "todo")
+       "bd5fa38e026ac2f5f65ce048d2d3f054")
   } else {
     FacebookSettings(
+      "fourpicweb",
       "583608191697375",
-      "618a6da80479f556e7a72c9780fcbefa",
-      s"http://4picweb.onor.net/gameKey/$gameKey/facebook/login",
-      "http://apps.facebook.com/fourpicweb",
-      "todo")
+      "618a6da80479f556e7a72c9780fcbefa")
   }
 
   val NETWORK_NAME = "Facebook"
   val PROTECTED_RESOURCE_URL = "https://graph.facebook.com/me"
   val EMPTY_TOKEN: Token = null
-  val scope = "email,friends_online_presence"
+  val fscope = "email,friends_online_presence"
 
   def fbLoginCode(gameKey:Int) = Action { implicit request =>
+
+    val host = s"http://${request.host}"
+    def callback(key:Int) = s"$host/gameKey/$key/facebook/login"
 
     val settings = facebookSettings(gameKey)
 
@@ -66,8 +68,8 @@ object Facebook extends Controller {
       .provider(classOf[FacebookApi])
       .apiKey(settings.appId)
       .apiSecret(settings.appSecret)
-      .callback(settings.appCallback)
-      .scope("email,friends_online_presence")
+      .callback(callback(gameKey))
+      .scope(fscope)
       .build()
 
     val authorizationUrl = service.getAuthorizationUrl(EMPTY_TOKEN);
