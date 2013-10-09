@@ -7,6 +7,8 @@ import play.api.libs.concurrent.Execution.Implicits._
 
 object Application extends Controller {
 
+  val onorUrl = play.api.Play.current.configuration.getString("onorplatform.url").get
+  val userKey = "4b1469e3ff90b438ef0134b1cb266c06"
   val GAMEKEY = "gameKey"
 
   def index = Action { implicit request =>
@@ -15,6 +17,9 @@ object Application extends Controller {
 
   def indexPost(gameKey:Int) = Action { implicit request =>
     Logger.info("INDEX POST")
+
+    def callback(gameKey:Int) = s"http://${request.host}/gameKey/$gameKey/facebook/login"
+
     val settings = Facebook.facebookSettings(gameKey)
     val sr = request.body.asFormUrlEncoded.get("signed_request").head
     components.SignedRequestUtils.parseSignedRequest(sr, settings.appSecret) match {
@@ -24,7 +29,7 @@ object Application extends Controller {
       }
       case None => {
         Logger.info("DIDNT GET SIGNED REQUEST")
-        Ok(views.html.redirect(settings.appId, settings.appCallback, Facebook.scope))
+        Ok(views.html.redirect(settings.appId, callback(gameKey), Facebook.fscope))
       }
     }
   }
@@ -33,7 +38,7 @@ object Application extends Controller {
     request.session.get(GAMEKEY).map(_.toInt) match {
       case Some(gameKey) => Async {
           WS.
-            url(s"http://www.onor.net/client/v1/games/4pics1word/$gameKey?userKey=4b1469e3ff90b438ef0134b1cb266c06").
+            url(s"$onorUrl/client/v1/games/4pics1word/$gameKey?userKey=$userKey").
             get.map(res => Ok(res.json))
         }
 
@@ -56,7 +61,7 @@ object Application extends Controller {
     request.session.get(GAMEKEY).map(_.toInt) match {
       case Some(gameKey) => Async {
         WS.
-          url(s"http://www.onor.net/client/v1/games/4pics1word/$gameKey?userKey=4b1469e3ff90b438ef0134b1cb266c06").
+          url(s"$onorUrl/client/v1/games/4pics1word/$gameKey?userKey=$userKey").
           get.map(res => Ok(views.txt.app((res.json \ "backgroundUrl").as[String])).as(CSS))
       }
 

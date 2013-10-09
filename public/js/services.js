@@ -17,5 +17,13 @@ angular.module('myApp.services', ['ngResource']).
         return $resource(
             "http://www.onor.net/client/v1/brands/5217421510d072b42ee36351/campaigns?page=1&perPage=10&userKey=4b1469e3ff90b438ef0134b1cb266c06"
         );
+    }).factory('Score', function($resource){
+        return $resource(
+            "./scores/levelpack/:lp",
+        {
+            lp: "lp"
+        },
+        { update: { method: 'PUT' }}
+        );
     });
 });

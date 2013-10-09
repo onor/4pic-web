@@ -46,7 +46,11 @@ function PrizeListCtrl($scope, Campaign) {
     $scope.campaigns = Campaign.query();
 }
 
-function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game) {
+function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game, Score) {
+    var levelPack = parseInt($routeParams.levelPack);
+    var level = parseInt($routeParams.level);
+
+    $scope.score = Score.get({lp:(levelPack + 1)});
 
     $scope.state = $cookieStore.get('state');
 
@@ -64,9 +68,6 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game)
         for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
         return result;
     };
-
-	var levelPack = parseInt($routeParams.levelPack);
-	var level = parseInt($routeParams.level);
 	
 	$scope.game = Game.get({}, function (game) {
 		
@@ -128,6 +129,7 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game)
 	$scope.nextLevel = function (points2) {
 
         if (level == 1) {
+            Score.update({lp:(levelPack + 1)}, $scope.score);
             $location.path('/leaderboard/' + levelPack);
         } else {
 
