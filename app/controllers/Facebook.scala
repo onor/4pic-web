@@ -33,22 +33,23 @@ case class FacebookUser(
   birthday: Option[String],
   link: String)
 
-case class FacebookSettings(appId:String, appSecret:String, appUrl:String, appHome:String)
+case class FacebookSettings(namespace:String, appId:String, appSecret:String) {
+  val appUrl = s"http://apps.facebook.com/$namespace"
+  val appHome = s"http://www.facebook.com/appcenter/$namespace"
+}
 
 object Facebook extends Controller {
 
   def facebookSettings(gameKey:Int) = if (play.api.Play.isDev(play.api.Play.current)) {
      FacebookSettings(
+       "fourpicbeauty-dev",
        "304111289726859",
-       "bd5fa38e026ac2f5f65ce048d2d3f054",
-       "http://apps.facebook.com/fourpicbeauty-dev",
-       "todo")
+       "bd5fa38e026ac2f5f65ce048d2d3f054")
   } else {
     FacebookSettings(
+      "fourpicweb",
       "583608191697375",
-      "618a6da80479f556e7a72c9780fcbefa",
-      "http://apps.facebook.com/fourpicweb",
-      "todo")
+      "618a6da80479f556e7a72c9780fcbefa")
   }
 
   val NETWORK_NAME = "Facebook"
