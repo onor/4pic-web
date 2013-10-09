@@ -7,7 +7,7 @@ import play.api.libs.json.JsString
 
 import play.api.libs.ws.WS
 
-case class GameKeyRequest[A](gameKey:Int, request: Request[A]) extends WrappedRequest(request)
+case class GameKeyRequest[A](gameKey:Int, fbid:String, request: Request[A]) extends WrappedRequest(request)
 
 trait GameController extends Controller {
   import play.api.Play
@@ -18,14 +18,14 @@ trait GameController extends Controller {
 
   def WithGameKey[A](p: BodyParser[A])(f: GameKeyRequest[A] => Result) = Action(p) { implicit request =>
 
-    request.session.get(GAMEKEY).map(_.toInt) match {
-      case Some(gameKey) => Async {
+    (request.session.get(GAMEKEY).map(_.toInt), request.session.get("fbid")) match {
+      case (Some(gameKey), Some(fbid)) => Async {
         WS.
           url(s"$onorUrl/client/v1/games/4pics1word/$gameKey?userKey=$userKey").
-          get.map(res => if (res.status == 200) f(GameKeyRequest(gameKey, request)) else NotFound("game"))
+          get.map(res => if (res.status == 200) f(GameKeyRequest(gameKey, fbid, request)) else NotFound("game"))
       }
 
-      case None => BadRequest("")
+      case _ => BadRequest("Missing gameKey or fbid")
     }
   }
 }

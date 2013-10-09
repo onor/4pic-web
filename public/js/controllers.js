@@ -20,15 +20,17 @@ function SplashCtrl($scope, $cookieStore, $location, Game, $facebook) {
     }
 }
 
-function LeaderboardCtrl($scope, $location, $cookieStore, $routeParams, $facebook) {
+function LeaderboardCtrl($scope, $location, $cookieStore, $routeParams, $facebook, Leaderboard) {
+
+    var levelPack = parseInt($routeParams.levelPack);
 
     $scope.scores = $facebook.api('/' + appConfig.appId + '/scores');
+    $scope.publicScores = Leaderboard.query({lp:(levelPack + 1)});
+
 
     $scope.me = $facebook.api('/me');
 
     $scope.state = $cookieStore.get('state');
-
-    var levelPack = parseInt($routeParams.levelPack);
 
     $scope.playAgain = function() {
          $location.path('/levelpack/' + (levelPack + 1) + '/level/' + 0);

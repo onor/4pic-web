@@ -22,6 +22,8 @@ GET         /css/app.css                            controllers.Application.appC
 GET         /scores/levelpack/:lp                   controllers.ScoreService.show(lp:Int)
 POST        /scores/levelpack/:lp                   controllers.ScoreService.create(lp:Int)
 PUT         /scores/levelpack/:lp                   controllers.ScoreService.update(lp:Int)
+GET         /leaderboards                           controllers.ScoreService.leaderboard(lp:Option[Int])
+
 
 
 

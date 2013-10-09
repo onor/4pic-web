@@ -23,7 +23,13 @@ angular.module('myApp.services', ['ngResource']).
         {
             lp: "lp"
         },
-        { update: { method: 'PUT' }}
+        {
+            update: { method: 'PUT' }
+        }
+        );
+    }).factory('Leaderboard', function($resource){
+        return $resource(
+            "./leaderboards"
         );
     });
 });
