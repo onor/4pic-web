@@ -8,7 +8,8 @@ requirejs.config({
     shim : {
         "webjars!angular-cookies.js" : ["angular"], // make angular available to ngCookies,
         "webjars!angular-route.js" : ["angular"], // make angular available to ngRoute
-        "webjars!angular-resource.js" : ["angular"] // make angular available to ngResource
+        "webjars!angular-resource.js" : ["angular"], // make angular available to ngResource
+        "webjars!angular-animate.js" : ["angular"], // make angular available to ngAnimate
     },
     priority: ["angular"] // Make sure angular is loaded first
 });
@@ -23,12 +24,12 @@ define('angular', ['webjars!angular.js'], function() {
 });
 
 require(['angular', 'ui.bootstrap', './controllers', './directives', './filters', './services', './angular-facebook.min', '4picword.config',
-    "webjars!angular-cookies.js", "webjars!angular-resource.js", "webjars!angular-route.js"],
+    "webjars!angular-cookies.js", "webjars!angular-resource.js", "webjars!angular-route.js", "webjars!angular-animate.js"],
   function(angular) {
 
 // Declare app level module which depends on filters, and services
 
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngCookies', 'ngRoute' , 'ui.bootstrap', 'facebook']).
+angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngCookies', 'ngRoute' , 'ngAnimate', 'ui.bootstrap', 'facebook']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/splash', {templateUrl: 'partials/splash.html', controller: SplashCtrl});
     $routeProvider.when('/prize', {templateUrl: 'partials/prize.html', controller: PrizeCtrl});
