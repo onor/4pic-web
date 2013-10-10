@@ -1,4 +1,4 @@
-@(background:String)
+@(background:String, backgrounds:Map[String, String])
 
 /* app css stylesheet */
 @@font-face {

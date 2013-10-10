@@ -70,7 +70,10 @@ object Application extends Controller with GameController {
       Async {
         WS.
           url(s"$onorUrl/client/v1/games/4pics1word/${request.gameKey}?userKey=$userKey").
-          get.map(res => Ok(views.txt.app((res.json \ "backgroundUrl").as[String])).as(CSS))
+          get.map(res => {
+            val backgrounds = (res.json \ "design" \ "backgrounds").as[Option[Map[String,String]]].getOrElse(Map())
+            Ok(views.txt.app((res.json \ "backgroundUrl").as[String], backgrounds)).as(CSS)
+          })
       }
   }
 
