@@ -18,7 +18,7 @@ object Application extends Controller with GameController {
     Logger.error("Facebook namespace: " + facebookNamespace)
       WS.
         url(s"$onorUrl/client/v1/games/facebookNamespace/$facebookNamespace?userKey=$userKey").
-        get.map(res => if (res.status == 200) { res.json.\("gameKey").asOpt[Int]} else {None})
+        get.map(res => if (res.status == 200) { Logger.error("FN OK " + res.json);res.json.\("gameKey").asOpt[Int]} else {Logger.error("FN KO"); None})
   }
 
 
