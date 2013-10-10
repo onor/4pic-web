@@ -1,22 +1,34 @@
-/*global define, angular */
+(function() {
+
+    /*global define, angular */
 
 'use strict';
+
+requirejs.config({
+    shim : {
+        "webjars!angular-cookies.js" : ["angular"], // make angular available to ngCookies,
+        "webjars!angular-route.js" : ["angular"], // make angular available to ngRoute
+        "webjars!angular-resource.js" : ["angular"] // make angular available to ngResource
+    },
+    priority: ["angular"] // Make sure angular is loaded first
+});
 
 // Declare here that angular is the US version - other locales can be easily substituted.
 define('ui.bootstrap', ['webjars!ui-bootstrap.js'], function(uibootstrap) {return uibootstrap;});
 
 define('4picword.config', ['config/angular'], function(config) {return config;});
 
-define('angular', ['webjars!angular-locale_en-us.js','webjars!angular-resource.js', 'webjars!angular-cookies.js'], function() {
+define('angular', ['webjars!angular.js'], function() {
     return angular;
 });
 
-require(['angular', 'ui.bootstrap', './controllers', './directives', './filters', './services', './angular-facebook.min', '4picword.config'],
+require(['angular', 'ui.bootstrap', './controllers', './directives', './filters', './services', './angular-facebook.min', '4picword.config',
+    "webjars!angular-cookies.js", "webjars!angular-resource.js", "webjars!angular-route.js"],
   function(angular) {
 
 // Declare app level module which depends on filters, and services
 
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngCookies' , 'ui.bootstrap', 'facebook']).
+angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngCookies', 'ngRoute' , 'ui.bootstrap', 'facebook']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/splash', {templateUrl: 'partials/splash.html', controller: SplashCtrl});
     $routeProvider.when('/prize', {templateUrl: 'partials/prize.html', controller: PrizeCtrl});
@@ -36,3 +48,5 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
 angular.bootstrap(document, ['myApp']);
 
 });
+
+})();
