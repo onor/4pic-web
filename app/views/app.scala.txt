@@ -13,7 +13,8 @@
 
 
 body {
-  background: url("@background") no-repeat;
+  /* background: url("@background") no-repeat; */
+  background: url("@backgrounds.get("splash")") no-repeat;
   background-size: 100% auto;
   font-family: GillSansStd, arial, sans-serif !important;
   color: #fff !important;
