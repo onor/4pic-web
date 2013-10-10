@@ -15,6 +15,7 @@ object Application extends Controller with GameController {
 
   def parseNamespace(str: String) =  {
     val facebookNamespace = str.replaceAll("http://apps.facebook.com/", "").replaceAll("/", "")
+    Logger.error("Facebook namespace: " + facebookNamespace)
       WS.
         url(s"$onorUrl/client/v1/games/facebookNamespace/$facebookNamespace?userKey=$userKey").
         get.map(res => if (res.status == 200) { res.json.\("gameKey").asOpt[Int]} else {None})
