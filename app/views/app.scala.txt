@@ -1,5 +1,19 @@
 @(background:String, backgrounds:Map[String, String])
 
+.my-special-animation.ng-enter {
+  -webkit-transition:0.5s linear all;
+  -moz-transition:0.5s linear all;
+  -o-transition:0.5s linear all;
+  transition:0.5s linear all;
+
+  background:red;
+}
+
+/* destination animations */
+.my-special-animation.ng-enter.ng-enter-active {
+  background:blue;
+}
+
 /* app css stylesheet */
 @@font-face {
   font-family: GillSansStd;
@@ -13,7 +27,6 @@
 
 
 body {
-  /* background: url("@background") no-repeat; */
   background: url("@backgrounds.get("splash")") no-repeat;
   background-size: 100% auto;
   font-family: GillSansStd, arial, sans-serif !important;
