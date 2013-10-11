@@ -25,8 +25,23 @@ function LeaderboardCtrl($scope, $location, $cookieStore, $routeParams, $faceboo
     var levelPack = parseInt($routeParams.levelPack);
 
     $scope.scores = $facebook.api('/' + appConfig.appId + '/scores');
-    $scope.publicScores = Leaderboard.query({lp:(levelPack + 1)});
+    $scope.publicScores = Leaderboard.query({lp:(levelPack + 1)}, function(ps) {
+    	$scope.publicScores = [];
+			for (var i = 0; i < ps.length; i++) {
+                var uri = '/' + ps[i].playerId.id;
 
+                var j = i + 0;
+
+                $facebook.api(uri).then(
+                    function(response) {
+                        $scope.publicScores[j] = {user:response, score: ps[j].scoreInt};
+                    },
+                    function(response) {
+                        alert('error');
+                    }
+                );
+			}
+    });
 
     $scope.me = $facebook.api('/me');
 
