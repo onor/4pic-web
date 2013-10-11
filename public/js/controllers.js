@@ -55,11 +55,7 @@ function LeaderboardCtrl($scope, $location, $cookieStore, $routeParams, $faceboo
     }
 }
 
-function PrizeCtrl() {
-
-}
-
-function PrizeListCtrl($scope, Campaign) {
+function PrizeCtrl($scope, Campaign) {
     $scope.campaigns = Campaign.query();
 }
 
@@ -72,7 +68,7 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game,
     $scope.state = $cookieStore.get('state');
 
     $scope.prizeList = function() {
-       $location.path('/prize/list');
+       $location.path('/prize');
     }
 
 	function shuffle(o) { //v1.0
