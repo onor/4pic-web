@@ -24,7 +24,7 @@ define('angular', ['webjars!angular.js'], function() {
 });
 
 require(['angular', 'ui.bootstrap', './controllers', './directives', './filters', './services', './angular-facebook.min', '4picword.config',
-    "webjars!angular-cookies.js", "webjars!angular-resource.js", "webjars!angular-route.js", "webjars!angular-animate.js"],
+    "webjars!angular-cookies.js", "webjars!angular-resource.js", "webjars!angular-route.js", "webjars!angular-animate.js", "webjars!underscore.js"],
   function(angular) {
 
 // Declare app level module which depends on filters, and services
