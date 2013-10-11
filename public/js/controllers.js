@@ -56,7 +56,9 @@ function LeaderboardCtrl($scope, $location, $cookieStore, $routeParams, $faceboo
 }
 
 function PrizeCtrl($scope, Campaign) {
-    $scope.campaigns = Campaign.query();
+    Campaign.query(function(res) {
+         $scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/3)});
+    });
 }
 
 function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game, Score) {

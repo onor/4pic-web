@@ -1,10 +1,15 @@
 <div class="backgroundPrize">
     <carousel interval="-1">
-        <slide ng-repeat="campaign in campaigns" active="image.isActive">
-            <img ng-src="{{campaign.prize.image}}" style="margin:auto;">
+        <slide ng-repeat="campaignGroup in campaigns" active="image.isActive">
+            <div class="span2"></div>
+            <ul class="thumbnails">
+            <li ng-repeat="campaign in campaignGroup" class="span2">
+            <img ng-src="{{campaign.prize.image}}">
             <div class="carousel-caption">
                 <h4>TODO</h4>
             </div>
+            </li>
+            </ul>
         </slide>
     </carousel>
 </div>
