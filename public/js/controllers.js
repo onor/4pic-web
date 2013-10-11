@@ -73,11 +73,6 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game,
        $location.path('/prize');
     }
 
-	function shuffle(o) { //v1.0
-		for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-		return o;
-	};
-
     function randomString(length, chars) {
         var result = '';
         for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
@@ -97,7 +92,7 @@ function LevelCtrl($scope, $routeParams, $dialog, $location, $cookieStore, Game,
 
         var generated =  randomString((12 - $scope.level.answer.length), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
-        $scope.other = shuffle(($scope.level.answer.toUpperCase() + generated).split(''));
+        $scope.other = _.shuffle(($scope.level.answer.toUpperCase() + generated).split(''));
 
 		$scope.invalid = false;
 
