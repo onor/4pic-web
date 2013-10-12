@@ -1,4 +1,5 @@
 <div class="backgroundLevel">
+	State {{state}}
 
 {{remains}} seconds
 <timer interval="1000" countdown="30">
@@ -34,11 +35,11 @@
         <div id="top-board">
             <div class="row-fluid">
                 <div class="span6">
-                    <h2>Level- {{state.level + 1}}</h2>
+                    <h2>Level- {{state.state.level + 1}}</h2>
                 </div>
                 <div class="span6">
                     <div id="hudscore">
-                        <span class="score" ng-click="prizeList()">{{state.score}}</span>
+                        <span class="score" ng-click="prizeList()">{{lpScore}}</span>
                     </div>
                 </div>
             </div>    

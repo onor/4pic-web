@@ -24,9 +24,9 @@ POST        /scores/levelpack/:lp                   controllers.ScoreService.cre
 PUT         /scores/levelpack/:lp                   controllers.ScoreService.update(lp:Int)
 GET         /leaderboards                           controllers.ScoreService.leaderboard(lp:Option[Int])
 
-
-
-
+#state proxy
+GET         /states                                 controllers.StateService.show
+PUT         /states/:points            		        controllers.StateService.resolveLevel(points:Int)
 
 # Map the JS resource paths
 GET         /*file                                  controllers.Assets.at(path="/public", file)

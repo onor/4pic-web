@@ -27,6 +27,15 @@ angular.module('myApp.services', ['ngResource']).
             update: { method: 'PUT' }
         }
         );
+    }).factory('State', function($resource){
+        return $resource(
+            "./states/:points",{},
+            {
+                resolveLevel: { 
+									method: 'PUT'
+								}
+            }
+        );
     }).factory('Leaderboard', function($resource){
         return $resource(
             "./leaderboards"
