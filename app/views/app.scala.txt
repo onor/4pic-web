@@ -47,7 +47,8 @@
 
 
 body {
-  background-size: 100% auto;
+  height: 1000px !important;
+  overflow:auto;
   font-family: GillSansStd, arial, sans-serif !important;
   color: #fff !important;
 }
@@ -55,15 +56,23 @@ body {
 .green {color:#23723b;font-weight:bold;}
 .backgroundSplash {
   background: url("@backgrounds.get("splash")") no-repeat;
+
+  height: 1000px;
 }
 .backgroundLevel {
   background: url("@backgrounds.get("level")") no-repeat;
+  
+  height: 1000px;
 }
 .backgroundPrize {
   background: url("@backgrounds.get("prize")") no-repeat;
+
+  height: 1000px;
 }
 .backgroundLeaderboard {
   background: url("@backgrounds.get("leaderboard")") no-repeat;
+
+  height: 1000px;
 }
 
 
