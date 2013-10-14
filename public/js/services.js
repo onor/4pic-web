@@ -19,13 +19,7 @@ angular.module('myApp.services', ['ngResource']).
         );
     }).factory('Score', function($resource){
         return $resource(
-            "./scores/levelpack/:lp",
-        {
-            lp: "lp"
-        },
-        {
-            update: { method: 'PUT' }
-        }
+            "./scores/:fbid"
         );
     }).factory('State', function($resource){
         return $resource(
@@ -35,10 +29,6 @@ angular.module('myApp.services', ['ngResource']).
 									method: 'PUT'
 								}
             }
-        );
-    }).factory('Leaderboard', function($resource){
-        return $resource(
-            "./leaderboards"
         );
     });
 });

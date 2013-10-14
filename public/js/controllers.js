@@ -13,41 +13,43 @@ function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
   $scope.go = function() {
     $location.path('/levelpack/' + $rootScope.state.state.levelPack + '/level/' + $rootScope.state.state.level);
   }
+
+  /*
+  $scope.ld = function() {
+    $location.path('/leaderboard/1');
+  }*/
 }
 
-function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Leaderboard) {
+function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
 
     var levelPack = $rootScope.state.state.levelPack;
 
     var sc = $rootScope.state.state.lpScores[levelPack - 1];
 	if (sc) {
-		$scope.lpScore = sc;
+		$scope.lpScore = sc.score;
 	} else {
 		$scope.lpScore = 0;
 	}
 
     $scope.scores = $facebook.api('/' + appConfig.appId + '/scores');
-    $scope.publicScores = Leaderboard.query({lp:(levelPack + 1)}, function(ps) {
-    	$scope.publicScores = [];
-			for (var i = 0; i < ps.length; i++) {
-                var uri = '/' + ps[i].playerId.id;
 
-                var j = i + 0;
-
-                $facebook.api(uri).then(
-                    function(response) {
-                        $scope.publicScores[j] = {user:response, score: ps[j].scoreInt};
-                    },
-                    function(response) {
-                        alert('error');
-                    }
-                );
-			}
-    });
+    Score.query({weekly:true}, function(scores) {
+        $scope.weeklyScores = [];
+        _.map(scores, function(score) {
+            $facebook.api('/' + score._id.playerId.id).then(
+                function(response) {
+                    $scope.weeklyScores.push({user:response, score: score.value});
+                },
+                function(response) {
+                    alert('error');
+                }
+            );
+		});
+	});
 
     $scope.playAgain = function() {
-         $location.path('/levelpack/' + (levelPack + 1) + '/level/' + 0);
-     }
+        $location.path('/levelpack/' + (levelPack + 1) + '/level/' + 0);
+    }
     $scope.getPrize = function() {
         $location.path('/prize')
     }
@@ -65,7 +67,7 @@ function LevelCtrl($scope, $rootScope, $dialog, State, $location, Game) {
 		
 		var sc = $rootScope.state.state.lpScores[levelPack];
 		if (sc) {
-			$scope.lpScore = sc;
+			$scope.lpScore = sc.score;
 		} else {
 			$scope.lpScore = 0;
 		}
