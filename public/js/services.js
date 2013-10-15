@@ -23,9 +23,13 @@ angular.module('myApp.services', ['ngResource']).
         );
     }).factory('State', function($resource){
         return $resource(
-            "./states/:points",{},
+            "./states/:points:docController",{},
             {
                 resolveLevel: { 
+									method: 'PUT'
+								},
+                seenLevel: {
+									params: {docController: "seen"}, 
 									method: 'PUT'
 								}
             }

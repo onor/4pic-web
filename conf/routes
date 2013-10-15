@@ -24,6 +24,7 @@ GET         /scores                     						controllers.ScoreService.leaderboa
 
 #state proxy
 GET         /states                                 controllers.StateService.show
+PUT         /states/seen            		            controllers.StateService.seenLevel
 PUT         /states/:points            		          controllers.StateService.resolveLevel(points:Int)
 
 # Map the JS resource paths

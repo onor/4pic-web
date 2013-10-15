@@ -76,6 +76,15 @@ function LevelCtrl($scope, $rootScope, $dialog, State, $location, Game) {
     var levelPack = $rootScope.state.state.levelPack;
     var level = $rootScope.state.state.level;
 		
+		if ($rootScope.state.state.seen) {
+			$scope.countdownAvailable = 1;
+		} else {
+			$scope.countdownAvailable = 30;
+		}
+		
+		$rootScope.state.$seenLevel({}, function(res) {
+		});
+		
 		var sc = $rootScope.state.state.lpScores[levelPack];
 		if (sc) {
 			$scope.lpScore = sc.score;

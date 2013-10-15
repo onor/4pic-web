@@ -35,5 +35,20 @@ object StateService extends Controller with GameController {
         })
       }
   }
+	
+  def seenLevel() = WithGameKey(p = parse.anyContent) {
+    implicit request =>
+      Async {
+        val uri = s"$onorUrl/client/v1/games/4pics1word/gk/${request.gameKey}/user/${request.fbid}/provider/facebook?userKey=$userKey"
+        WS.
+          url(uri).
+          put(request.body.asJson.get).map(res => {
+          //todo move get
+          if (res.status == 200)
+            Ok(res.json)
+          else BadRequest(res.body)
+        })
+      }
+  }
 
 }
