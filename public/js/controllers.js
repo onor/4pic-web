@@ -36,7 +36,7 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
     Score.query({weekly:true}, function(scores) {
         $scope.weeklyScores = [];
         _.map(scores, function(score) {
-            $facebook.api('/' + score._id.playerId.id).then(
+            $facebook.api('/' + score._id.playerId.id + '?fields=id,name,picture').then(
                 function(response) {
                     $scope.weeklyScores.push({user:response, score: score.value});
                 },
