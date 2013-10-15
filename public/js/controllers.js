@@ -14,10 +14,10 @@ function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
     $location.path('/levelpack/' + $rootScope.state.state.levelPack + '/level/' + $rootScope.state.state.level);
   }
 
-  /*
+  
   $scope.ld = function() {
     $location.path('/leaderboard/1');
-  }*/
+  }
 }
 
 function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
@@ -31,7 +31,18 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
 		$scope.lpScore = 0;
 	}
 
-    $scope.scores = $facebook.api('/' + appConfig.appId + '/scores');
+    $facebook.api({
+							method : 'fql.query',
+							query : 'SELECT uid, name, is_app_user, pic_square FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
+						}).then(function (friends) {
+							$scope.scores = [];
+							_.map(friends, function(friend) {
+								Score.get({fbid:friend.uid, weekly:false}, function(res) {
+									friend.score = res.value;
+									$scope.scores.push(friend);
+								});
+							});	
+						});
 
     Score.query({weekly:true}, function(scores) {
         $scope.weeklyScores = [];
