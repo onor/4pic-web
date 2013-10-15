@@ -14,7 +14,7 @@ object Application extends Controller with GameController {
   }
 
   def parseNamespace(str: String) =  {
-    val facebookNamespace = str.replaceAll("http://apps.facebook.com/", "").replaceAll("/", "")
+    val facebookNamespace = str.replaceAll("http://apps.facebook.com/", "").replaceAll("https://apps.facebook.com/", "").replaceAll("/", "")
 		val URI = s"$onorUrl/client/v1/games/facebookNamespace/$facebookNamespace?userKey=$userKey"
     Logger.error("Facebook namespace: " + facebookNamespace + " URI " + URI)
       WS.
