@@ -80,6 +80,11 @@ body {
 .header {
   position: relative;
 }
+.modal-fixed {
+  width: 300px;
+  height: auto;
+  overflow: none;
+}
 /*---- END Global -----*/
 
 
