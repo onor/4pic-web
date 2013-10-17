@@ -1,4 +1,4 @@
-<div class="backgroundLevel">
+<!-- <div class="backgroundLevel">
 	State {{state}}
 
 {{remains}} seconds
@@ -10,34 +10,34 @@
 
 
 <div class="row">
-    <div class="span6">
+    <div class="col-md-6 col-xs-6">
         <div class="image-holder">
-            <div class="row-fluid">
-                <div class="span6">
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
                     <img ng-src="{{level.photo1}}"/>
                 </div>
-                <div class="span6">
+                <div class="col-md-6 col-xs-6">
                     <img ng-src="{{level.photo2}}"/>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span6">
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
                     <img ng-src="{{level.photo3}}"/>
                 </div>
-                <div class="span6">
+                <div class="col-md-6 col-xs-6">
                     <img ng-src="{{level.photo4}}"/>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="span6">
+    <div class="col-md-6 col-xs-6">
         <div id="top-board">
-            <div class="row-fluid">
-                <div class="span6">
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
                     <h2>Level- {{state.state.level + 1}}</h2>
                 </div>
-                <div class="span6">
+                <div class="col-md-6 col-xs-6">
                     <div id="hudscore">
                         <span class="score" ng-click="prizeList()">{{lpScore}}</span>
                     </div>
@@ -72,4 +72,101 @@
         </div>
     </div>
 </div>
+</div> -->
+
+<div class="backgroundLevel">
+   <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 clearfix">
+                <div id="player-pic-container">
+                    <img src="img/ingame/player-pic-holder.png" width="83" height="83" alt="" class="img-circle">
+                </div>
+
+                <div id="player-lives-container">
+                    <ul class="player-lives">
+                        <li class="player-life">
+                            <span class="heart active"></span>
+                        </li>
+                        <li class="player-life">
+                            <span class="heart active"></span>
+                        </li>
+                        <li class="player-life">
+                            <span class="heart active"></span>
+                        </li>
+                        <li class="player-life">
+                            <span class="heart active"></span>
+                        </li>
+                        <li class="player-life">
+                            <span class="heart"></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="hudscore">
+                    <span class="score" ng-click="prizeList()">{{lpScore}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <timer interval="1000" countdown="countdownAvailable">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{seconds * 3.3}}%;">
+                            <span class="sr-only">{{seconds * 3.3}}% Complete</span>
+                        </div>
+                    </div>
+                </timer>   
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="image-holder-container">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="image-holder">
+                                <img ng-src="{{level.photo1}}"/>
+                            </div>
+                            <div class="image-holder">
+                                <img ng-src="{{level.photo2}}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="image-holder">
+                                <img ng-src="{{level.photo3}}"/>
+                            </div>
+                            <div class="image-holder">
+                                <img ng-src="{{level.photo4}}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xs-6">
+                <div id="letter-board" class="clearfix">
+                    <ul id="letter-placeholder" class="inline list-unstyled clearfix" ng-class="{'invalidClass': invalid}">
+                        <li ng-repeat="letter in answer track by $index">
+                            <div ng-click="remove($index)">
+                                {{letter}}
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div id="letter-selections" class="clearfix">
+                        <ul class="inline">
+                            <li ng-repeat="letter in other track by $index">
+                                <div ng-click="add($index)">
+                                    {{letter}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
 </div>
