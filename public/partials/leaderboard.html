@@ -50,7 +50,7 @@
             <table>
                 <caption>Your Friends ? <span class="leader-count"><p>?</p></span></caption>
                 <tbody>
-                    <tr ng-repeat="value in scores track by $index | orderBy:score">
+                    <tr ng-repeat="value in scores track by $index | orderBy:value.score">
                         <td>{{$index + 1}}<img ng-src="{{value.pic_square}}"/></td>
                         <td>{{value.name}}</td>
                         <td>{{value.score}}</td>
@@ -61,7 +61,7 @@
             <table>
                 <caption>Current Weekly Winners <span class="leader-count"><p>?</p></span></caption>
                 <tbody>
-                    <tr ng-repeat="value in weeklyScores track by $index | orderBy:score">
+                    <tr ng-repeat="value in weeklyScores track by $index | orderBy:value.score">
                         <td>{{$index + 1}}<img ng-src="{{value.user.picture.data.url}}"/></td>
                         <td>{{value.user.name}}</td>
                         <td>{{value.score}}</td>
