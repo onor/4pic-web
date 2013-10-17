@@ -72,7 +72,16 @@ function PrizeCtrl($scope, Campaign) {
     });
 }
 
-function LevelCtrl($scope, $rootScope, $dialog, State, $location, Game) {
+function LevelCtrl($scope, $rootScope, $dialog, State, $location, Game, $facebook) {
+	
+		$facebook.api('/me?fields=id,name,picture').then(function(me) {
+			if (me.picture.data.is_silhouette) {
+				$scope.profilePic = "img/ingame/player-pic-holder.png";
+			} else {
+				$scope.profilePic = me.picture.data.url;
+			}
+		});
+	
     var levelPack = $rootScope.state.state.levelPack;
     var level = $rootScope.state.state.level;
 		
