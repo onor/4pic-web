@@ -31,6 +31,8 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
 	});
 
     var levelPack = $rootScope.state.state.levelPack;
+		
+		$scope.bestScore = _.max($rootScope.state.state.lpScores, function(lps){return lps.score;}).score;
 
     var sc = $rootScope.state.state.lpScores[levelPack - 1];
 	if (sc) {
