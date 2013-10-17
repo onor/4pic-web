@@ -85,19 +85,19 @@
                 <div id="player-lives-container">
                     <ul class="player-lives">
                         <li class="player-life">
-                            <span class="heart active"></span>
+                            <span class="heart" ng-class="{'active': state.state.level > 0}"></span>
                         </li>
                         <li class="player-life">
-                            <span class="heart active"></span>
+                            <span class="heart" ng-class="{'active': state.state.level > 1}"></span>
                         </li>
                         <li class="player-life">
-                            <span class="heart active"></span>
+                            <span class="heart" ng-class="{'active': state.state.level > 2}"></span>
                         </li>
                         <li class="player-life">
-                            <span class="heart active"></span>
+                            <span class="heart" ng-class="{'active': state.state.level > 3}"></span>
                         </li>
                         <li class="player-life">
-                            <span class="heart"></span>
+                            <span class="heart" ng-class="{'active': state.state.level > 4}"></span>
                         </li>
                     </ul>
                 </div>
