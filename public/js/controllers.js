@@ -1,7 +1,7 @@
 'use strict';
 
 function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
-
+	
   $facebook.getLoginStatus();
 
 	$scope.game = Game.get({}, function (game) {
@@ -21,6 +21,14 @@ function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
 }
 
 function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
+	
+	$facebook.api('/me?fields=id,name,picture').then(function(me) {
+		if (me.picture.data.is_silhouette) {
+			$scope.profilePic = "img/ingame/player-pic-holder.png";
+		} else {
+			$scope.profilePic = me.picture.data.url;
+		}
+	});
 
     var levelPack = $rootScope.state.state.levelPack;
 
