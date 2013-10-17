@@ -13,7 +13,7 @@ object ApplicationBuild extends Build {
     "org.webjars" % "bootstrap" % "3.0.0",
     "org.webjars" % "angular-ui" % "0.4.0-1",
     "org.webjars" % "underscorejs" % "1.5.1",
-    "org.webjars" % "angular-ui-bootstrap" % "0.3.0-1",
+    "org.webjars" % "angular-ui-bootstrap" % "0.6.0-1",
     "org.webjars" %% "webjars-play" % "2.1.0-3",
     "commons-codec" % "commons-codec" % "1.7"
   )

@@ -80,7 +80,7 @@ function PrizeCtrl($scope, Campaign) {
     });
 }
 
-function LevelCtrl($scope, $rootScope, $dialog, State, $location, Game, $facebook) {
+function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook) {
 	
 		$facebook.api('/me?fields=id,name,picture').then(function(me) {
 			if (me.picture.data.is_silhouette) {
@@ -185,7 +185,7 @@ function LevelCtrl($scope, $rootScope, $dialog, State, $location, Game, $faceboo
       $location.path('/leaderboard/' + levelPack);
     } else {
 
-			var modalInstance = $dialog.dialog({
+			var modalInstance = $modal.open({
 				templateUrl: 'partials/nextlevel.html',
 				controller: NextLevelCtrl,
 				dialogClass: 'modal',
@@ -196,7 +196,7 @@ function LevelCtrl($scope, $rootScope, $dialog, State, $location, Game, $faceboo
         }
 			});
 
-			modalInstance.open().then(function (points) {
+			modalInstance.result.then(function (points) {
 				if (points) {
 	        $location.path('/levelpack/' + $rootScope.state.state.levelPack + '/level/' + $rootScope.state.state.level);
 				}
@@ -214,10 +214,10 @@ function LevelCtrl($scope, $rootScope, $dialog, State, $location, Game, $faceboo
   });
 }
 
-function NextLevelCtrl($scope, dialog, points) {
+function NextLevelCtrl($scope, $modalInstance, points) {
   $scope.points = points;
 	$scope.next = function () {
-		dialog.close(points);
+		$modalInstance.close(points);
 	}
 
 }

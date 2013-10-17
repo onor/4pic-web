@@ -15,7 +15,7 @@ requirejs.config({
 });
 
 // Declare here that angular is the US version - other locales can be easily substituted.
-define('ui.bootstrap', ['webjars!ui-bootstrap.js'], function(uibootstrap) {return uibootstrap;});
+define('ui.bootstrap', ['webjars!ui-bootstrap-tpls.js'], function(uibootstrap) {return uibootstrap;});
 
 define('4picword.config', ['config/angular'], function(config) {return config;});
 
