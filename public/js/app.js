@@ -10,20 +10,19 @@ requirejs.config({
         "webjars!angular-route.js" : ["angular"], // make angular available to ngRoute
         "webjars!angular-resource.js" : ["angular"], // make angular available to ngResource
         "webjars!angular-animate.js" : ["angular"], // make angular available to ngAnimate
+				"webjars!ui-bootstrap-tpls.js" : ["angular"]
     },
     priority: ["angular"] // Make sure angular is loaded first
 });
 
 // Declare here that angular is the US version - other locales can be easily substituted.
-define('ui.bootstrap', ['webjars!ui-bootstrap-tpls.js'], function(uibootstrap) {return uibootstrap;});
-
 define('4picword.config', ['config/angular'], function(config) {return config;});
 
 define('angular', ['webjars!angular.js'], function() {
     return angular;
 });
 
-require(['angular', 'ui.bootstrap', './controllers', './directives', './filters', './services', './angular-facebook.min', '4picword.config',
+require(['angular', "webjars!ui-bootstrap-tpls.js", './controllers', './directives', './filters', './services', './angular-facebook.min', '4picword.config',
     "webjars!angular-cookies.js", "webjars!angular-resource.js", "webjars!angular-route.js", "webjars!angular-animate.js", "webjars!underscore.js"],
   function(angular) {
 
