@@ -13,7 +13,7 @@ GET         /webjars/*file                          controllers.WebJarAssets.at(
 #GET       /                      controllers.Assets.at(path="/public", file="index.html")
 GET         /                                       controllers.Application.index
 GET         /game                                   controllers.Application.game
-POST        /                                       controllers.Application.indexPost
+POST        /gameKey/:gameKey/                      controllers.Application.indexPost(gameKey:Int)
 GET         /gameKey/:gameKey/facebook/login        controllers.Facebook.fbLoginCode(gameKey:Int)
 GET         /js/config/angular.js                   controllers.Application.angularConfig
 GET         /css/app.css                            controllers.Application.appCss

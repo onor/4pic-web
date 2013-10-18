@@ -23,30 +23,23 @@ object Application extends Controller with GameController {
   }
 
 
-  def indexPost() = Action {
+  def indexPost(gameKey:Int) = Action {
     implicit request =>
       Logger.info("INDEX POST")
 
       def callback(gameKey: Int) = s"http://${request.host}/gameKey/$gameKey/facebook/login"
 
-      Async{
-      parseNamespace(request.headers("Referer")) map {
-        case Some(gameKey) => {
-          val settings = Facebook.facebookSettings(gameKey)
-          val sr = request.body.asFormUrlEncoded.get("signed_request").head
-          components.SignedRequestUtils.parseSignedRequest(sr, settings.appSecret) match {
-            case Some(signedRequest) => {
-              Logger.info("GOT SIGNED REQUEST")
-              Redirect(routes.Application.index()).withSession(("fbid", signedRequest.user_id), (GAMEKEY, gameKey.toString))
-            }
-            case None => {
-              Logger.info("DIDNT GET SIGNED REQUEST")
-              Ok(views.html.redirect(settings.appId, callback(gameKey), Facebook.fscope))
-            }
-          }
+      val settings = Facebook.facebookSettings(gameKey)
+      val sr = request.body.asFormUrlEncoded.get("signed_request").head
+      components.SignedRequestUtils.parseSignedRequest(sr, settings.appSecret) match {
+        case Some(signedRequest) => {
+          Logger.info("GOT SIGNED REQUEST")
+          Redirect(routes.Application.index()).withSession(("fbid", signedRequest.user_id), (GAMEKEY, gameKey.toString))
         }
-        case None => NotFound("game")
-      }
+        case None => {
+          Logger.info("DIDNT GET SIGNED REQUEST")
+          Ok(views.html.redirect(settings.appId, callback(gameKey), Facebook.fscope))
+        }
       }
   }
 
