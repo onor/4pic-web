@@ -16,13 +16,11 @@ requirejs.config({
 });
 
 // Declare here that angular is the US version - other locales can be easily substituted.
-define('4picword.config', ['config/angular'], function(config) {return config;});
-
 define('angular', ['webjars!angular.js'], function() {
     return angular;
 });
 
-require(['angular', "webjars!ui-bootstrap-tpls.js", './controllers', './directives', './filters', './services', './angular-facebook.min', '4picword.config',
+require(['angular', "webjars!ui-bootstrap-tpls.js", './controllers', './directives', './filters', './services', './angular-facebook.min',
     "webjars!angular-cookies.js", "webjars!angular-resource.js", "webjars!angular-route.js", "webjars!angular-animate.js", "webjars!underscore.js"],
   function(angular) {
 

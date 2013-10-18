@@ -10,13 +10,13 @@ GET         /lib/require.js                         controllers.WebJarAssets.req
 GET         /webjars/*file                          controllers.WebJarAssets.at(file)
 
 # Home page
-#GET       /                      controllers.Assets.at(path="/public", file="index.html")
-GET         /                                       controllers.Application.index
-GET         /game                                   controllers.Application.game
-POST        /gameKey/:gameKey/                      controllers.Application.indexPost(gameKey:Int)
+#GET        /                      									controllers.Assets.at(path="/public", file="index.html")
+GET         /                       								controllers.Application.index(gameKey:Int)
+POST        /gameKey/:gameKey/       								controllers.Application.indexPost(gameKey:Int)
 GET         /gameKey/:gameKey/facebook/login        controllers.Facebook.fbLoginCode(gameKey:Int)
-GET         /js/config/angular.js                   controllers.Application.angularConfig
-GET         /css/app.css                            controllers.Application.appCss
+GET         /css/app.css           									controllers.Application.appCss(gameKey:Int)
+
+GET         /game                                   controllers.Application.game
 
 #scores proxy
 GET         /scores/:fbid							              controllers.ScoreService.show(fbid:String, weekly:Boolean)
@@ -28,4 +28,4 @@ PUT         /states/seen            		            controllers.StateService.seenL
 PUT         /states/:points            		          controllers.StateService.resolveLevel(points:Int)
 
 # Map the JS resource paths
-GET         /*file                                  controllers.Assets.at(path="/public", file)
+GET         /*file                 									controllers.Assets.at(path="/public", file)

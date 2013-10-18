@@ -59,16 +59,13 @@ object Facebook extends Controller {
 
   def fbLoginCode(gameKey:Int) = Action { implicit request =>
 
-    val host = s"http://${request.host}"
-    def callback(key:Int) = s"$host/gameKey/$key/facebook/login"
-
     val settings = facebookSettings(gameKey)
 
     val service: OAuthService = new ServiceBuilder()
       .provider(classOf[FacebookApi])
       .apiKey(settings.appId)
       .apiSecret(settings.appSecret)
-      .callback(callback(gameKey))
+      .callback(Application.callback(gameKey, request))
       .scope(fscope)
       .build()
 
