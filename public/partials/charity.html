@@ -1,0 +1,79 @@
+<div class="backgroundCharity">
+    <div class="container">
+        <div id="scoreboard" class="clearfix">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="header clearfix">
+                        <div class="player-pic-scoreboard">
+                            <img ng-src="{{profilePic}}" width="83" height="83" class="img-circle" alt="">
+                        </div>
+
+                        <h1>Charities</h1>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="row"> -->
+            <!--     <div class="col-md-6 col-xs-6">
+                    <div class="score-container current-score">
+                        <p>Your Current Score</p>
+                        <span class="score-block">{{lpScore}}</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="score-block best-score">
+                        Your overall score {{state.scoreInt}}
+                    </div>
+                </div>
+            </div> -->
+
+            <table>
+                <caption>Your Friends ? <span class="leader-count"><p>?</p></span></caption>
+                <tbody>
+                    <tr ng-repeat="value in scores | orderBy:'score':true">
+                        <td>{{$index + 1}}<img ng-src="{{value.pic_square}}" width="45" height="45" class="img-circle"/></td>
+                        <td>{{value.name}}</td>
+                        <td>{{value.score}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <caption>Current Weekly Winners <span class="leader-count"><p>?</p></span></caption>
+                <tbody>
+                    <tr ng-repeat="value in weeklyScores | orderBy:'score':true">
+                        <td>{{$index + 1}}<img ng-src="{{value.user.picture.data.url}}" width="45" height="45" class="img-circle"//></td>
+                        <td>{{value.user.name}}</td>
+                        <td>{{value.score}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="btn-scoreboard-container">
+                    <a href="javascript:void();" class="leader-btn" ng-click="playAgain()">
+                        <p>Play Again</p>
+                    </a>
+                    <a href="javascript:void();" class="leader-btn" ng-click="getPrize()">
+                        <p>Get Daily Prize!</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <div class="btn-scoreboard-container">
+                    <a href="javascript:void();" class="prize-btn" ng-click="playAgain()">
+                        <p>Invite Friends<br>(+10 points each)</p>
+                    </a>
+                    <a href="javascript:void();" class="prize-btn" ng-click="getPrize()">
+                        <p>Recommend<br>(+50 points)</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+</div>
+

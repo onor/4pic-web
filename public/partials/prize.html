@@ -1,15 +1,19 @@
 <div class="backgroundPrize">
-    <carousel interval="-1">
-        <slide ng-repeat="campaignGroup in campaigns" active="image.isActive">
-            <div class="span2"></div>
-            <ul class="thumbnails">
-            <li ng-repeat="campaign in campaignGroup" class="span2">
-            <img ng-src="{{campaign.prize.image}}">
-            <div class="carousel-caption">
-                <h4>TODO</h4>
+
+<ul class="pagination">
+<li ng-repeat-start="campaign in campaigns" active="image.isActive"><img ng-src="{{campaign.prize.image}}"></li>
+<li ng-repeat-end></li>
+</ul>
+
+            <div class="col-md-6 col-xs-6">
+                <div class="btn-scoreboard-container">
+                   <a href="javascript:void();" class="prize-btn" ng-click="playAgain()">
+                        <p>Invite Friends<br>(+10 points each)</p>
+                    </a>
+                    <a href="javascript:void();" class="prize-btn" ng-click="getCharity()">
+                        <p>Help Philz Do Good</p>
+                    </a>
+                </div>
             </div>
-            </li>
-            </ul>
-        </slide>
-    </carousel>
+
 </div>

@@ -77,9 +77,18 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
 }
 
 function PrizeCtrl($scope, Campaign) {
+
     Campaign.query(function(res) {
-         $scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/3)});
+         //$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
+         $scope.campaigns = res;
     });
+}
+
+function CharityCtrl($scope, $rootScope, $modal)
+{
+	$scope.getCharity = function() {
+       $location.path('/charity');
+    }
 }
 
 function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook) {
@@ -224,6 +233,7 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
     $scope.remains = data.millis / 1000;
   });
 }
+
 
 function NextLevelCtrl($scope, $modalInstance, points) {
   $scope.points = points;
