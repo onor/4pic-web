@@ -84,6 +84,13 @@ function PrizeCtrl($scope, Campaign) {
     });
 }
 
+function CharityCtrl($scope, $rootScope, $modal)
+{
+	$scope.getCharity = function() {
+       $location.path('/charity');
+    }
+}
+
 function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook) {
 	
 		$facebook.api('/me?fields=id,name,picture').then(function(me) {
