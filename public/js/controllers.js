@@ -18,6 +18,10 @@ function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
   $scope.ld = function() {
     $location.path('/leaderboard/1');
   }
+
+    $scope.prize = function() {
+        $location.path('/prize');
+    }
 }
 
 function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
@@ -78,9 +82,14 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
 
 function PrizeCtrl($scope, Campaign) {
 
+    var wallet = 1;
+
     Campaign.query(function(res) {
          //$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
-         $scope.campaigns = res;
+         $scope.campaigns = _.map(res, function(camp) {
+            camp.available = wallet >= camp.prize.cost;
+            return camp;
+         });
     });
 }
 

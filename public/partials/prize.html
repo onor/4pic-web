@@ -1,8 +1,13 @@
 <div class="backgroundPrize">
 
 <ul class="pagination">
-<li ng-repeat-start="campaign in campaigns" active="image.isActive"><img ng-src="{{campaign.prize.image}}"></li>
-<li ng-repeat-end></li>
+<li ng-repeat="campaign in campaigns" active="image.isActive">
+    Desc {{campaign.prize.description}}
+    <img ng-src="{{campaign.prize.image}}">
+    <a href="javascript:void();" ng-disabled="campaign.available" ng-click="unlock()">
+        {{campaign.prize.cost}} to unlock
+    </a>
+</li>
 </ul>
 
             <div class="col-md-6 col-xs-6">
