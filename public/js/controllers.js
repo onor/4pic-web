@@ -83,6 +83,15 @@ function PrizeCtrl($scope, Campaign) {
 }
 
 function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook) {
+
+    $scope.loadedImages = [];
+
+	$scope.$on('levelimageloaded', function() {
+      $scope.loadedImages.push(true);
+        if($scope.loadedImages.length == 4) {
+	  $scope.$broadcast('timer-start');
+        }
+	});
 	
 		$facebook.api('/me?fields=id,name,picture').then(function(me) {
 			if (me.picture.data.is_silhouette) {

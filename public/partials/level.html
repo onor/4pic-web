@@ -110,7 +110,7 @@
 
         <div class="row">
             <div class="col-md-12 col-xs-12">
-                <timer interval="1000" countdown="countdownAvailable">
+                <timer autostart="false" interval="1000" countdown="countdownAvailable">
                     <div class="progress">
                         <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{seconds * 3.3}}%;">
                             <span class="sr-only">{{seconds * 3.3}}% Complete</span>
@@ -126,20 +126,20 @@
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
                             <div class="image-holder">
-                                <img ng-src="{{level.photo1}}"/>
+                                <img ng-src="{{level.photo1}}" imageonload/>
                             </div>
                             <div class="image-holder">
-                                <img ng-src="{{level.photo2}}"/>
+                                <img ng-src="{{level.photo2}}" imageonload/>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
                             <div class="image-holder">
-                                <img ng-src="{{level.photo3}}"/>
+                                <img ng-src="{{level.photo3}}" imageonload/>
                             </div>
                             <div class="image-holder">
-                                <img ng-src="{{level.photo4}}"/>
+                                <img ng-src="{{level.photo4}}" imageonload/>
                             </div>
                         </div>
                     </div>
