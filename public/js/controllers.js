@@ -107,9 +107,17 @@ function PrizeCtrl($scope, $modal, $location, Campaign, $facebook) {
 		});
 	});
 
+	$scope.selectedCampaign = null;
+	
+	$scope.$watch('selectedCampaign', function (selected) {
+		_.each($scope.campaigns, function(campaign) {
+			campaign.picked = selected._id == campaign._id;
+		});
+	}, true);
+
 	$scope.pickPrize = function(campaign) {
-		if(campaign.available) {
-			campaign.picked = !campaign.picked;
+		if (campaign.available) {
+			$scope.selectedCampaign = campaign;
 		}
 	}
 
