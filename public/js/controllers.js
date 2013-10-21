@@ -129,11 +129,9 @@ function PrizeModalCtrl($modal) {
 
 }
 
-function CharityCtrl($scope, $rootScope, $modal)
+function CharityCtrl($scope, Charity)
 {
-	$scope.getCharity = function() {
-       $location.path('/charity');
-    }
+	$scope.charities = Charity.query();
 }
 
 function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook) {
