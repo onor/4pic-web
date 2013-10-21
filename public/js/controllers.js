@@ -80,7 +80,7 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
     }
 }
 
-function PrizeCtrl($scope, $modal, Campaign, $facebook) {
+function PrizeCtrl($scope, $modal, $location, Campaign, $facebook) {
 
     $facebook.api('/me?fields=id,name,picture').then(function(me) {
         if (me.picture.data.is_silhouette) {
@@ -100,6 +100,10 @@ function PrizeCtrl($scope, $modal, Campaign, $facebook) {
             return camp;
          });
     });
+
+    $scope.charity = function() {
+        $location.path('/charity');
+    }
 
     /*
     var modalInstance = $modal.open({

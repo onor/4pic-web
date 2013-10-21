@@ -77,6 +77,11 @@ body {
   background-size: 100% auto;
   min-height: 768px;
 }
+.backgroundCharity {
+  background: url("@backgrounds.get("prize")") fixed no-repeat;
+  background-size: 100% auto;
+  min-height: 768px;
+}
 .header {
   position: relative;
 }
