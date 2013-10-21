@@ -443,6 +443,16 @@ body {
   display: block;
   background: url('../img/prizes/gray-tag.png') no-repeat;
 }
+#img-prizes li .prize-body .top-tag-prize .available{
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  width: 131px;
+  height: 132px;
+  margin-left: -66px;
+  display: block;
+  background: url('../img/prizes/green-tag.png') no-repeat;
+}
 #prize .footer {
   margin-top: 20px;
   text-align: center;

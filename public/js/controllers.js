@@ -93,14 +93,17 @@ function PrizeCtrl($scope, $modal, $location, Campaign, $facebook) {
 		$scope.name = me.name;
 	});
 
-	var wallet = 1;
+	$scope.wallet = 1000;
 
 	Campaign.query(function (res) {
 		//$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
 		$scope.campaigns = _.map(res, function (camp) {
-			camp.available = wallet >= camp.prize.cost;
+			camp.available = $scope.wallet >= camp.prize.cost;
 			camp.picked = false;
 			return camp;
+		});
+		$scope.hasAvailable = _.some($scope.campaigns, function(campaign) {
+			return campaign.available;
 		});
 	});
 

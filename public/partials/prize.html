@@ -30,9 +30,9 @@
                         <ul id="img-prizes" class="row">
                             <li class="col-md-3 col-xs-3" ng-repeat="campaign in campaigns" active="image.isActive">
                                 <div class="prize-body" ng-click="pickPrize(campaign)">
-                                    <span class="top-tag-prize"></span>
+                                    <span class="top-tag-prize" ng-class="{available:campaign.available}"></span>
                                     <img ng-src="{{campaign.prize.image}}" alt="">
-                                    <p>{{campaign.prize.description}}</p>  {{campaign.picked}}
+                                    <p>{{campaign.prize.description}}</p>  picked {{campaign.picked}} available {{campaign.available}}
                                     <span class="point-required-prize">5,000 pts. required</span>
                                 </div>
                                 
@@ -51,11 +51,22 @@
                         </ul> 
                     </div>
 
+                    <div class="modal-dialog" ng-show="hasAvailable">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                Sorry you have to be faster in the game and get more points! Keep trying for this prizes!
+                                <a href="javascript:void();" class="leader-btn">
+                                    <p>Help Philz do Good!</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="footer">
                         <div class="prize-current-score clearfix">
-                            <p>Your Current Score</p>
+                            <p>Your Current Score ??? wallet points?</p>
                             <span class="score-block">
-                                <p>{{lpScore}}</p>
+                                <p>{{wallet}}</p>
                             </span>
                         </div>
                     </div>
