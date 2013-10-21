@@ -503,9 +503,6 @@ body {
   padding: 12px;
   position: relative;
 }
-#charity .header {
-  margin-bottom: 65px;
-}
 #charity .header .player-pic-prizes,
 #charity .header h1 {
   float: left;
@@ -513,6 +510,103 @@ body {
 }
 #charity .header h1 {
   margin-left: 20px;
+}
+#charity .heart-charity {
+  text-align: center;
+}
+#charity .info-box-container p{
+  float: left;
+  font-size: 18px;
+  width: 100px;
+  text-align: right;
+}
+#charity .info-box-container .info-box {
+  float: right;
+  width: 102px;
+  height: 70px;
+  display: block;
+  background: url(../img/charity/info-box.png) no-repeat;
+}
+#charity .info-box-container .info-box p {
+  line-height: 65px;
+  text-align: center;
+}
+#charity .play-again-btn {
+  display: block;
+  width: 203px;
+  height: 117px;
+  background: url(../img/charity/play-again-btn.png) no-repeat;
+  position: absolute;
+  right: 0;
+  bottom: 70px;
+  text-indent: -9999px;
+}
+#charity .quit-btn {
+  display: block;
+  width: 113px;
+  height: 63px;
+  background: url(../img/charity/quit-btn.png) no-repeat;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  text-indent: -9999px;
+}
+#charity .charity-caption {
+  margin-bottom: 20px;
+}
+#charity .charity-note {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  font-size: 16px;
+  color: #fac090;
+  text-align: right;
+  width: 200px;
+}
+#charities {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#charities li {
+  margin-bottom: 30px;
+}
+#charities .charity-body {
+  position: relative;
+}
+#charities .charity-body img {
+  float: left;
+  height: 90px;
+  margin-top: 10px;
+}
+#charities .charity-body .charity-badge {
+  width: 109px;
+  height: 109px;
+  display: block;
+  background: url(../img/charity/gray-badge.png) no-repeat;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#charities .charity-body .charity-vote-tag {
+  display: block;
+  position: absolute;
+  left: -45px;
+  top: 0;
+  background: url(../img/charity/vote-tag.png) no-repeat;
+  width: 75px;
+  height: 56px;
+}
+#charities .charity-body.voted .charity-badge {
+  background: url(../img/charity/orange-badge.png) no-repeat;
+  width: 143px;
+  height: 114px;
+  right: -35px;
+}
+#charities .charity-body .charity-badge p {
+  text-align: center;
+  margin-top: 40px;
+  width: 109px;
 }
 /*----- END Charity Page -----*/
 

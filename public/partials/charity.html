@@ -1,50 +1,71 @@
 <div class="backgroundCharity">
     <div class="container">
-        <div id="scoreboard" class="clearfix">
+        <div id="charity" class="clearfix">
             <div class="row">
                 <div class="col-md-12 col-xs-12">
                     <div class="header clearfix">
-                        <div class="player-pic-scoreboard">
+                        <div class="player-pic-prizes">
                             <img ng-src="{{profilePic}}" width="83" height="83" class="img-circle" alt="">
                         </div>
                         <h1>{{name}}, you are doing good - thank you!</h1>
-                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="charity-caption clearfix">
+                        <img src="img/charity/vote-charity.png" alt="">
+                    </div>
+                </div>
+            </div>
 
-                    <div class="box-content">
-                        <ul class="row">
+            <div class="box-content">
+                <div class="row">
+                    <div class="col-md-3 col-xs-3">
+                        <ul id="charities">
                             <li ng-repeat="charity in charities">
-                                <img ng-src="{{charity.charity.logoColor}}" alt="">
-                                {{charity.name}}
+                                <div class="charity-body clearfix">
+                                    <img ng-src="{{charity.charity.logoColor}}" alt="">
+                                    
+                                    <span class="charity-vote-tag"></span>
+
+                                    <span class="charity-badge">
+                                        <p>{{charity.name}}</p>
+                                    </span>
+                                </div>
                             </li>
                         </ul>
                     </div>
 
-                </div>
-            </div>
-        </div>
+                    <div class="col-md-6 col-xs-6">
+                        <div class="heart-charity">
+                            <img src="img/charity/heart.png" alt="">
+                        </div>
+                    </div>
 
-        <div class="row">
-            <div class="col-md-6 col-xs-6">
-                <div class="btn-scoreboard-container">
-                    <a href="javascript:void();" class="leader-btn" ng-click="playAgain()">
-                        <p>Play Again</p>
-                    </a>
-                    <a href="javascript:void();" class="leader-btn" ng-click="getPrize()">
-                        <p>Get Daily Prize!</p>
-                    </a>
+                    <div class="col-md-3 col-xs-3">
+                        <div class="info-box-container clearfix">
+                            <p>Games Needed!</p>
+                            <span class="info-box">
+                                <p>123</p>
+                            </span>
+                        </div>
+
+                        <div class="info-box-container clearfix">
+                            <p>Filled!</p>
+                            <span class="info-box">
+                                <p>36</p>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-xs-6">
-                <div class="btn-scoreboard-container">
-                    <a href="javascript:void();" class="prize-btn" ng-click="playAgain()">
-                        <p>Invite Friends<br>(+10 points each)</p>
-                    </a>
-                    <a href="javascript:void();" class="prize-btn" ng-click="getPrize()">
-                        <p>Recommend<br>(+50 points)</p>
-                    </a>
-                </div>
+
+                <p class="charity-note">For Every Filled Heart,<br>Philz will donate $50 to <br>the charity that collected the<br> most votes from you!</p>
+
+                <a href="javascript:void();" class="play-again-btn">Play Again</a>
+                <a href="javascript:void();" class="quit-btn">Quit</a>
             </div>
         </div>
+    </div>
 </div>
 
