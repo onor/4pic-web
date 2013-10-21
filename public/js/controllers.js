@@ -98,7 +98,7 @@ function PrizeCtrl($scope, $modal, $location, Campaign, $facebook) {
 	Campaign.query(function (res) {
 		//$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
 		$scope.campaigns = _.map(res, function (camp) {
-			camp.available = $scope.wallet >= camp.prize.cost;
+			camp.available = $scope.wallet >= (camp.prize.cost * 1000);
 			camp.picked = false;
 			return camp;
 		});
@@ -108,7 +108,9 @@ function PrizeCtrl($scope, $modal, $location, Campaign, $facebook) {
 	});
 
 	$scope.pickPrize = function(campaign) {
-		campaign.picked = !campaign.picked;
+		if(campaign.available) {
+			campaign.picked = !campaign.picked;
+		}
 	}
 
 	$scope.charity = function () {
