@@ -129,8 +129,16 @@ function PrizeModalCtrl($modal) {
 
 }
 
-function CharityCtrl($scope, Charity)
+function CharityCtrl($scope, Charity, $facebook)
 {
+    $facebook.api('/me?fields=id,name,picture').then(function(me) {
+        if (me.picture.data.is_silhouette) {
+            $scope.profilePic = "img/ingame/player-pic-holder.png";
+        } else {
+            $scope.profilePic = me.picture.data.url;
+        }
+        $scope.name = me.name;
+    });
 	$scope.charities = Charity.query();
 }
 
