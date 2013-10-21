@@ -29,21 +29,21 @@
                     <div class="box-content">
                         <ul id="img-prizes" class="row">
                             <li class="col-md-3 col-xs-3" ng-repeat="campaign in campaigns" active="image.isActive">
-                                <div class="prize-body" ng-click="pickPrize(campaign)">
+                                <div class="prize-body {{campaign.picked}}" ng-click="pickPrize(campaign)">
                                     <span class="top-tag-prize"></span>
                                     <img ng-src="{{campaign.prize.image}}" alt="">
-                                    <p>{{campaign.prize.description}}</p>  {{campaign.picked}}
+                                    <p>{{campaign.prize.description}}</p>
                                     <span class="point-required-prize">5,000 pts. required</span>
                                 </div>
                                 
                                 <!-- <img ng-src="{{campaign.prize.image}}"> -->
-                                <a href="javascript:void();" ng-disabled="campaign.available" ng-click="unlock()">
+                                <!-- <a href="javascript:void();" ng-disabled="campaign.available" ng-click="unlock()">
                                     {{campaign.prize.cost}} to unlock
-                                </a>
+                                </a> -->
                             </li>
                             <li class="col-md-3 col-xs-3">
                                 <div id="prize-plus-btn">
-                                    <a ng-click="charity()">
+                                    <a href="javascript:void();" ng-click="charity()">
                                         <img src="img/prizes/plus-btn.png" alt="">
                                     </a>
                                 </div>
