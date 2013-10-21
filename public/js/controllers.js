@@ -99,9 +99,14 @@ function PrizeCtrl($scope, $modal, $location, Campaign, $facebook) {
 		//$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
 		$scope.campaigns = _.map(res, function (camp) {
 			camp.available = wallet >= camp.prize.cost;
+			camp.picked = false;
 			return camp;
 		});
 	});
+
+	$scope.pickPrize = function(campaign) {
+		campaign.picked = !campaign.picked;
+	}
 
 	$scope.charity = function () {
 		$location.path('/charity');
