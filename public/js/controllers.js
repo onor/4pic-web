@@ -80,7 +80,16 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
     }
 }
 
-function PrizeCtrl($scope, Campaign) {
+function PrizeCtrl($scope, $modal, Campaign, $facebook) {
+
+    $facebook.api('/me?fields=id,name,picture').then(function(me) {
+        if (me.picture.data.is_silhouette) {
+            $scope.profilePic = "img/ingame/player-pic-holder.png";
+        } else {
+            $scope.profilePic = me.picture.data.url;
+        }
+        $scope.name = me.name;
+    });
 
     var wallet = 1;
 
@@ -91,6 +100,29 @@ function PrizeCtrl($scope, Campaign) {
             return camp;
          });
     });
+
+    /*
+    var modalInstance = $modal.open({
+        templateUrl: 'partials/prizemodal.html',
+        backdrop:false,
+        controller: PrizeModalCtrl,
+        dialogClass: 'modal',
+        resolve: {
+            points: function () {
+                return true;
+            }
+        }
+    });
+
+    modalInstance.result.then(function (points) {
+        if (points) {
+            $location.path('/charity');
+        }
+    });  */
+}
+
+function PrizeModalCtrl($modal) {
+
 }
 
 function CharityCtrl($scope, $rootScope, $modal)

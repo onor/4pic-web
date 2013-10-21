@@ -23,7 +23,7 @@
                             <img ng-src="{{profilePic}}" width="83" height="83" class="img-circle" alt="">
                         </div>
 
-                        <h1>(Name), you are winning!</h1>
+                        <h1>{{name}}, you are winning!</h1>
                     </div>
 
                     <div class="box-content">
@@ -31,7 +31,7 @@
                             <li class="col-md-3 col-xs-3" ng-repeat="campaign in campaigns" active="image.isActive">
                                 <div class="prize-body">
                                     <span class="top-tag-prize"></span>
-                                    <img src="" alt="">
+                                    <img ng-src="{{campaign.prize.image}}" alt="">
                                     <p>{{campaign.prize.description}}</p>
                                     <span class="point-required-prize">5,000 pts. required</span>
                                 </div>
