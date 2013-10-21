@@ -82,7 +82,7 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
 	}
 }
 
-function PrizeCtrl($scope, $modal, $location, Campaign, $facebook) {
+function PrizeCtrl($scope, $rootScope, $modal, $location, Campaign, $facebook) {
 
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {
 		if (me.picture.data.is_silhouette) {
@@ -93,12 +93,12 @@ function PrizeCtrl($scope, $modal, $location, Campaign, $facebook) {
 		$scope.name = me.name;
 	});
 
-	$scope.wallet = 1000;
-
+	$scope.wallet = _.reduce($rootScope.state.state.lpScores, function(memo, lps){ return memo + lps.score; }, 0);
+	
 	Campaign.query(function (res) {
 		//$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
 		$scope.campaigns = _.map(res, function (camp) {
-			camp.available = $scope.wallet >= camp.prize.cost;
+			camp.available = $scope.wallet >= (camp.prize.cost * 1000);
 			camp.picked = false;
 			return camp;
 		});
@@ -107,8 +107,18 @@ function PrizeCtrl($scope, $modal, $location, Campaign, $facebook) {
 		});
 	});
 
+	$scope.selectedCampaign = null;
+	
+	$scope.$watch('selectedCampaign', function (selected) {
+		_.each($scope.campaigns, function(campaign) {
+			campaign.picked = selected._id == campaign._id;
+		});
+	}, true);
+
 	$scope.pickPrize = function(campaign) {
-		campaign.picked = !campaign.picked;
+		if (campaign.available) {
+			$scope.selectedCampaign = campaign;
+		}
 	}
 
 	$scope.charity = function () {
