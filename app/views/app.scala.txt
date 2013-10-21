@@ -258,7 +258,7 @@ body {
 /*----- END Ingame Page -----*/
 
 
-/*---- Scoreboard Page -----*/
+/*----- Scoreboard Page -----*/
 #scoreboard {
   background: url(../img/leaderboard/box-bg.png);
   padding: 10px 25px 30px;
@@ -376,24 +376,103 @@ body {
   display: inline-block;
   margin: -20px 0 0 35px;
 }
-/*---- END Scoreboard Page -----*/
-/*#scoreboard h1 {
+/*----- END Scoreboard Page -----*/
+
+
+/*----- Prizes Page -----*/
+#prize {
+  background: url(../img/leaderboard/box-bg.png);
+  margin-top: 40px;
+  padding: 12px;
+}
+#prize .header {
+  margin-bottom: 65px;
+}
+#prize .header .player-pic-prizes,
+#prize .header h1 {
+  float: left;
+}
+#prize .header h1 {
+  margin-left: 20px;
+}
+#img-prizes {
+  list-style: none;
+}
+#img-prizes li .prize-body {
+  background: #4a452a;
+  text-align: center;
+  border: 2px solid #948a54;
+  padding: 30px 20px 20px;
+  position: relative;
+  height: 310px;
+  border-radius: 5px;
+}
+#img-prizes li .prize-body p {
+  font-size: 30px;
+  color: #ff7800;
+}
+#img-prizes li .prize-body img {
+  height: 190px;
+  width: auto;
+}
+#img-prizes li .prize-body .point-required-prize {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  display: block;
+  background: #948a54;
+  width: 100%;
+  text-align: center;
+  color: #000;
+  font-size: 20px;
+  padding: 3px 5px;
+  border-radius: 5px;
+}
+#img-prizes li .prize-body .top-tag-prize {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  width: 131px;
+  height: 132px;
+  margin-left: -66px;
+  display: block;
+  background: url('../img/prizes/gray-tag.png') no-repeat;
+}
+#prize .footer {
+  margin-top: 20px;
   text-align: center;
 }
-#scoreboard .row {
-  margin-bottom: 10px;
+#prize .footer .prize-current-score {
+  display: inline-block;
 }
-.score-block {
-  background: #eee8d8;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 2px 2px rgba(0,0,0,0.5);
+#prize .footer .prize-current-score p {
+  float: left;
+  font-size: 26px;
+  line-height: 52px;
+  margin: 0 10px 0 0;
 }
-.current-score,
-.best-score {
-  color: #140601;
+#prize .footer .prize-current-score .score-block {
+  width: 96px;
+  height: 52px;
+  background: url(../img/leaderboard/score-block.png) no-repeat;
+  display: block; 
+  float: right;
 }
-*/
+#prize-plus-btn {
+  position: relative;
+  height: 310px;
+}
+#prize-plus-btn a {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  margin-left: -40px;
+  margin-top: -40px;
+}
+/*----- END Prizes Page -----*/
 
 /* Modal CSS */
 .modal {

@@ -1,24 +1,77 @@
 <div class="backgroundPrize">
-
-<ul class="pagination">
-<li ng-repeat="campaign in campaigns" active="image.isActive">
-    Desc {{campaign.prize.description}}
-    <img ng-src="{{campaign.prize.image}}">
-    <a href="javascript:void();" ng-disabled="campaign.available" ng-click="unlock()">
-        {{campaign.prize.cost}} to unlock
-    </a>
-</li>
-</ul>
-
-            <div class="col-md-6 col-xs-6">
-                <div class="btn-scoreboard-container">
-                   <a href="javascript:void();" class="prize-btn" ng-click="playAgain()">
-                        <p>Invite Friends<br>(+10 points each)</p>
-                    </a>
-                    <a href="javascript:void();" class="prize-btn" ng-click="getCharity()">
-                        <p>Help Philz Do Good</p>
-                    </a>
-                </div>
+<!--     <carousel interval="-1">
+        <slide ng-repeat="campaignGroup in campaigns" active="image.isActive">
+            <div class="span2"></div>
+            <ul class="thumbnails">
+            <li ng-repeat="campaign in campaignGroup" class="span2">
+            <img ng-src="{{campaign.prize.image}}">
+            <div class="carousel-caption">
+                <h4>TODO</h4>
             </div>
+            </li>
+            </ul>
+        </slide>
+    </carousel> -->
 
+
+    <div class="container">
+        <div id="prize">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="header clearfix">
+                        <div class="player-pic-prizes">
+                            <img ng-src="{{profilePic}}" width="83" height="83" class="img-circle" alt="">
+                        </div>
+
+                        <h1>(Name), you are winning!</h1>
+                    </div>
+
+                    <div class="box-content">
+                        <ul id="img-prizes" class="row">
+                            <li class="col-md-3 col-xs-3" ng-repeat="campaign in campaigns" active="image.isActive">
+                                <div class="prize-body">
+                                    <span class="top-tag-prize"></span>
+                                    <img src="" alt="">
+                                    <p>{{campaign.prize.description}}</p>
+                                    <span class="point-required-prize">5,000 pts. required</span>
+                                </div>
+                                
+                                <!-- <img ng-src="{{campaign.prize.image}}"> -->
+                                <a href="javascript:void();" ng-disabled="campaign.available" ng-click="unlock()">
+                                    {{campaign.prize.cost}} to unlock
+                                </a>
+                            </li>
+                            <li class="col-md-3 col-xs-3">
+                                <div id="prize-plus-btn">
+                                    <a href="#">
+                                        <img src="img/prizes/plus-btn.png" alt="">
+                                    </a>
+                                </div>
+                            </li>
+                        </ul> 
+                    </div>
+
+                    <div class="footer">
+                        <div class="prize-current-score clearfix">
+                            <p>Your Current Score</p>
+                            <span class="score-block">
+                                <p>{{lpScore}}</p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-6 col-xs-6">
+                    <div class="btn-scoreboard-container">
+                       <a href="javascript:void();" class="prize-btn" ng-click="playAgain()">
+                            <p>Invite Friends<br>(+10 points each)</p>
+                        </a>
+                        <a href="javascript:void();" class="prize-btn" ng-click="getCharity()">
+                            <p>Help Philz Do Good</p>
+                        </a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
 </div>
