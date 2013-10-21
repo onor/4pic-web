@@ -412,14 +412,17 @@ body {
   height: 310px;
   border-radius: 5px;
 }
+#img-prizes li .prize-body.true {
+  box-shadow: 0 0 20px #fff;
+}
 #img-prizes li .prize-body p {
   font-size: 30px;
   color: #ff7800;
 }
-#img-prizes li .prize-body img {
+/*#img-prizes li .prize-body img {
   height: 190px;
   width: auto;
-}
+}*/
 #img-prizes li .prize-body .point-required-prize {
   position: absolute;
   bottom: -20px;
@@ -454,7 +457,7 @@ body {
   background: url('../img/prizes/green-tag.png') no-repeat;
 }
 #prize .footer {
-  margin-top: 20px;
+  margin-top: 40px;
   text-align: center;
 }
 #prize .footer .prize-current-score {
@@ -488,6 +491,29 @@ body {
   margin-top: -40px;
 }
 /*----- END Prizes Page -----*/
+
+
+/*----- Charity Page -----*/
+#charity {
+  background: url(../img/leaderboard/box-bg.png);
+  margin-top: 40px;
+  padding: 12px;
+  position: relative;
+}
+#charity .header {
+  margin-bottom: 65px;
+}
+#charity .header .player-pic-prizes,
+#charity .header h1 {
+  float: left;
+  font-size: 30px;
+}
+#charity .header h1 {
+  margin-left: 20px;
+}
+/*----- END Charity Page -----*/
+
+
 
 /* Modal CSS */
 .modal {
