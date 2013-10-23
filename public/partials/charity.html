@@ -27,7 +27,7 @@
                                 <div class="charity-body clearfix">
                                     <img ng-src="{{charity.charity.logoColor}}" alt="">
                                     
-                                    <span class="charity-vote-tag"></span>
+                                    <span class="charity-vote-tag" ng-click="vote(charity)"></span>
 
                                     <span class="charity-badge">
                                         <p>{{charity.name}}</p>
@@ -38,6 +38,11 @@
                     </div>
 
                     <div class="col-md-6 col-xs-6">
+                        <ul>
+                            <li ng-repeat="playerId in votes.playerIds">
+                                {{playerId}}
+                            </li>
+                        </ul>
                         <div class="heart-charity">
                             <img src="img/charity/heart.png" alt="">
                         </div>
@@ -47,14 +52,14 @@
                         <div class="info-box-container clearfix">
                             <p>Games Needed!</p>
                             <span class="info-box">
-                                <p>123</p>
+                                <p>{{votes.needed}}</p>
                             </span>
                         </div>
 
                         <div class="info-box-container clearfix">
                             <p>Filled!</p>
                             <span class="info-box">
-                                <p>36</p>
+                                <p>{{votes.filled}}</p>
                             </span>
                         </div>
                     </div>

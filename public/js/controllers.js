@@ -149,7 +149,7 @@ function PrizeModalCtrl($modal) {
 
 }
 
-function CharityCtrl($scope, Charity, $facebook) {
+function CharityCtrl($scope, Charity, $facebook, Votes) {
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {
 		if (me.picture.data.is_silhouette) {
 			$scope.profilePic = "img/ingame/player-pic-holder.png";
@@ -158,7 +158,11 @@ function CharityCtrl($scope, Charity, $facebook) {
 		}
 		$scope.name = me.name;
 	});
+	$scope.vote = function(charity) {
+		Votes.save({charityId:charity._id});
+	}
 	$scope.charities = Charity.query();
+	$scope.votes = Votes.get();
 }
 
 function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook) {
