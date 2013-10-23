@@ -11,21 +11,29 @@ GET         /webjars/*file                          controllers.WebJarAssets.at(
 
 # Home page
 #GET        /                      									controllers.Assets.at(path="/public", file="index.html")
-GET         /                       								controllers.Application.index(gameKey:Int)
-POST        /gameKey/:gameKey/       								controllers.Application.indexPost(gameKey:Int)
+GET         /                                       controllers.Application.index(gameKey:Int)
+POST        /gameKey/:gameKey/                      controllers.Application.indexPost(gameKey:Int)
 GET         /gameKey/:gameKey/facebook/login        controllers.Facebook.fbLoginCode(gameKey:Int)
-GET         /css/app.css           									controllers.Application.appCss(gameKey:Int)
+GET         /css/app.css                            controllers.Application.appCss(gameKey:Int)
 
 GET         /game                                   controllers.Application.game
 
 #scores proxy
-GET         /scores/:fbid							              controllers.ScoreService.show(fbid:String, weekly:Boolean)
-GET         /scores                     						controllers.ScoreService.leaderboard(weekly:Boolean)
+GET         /scores/:fbid                           controllers.ScoreService.show(fbid:String, weekly:Boolean)
+GET         /scores                                 controllers.ScoreService.leaderboard(weekly:Boolean)
 
 #state proxy
 GET         /states                                 controllers.StateService.show
-PUT         /states/seen            		            controllers.StateService.seenLevel
-PUT         /states/:points            		          controllers.StateService.resolveLevel(points:Int)
+PUT         /states/seen                            controllers.StateService.seenLevel
+PUT         /states/:points                         controllers.StateService.resolveLevel(points:Int)
+
+#campaign proxy
+GET         /campaigns                              controllers.CampaignService.show
+
+#charity proxy
+GET         /charities                              controllers.CharityService.show
+GET         /charityvotes                           controllers.CharityService.votes
+POST        /charityvotes                           controllers.CharityService.vote
 
 # Map the JS resource paths
-GET         /*file                 									controllers.Assets.at(path="/public", file)
+GET         /*file                                  controllers.Assets.at(path="/public", file)
