@@ -39,7 +39,11 @@ trait GameController extends Controller {
           get.map(res => if (res.status == 200) f(GameKeyFbidRequest(gameKey, fbid, request)) else NotFound("game"))
       }
 
-      case _ => BadRequest("Missing gameKey or fbid")
+      case _ => {
+				play.api.Logger.error("Missing gameKey or fbid " + request.headers + " body " + request.body + " T " + request.uri)
+        play.api.Logger.error("Cookie for missing gk or fbid " + request.session)
+				BadRequest("Missing gameKey or fbid ")
+			}
     }
   }
 }
