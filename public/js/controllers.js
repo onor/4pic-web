@@ -150,7 +150,9 @@ function PrizeModalCtrl($modal) {
 }
 
 function CharityCtrl($scope, Charity, $facebook, Votes) {
+	
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {
+		$scope.me = me;
 		if (me.picture.data.is_silhouette) {
 			$scope.profilePic = "img/ingame/player-pic-holder.png";
 		} else {
@@ -158,11 +160,39 @@ function CharityCtrl($scope, Charity, $facebook, Votes) {
 		}
 		$scope.name = me.name;
 	});
+	
+	function getColumn(i) {
+		if (0  <= i && i < 9 ) return 0;
+		if (9  <= i && i < 21) return 1;
+		if (21 <= i && i < 36) return 2;		
+	}
+	
 	$scope.vote = function(charity) {
 		Votes.save({charityId:charity._id});
+		var suma = 0;
+		for (var i = 0; i < 27; i++) {
+			suma = suma + $scope.players[i].length;
+		}
+		var j = suma + 1;
+		var i = getColumn(j);
+	  $scope.players[i].push($facebook.api('/me?fields=id,name,picture'));
+		//$scope.players.push($scope.me);
 	}
+	
 	$scope.charities = Charity.query();
-	$scope.votes = Votes.get();
+	
+	Votes.get({}, function (votes) {
+		$scope.votes = votes;
+				
+		$scope.players = [];
+		for (var i = 0; i < 27; i++) {
+			$scope.players[i] = [];
+		}
+		for (var j = 0; j < votes.playerIds.length; j++) {
+			var i = getColumn(j);
+		  $scope.players[i].push($facebook.api('/' + votes.playerIds[j].id + '?fields=id,name,picture'));						
+		};
+	});	
 }
 
 function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook) {

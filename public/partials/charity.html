@@ -38,14 +38,33 @@
                     </div>
 
                     <div class="col-md-6 col-xs-6">
-                        <ul>
-                            <li ng-repeat="playerId in votes.playerIds">
-                                {{playerId}}
-                            </li>
-                        </ul>
-                        <div class="heart-charity">
-                            <img src="/img/charity/heart.png" alt="">
-                        </div>
+											<ul>
+												<li>
+		                      <ul>
+		                          <li ng-repeat="player in players[0]" class="heartplayers">
+		                            <img ng-src="{{player.picture.data.url}}" width="20" height="20" class="img-circle" alt="">
+															</li>
+		                      </ul>
+												</li>
+												<li>
+		                      <ul>
+		                          <li ng-repeat="player in players[1]" class="heartplayers">
+		                            <img ng-src="{{player.picture.data.url}}" width="20" height="20" class="img-circle" alt="">
+															</li>
+		                      </ul>
+												</li>
+												<li>
+		                      <ul>
+		                          <li ng-repeat="player in players[2]" class="heartplayers">
+		                            <img ng-src="{{player.picture.data.url}}" width="20" height="20" class="img-circle" alt="">
+															</li>
+		                      </ul>
+												</li>
+											</ul>
+                     
+                      <div class="heart-charity">
+                          <img src="/img/charity/heart.png" alt="">
+                      </div>
                     </div>
 
                     <div class="col-md-3 col-xs-3">

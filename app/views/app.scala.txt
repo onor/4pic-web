@@ -33,6 +33,17 @@
   left:-100px;
   opacity:0;
 }
+
+.heartplayers.ng-enter {
+  -webkit-transition: 1s;
+  transition: 1s;
+  
+  margin-top: 100%;
+}
+
+.heartplayers.ng-enter-active {
+  margin-top: 0;
+}
 /*----- END Animations -----*/
 
 
