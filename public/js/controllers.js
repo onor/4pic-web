@@ -164,7 +164,11 @@ function CharityCtrl($scope, Charity, $facebook, Votes) {
 	function getColumn(i) {
 		if (0  <= i && i < 9 ) return 0;
 		if (9  <= i && i < 21) return 1;
-		if (21 <= i && i < 36) return 2;		
+		if (21 <= i && i < 36) return 2;
+		if (36 <= i && i < 53) return 3;
+		if (53 <= i && i < 70) return 4;
+		if (70 <= i && i < 91) return 5;		
+				
 	}
 	
 	$scope.vote = function(charity) {
