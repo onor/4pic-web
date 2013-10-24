@@ -280,7 +280,7 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 		} else {
 
 			var modalInstance = $modal.open({
-				templateUrl: 'partials/nextlevel.html',
+				templateUrl: '../../partials/nextlevel.html',
 				controller: NextLevelCtrl,
 				dialogClass: 'modal',
 				resolve: {
