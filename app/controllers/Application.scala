@@ -8,11 +8,11 @@ import play.api.libs.concurrent.Execution.Implicits._
 
 object Application extends Controller with GameController {
 
-  def index(gameKey:Int) = WithGameKeyAndFbid(p = parse.anyContent) {
+  def index(gameKey:Int) = WithGameKey(p = parse.anyContent) {
     implicit request =>
-		  Logger.error(s"INDEX REQUEST GK${request.gameKey} FB ${request.fbid}")
+		  Logger.error(s"INDEX REQUEST GK${request.gameKey}}")
 			val settings = Facebook.facebookSettings(gameKey)
-			Ok(views.html.index(gameKey, settings.appId)).withSession(("fbid", request.fbid), (GAMEKEY, gameKey.toString))			
+			Ok(views.html.index(gameKey, settings.appId))//.withSession(("fbid", request.fbid), (GAMEKEY, gameKey.toString))			
   }
 
   def parseNamespace(str: String) =  {
