@@ -8,13 +8,6 @@ import play.api.libs.concurrent.Execution.Implicits._
 
 object Application extends Controller with GameController {
 
-  def index(gameKey:Int) = Action {
-    implicit request =>
-		  Logger.error(s"INDEX REQUEST GK${gameKey}}")
-			val settings = Facebook.facebookSettings(gameKey)
-			Ok(views.html.index(gameKey, settings.appId))//.withSession(("fbid", request.fbid), (GAMEKEY, gameKey.toString))			
-  }
-
   def parseNamespace(str: String) =  {
     val facebookNamespace = str.replaceAll("http://apps.facebook.com/", "").replaceAll("https://apps.facebook.com/", "").replaceAll("/", "")
 		val URI = s"$onorUrl/client/v1/games/facebookNamespace/$facebookNamespace?userKey=$userKey"
@@ -35,7 +28,7 @@ object Application extends Controller with GameController {
       components.SignedRequestUtils.parseSignedRequest(sr, settings.appSecret) match {
         case Some(signedRequest) => {
           Logger.info("GOT SIGNED REQUEST")
-          Redirect(routes.Application.index(gameKey)).withSession(("fbid", signedRequest.user_id), (GAMEKEY, gameKey.toString))
+					Ok(views.html.index(gameKey, settings.appId)).withSession(("fbid", signedRequest.user_id), (GAMEKEY, gameKey.toString))			
         }
         case None => {
           Logger.info("DIDNT GET SIGNED REQUEST")

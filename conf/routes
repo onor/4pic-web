@@ -11,7 +11,6 @@ GET         /webjars/*file                          controllers.WebJarAssets.at(
 
 # Home page
 #GET        /                      									controllers.Assets.at(path="/public", file="index.html")
-GET         /                                       controllers.Application.index(gameKey:Int)
 POST        /gameKey/:gameKey/                      controllers.Application.indexPost(gameKey:Int)
 GET         /gameKey/:gameKey/facebook/login        controllers.Facebook.fbLoginCode(gameKey:Int)
 GET         /css/app.css                            controllers.Application.appCss(gameKey:Int)
