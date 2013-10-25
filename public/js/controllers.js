@@ -136,9 +136,17 @@ function PrizeModalCtrl($modal) {
 
 }
 
-function CharityCtrl($scope, Charity, $facebook, $filter, Votes) {
+function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location, Votes) {
 	
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
+	
+	$scope.playAgain = function () {
+		$location.path('/levelpack/' + $rootScope.state.state.levelPack + '/level/' + $rootScope.state.state.level);
+	}
+	
+	$scope.quit = function() {
+		$location.path('/splash');
+	}
 	
 	function getColumn(i) {
 		if (0  <= i && i < 9 ) return 0;
