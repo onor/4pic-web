@@ -24,15 +24,9 @@ function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
 	}
 }
 
-function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
+function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score, $filter) {
 
-	$facebook.api('/me?fields=id,name,picture').then(function (me) {
-		if (me.picture.data.is_silhouette) {
-			$scope.profilePic = "img/ingame/player-pic-holder.png";
-		} else {
-			$scope.profilePic = me.picture.data.url;
-		}
-	});
+	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
 
 	var levelPack = $rootScope.state.state.levelPack;
 
@@ -82,16 +76,9 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score) {
 	}
 }
 
-function PrizeCtrl($scope, $rootScope, $modal, $location, Campaign, $facebook) {
+function PrizeCtrl($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter) {
 
-	$facebook.api('/me?fields=id,name,picture').then(function (me) {
-		if (me.picture.data.is_silhouette) {
-			$scope.profilePic = "img/ingame/player-pic-holder.png";
-		} else {
-			$scope.profilePic = me.picture.data.url;
-		}
-		$scope.name = me.name;
-	});
+	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
 
 	$scope.wallet = _.reduce($rootScope.state.state.lpScores, function(memo, lps){ return memo + lps.score; }, 0);
 	
@@ -149,17 +136,9 @@ function PrizeModalCtrl($modal) {
 
 }
 
-function CharityCtrl($scope, Charity, $facebook, Votes) {
+function CharityCtrl($scope, Charity, $facebook, $filter, Votes) {
 	
-	$facebook.api('/me?fields=id,name,picture').then(function (me) {
-		$scope.me = me;
-		if (me.picture.data.is_silhouette) {
-			$scope.profilePic = "img/ingame/player-pic-holder.png";
-		} else {
-			$scope.profilePic = me.picture.data.url;
-		}
-		$scope.name = me.name;
-	});
+	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
 	
 	function getColumn(i) {
 		if (0  <= i && i < 9 ) return 0;
@@ -199,7 +178,7 @@ function CharityCtrl($scope, Charity, $facebook, Votes) {
 	});	
 }
 
-function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook) {
+function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook, $filter) {
 
 	$scope.loadedImages = [];
 
@@ -210,13 +189,7 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 		}
 	});
 
-	$facebook.api('/me?fields=id,name,picture').then(function (me) {
-		if (me.picture.data.is_silhouette) {
-			$scope.profilePic = "img/ingame/player-pic-holder.png";
-		} else {
-			$scope.profilePic = me.picture.data.url;
-		}
-	});
+	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
 
 	var levelPack = $rootScope.state.state.levelPack;
 	var level = $rootScope.state.state.level;
