@@ -5,6 +5,11 @@ import play.api.Logger
 import play.api.libs.ws.WS
 import play.api.libs.concurrent.Execution.Implicits._
 
+/**
+ * Proxy for gamestate/cloudsave service.
+ * It adds fbid to all http requests, and tweeks urls.
+ * todo: code redundancy. we should make one simple method, to do the proxy stuff.
+ */
 object StateService extends Controller with GameController {
 
   def show = WithGameKeyAndFbid(p = parse.anyContent) {

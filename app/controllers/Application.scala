@@ -8,6 +8,7 @@ import play.api.libs.concurrent.Execution.Implicits._
 
 object Application extends Controller with GameController {
 
+  /*
   def parseNamespace(str: String) =  {
     val facebookNamespace = str.replaceAll("http://apps.facebook.com/", "").replaceAll("https://apps.facebook.com/", "").replaceAll("/", "")
 		val URI = s"$onorUrl/client/v1/games/facebookNamespace/$facebookNamespace?userKey=$userKey"
@@ -15,10 +16,15 @@ object Application extends Controller with GameController {
       WS.
         url(URI).
         get.map(res => if (res.status == 200) { Logger.error("FN OK " + res.json);res.json.\("gameKey").asOpt[Int]} else {Logger.error("FN KO " + res.status + " res " + res.body); None})
-  }
+  }*/
 
+  //todo it should be moved to facebook class
   def callback(gameKey: Int, request:Request[_]) = s"http://${request.host}/gameKey/$gameKey/facebook/login"
 
+  /**
+   * Handles first request made from facebook to ur app. gameKey is extracted from url, and added to session cookie.
+   * Also checks if user is authenticated. It should almost always be authenticated, because currently facebook handles permissions before it contacts app.
+   */
   def indexPost(gameKey:Int) = Action {
     implicit request =>
       Logger.info("INDEX POST")
@@ -37,6 +43,9 @@ object Application extends Controller with GameController {
       }
   }
 
+  /**
+   * Proxy for game entity.
+   */
   def game = WithGameKey(p = parse.anyContent) {
     implicit request =>
       Async {
@@ -46,6 +55,11 @@ object Application extends Controller with GameController {
       }
   }
 
+  /**
+   * Returns css for 4pics1word specific to gameKey.
+   * todo support for other types of games.
+   * @param gameKey
+   */
   def appCss(gameKey:Int) = Action {
     implicit request =>
       Async {

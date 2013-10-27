@@ -11,6 +11,9 @@ case class GameKeyRequest[A](gameKey:Int, request: Request[A]) extends WrappedRe
 case class GameKeyFbidRequest[A](gameKey:Int, fbid:String, request: Request[A]) extends WrappedRequest(request)
 
 
+/**
+ * Helpers for extracting gameKey and fbid from cookie.
+ */
 trait GameController extends Controller {
   import play.api.Play
 
@@ -23,7 +26,7 @@ trait GameController extends Controller {
     request.session.get(GAMEKEY).map(_.toInt) match {
       case Some(gameKey) => Async {
         WS.
-          url(s"$onorUrl/client/v1/games/4pics1word/$gameKey?userKey=$userKey").
+          url(s"$onorUrl/client/v1/games/4pics1word/$gameKey?userKey=$userKey").   //todo: res is not used, remove this?
           get.map(res => if (res.status == 200) f(GameKeyRequest(gameKey, request)) else NotFound("game"))
       }
       case None => BadRequest("Missing gameKey.")
@@ -35,7 +38,7 @@ trait GameController extends Controller {
     (request.session.get(GAMEKEY).map(_.toInt), request.session.get("fbid")) match {
       case (Some(gameKey), Some(fbid)) => Async {
         WS.
-          url(s"$onorUrl/client/v1/games/4pics1word/$gameKey?userKey=$userKey").
+          url(s"$onorUrl/client/v1/games/4pics1word/$gameKey?userKey=$userKey").  //todo: returned game entity is not used, we should remove this.
           get.map(res => if (res.status == 200) f(GameKeyFbidRequest(gameKey, fbid, request)) else NotFound("game"))
       }
 

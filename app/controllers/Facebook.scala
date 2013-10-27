@@ -33,13 +33,26 @@ case class FacebookUser(
   birthday: Option[String],
   link: String)
 
+/**
+ * Holds every facebook application specific configuration.
+ * @param namespace   facebook namespace
+ * @param appId
+ * @param appSecret
+ */
 case class FacebookSettings(namespace:String, appId:String, appSecret:String) {
   val appUrl = s"http://apps.facebook.com/$namespace"
   val appHome = s"http://www.facebook.com/appcenter/$namespace"
 }
 
+//todo: we should use either or scala.util.try
 object Facebook extends Controller {
 
+  /**
+   *  Retrieves facebook application specific configuration by gameKey.
+   *  todo: It could be fetched from configuration file, or via service.
+   * @param gameKey
+   * @return
+   */
   def facebookSettings(gameKey:Int) = if (play.api.Play.isDev(play.api.Play.current)) {
      FacebookSettings(
        "fourpicbeauty-dev",
@@ -55,6 +68,8 @@ object Facebook extends Controller {
   val NETWORK_NAME = "Facebook"
   val PROTECTED_RESOURCE_URL = "https://graph.facebook.com/me"
   val EMPTY_TOKEN: Token = null
+  //requested facebook permission.
+  // todo: should we make it, gametype or facebook app specific?
   val fscope = "email,friends_online_presence"
 
   def fbLoginCode(gameKey:Int) = Action { implicit request =>
@@ -85,7 +100,7 @@ object Facebook extends Controller {
             implicit val reads = Json.reads[FacebookUser]
             reads.reads(Json.parse(body)).asOpt match {
               case Some(fUser) => {
-                //todo
+                //todo: currently we don't store any user information in our system, except his fbid.
                 Redirect(settings.appUrl).withSession(("fbid", fUser.id))
               }
               case None => BadRequest("TODO")

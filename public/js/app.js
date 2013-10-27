@@ -29,6 +29,7 @@
 					$routeProvider.when('/splash', {templateUrl: '../../partials/splash.html', controller: SplashCtrl});
 					$routeProvider.when('/prize', {templateUrl: '../../partials/prize.html', controller: PrizeCtrl});
 					$routeProvider.when('/charity', {templateUrl: '../../partials/charity.html', controller: CharityCtrl});
+					//todo: levelPack and level url parameters are not needed anymore. except for bugfix on level reloading on next button.
 					$routeProvider.when('/leaderboard/:levelPack', {templateUrl: '../../partials/leaderboard.html', controller: LeaderboardCtrl});
 					$routeProvider.when('/levelpack/:levelPack/level/:level', {templateUrl: '../../partials/level.html', controller: LevelCtrl});
 					$routeProvider.otherwise({redirectTo: '/splash'});
@@ -36,7 +37,7 @@
 				config(['$facebookProvider', function ($facebookProvider) {
 					$facebookProvider.init({
 						appId: appConfig.appId//,
-						//channel: '//path/to/channel.html'
+						//channel: '//path/to/channel.html'  todo: what is channel?
 					});
 				}]);
 

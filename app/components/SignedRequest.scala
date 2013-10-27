@@ -6,6 +6,8 @@ import play.api.libs.json.Json
 
 case class SignedRequest(user_id: String, oauth_token: String, expires: Int, algorithm: String)
 
+//parses token received from facebook on first request to our app. Via standard facebook/webapp post request.
+//todo: use either class and scala.util.try
 object SignedRequestUtils {
   def base64UrlDecode(s: String): Array[Byte] = {
     Base64.decodeBase64(s.replace('-', '+').replace('_', '/'))
@@ -25,6 +27,7 @@ object SignedRequestUtils {
     }
   }
 
+	//parses https://developers.facebook.com/docs/reference/login/signed-request/
   def parseSignedRequest(signedRequestString: String, appSecret: String) = {
     val fields = signedRequestString.split("\\.", 2)
     val encodedSig = fields(0)

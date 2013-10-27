@@ -9,6 +9,7 @@ resolvers ++= Seq(
 )
 
 // Use the Play sbt plugin for Play projects
+//todo upgrade to play 2.2, new sbt 0.13 is required
 addSbtPlugin("play" % "sbt-plugin" % "2.1.4")
 
 addSbtPlugin("com.cloudbees.deploy.play" % "sbt-cloudbees-play-plugin" % "0.5-SNAPSHOT")
