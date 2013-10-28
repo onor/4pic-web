@@ -12,9 +12,8 @@ import play.api.libs.concurrent.Execution.Implicits._
  */
 object StateService extends Controller with GameController {
 
-  def show = WithGameKeyAndFbid(parse.anyContent) {
-    implicit request =>
-      Async {
+  def show = WithGameKeyAndFbid.async(parse.anyContent) {
+    implicit request => {
         val uri = s"$onorUrl/client/v1/games/4pics1word/gk/${request.gameKey}/user/${request.fbid}/provider/facebook?userKey=$userKey"
         WS.
           url(uri).
@@ -26,9 +25,8 @@ object StateService extends Controller with GameController {
       }
   }
 
-  def resolveLevel(points: Int) = WithGameKeyAndFbid(parse.anyContent) {
-    implicit request =>
-      Async {
+  def resolveLevel(points: Int) = WithGameKeyAndFbid.async(parse.anyContent) {
+    implicit request => {
         val uri = s"$onorUrl/client/v1/games/4pics1word/gk/${request.gameKey}/user/${request.fbid}/provider/facebook/points/$points?userKey=$userKey"
         WS.
           url(uri).
@@ -41,9 +39,8 @@ object StateService extends Controller with GameController {
       }
   }
 	
-  def seenLevel() = WithGameKeyAndFbid(parse.anyContent) {
-    implicit request =>
-      Async {
+  def seenLevel() = WithGameKeyAndFbid.async(parse.anyContent) {
+    implicit request => {
         val uri = s"$onorUrl/client/v1/games/4pics1word/gk/${request.gameKey}/user/${request.fbid}/provider/facebook?userKey=$userKey"
         WS.
           url(uri).

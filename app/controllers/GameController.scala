@@ -8,8 +8,6 @@ import play.api.libs.json.JsString
 import play.api.libs.ws.WS
 import scala.concurrent.Future
 import controllers.Default._
-import controllers.GameKeyFbidRequest
-import controllers.GameKeyRequest
 import scala.Some
 import play.api.mvc.SimpleResult
 

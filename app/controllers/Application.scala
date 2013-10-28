@@ -46,9 +46,8 @@ object Application extends Controller with GameController {
   /**
    * Proxy for game entity.
    */
-  def game = WithGameKey(parse.anyContent) {
-    implicit request =>
-      Async {
+  def game = WithGameKey.async(parse.anyContent) {
+    implicit request => {
         WS.
           url(s"$onorUrl/client/v1/games/4pics1word/${request.gameKey}?userKey=$userKey").
           get.map(res => Ok(res.json))
@@ -60,9 +59,8 @@ object Application extends Controller with GameController {
    * todo support for other types of games.
    * @param gameKey
    */
-  def appCss(gameKey:Int) = Action {
-    implicit request =>
-      Async {
+  def appCss(gameKey:Int) = Action.async(parse.anyContent) {
+    implicit request => {
         WS.
           url(s"$onorUrl/client/v1/games/4pics1word/${gameKey}?userKey=$userKey").
           get.map(res => {

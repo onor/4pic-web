@@ -17,9 +17,8 @@ object CharityService extends Controller with GameController {
   private implicit val format2 = Json.format[PlayerId]
   private implicit val format = Json.format[CharityVote]
 
-  def show() = WithGameKey(parse.anyContent) {
-    implicit request =>
-      Async {
+  def show() = WithGameKey.async(parse.anyContent) {
+    implicit request => {
         val url = s"$onorUrl/client/v1/brands/522ccb2f490122bc02eb0929/charities?page=1&perPage=3&userKey=$userKey"
         WS.
           url(url).
@@ -31,9 +30,8 @@ object CharityService extends Controller with GameController {
       }
   }
 
-  def votes() = WithGameKey(parse.anyContent) {
-    implicit request =>
-      Async {
+  def votes() = WithGameKey.async(parse.anyContent) {
+    implicit request => {
         val url = s"$onorUrl/client/v1/charityvotes?gameKey=${request.gameKey}&userKey=$userKey"
         WS.
           url(url).
@@ -45,9 +43,8 @@ object CharityService extends Controller with GameController {
       }
   }
 
-  def vote() = WithGameKeyAndFbid(parse.json) {
-    implicit request =>
-      Async {
+  def vote() = WithGameKeyAndFbid.async(parse.json) {
+    implicit request => {
         val url = s"$onorUrl/client/v1/charityvotes?gameKey=${request.gameKey}&userKey=$userKey"
         val vote = request.request.body.validate[CharityId].map{
           case charityId =>
