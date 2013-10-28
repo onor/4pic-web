@@ -6,25 +6,28 @@
 
 	requirejs.config({
 		shim: {
-			"webjars!angular-cookies.js": ["angular"], // make angular available to ngCookies,
-			"webjars!angular-route.js": ["angular"], // make angular available to ngRoute
-			"webjars!angular-resource.js": ["angular"], // make angular available to ngResource
-			"webjars!angular-animate.js": ["angular"], // make angular available to ngAnimate
-			"webjars!ui-bootstrap-tpls.js": ["angular"]
+			"angular-route": ["angular"], // make angular available to ngRoute
+			"angular-resource": ["angular"], // make angular available to ngResource
+			"angular-animate": ["angular"], // make angular available to ngAnimate
+			"ui-bootstrap-tpls": ["angular"]
 		},
+		paths: {
+      "_" : "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min",
+      "ui-bootstrap-tpls" : "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min"
+    },
 		priority: ["angular"] // Make sure angular is loaded first
 	});
 
-// Declare here that angular is the US version - other locales can be easily substituted.
-	define('angular', ['webjars!angular.js'], function () {
-		return angular;
-	});
+	define("angular-animate", ["webjars!angular-animate.js"], function() {});
+  define("angular-resource", ["webjars!angular-resource.js"], function() {});
+	define("angular-route", ["webjars!angular-route.js"], function() {});
+	define('angular', ['webjars!angular.js'], function () {return angular;});
 
-	require(['angular', "webjars!ui-bootstrap-tpls.js", './controllers', './directives', './filters', './services', './angular-facebook.min', 'angular-timer.min',
-		"webjars!angular-cookies.js", "webjars!angular-resource.js", "webjars!angular-route.js", "webjars!angular-animate.js", "webjars!underscore.js"],
+	require(['angular', "ui-bootstrap-tpls", './controllers', './directives', './filters', './services',
+	'./angular-facebook.min', 'angular-timer.min', "angular-resource", "angular-route", "angular-animate", "_"],
 		function (angular) {
 
-			angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngCookies', 'ngRoute' , 'ngAnimate', 'ui.bootstrap', 'facebook', 'timer']).
+			angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngRoute' , 'ngAnimate', 'ui.bootstrap', 'facebook', 'timer']).
 				config(['$routeProvider', function ($routeProvider) {
 					$routeProvider.when('/splash', {templateUrl: '../../partials/splash.html', controller: SplashCtrl});
 					$routeProvider.when('/prize', {templateUrl: '../../partials/prize.html', controller: PrizeCtrl});
