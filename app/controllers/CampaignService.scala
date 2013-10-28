@@ -11,7 +11,7 @@ import play.api.libs.concurrent.Execution.Implicits._
  */
 object CampaignService extends Controller with GameController {
 
-  def show() = WithGameKey(p = parse.anyContent) {
+  def show() = WithGameKey(parse.anyContent) {
     implicit request =>
       Async {
         val url = s"$onorUrl/client/v1/brands/522ccb2f490122bc02eb0929/campaigns?page=1&perPage=3&userKey=$userKey"

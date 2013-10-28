@@ -46,7 +46,7 @@ object Application extends Controller with GameController {
   /**
    * Proxy for game entity.
    */
-  def game = WithGameKey(p = parse.anyContent) {
+  def game = WithGameKey(parse.anyContent) {
     implicit request =>
       Async {
         WS.

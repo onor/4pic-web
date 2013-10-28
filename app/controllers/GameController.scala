@@ -6,10 +6,45 @@ import play.api.libs.json.Json
 import play.api.libs.json.JsString
 
 import play.api.libs.ws.WS
+import scala.concurrent.Future
+import controllers.Default._
+import controllers.GameKeyFbidRequest
+import controllers.GameKeyRequest
+import scala.Some
+import play.api.mvc.SimpleResult
 
-case class GameKeyRequest[A](gameKey:Int, request: Request[A]) extends WrappedRequest(request)
-case class GameKeyFbidRequest[A](gameKey:Int, fbid:String, request: Request[A]) extends WrappedRequest(request)
+case class GameKeyRequest[A](gameKey:Int, request: Request[A]) extends WrappedRequest[A](request)
+case class GameKeyFbidRequest[A](gameKey:Int, fbid:String, request: Request[A]) extends WrappedRequest[A](request)
 
+object WithGameKey extends ActionBuilder[GameKeyRequest] {
+
+  val GAMEKEY = "gameKey"
+
+  def invokeBlock[A](request: Request[A], block: (GameKeyRequest[A]) => Future[SimpleResult]) = {
+    request.session.get(GAMEKEY).map(_.toInt) match {
+      case Some(gameKey) => {
+        block(GameKeyRequest(gameKey, request))
+      }
+      case None => Future{BadRequest("Missing gameKey.")}
+    }
+  }
+
+}
+
+object WithGameKeyAndFbid extends ActionBuilder[GameKeyFbidRequest] {
+
+  val GAMEKEY = "gameKey"
+
+  def invokeBlock[A](request: Request[A], block: (GameKeyFbidRequest[A]) => Future[SimpleResult]) = {
+    (request.session.get(GAMEKEY).map(_.toInt), request.session.get("fbid")) match {
+      case (Some(gameKey), Some(fbid)) => {
+        block(GameKeyFbidRequest(gameKey,fbid, request))
+      }
+      case _ => Future{BadRequest("Missing gameKey or fbid!")}
+    }
+  }
+
+}
 
 /**
  * Helpers for extracting gameKey and fbid from cookie.
@@ -21,32 +56,4 @@ trait GameController extends Controller {
   val userKey = "4b1469e3ff90b438ef0134b1cb266c06"
   val GAMEKEY = "gameKey"
 
-  def WithGameKey[A](p: BodyParser[A])(f: GameKeyRequest[A] => Result) = Action(p) { implicit request =>
-
-    request.session.get(GAMEKEY).map(_.toInt) match {
-      case Some(gameKey) => Async {
-        WS.
-          url(s"$onorUrl/client/v1/games/4pics1word/$gameKey?userKey=$userKey").   //todo: res is not used, remove this?
-          get.map(res => if (res.status == 200) f(GameKeyRequest(gameKey, request)) else NotFound("game"))
-      }
-      case None => BadRequest("Missing gameKey.")
-    }
-  }
-
-  def WithGameKeyAndFbid[A](p: BodyParser[A])(f: GameKeyFbidRequest[A] => Result) = Action(p) { implicit request =>
-
-    (request.session.get(GAMEKEY).map(_.toInt), request.session.get("fbid")) match {
-      case (Some(gameKey), Some(fbid)) => Async {
-        WS.
-          url(s"$onorUrl/client/v1/games/4pics1word/$gameKey?userKey=$userKey").  //todo: returned game entity is not used, we should remove this.
-          get.map(res => if (res.status == 200) f(GameKeyFbidRequest(gameKey, fbid, request)) else NotFound("game"))
-      }
-
-      case _ => {
-				play.api.Logger.error("Missing gameKey or fbid " + request.headers + " body " + request.body + " T " + request.uri)
-        play.api.Logger.error("Cookie for missing gk or fbid " + request.session)
-				BadRequest("Missing gameKey or fbid ")
-			}
-    }
-  }
 }
