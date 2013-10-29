@@ -12,7 +12,7 @@
 			"ui-bootstrap-tpls": ["angular"]
 		},
 		paths: {
-      "_" : "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min",
+      "underscorejs" : "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min",
       "ui-bootstrap-tpls" : "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min"
     },
 		priority: ["angular"] // Make sure angular is loaded first
@@ -24,7 +24,7 @@
 	define('angular', ['webjars!angular.js'], function () {return angular;});
 
 	require(['angular', "ui-bootstrap-tpls", './controllers', './directives', './filters', './services',
-	'./angular-facebook.min', 'angular-timer.min', "angular-resource", "angular-route", "angular-animate", "_"],
+	'./angular-facebook.min', 'angular-timer.min', "angular-resource", "angular-route", "angular-animate", "underscorejs"],
 		function (angular) {
 
 			angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngRoute' , 'ngAnimate', 'ui.bootstrap', 'facebook', 'timer']).
@@ -33,8 +33,8 @@
 					$routeProvider.when('/prize', {templateUrl: '../../partials/prize.html', controller: PrizeCtrl});
 					$routeProvider.when('/charity', {templateUrl: '../../partials/charity.html', controller: CharityCtrl});
 					//todo: levelPack and level url parameters are not needed anymore. except for bugfix on level reloading on next button.
-					$routeProvider.when('/leaderboard/:levelPack', {templateUrl: '../../partials/leaderboard.html', controller: LeaderboardCtrl});
-					$routeProvider.when('/levelpack/:levelPack/level/:level', {templateUrl: '../../partials/level.html', controller: LevelCtrl});
+					$routeProvider.when('/leaderboard', {templateUrl: '../../partials/leaderboard.html', controller: LeaderboardCtrl});
+					$routeProvider.when('/level', {templateUrl: '../../partials/level.html', controller: LevelCtrl});
 					$routeProvider.otherwise({redirectTo: '/splash'});
 				}]).
 				config(['$facebookProvider', function ($facebookProvider) {

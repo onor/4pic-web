@@ -1,7 +1,5 @@
 'use strict';
 
-//todo: remove flat-ui.css amd all related files?
-
 function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
 
     //todo: check if needed
@@ -12,16 +10,15 @@ function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
 		$scope.game = game;
 	});
 
-    //todo: can be removed if we get rid of levelpack and level parameters.
 	$rootScope.state = State.get();
 
 	$scope.go = function () {
-		$location.path('/levelpack/' + $rootScope.state.state.levelPack + '/level/' + $rootScope.state.state.level);
+		$location.path('/level');
 	}
 
     //quick jump to leaderboard page from splash screen
 	$scope.ld = function () {
-		$location.path('/leaderboard/1');
+		$location.path('/leaderboard');
 	}
 
     //quick jump to prize page from splash screen
@@ -82,7 +79,7 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score, $filte
 
     //navigation
 	$scope.playAgain = function () {
-		$location.path('/levelpack/' + (levelPack + 1) + '/level/' + 0); //todo remove url parameters
+		$location.path('/level');
 	}
 	$scope.getPrize = function () {
 		$location.path('/prize')
@@ -161,7 +158,7 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 
 	//navigation
 	$scope.playAgain = function () {
-		$location.path('/levelpack/' + $rootScope.state.state.levelPack + '/level/' + $rootScope.state.state.level);
+		$location.path('/level');
 	}
 	$scope.quit = function() {
 		$location.path('/splash');
@@ -211,7 +208,7 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 	});	
 }
 
-function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook, $filter) {
+function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook, $filter, $route) {
 
     //when all four levelimages are loaded, timer is started
 	$scope.loadedImages = [];
@@ -333,7 +330,7 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 	$scope.nextLevel = function (points2) {
 
 		if (level == 4) { //todo take 4 from game definition, remove levelPack param
-			$location.path('/leaderboard/' + levelPack);
+			$location.path('/leaderboard');
 		} else {
 
 			var modalInstance = $modal.open({
@@ -349,8 +346,7 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 
 			modalInstance.result.then(function (points) {
 				if (points) {
-				  //todo remove extra url params
-					$location.path('/levelpack/' + $rootScope.state.state.levelPack + '/level/' + $rootScope.state.state.level);
+					$route.reload();
 				}
 			});
 		}
