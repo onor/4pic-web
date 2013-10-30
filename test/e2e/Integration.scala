@@ -15,7 +15,6 @@ import org.fluentlenium.core.filter.FilterConstructor._
 import java.util.concurrent.TimeUnit
 
 import java.net.URL
-import e2e.pages._
 
 trait SauceLabs {
   
@@ -34,12 +33,9 @@ case class TestUser(email:String, password:String)
 class Integration extends Specification with SauceLabs{
   
   "login" in new WithBrowser(FIREFOX) {
-    val facebookPage = new FacebookPage(browser.webDriver, TestUser("rudolf.markulin@gmail.com", "***"))
 	  browser.goTo("https://www.facebook.com")
 	  
-	  facebookPage.isAt()
-	  facebookPage.login()
-	  facebookPage.isLoggedin()
+	  FacebookPage.login(browser, TestUser("rudolf.markulin@gmail.com", "mir7rna"))
 	  
 	  browser.goTo(baseUrl)
 	  browser.webDriver.switchTo().frame("iframe_canvas")
