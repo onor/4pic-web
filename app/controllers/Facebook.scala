@@ -45,7 +45,7 @@ case class FacebookSettings(namespace:String, appId:String, appSecret:String) {
 }
 
 //todo: we should use either or scala.util.try
-object Facebook extends Controller {
+object Facebook extends Controller with GameController{
 
   /**
    *  Retrieves facebook application specific configuration by gameKey.
@@ -101,7 +101,7 @@ object Facebook extends Controller {
             reads.reads(Json.parse(body)).asOpt match {
               case Some(fUser) => {
                 //todo: currently we don't store any user information in our system, except his fbid.
-                Redirect(settings.appUrl).withSession(("fbid", fUser.id))
+                Redirect(settings.appUrl).withCookies(Cookie("fbid", fUser.id), Cookie(GAMEKEY, gameKey.toString))
               }
               case None => BadRequest("TODO")
             }
