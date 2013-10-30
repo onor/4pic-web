@@ -35,7 +35,7 @@ class Integration extends Specification with SauceLabs{
   "login" in new WithBrowser(FIREFOX) {
 	  browser.goTo("https://www.facebook.com")
 	  
-	  FacebookPage.login(browser, TestUser("rudolf.markulin@gmail.com", "mir7rna"))
+	  FacebookPage.login(browser, TestUser("rudolf.markulin@gmail.com", "***"))
 	  
 	  browser.goTo(baseUrl)
 	  browser.webDriver.switchTo().frame("iframe_canvas")
