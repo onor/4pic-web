@@ -327,6 +327,29 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 		}
 	}
 
+	$scope.hint = function() {
+		//User has selected Question Mark
+
+		
+
+		var modalInstance = $modal.open({
+				templateUrl: '../../partials/hint.html',
+				controller: HintCtrl,
+				dialogClass: 'modal'
+				
+				});
+
+		modalInstance.result.then(function (msg) {
+				if (msg == "revealLetters") {
+					alert("revealLetters");
+				}
+				else if (msg == "removeLetters") {
+					alert("replaceLetters");
+				}
+
+			});
+	}
+
 	$scope.nextLevel = function (points2) {
 
 		if (level == 4) { //todo take 4 from game definition, remove levelPack param
@@ -353,12 +376,26 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 
 	}
 
+
+
+
   //timer text info refresh
 	$scope.$on('timer-tick', function (event, data) {
 		$scope.remains = data.millis / 1000;
 	});
 }
 
+function HintCtrl($scope, $modalInstance) {
+	$scope.removeLetters = function () {
+		$modalInstance.close("removeLetters");
+	}
+
+	$scope.revealLetters = function () {
+	   $modalInstance.close("revealLetters");
+	}
+
+
+}
 
 //navigates to next level
 function NextLevelCtrl($scope, $modalInstance, points) {
