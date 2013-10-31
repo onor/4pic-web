@@ -24,6 +24,7 @@ GET         /scores                                 controllers.ScoreService.lea
 GET         /states                                 controllers.StateService.show
 PUT         /states/seen                            controllers.StateService.seenLevel
 PUT         /states/:points                         controllers.StateService.resolveLevel(points:Int)
+PUT					/states/hint/:hint											controllers.StateService.hint(hint:Int)
 
 #campaign proxy
 GET         /campaigns                              controllers.CampaignService.show

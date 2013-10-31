@@ -29,7 +29,7 @@ define(['angular'], function (angular) {
 			);
 		}).factory('State', function ($resource) {
 			return $resource(
-				"/states/:points:docController", {},
+				"/states/:points:docController/:hint", {},
 				{
 					resolveLevel: {
 						method: 'PUT'
@@ -37,6 +37,10 @@ define(['angular'], function (angular) {
 					seenLevel: {
 						params: {docController: "seen"},
 						method: 'PUT'
+					},
+					hint: {
+						method: 'PUT',
+						params: {docController: "hint"}
 					}
 				}
 			);

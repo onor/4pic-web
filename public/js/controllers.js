@@ -341,10 +341,14 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 
 		modalInstance.result.then(function (msg) {
 				if (msg == "revealLetters") {
-					alert("revealLetters");
+					$rootScope.state.$hint({hint: 10}, function (res) {					
+						alert("revealLetters");
+					});
 				}
 				else if (msg == "removeLetters") {
-					alert("replaceLetters");
+					$rootScope.state.$hint({hint: 40}, function (res) {					
+						alert("replaceLetters");
+					});
 				}
 
 			});
