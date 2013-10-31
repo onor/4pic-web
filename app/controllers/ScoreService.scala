@@ -16,28 +16,16 @@ object ScoreService extends Controller with GameController {
    * @param weekly
    * @return
    */
-  def show(fbid:String, weekly:Boolean) = WithGameKey.async(parse.anyContent) {
-    implicit request => {
-        WS.
-          url(s"$onorUrl/client/v1/scores/gk/${request.gameKey}/fbid/${fbid}?userKey=$userKey&weekly=$weekly").
-          get.map(res => {
-          if (res.status == 200)
-            Ok(res.json)
-          else BadRequest(res.body)
-        })
-      }
+  def show(fbid: String, weekly: Boolean) = WithGameKey.async(parse.anyContent) {
+    implicit request =>
+      val uri = s"$onorUrl/client/v1/scores/gk/${request.gameKey}/fbid/${fbid}?userKey=$userKey&weekly=$weekly"
+      proxyGet(uri)
   }
 
-  def leaderboard(weekly:Boolean) = WithGameKey.async(parse.anyContent) {
-    implicit request => {
-        WS.
-          url(s"$onorUrl/client/v1/scores/gk/${request.gameKey}?userKey=$userKey&weekly=$weekly").
-          get.map(res => {
-          if (res.status == 200)
-            Ok(res.json)
-          else BadRequest(res.body)
-        })
-      }
+  def leaderboard(weekly: Boolean) = WithGameKey.async(parse.anyContent) {
+    implicit request =>
+      val uri = s"$onorUrl/client/v1/scores/gk/${request.gameKey}?userKey=$userKey&weekly=$weekly"
+      proxyGet(uri)
   }
 
 }

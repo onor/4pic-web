@@ -16,13 +16,7 @@ object StateService extends Controller with GameController {
   def show = WithGameKeyAndFbid.async(parse.anyContent) {
     implicit request => {
       val uri = s"$onorUrl/client/v1/games/4pics1word/gk/${request.gameKey}/user/${request.fbid}/provider/facebook?userKey=$userKey"
-      WS.
-        url(uri).
-        get.map(res => {
-        if (res.status == 200)
-          Ok(res.json)
-        else BadRequest(res.body)
-      })
+      proxyGet(uri)
     }
   }
 
@@ -47,11 +41,4 @@ object StateService extends Controller with GameController {
     }
   }
 
-  def proxyPost(url: String, body: JsValue) = WS.
-    url(url).
-    put(body).map(res => {
-    if (res.status == 200)
-      Ok(res.json)
-    else BadRequest(res.body)
-  })
 }

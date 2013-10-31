@@ -2,8 +2,7 @@ package controllers
 
 import play.api.libs.concurrent.Execution.Implicits._
 import play.api.mvc._
-import play.api.libs.json.Json
-import play.api.libs.json.JsString
+import play.api.libs.json.{JsValue, Json, JsString}
 
 import play.api.libs.ws.WS
 import scala.concurrent.Future
@@ -53,5 +52,21 @@ trait GameController extends Controller {
   val onorUrl = play.api.Play.current.configuration.getString("onorplatform.url").get
   val userKey = "4b1469e3ff90b438ef0134b1cb266c06"
   val GAMEKEY = "gameKey"
+
+  def proxyPost(url: String, body: JsValue) = WS.
+    url(url).
+    put(body).map(res => {
+    if (res.status == 200)
+      Ok(res.json)
+    else BadRequest(res.body)
+  })
+
+  def proxyGet(url:String) = WS.
+    url(url).
+    get.map(res => {
+    if (res.status == 200)
+      Ok(res.json)
+    else BadRequest(res.body)
+  })
 
 }
