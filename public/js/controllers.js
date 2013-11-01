@@ -273,10 +273,10 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 		}
 
     //generates missing letters
-		var generated = randomString((12 - $scope.level.answer.length), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+		$scope.generated = randomString((12 - $scope.level.answer.length), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
     //shuffle answer with additional letters
-		$scope.other = _.shuffle(($scope.level.answer.toUpperCase() + generated).split(''));
+		$scope.other = _.shuffle(($scope.level.answer.toUpperCase() + $scope.generated).split(''));
 
     //logic to check if answer is correct one
     //css is changed based on 'scope.correct' model
@@ -326,6 +326,25 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 			}
 		}
 	}
+	
+	function removeLetter(letter, array) {
+		for(var i = 0; i < array.length; i++) {
+		  if(array[i] == letter) {
+		  	array[i] = '';
+				return true;
+		  }	
+		}
+		return false;
+	}	
+	$scope.removeLetters = function () {
+		for (var i = 0; i < $scope.generated.length; i++) {
+			var letter = $scope.generated[i];
+			var removedFromOther = removeLetter(letter, $scope.other);
+			if (!removedFromOther) {
+				removeLetter(letter, $scope.answer);
+			}
+		}
+	}
 
 	$scope.hint = function() {
 		//User has selected Question Mark
@@ -347,7 +366,7 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 				}
 				else if (msg == "removeLetters") {
 					$rootScope.state.$hint({hint: 40}, function (res) {					
-						alert("replaceLetters");
+						$scope.removeLetters();
 					});
 				}
 
