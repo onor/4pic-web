@@ -368,8 +368,7 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 		var modalInstance = $modal.open({
 				templateUrl: '../../partials/hint.html',
 				controller: HintCtrl,
-				dialogClass: 'modal'
-				
+				backdrop:true				
 				});
 
 		modalInstance.result.then(function (msg) {
@@ -396,7 +395,7 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 			var modalInstance = $modal.open({
 				templateUrl: '../../partials/nextlevel.html',
 				controller: NextLevelCtrl,
-				dialogClass: 'modal',
+				backdrop:true,
 				resolve: {
 					points: function () {
 						return points2;
