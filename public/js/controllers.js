@@ -345,6 +345,20 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 			}
 		}
 	}
+	$scope.revealLetter = function () {
+		var answer = $scope.level.answer.toUpperCase();
+		var letter = _.first(_.shuffle(_.intersection(answer.split(''), $scope.other)));
+		var index = _.indexOf($scope.other, letter);
+		if (index > -1) {
+			for (var i = 0; i < answer.length; i++) {
+				if ($scope.answer[i] != answer[i] && answer[i] == letter) {
+					$scope.answer[i] = letter;
+					$scope.other[index] = '';
+					break;
+				}
+			}
+		}
+	}
 
 	$scope.hint = function() {
 		//User has selected Question Mark
@@ -361,7 +375,7 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 		modalInstance.result.then(function (msg) {
 				if (msg == "revealLetters") {
 					$rootScope.state.$hint({hint: 10}, function (res) {					
-						alert("revealLetters");
+						$scope.revealLetter();
 					});
 				}
 				else if (msg == "removeLetters") {
