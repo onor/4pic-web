@@ -39,10 +39,9 @@
 
                     <div class="col-md-6 col-xs-6">
                       <div id="heart-box">
-												<a class="heart-player" ng-repeat="player in players" ng-style="heartStyle($index)">
-													<img ng-src="{{player.picture.data.url}}" style="position:absolute;top:0;left:0" alt="" />
-													<span ng-style="borderStyle($index)" ng-show="showBorder($index)">&nbsp;</span>
-												</a>   
+												<div ng-repeat="fbid in votes.playerIds">
+													<heart-profile fbid="fbid" position="$index"></heart-profile>
+												</div>
                       </div>
                     </div>
 
