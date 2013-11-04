@@ -2,13 +2,8 @@
 
 function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
 
-    //todo: check if needed
-	$facebook.getLoginStatus();
-
     //todo: refactor so that game def is loaded only once.
-	$scope.game = Game.get({}, function (game) {
-		$scope.game = game;
-	});
+	$rootScope.game = Game.get({});
 
 	$rootScope.state = State.get();
 
@@ -208,7 +203,7 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 	});	
 }
 
-function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook, $filter, $route) {
+function LevelCtrl($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route) {
 
     //when all four levelimages are loaded, timer is started
 	$scope.loadedImages = [];
@@ -261,43 +256,40 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 
   //based on game definition, fills answer and pics.
   //todo: refactor to not take whole game definition
-	$scope.game = Game.get({}, function (game) {
 
-		$scope.game = game;
-		$scope.level = game.levelPacks[levelPack].levels[level];
+	$scope.level = $rootScope.game.levelPacks[levelPack].levels[level];
 
-		$scope.answer = [];
+	$scope.answer = [];
 
-		for (var i = 0; i < $scope.level.answer.length; i++) {
-			$scope.answer.push('');
+	for (var i = 0; i < $scope.level.answer.length; i++) {
+		$scope.answer.push('');
+	}
+
+  //generates missing letters
+	$scope.generated = randomString((12 - $scope.level.answer.length), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+
+  //shuffle answer with additional letters
+	$scope.other = _.shuffle(($scope.level.answer.toUpperCase() + $scope.generated).split(''));
+
+  //logic to check if answer is correct one
+  //css is changed based on 'scope.correct' model
+	$scope.invalid = false;
+	$scope.$watch('answer', function (newValue) {
+		$scope.invalid = false;
+
+		$scope.correct = $scope.level.answer.toUpperCase() == newValue.join("");
+		if ($scope.correct) {
+			$scope.$broadcast('timer-stop');
+			var points2 = $scope.remains * 10
+			$rootScope.state.$resolveLevel({points: points2}, function (res) {
+				$scope.nextLevel(points2);
+			});
 		}
 
-    //generates missing letters
-		$scope.generated = randomString((12 - $scope.level.answer.length), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-
-    //shuffle answer with additional letters
-		$scope.other = _.shuffle(($scope.level.answer.toUpperCase() + $scope.generated).split(''));
-
-    //logic to check if answer is correct one
-    //css is changed based on 'scope.correct' model
-		$scope.invalid = false;
-		$scope.$watch('answer', function (newValue) {
-			$scope.invalid = false;
-
-			$scope.correct = $scope.level.answer.toUpperCase() == newValue.join("");
-			if ($scope.correct) {
-				$scope.$broadcast('timer-stop');
-				var points2 = $scope.remains * 10
-				$rootScope.state.$resolveLevel({points: points2}, function (res) {
-					$scope.nextLevel(points2);
-				});
-			}
-
-			if ($scope.level.answer.length == newValue.join("").length && !$scope.correct) {
-				$scope.invalid = true;
-			}
-		}, true);
-	});
+		if ($scope.level.answer.length == newValue.join("").length && !$scope.correct) {
+			$scope.invalid = true;
+		}
+	}, true);
 
   //adds letter to answer
 	$scope.add = function (index) {
@@ -385,10 +377,12 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, Game, $facebook
 
 			});
 	}
+	
+	$scope.levels = $rootScope.game.levelPacks[levelPack].levels;
 
 	$scope.nextLevel = function (points2) {
 
-		if (level == 4) { //todo take 4 from game definition, remove levelPack param
+		if (level == $scope.levels.length) { //todo take 4 from game definition, remove levelPack param
 			$location.path('/leaderboard');
 		} else {
 
