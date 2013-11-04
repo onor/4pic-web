@@ -34,6 +34,35 @@
   opacity:0;
 }
 
+ul li { list-style: none; }
+#heart-box { 
+	background-image: url(../img/charity/heart.png); 
+	width: 423px; 
+	height: 389px; 
+	position: relative; 
+}
+.heart-player { 
+	width: 14px; 
+	height: 14px; 
+	display: block; 
+	position: absolute; 
+	text-decoration: none; 
+}
+.heart-player img { 
+	width: 100%; 
+	height: 100%; 
+}
+.heart-player span { 
+	width: 100%; 
+	height: 100%; 
+	display: block; 
+	background: url(../img/charity/heart-border.png) no-repeat 0 0; 
+	position: absolute; 
+	z-index: 10; 
+	top: 0; 
+	left: 0; 
+}
+
 .heartplayers.ng-enter {
   -webkit-transition: 1s;
   transition: 1s;

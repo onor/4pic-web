@@ -38,53 +38,11 @@
                     </div>
 
                     <div class="col-md-6 col-xs-6">
-											<ul>
-												<li>
-		                      <ul>
-		                          <li ng-repeat="player in players[0]" class="heartplayers">
-		                            <img ng-src="{{player.picture.data.url}}" width="20" height="20" class="img-circle" alt="">
-															</li>
-		                      </ul>
-												</li>
-												<li>
-		                      <ul>
-		                          <li ng-repeat="player in players[1]" class="heartplayers">
-		                            <img ng-src="{{player.picture.data.url}}" width="20" height="20" class="img-circle" alt="">
-															</li>
-		                      </ul>
-												</li>
-												<li>
-		                      <ul>
-		                          <li ng-repeat="player in players[2]" class="heartplayers">
-		                            <img ng-src="{{player.picture.data.url}}" width="20" height="20" class="img-circle" alt="">
-															</li>
-		                      </ul>
-												</li>
-												<li>
-		                      <ul>
-		                          <li ng-repeat="player in players[3]" class="heartplayers">
-		                            <img ng-src="{{player.picture.data.url}}" width="20" height="20" class="img-circle" alt="">
-															</li>
-		                      </ul>
-												</li>
-												<li>
-		                      <ul>
-		                          <li ng-repeat="player in players[4]" class="heartplayers">
-		                            <img ng-src="{{player.picture.data.url}}" width="20" height="20" class="img-circle" alt="">
-															</li>
-		                      </ul>
-												</li>
-												<li>
-		                      <ul>
-		                          <li ng-repeat="player in players[5]" class="heartplayers">
-		                            <img ng-src="{{player.picture.data.url}}" width="20" height="20" class="img-circle" alt="">
-															</li>
-		                      </ul>
-												</li>
-											</ul>
-                     
-                      <div class="heart-charity">
-                          <img src="/img/charity/heart.png" alt="">
+                      <div id="heart-box">
+												<a class="heart-player" ng-repeat="player in players" ng-style="heartStyle($index)">
+													<img ng-src="{{player.picture.data.url}}" alt="" />
+													<span ng-style="borderStyle($index)" ng-show="showBorder($index)">&nbsp;</span>
+												</a>   
                       </div>
                     </div>
 
