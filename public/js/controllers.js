@@ -162,11 +162,15 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 	//todo: push to heart after successful post to backend
 	//todo: maybe to move this to cloudsave? user could vote many times if he uses back button.
 	//we can disable back button or track state if he has voted for lp.
+	$scope.voted = false;
 	$scope.vote = function(charity) {
-		Votes.save({charityId:charity._id}, function() {
-		  $scope.votes.playerIds.push({id:$scope.me.id});
-			$scope.votes.needed = $scope.votes.needed - 1;
-		});
+		if($scope.voted == false) {
+			Votes.save({charityId:charity._id}, function() {
+		  	$scope.votes.playerIds.push({id:$scope.me.id});
+				$scope.votes.needed = $scope.votes.needed - 1;
+				$scope.voted = true;
+			});
+		}
 	}
 
 	//get lists of available charities to vote for
