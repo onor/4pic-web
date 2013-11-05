@@ -178,7 +178,9 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 	$scope.charities = Charity.query();
 
 	//retrieves data about last heart votes, filled heart, and remaining votes to fill heart
-	$scope.votes = Votes.get({});	
+	$scope.votes = Votes.get({}, function(votes) {
+		$scope.playerIds = votes.playerIds.reverse();
+	});	
 }
 
 function LevelCtrl($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route) {
