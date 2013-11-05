@@ -6,8 +6,12 @@
 				</div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success pull-right" ng-click="revealLetters()">Reveal Letter </button>
-        <button class="btn btn-success pull-right" ng-click="removeLetters()">Remove Letters </button>        
+        <button class="btn btn-success pull-right" ng-click="revealLetters()" ng-disabled="!revealLettersEnabled">
+					Reveal Letter 
+				</button>
+        <button class="btn btn-success pull-right" ng-click="removeLetters()" ng-disabled="!removeLettersEnabled">
+					Remove Letters 
+				</button>        
       </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dalog -->

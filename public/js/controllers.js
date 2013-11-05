@@ -208,14 +208,13 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, $facebook, $fil
 	$rootScope.state.$seenLevel({}, function (res) {
 	});
 
-    //refactor this, occurs multiple times in code
-	var sc = $rootScope.state.state.lpScores[levelPack];
-	if (sc) {
-		$scope.lpScore = sc.score;
-	} else {
-		$scope.lpScore = 0;
-	}
-
+  //refactor this, occurs multiple times in code
+	$rootScope.$watch('state', function (newValue) {
+  	var sumed = _.reduce(newValue.state.lpScores, function(memo, lps){ return memo + lps.score; }, 0);
+		var hints = _.reduce(newValue.state.lpScores, function(memo, lps){ return memo + lps.hints; }, 0);	
+		$rootScope.alltime = sumed - hints;
+	}, true);
+	
   //navigation
 	$scope.prizeList = function () {
 		$location.path('/prize');
@@ -305,6 +304,7 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, $facebook, $fil
 		}
 		return false;
 	}	
+	
 	$scope.removeLetters = function () {
 		for (var i = 0; i < $scope.generated.length; i++) {
 			var letter = $scope.generated[i];
@@ -329,30 +329,34 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, $facebook, $fil
 		}
 	}
 
+	$scope.hintUsed = false;
 	$scope.hint = function() {
 		//User has selected Question Mark
 
-		
+		if ($scope.hintUsed == false) {
 
-		var modalInstance = $modal.open({
+			var modalInstance = $modal.open({
 				templateUrl: '../../partials/hint.html',
 				controller: HintCtrl,
 				backdrop:true				
 				});
 
-		modalInstance.result.then(function (msg) {
-				if (msg == "revealLetters") {
+			modalInstance.result.then(function (msg) {
+				if (msg == "revealLetters") {		
 					$rootScope.state.$hint({hint: 10}, function (res) {					
 						$scope.revealLetter();
+						$scope.hintUsed = true;
 					});
 				}
 				else if (msg == "removeLetters") {
 					$rootScope.state.$hint({hint: 40}, function (res) {					
 						$scope.removeLetters();
+						$scope.hintUsed = true;
 					});
 				}
 
 			});
+		}
 	}
 	
 	$scope.levels = $rootScope.game.levelPacks[levelPack].levels;
@@ -392,7 +396,10 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, $facebook, $fil
 	});
 }
 
-function HintCtrl($scope, $modalInstance) {
+function HintCtrl($scope, $rootScope, $modalInstance) {
+	$scope.removeLettersEnabled = $rootScope.alltime >= 40;
+	$scope.revealLettersEnabled = $rootScope.alltime >= 10;
+	
 	$scope.removeLetters = function () {
 		$modalInstance.close("removeLetters");
 	}
