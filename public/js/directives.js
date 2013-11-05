@@ -21,7 +21,7 @@ define(['angular'], function (angular) {
   return {
     restrict: 'E',
     scope: {
-			fbid: '=fbid',
+			player: '=player',
 			position: '=position'
     },
     templateUrl: '../../partials/heartProfile.html',
@@ -38,9 +38,7 @@ define(['angular'], function (angular) {
 			}
 			
 			$scope.showBorder = (p.b == 1);
-			
-			$scope.player = $facebook.api('/' + $scope.fbid.id + '?fields=name,picture');
-			               
+						               
 		}
   };
 });

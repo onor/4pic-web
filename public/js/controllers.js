@@ -167,7 +167,7 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 	$scope.vote = function(charity) {
 		if($scope.voted == false) {
 			Votes.save({charityId:charity._id}, function() {
-		  	$scope.votes.playerIds.push({id:$scope.me.id});
+		  	$scope.votes.playerProfiles.push($scope.me);
 				$scope.votes.needed = $scope.votes.needed - 1;
 				$scope.voted = true;
 			});
@@ -179,7 +179,7 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 
 	//retrieves data about last heart votes, filled heart, and remaining votes to fill heart
 	$scope.votes = Votes.get({}, function(votes) {
-		$scope.playerIds = votes.playerIds.reverse();
+		$scope.playerProfiles = votes.playerProfiles.reverse();
 	});	
 }
 
