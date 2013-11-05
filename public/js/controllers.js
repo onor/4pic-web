@@ -407,6 +407,10 @@ function HintCtrl($scope, $rootScope, $modalInstance) {
 	$scope.revealLetters = function () {
 	   $modalInstance.close("revealLetters");
 	}
+	
+	$scope.dismiss = function() {
+		$modalInstance.dismiss();
+	};
 
 
 }
