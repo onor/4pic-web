@@ -114,6 +114,8 @@ function PrizeCtrl($scope, $rootScope, $modal, $location, Campaign, $facebook, $
 	$scope.pickPrize = function(campaign) {
 		if (campaign.available) {
 			$scope.selectedCampaign = campaign;
+		} else {
+			$scope.openModal();
 		}
 	}
 
@@ -121,29 +123,28 @@ function PrizeCtrl($scope, $rootScope, $modal, $location, Campaign, $facebook, $
 	$scope.charity = function () {
 		$location.path('/charity');
 	}
+	
+	$scope.openModal = function() {
+ 		var modalInstance = $modal.open({
+ 	 		templateUrl: '../../partials/prizeModal.html',
+ 	 		backdrop:false,
+ 	 		controller: PrizeModalCtrl,
+ 	 		resolve: {
+ 	 			points: function () {return true;}
+ 	 	 	}
+ 	 	});
 
-	/*
-	 var modalInstance = $modal.open({
-	 templateUrl: 'partials/prizemodal.html',
-	 backdrop:false,
-	 controller: PrizeModalCtrl,
-	 dialogClass: 'modal',
-	 resolve: {
-	 points: function () {
-	 return true;
-	 }
-	 }
-	 });
+ 	 	modalInstance.result.then(function (res) {
+ 	 		$location.path('/charity');
+ 	 	});
+	}
 
-	 modalInstance.result.then(function (points) {
-	 if (points) {
-	 $location.path('/charity');
-	 }
-	 });  */
 }
 
-function PrizeModalCtrl($modal) {
-
+function PrizeModalCtrl($scope, $modalInstance) {
+  $scope.close = function() {
+		$modalInstance.close("");
+  }
 }
 
 function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location, Votes) {
