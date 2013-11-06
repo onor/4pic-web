@@ -1,18 +1,21 @@
+
 <div class="modal-dialog">
     <div class="modal-content">
+    <div class="modal-header">
+    <button type="button" class="close" ng-click="dismiss()" aria-hidden="true">&times;</button>
+    <h2>You can get some help</h2>
+  </div>  
       <div class="modal-body">
-				<div class="help-content">
-					<p>You can get some help here</p>
-				</div>
-      </div>
-      <div class="modal-footer">
+		
+
         <button class="btn btn-success pull-right" ng-click="revealLetters()" ng-disabled="!revealLettersEnabled">
 					Reveal Letter 
 				</button>
         <button class="btn btn-success pull-right" ng-click="removeLetters()" ng-disabled="!removeLettersEnabled">
 					Remove Letters 
-				</button>    
-				<button class="btn btn-success pull-right" ng-click="dismiss()">Close</button>    
+				</button>  
+        
+
       </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dalog -->

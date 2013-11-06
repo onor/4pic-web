@@ -679,6 +679,11 @@ body {
 }
 /*----- END Charity Page -----*/
 
+.modal-dialog {
+  width:350px;
+  height: 500px;
+  background: url(../img/phillz/hint/philzcoffee.jpg) no-repeat;
+}
 
 
 /* Modal CSS   quick fix for modal dialog issue for bootstrap3 */
