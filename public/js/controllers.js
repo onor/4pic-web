@@ -22,7 +22,7 @@ function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
 	}
 }
 
-function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score, $filter) {
+function LeaderboardCtrl($scope, $rootScope, $location, $facebook,$modal, Score, $filter) {
 
     //load logged user info
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
@@ -74,11 +74,27 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook, Score, $filte
 
     //navigation
 	$scope.playAgain = function () {
-		$location.path('/level');
+		var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
+		if(hasMoreLevelPacks) {
+			$location.path('/level');
+		} else {
+		 		var modalInstance = $modal.open({
+		 	 		templateUrl: '../../partials/noLevelModal.html',
+		 	 		backdrop:false,
+		 	 		controller: NoLevelModalCtrl,
+					resolve: {}
+		 	 	});
+		}
 	}
 	$scope.getPrize = function () {
 		$location.path('/prize')
 	}
+}
+
+function NoLevelModalCtrl($scope, $modalInstance) {
+  $scope.close = function() {
+		$modalInstance.close("");
+  }
 }
 
 function PrizeCtrl($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter) {
@@ -147,7 +163,7 @@ function PrizeModalCtrl($scope, $modalInstance) {
   }
 }
 
-function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location, Votes) {
+function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location, $modal, Votes) {
 	
 	//load logged user info
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {
@@ -157,7 +173,18 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 	
 	//navigation
 	$scope.playAgain = function () {
-		$location.path('/level');
+		var levelPack = $rootScope.state.state.levelPack;
+		var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
+		if(hasMoreLevelPacks) {
+			$location.path('/level');
+		} else {
+		 		var modalInstance = $modal.open({
+		 	 		templateUrl: '../../partials/noLevelModal.html',
+		 	 		backdrop:false,
+		 	 		controller: NoLevelModalCtrl,
+					resolve: {}
+		 	 	});
+		}
 	}
 	$scope.quit = function() {
 		$location.path('/splash');
