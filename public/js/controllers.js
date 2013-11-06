@@ -150,8 +150,11 @@ function PrizeModalCtrl($scope, $modalInstance) {
 function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location, Votes) {
 	
 	//load logged user info
-	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
-
+	$facebook.api('/me?fields=id,name,picture').then(function (me) {
+		$scope.me = $filter('finfo')(me);
+		$scope.meForVote = me;
+	});
+	
 	//navigation
 	$scope.playAgain = function () {
 		$location.path('/level');
@@ -167,7 +170,7 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 	$scope.vote = function(charity) {
 		if($scope.voted == false) {
 			Votes.save({charityId:charity._id}, function() {
-		  	$scope.votes.playerProfiles.push($scope.me);
+		  	$scope.votes.playerProfiles.push($scope.meForVote);
 				$scope.votes.needed = $scope.votes.needed - 1;
 				$scope.voted = true;
 			});
