@@ -38,21 +38,6 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook,$modal, Score,
     //load logged user info
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
 
-	var levelPack = $rootScope.state.state.levelPack;
-
-    //calculate best score as maximum of all scores on all level packs.
-	$scope.bestScore = _.max($rootScope.state.state.lpScores,function (lps) {
-		return lps.score;
-	}).score;
-
-    //return last finished levelpack score.
-	var sc = $rootScope.state.state.lpScores[levelPack - 1];
-	if (sc) {
-		$scope.lpScore = sc.score;
-	} else {
-		$scope.lpScore = 0;
-	}
-
     //retrieves all facebook friends that use the same app/game.
     //and for every retrieved facebook user, calls score service(by fbid) to fetch his current score.
 	$facebook.api({
@@ -62,7 +47,7 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook,$modal, Score,
 			$scope.scores = [];
 			_.map(friends, function (friend) {
 				Score.get({fbid: friend.uid, weekly: false}, function (res) {
-					friend.score = res.value;
+					friend.score = res.value;				
 					$scope.scores.push(friend);
 				});
 			});
@@ -85,6 +70,7 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook,$modal, Score,
 
     //navigation
 	$scope.playAgain = function () {
+		var levelPack = $rootScope.state.state.levelPack;
 		var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
 		if(hasMoreLevelPacks) {
 			$location.path('/level');
@@ -114,7 +100,7 @@ function PrizeCtrl($scope, $rootScope, $modal, $location, Campaign, $facebook, $
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
 
     //sum off all scores on all level packs. todo: rename it after prize redemption integration
-	$scope.wallet = _.reduce($rootScope.state.state.lpScores, function(memo, lps){ return memo + lps.score; }, 0);
+	$scope.wallet = $rootScope.state.scoreSummary.alltime;
 
 	//retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
 	Campaign.query(function (res) {
@@ -251,13 +237,6 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, $facebook, $fil
     //todo move this to occur after all images are loaded
 	$rootScope.state.$seenLevel({}, function (res) {
 	});
-
-  //refactor this, occurs multiple times in code
-	$rootScope.$watch('state', function (newValue) {
-  	var sumed = _.reduce(newValue.state.lpScores, function(memo, lps){ return memo + lps.score; }, 0);
-		var hints = _.reduce(newValue.state.lpScores, function(memo, lps){ return memo + lps.hints; }, 0);	
-		$rootScope.alltime = sumed - hints;
-	}, true);
 	
   //navigation
 	$scope.prizeList = function () {

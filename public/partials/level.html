@@ -1,79 +1,3 @@
-<!-- <div class="backgroundLevel">
-	State {{state}}
-
-{{remains}} seconds
-<timer interval="1000" countdown="countdownAvailable">
-    <div class="progress progress-striped active">
-        <div class="bar" style="width:{{seconds * 3.3}}%;"></div>
-    </div>
-</timer>
-
-
-<div class="row">
-    <div class="col-md-6 col-xs-6">
-        <div class="image-holder">
-            <div class="row">
-                <div class="col-md-6 col-xs-6">
-                    <img ng-src="{{level.photo1}}"/>
-                </div>
-                <div class="col-md-6 col-xs-6">
-                    <img ng-src="{{level.photo2}}"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-xs-6">
-                    <img ng-src="{{level.photo3}}"/>
-                </div>
-                <div class="col-md-6 col-xs-6">
-                    <img ng-src="{{level.photo4}}"/>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6 col-xs-6">
-        <div id="top-board">
-            <div class="row">
-                <div class="col-md-6 col-xs-6">
-                    <h2>Level- {{state.state.level + 1}}</h2>
-                </div>
-                <div class="col-md-6 col-xs-6">
-                    <div id="hudscore">
-                        <span class="score" ng-click="prizeList()">{{lpScore}}</span>
-                    </div>
-                </div>
-            </div>    
-        </div>
-
-        <div id="letter-board" class="clearfix">
-            <ul id="letter-placeholder" class="inline" ng-class="{'invalidClass': invalid}">
-                <li ng-repeat="letter in answer track by $index">
-                    <div ng-click="remove($index)">
-                        {{letter}}
-                    </div>
-                </li>
-            </ul>
-            
-            <div id="letter-selections" class="clearfix">
-                <ul class="inline">
-                    <li ng-repeat="letter in other track by $index">
-                        <div ng-click="add($index)">
-                            {{letter}}
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div>
-            <button class="btn" ng-click="back()">
-                <i class="icon-arrow-left"></i>
-            </button>
-        </div>
-    </div>
-</div>
-</div> -->
-
 <div class="backgroundLevel">
    <div class="container">
         <div class="row">
@@ -91,7 +15,7 @@
                 </div>
 
                 <div id="hudscore">
-                    <span class="score" ng-click="prizeList()">{{alltime}}</span>
+                    <span class="score" ng-click="prizeList()">{{state.scoreSummary.alltime}}</span>
                 </div>
             </div>
         </div>
