@@ -1,6 +1,6 @@
 'use strict';
 
-function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
+function SplashCtrl($scope, $rootScope, State, $location, $modal, Game, $facebook) {
 
     //todo: refactor so that game def is loaded only once.
 	$rootScope.game = Game.get({});
@@ -8,7 +8,18 @@ function SplashCtrl($scope, $rootScope, State, $location, Game, $facebook) {
 	$rootScope.state = State.get();
 
 	$scope.go = function () {
-		$location.path('/level');
+		var levelPack = $rootScope.state.state.levelPack;
+		var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
+		if(hasMoreLevelPacks) {
+			$location.path('/level');
+		} else {
+		 		var modalInstance = $modal.open({
+		 	 		templateUrl: '../../partials/noLevelModal.html',
+		 	 		backdrop:false,
+		 	 		controller: NoLevelModalCtrl,
+					resolve: {}
+		 	 	});
+		}
 	}
 
     //quick jump to leaderboard page from splash screen
