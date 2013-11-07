@@ -221,14 +221,16 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 	}
 	$scope.borderStyle = function(i) {
 		var p = positions[i];
-		return {
-			"background-position": '-' + (p.x) + 'px -' + (p.y - imageSize) + 'px'
+		if(p.b == 1) {
+			return {
+				"background-position": '-' + (p.x) + 'px -' + (p.y - imageSize) + 'px',
+			}
+		} else {
+			return {
+				"background-position": '-' + (p.x) + 'px -' + (p.y - imageSize) + 'px',
+				"display":'none'
+			}
 		}
-	}
-	
-	$scope.showBorder = function(i) {
-		var p = positions[i];
-		return (p.b == 1);
 	}
 }
 
