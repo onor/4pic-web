@@ -37,6 +37,7 @@
 ul li { list-style: none; }
 #heart-box { 
 	background-image: url(../img/charity/heart.png); 
+  background-repeat: no-repeat;
 	width: 423px; 
 	height: 389px; 
 	position: relative; 
