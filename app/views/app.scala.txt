@@ -43,8 +43,8 @@ ul li { list-style: none; }
 	position: relative; 
 }
 .heart-player { 
-	width: 14px; 
-	height: 14px; 
+	width: 12px; 
+	height: 12px; 
 	display: block; 
 	text-decoration: none; 
 }

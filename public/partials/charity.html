@@ -39,11 +39,13 @@
 
                     <div class="col-md-6 col-xs-6">
                       <div id="heart-box">
-												<div ng-repeat="players in playerProfiles">
-													<a class="heart-player" ng-repeat="player in players track by $index">
-														<img ng-src="{{player.picture.data.url}}"/>
-													</a>
-												</div>
+                      <table>
+									<tr ng-repeat="players in playerProfiles">
+										<td ng-repeat="player in players track by $index">
+										<img class="heart-player" ng-src="{{player.picture.data.url}}"/>
+										</td>
+									</tr>
+                      </table>                                    
                       </div>
                     </div>
 
