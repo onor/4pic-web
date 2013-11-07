@@ -746,10 +746,12 @@ body {
 /*----- END Charity Page -----*/
 
 .modal-dialog {
-  width: 200px;
+  /*width: 200px;*/
   height: 500px;
 }
-
+.modal-content {
+  background: #d0caa8 !important;
+}
 
 /* Modal CSS   quick fix for modal dialog issue for bootstrap3 */
 .modal {
