@@ -1,21 +1,27 @@
 
-<div class="modal-dialog">
+  <div class="modal-dialog">
     <div class="modal-content">
-    <div class="modal-header">
-    <button type="button" class="close" ng-click="dismiss()" aria-hidden="true">&times;</button>
-    <h2>You can get some help</h2>
-  </div>  
       <div class="modal-body">
-		
-
-        <button class="btn btn-success pull-right" ng-click="revealLetters()" ng-disabled="!revealLettersEnabled">
-					Reveal Letter 
-				</button>
-        <button class="btn btn-success pull-right" ng-click="removeLetters()" ng-disabled="!removeLettersEnabled">
-					Remove Letters 
-				</button>  
-        
-
+                                <div class="level-complete">
+                                <p>
+                                  If you need some help you can remove
+                                  some letters or reveal letters. 
+                                  It will cost you 10 points and you can do it just once per level.
+                                </p>
+                                </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success pull-right" ng-click="revealLetters()" >
+                                        Reveal Letter 
+                                </button>
+        <button class="btn btn-success pull-right" ng-click="removeLetters()" >
+                                        Remove Letters 
+                                </button>    
+                                <button class="btn btn-success pull-right" ng-click="dismiss()">Close</button>    
       </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dalog -->
+
+
+
+
