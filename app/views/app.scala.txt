@@ -46,7 +46,6 @@ ul li { list-style: none; }
 	width: 14px; 
 	height: 14px; 
 	display: block; 
-	position: absolute; 
 	text-decoration: none; 
 }
 .heart-player img { 
