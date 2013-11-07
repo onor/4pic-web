@@ -58,6 +58,7 @@ ul li { list-style: none; }
 	height: 100%; 
 	display: block; 
 	background: url(../img/charity/heart-border.png) no-repeat 0 0; 
+  background-repeat: no-repeat;
 	position: absolute; 
 	z-index: 10; 
 	top: 0; 
