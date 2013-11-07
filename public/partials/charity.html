@@ -42,7 +42,7 @@
                       <table>
 									<tr ng-repeat="players in playerProfiles">
 										<td ng-repeat="player in players track by $index">
-										<img class="heart-player" ng-src="{{player.picture.data.url}}"/>
+										<img class="heart-player" ng-src="{{player.picture.data.url}}" ng-show="{{isPlayerObject(player)}}"/>
 										</td>
 									</tr>
                       </table>                                    

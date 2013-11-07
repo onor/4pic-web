@@ -257,7 +257,9 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 		$scope.playerProfiles = matrix;
 	});	
 	
-		
+	$scope.isPlayerObject = function(player) {
+		return _.isObject(player);
+	}
 }
 
 function LevelCtrl($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route) {
