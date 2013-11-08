@@ -42,22 +42,34 @@ table {
 
 ul li { list-style: none; }
 
+table {
+  clip-path: url(../img/charity/heart.svg);
+}
+
+.target { clip-path: url(../img/charity/heart.svg); }
+
+.clip-animation {
+    clip-path: url("#clipping5");   
+    -webkit-clip-path: url("#clipping5");
+}
+
+
 #heart-box td {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   padding: 0;
 }
 
 #heart-box { 
-	background-image: url(../img/charity/heart.png); 
+
   background-repeat: no-repeat;
 	width: 423px; 
 	height: 389px; 
 	position: relative; 
 }
 .heart-player { 
-	width: 12px; 
-	height: 12px; 
+	width: 14px; 
+	height: 14px; 
 	display: block; 
 	text-decoration: none; 
 }
