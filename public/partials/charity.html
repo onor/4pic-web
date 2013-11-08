@@ -39,13 +39,16 @@
 
                     <div class="col-md-6 col-xs-6">
                       <div id="heart-box">
-                      <table>
+                      <div class="table_block">
+                      <table align="bottom" border="0"  >
 									<tr ng-repeat="players in playerProfiles">
-										<td ng-repeat="player in players track by $index">
-										<img class="heart-player" ng-src="{{player.picture.data.url}}" ng-show="{{isPlayerObject(player)}}"/>
+										<td border="0" ng-repeat="player in players track by $index">
+										<img class="heart-player" ng-src="{{player.picture.data.url}}" ng-show="{{isPlayerObject(player)}}" />
+
 										</td>
 									</tr>
-                      </table>                                    
+                      </table>                  
+                      </div>                  
                       </div>
                     </div>
 

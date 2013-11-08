@@ -34,7 +34,20 @@
   opacity:0;
 }
 
+table {
+  padding: 0;
+
+}
+
+
 ul li { list-style: none; }
+
+#heart-box td {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+}
+
 #heart-box { 
 	background-image: url(../img/charity/heart.png); 
   background-repeat: no-repeat;
@@ -51,6 +64,7 @@ ul li { list-style: none; }
 .heart-player img { 
 	width: 100%; 
 	height: 100%; 
+  border-radius: 6px;
 }
 .heart-player span { 
 	width: 100%; 
