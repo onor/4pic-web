@@ -68,28 +68,14 @@ table {
 	position: relative; 
 }
 .heart-player { 
+	display:none;
 	width: 14px; 
 	height: 14px; 
-	display: block; 
 	text-decoration: none; 
 }
-.heart-player img { 
-	width: 100%; 
-	height: 100%; 
-  border-radius: 6px;
+.heart-player[src*="http"] {
+    display: block;
 }
-.heart-player span { 
-	width: 100%; 
-	height: 100%; 
-	display: block; 
-	background: url(../img/charity/heart-border.png) no-repeat 0 0; 
-  background-repeat: no-repeat;
-	position: absolute; 
-	z-index: 10; 
-	top: 0; 
-	left: 0; 
-}
-
 .heartplayers.ng-enter {
   -webkit-transition: 1s;
   transition: 1s;
