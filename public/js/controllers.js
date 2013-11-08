@@ -207,9 +207,8 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 	function addPlayer(matrix, prof) {
 		for (var i = matrix.length - 1; i >=0; i--) {
 			for (var j = 0; j < matrix[i].length; j++) {
-				if (matrix[i][j].v == 1) {
-					matrix[i][j].url = prof.picture.data.url;
-					matrix[i][j].v = 0;
+				if (matrix[i][j] == 1) {
+					matrix[i][j] = prof;
 					return;
 				}
 			}
@@ -244,13 +243,6 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 								[0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0],
 								[0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 								
-	for (var i = 0; i < matrix.length; i++) {
-		for(var j = 0; j < matrix[i].length; j++) {
-			if (matrix[i][j] == 1) {matrix[i][j] = {v:1}}
-			if (matrix[i][j] == 0) {matrix[i][j] = {v:0}}
-		}
-	}
-
 	//retrieves data about last heart votes, filled heart, and remaining votes to fill heart
 	$scope.votes = Votes.get({}, function(votes) {		
 		var reversed = votes.playerProfiles.reverse();
