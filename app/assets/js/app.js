@@ -23,7 +23,7 @@
 
 	define('angular', ['https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js'], function () {return angular;});
  
- 	require(['angular', "ui-bootstrap-tpls", './controllers', './directives', './filters', './services',
+ 	require(['angular', "ui-bootstrap-tpls", './controllers', './directives.min', './filters.min', './services.min',
  	'./angular-facebook.min', 'angular-timer.min', "angular-resource", "angular-route", "angular-animate", "underscorejs"],
  		function (angular) {
  
