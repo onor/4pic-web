@@ -8,6 +8,7 @@ object ApplicationBuild extends Build {
 
   //todo: scribe library is added to lib folder directly
   val appDependencies = Seq(
+		filters,//for gzip
     cache,
     "org.webjars" % "angularjs" % "1.2.0", //todo upgrade to non rc version
     "org.webjars" % "requirejs" % "2.1.1",
