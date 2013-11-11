@@ -23,18 +23,18 @@
 
 	define('angular', ['https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js'], function () {return angular;});
  
- 	require(['angular', "ui-bootstrap-tpls", './controllers', './directives.min', './filters.min', './services.min',
+ 	require(['angular', "ui-bootstrap-tpls", './controllers.min', './directives.min', './filters.min', './services.min',
  	'./angular-facebook.min', 'angular-timer.min', "angular-resource", "angular-route", "angular-animate", "underscorejs"],
- 		function (angular) {
+ 		function (angular, xxx, controllers) {
  
  			angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngRoute' , 'ngAnimate', 'ui.bootstrap', 'facebook', 'timer']).
  				config(['$routeProvider', function ($routeProvider) {
- 					$routeProvider.when('/splash', {templateUrl: '../../partials/splash.html', controller: SplashCtrl});
- 					$routeProvider.when('/prize', {templateUrl: '../../partials/prize.html', controller: PrizeCtrl});
- 					$routeProvider.when('/charity', {templateUrl: '../../partials/charity.html', controller: CharityCtrl});
+ 					$routeProvider.when('/splash', {templateUrl: '../../partials/splash.html', controller: controllers.SplashCtrl});
+ 					$routeProvider.when('/prize', {templateUrl: '../../partials/prize.html', controller: controllers.PrizeCtrl});
+ 					$routeProvider.when('/charity', {templateUrl: '../../partials/charity.html', controller: controllers.CharityCtrl});
  					//todo: levelPack and level url parameters are not needed anymore. except for bugfix on level reloading on next button.
- 					$routeProvider.when('/leaderboard', {templateUrl: '../../partials/leaderboard.html', controller: LeaderboardCtrl});
- 					$routeProvider.when('/level', {templateUrl: '../../partials/level.html', controller: LevelCtrl});
+ 					$routeProvider.when('/leaderboard', {templateUrl: '../../partials/leaderboard.html', controller: controllers.LeaderboardCtrl});
+ 					$routeProvider.when('/level', {templateUrl: '../../partials/level.html', controller: controllers.LevelCtrl});
  					$routeProvider.otherwise({redirectTo: '/splash'});
  				}]).
  				config(['$facebookProvider', function ($facebookProvider) {

@@ -1,6 +1,8 @@
 'use strict';
 
-function SplashCtrl($scope, $rootScope, State, $location, $modal, Game, $facebook) {
+define(['angular'], function (angular) {
+
+var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook) {
 
     //todo: refactor so that game def is loaded only once.
 	$rootScope.game = Game.get({});
@@ -33,7 +35,7 @@ function SplashCtrl($scope, $rootScope, State, $location, $modal, Game, $faceboo
 	}
 }
 
-function LeaderboardCtrl($scope, $rootScope, $location, $facebook,$modal, Score, $filter) {
+var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, Score, $filter) {
 
     //load logged user info
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
@@ -88,13 +90,13 @@ function LeaderboardCtrl($scope, $rootScope, $location, $facebook,$modal, Score,
 	}
 }
 
-function NoLevelModalCtrl($scope, $modalInstance) {
+var NoLevelModalCtrl = function($scope, $modalInstance) {
   $scope.close = function() {
 		$modalInstance.close("");
   }
 }
 
-function PrizeCtrl($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter) {
+var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter) {
 
     //load logged user info
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
@@ -154,13 +156,13 @@ function PrizeCtrl($scope, $rootScope, $modal, $location, Campaign, $facebook, $
 
 }
 
-function PrizeModalCtrl($scope, $modalInstance) {
+var PrizeModalCtrl = function($scope, $modalInstance) {
   $scope.close = function() {
 		$modalInstance.close("");
   }
 }
 
-function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location, $modal, Votes) {
+var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, $modal, Votes) {
 	
 	//load logged user info
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {
@@ -253,7 +255,7 @@ function CharityCtrl($scope, $rootScope, Charity, $facebook, $filter, $location,
 	});	
 }
 
-function LevelCtrl($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route) {
+var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route) {
 
     //when all four levelimages are loaded, timer is started
 	$scope.loadedImages = [];
@@ -462,7 +464,7 @@ function LevelCtrl($scope, $rootScope, $modal, State, $location, $facebook, $fil
 	});
 }
 
-function HintCtrl($scope, $rootScope, $modalInstance) {
+var HintCtrl = function($scope, $rootScope, $modalInstance) {
 	$scope.removeLettersEnabled = $rootScope.alltime >= 40;
 	$scope.revealLettersEnabled = $rootScope.alltime >= 10;
 	
@@ -482,10 +484,24 @@ function HintCtrl($scope, $rootScope, $modalInstance) {
 }
 
 //navigates to next level
-function NextLevelCtrl($scope, $modalInstance, points) {
+var NextLevelCtrl = function($scope, $modalInstance, points) {
 	$scope.points = points;
 	$scope.next = function () {
 		$modalInstance.close(points);
 	}
 
 }
+
+
+return {
+	SplashCtrl:SplashCtrl,
+	LeaderboardCtrl:LeaderboardCtrl,
+	CharityCtrl:CharityCtrl,
+	LevelCtrl:LevelCtrl,
+	HintCtrl:HintCtrl,
+	NoLevelModalCtrl:NoLevelModalCtrl,
+	PrizeCtrl:PrizeCtrl,
+	PrizeModalCtrl:PrizeModalCtrl,
+	NextLevelCtrl:NextLevelCtrl
+}
+});
