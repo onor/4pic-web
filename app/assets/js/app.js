@@ -3,7 +3,7 @@
  	/*global define, angular */
  
  	'use strict';
- 
+ //todo package everything even angular ad dependent libraries in one file
  	requirejs.config({
  		shim: {
  			"angular-route": ["angular"], // make angular available to ngRoute
