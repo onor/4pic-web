@@ -96,10 +96,13 @@ var NoLevelModalCtrl = function($scope, $modalInstance) {
   }
 }
 
-var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter) {
+var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter, $http) {
 
     //load logged user info
-	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
+	$facebook.api('/me?fields=id,name,picture,email').then(function (me) {
+		$scope.me = $filter('finfo')(me);
+		$scope.me2 = me;
+	});
 
     //sum off all scores on all level packs. todo: rename it after prize redemption integration
 	$scope.wallet = $rootScope.state.scoreSummary.alltime;
@@ -129,6 +132,10 @@ var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $faceb
 	$scope.pickPrize = function(campaign) {
 		if (campaign.available) {
 			$scope.selectedCampaign = campaign;
+			$http({
+			  method: 'POST',
+			  url: 'http://localhost:8080/client/v1/prizecode/gk/123/fbid/ruda/email/' + $scope.me2.email + '/campaign/' + campaign._id + '?userKey=4b1469e3ff90b438ef0134b1cb266c06'
+			});
 		} else {
 			$scope.openModal();
 		}
