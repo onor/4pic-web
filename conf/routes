@@ -14,7 +14,7 @@ POST        /gameKey/:gameKey/                      controllers.Application.inde
 GET         /gameKey/:gameKey/facebook/login        controllers.Facebook.fbLoginCode(gameKey:Int)
 GET         /css/app.css                            controllers.Application.appCss(gameKey:Int)
 
-GET         /game                                   controllers.Application.game
+#GET         /game                                   controllers.Application.game
 
 #scores proxy
 GET         /scores/:fbid                           controllers.ScoreService.show(fbid:String, weekly:Boolean)
