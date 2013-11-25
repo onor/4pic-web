@@ -28,13 +28,13 @@
 
                     <div class="box-content">
                         <ul id="img-prizes" class="row">
-                            <li class="col-md-3 col-xs-3" ng-repeat="campaign in campaigns" active="image.isActive">
+                            <li class="col-md-3 col-xs-3" ng-repeat="campaign in campaigns | orderBy:'prize.retail'" active="image.isActive">
                                 
                                 <div class="prize-body" ng-class="{available:campaign.available, picked:campaign.picked}" ng-click="pickPrize(campaign)">
                                     <span class="top-tag-prize"></span>
                                     <img ng-src="{{campaign.prize.image}}" alt="">
                                     <p>{{campaign.description}}</p>
-                                    <span class="point-required-prize">{{campaign.prize.cost * 1000}} pts. required</span>
+                                    <span class="point-required-prize">{{campaign.prize.retail * 1000}} pts. required</span>
                                 </div>
                                 
                             </li>
