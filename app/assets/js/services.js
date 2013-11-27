@@ -17,23 +17,23 @@ define(['angular'], function (angular) {
 			);
 		}).factory('Campaign',function ($resource) {
 			return $resource(
-				"/campaigns"
+				onorUrl + "/client/v1/brands/522ccb2f490122bc02eb0929/campaigns?page=1&perPage=3"
 			);
 		}).factory('Charity',function ($resource) {
 			return $resource(
-				"/charities"
+				onorUrl + "/client/v1/brands/522ccb2f490122bc02eb0929/charities?page=1&perPage=3"
 			);
 		}).factory('Votes',function ($resource) {
 			return $resource(
-				"/charityvotes"
+				onorUrl + "/client/v1/charityvotes"
 			);
 		}).factory('Score',function ($resource) {
 			return $resource(
-				"/scores/:fbid"
+				onorUrl + "/client/v1/scores/:fbid"
 			);
 		}).factory('State', function ($resource) {
 			return $resource(
-				"/states/:points:docController/:hint", {},
+				onorUrl + "/client/v1/games/4pics1word/:points:docController/:hint", {},
 				{
 					resolveLevel: {
 						method: 'PUT'

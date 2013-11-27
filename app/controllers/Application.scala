@@ -8,16 +8,6 @@ import play.api.libs.concurrent.Execution.Implicits._
 
 object Application extends Controller with GameController {
 
-  /*
-  def parseNamespace(str: String) =  {
-    val facebookNamespace = str.replaceAll("http://apps.facebook.com/", "").replaceAll("https://apps.facebook.com/", "").replaceAll("/", "")
-		val URI = s"$onorUrl/client/v1/games/facebookNamespace/$facebookNamespace?userKey=$userKey"
-    Logger.error("Facebook namespace: " + facebookNamespace + " URI " + URI)
-      WS.
-        url(URI).
-        get.map(res => if (res.status == 200) { Logger.error("FN OK " + res.json);res.json.\("gameKey").asOpt[Int]} else {Logger.error("FN KO " + res.status + " res " + res.body); None})
-  }*/
-
   //todo it should be moved to facebook class
   def callback(gameKey: Int, request:Request[_]) = s"http://${request.host}/gameKey/$gameKey/facebook/login"
 
@@ -34,23 +24,12 @@ object Application extends Controller with GameController {
       components.SignedRequestUtils.parseSignedRequest(sr, settings.appSecret) match {
         case Some(signedRequest) => {
           Logger.info("GOT SIGNED REQUEST")
-					Ok(views.html.index(gameKey, settings.appId)).withSession(("fbid", signedRequest.user_id), (GAMEKEY, gameKey.toString))			
+					Ok(views.html.index(gameKey, settings.appId, signedRequest.user_id)).withSession(("fbid", signedRequest.user_id), (GAMEKEY, gameKey.toString))			
         }
         case None => {
           Logger.info("DIDNT GET SIGNED REQUEST")
           Ok(views.html.redirect(settings.appId, callback(gameKey, request), Facebook.fscope))
         }
-      }
-  }
-
-  /**
-   * Proxy for game entity.
-   */
-  def game = WithGameKey.async(parse.anyContent) {
-    implicit request => {
-        WS.
-          url(s"$onorUrl/client/v1/games/4pics1word/${request.gameKey}?userKey=$userKey").
-          get.map(res => Ok(res.json))
       }
   }
 

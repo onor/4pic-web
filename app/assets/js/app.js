@@ -42,7 +42,13 @@
  						appId: appConfig.appId//,
  						//channel: '//path/to/channel.html'  todo: what is channel?
  					});
- 				}]);
+ 				}]).config(function ($httpProvider) {
+ 						$httpProvider.defaults.headers.common = {
+ 		 					'userKey' : '4b1469e3ff90b438ef0134b1cb266c06',
+ 		 					'gameKey' : appConfig.gameKey,
+ 		 					'fbid' : appConfig.fbid
+ 		 				}; 					
+ 				});
  
  			angular.bootstrap(document, ['myApp']);
  
