@@ -6,7 +6,10 @@ import play.api.libs.json._
 import play.api.libs.ws.WS
 import play.api.libs.concurrent.Execution.Implicits._
 
-object Application extends Controller with GameController {
+object Application extends Controller {
+  
+  val onorUrl = play.api.Play.current.configuration.getString("onorplatform.url").get
+  val userKey = "4b1469e3ff90b438ef0134b1cb266c06"
 
   //todo it should be moved to facebook class
   def callback(gameKey: Int, request:Request[_]) = s"http://${request.host}/gameKey/$gameKey/facebook/login"
@@ -24,7 +27,7 @@ object Application extends Controller with GameController {
       components.SignedRequestUtils.parseSignedRequest(sr, settings.appSecret) match {
         case Some(signedRequest) => {
           Logger.info("GOT SIGNED REQUEST")
-					Ok(views.html.index(gameKey, settings.appId, signedRequest.user_id)).withSession(("fbid", signedRequest.user_id), (GAMEKEY, gameKey.toString))			
+					Ok(views.html.index(gameKey, settings.appId, signedRequest.user_id))			
         }
         case None => {
           Logger.info("DIDNT GET SIGNED REQUEST")
