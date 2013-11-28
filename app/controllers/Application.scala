@@ -27,7 +27,7 @@ object Application extends Controller {
       components.SignedRequestUtils.parseSignedRequest(sr, settings.appSecret) match {
         case Some(signedRequest) => {
           Logger.info("GOT SIGNED REQUEST")
-					Ok(views.html.index(gameKey, settings.appId, signedRequest.user_id))			
+					Ok(views.html.index(gameKey, settings.appId, signedRequest.user_id, onorUrl))			
         }
         case None => {
           Logger.info("DIDNT GET SIGNED REQUEST")

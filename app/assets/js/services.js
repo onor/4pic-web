@@ -5,7 +5,7 @@
 define(['angular'], function (angular) {
 
 	/* Services */
-	var onorUrl = "http://onor-stage.zalzero.cloudbees.net"
+	var onorUrl = appConfig.onorUrl;
 
 	angular.module('myApp.services', ['ngResource']).
 		value('version', '0.1').factory('Game',function ($resource) {
@@ -17,7 +17,7 @@ define(['angular'], function (angular) {
 			);
 		}).factory('Campaign',function ($resource) {
 			return $resource(
-				onorUrl + "/client/v1/campaigns?page=1&perPage=3"
+				onorUrl + "/client/v2/campaigns?page=1&perPage=3"
 			);
 		}).factory('Charity',function ($resource) {
 			return $resource(
