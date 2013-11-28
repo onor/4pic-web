@@ -98,7 +98,7 @@ var NoLevelModalCtrl = function($scope, $modalInstance) {
   }
 }
 
-var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter, $http) {
+var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter, PrizeCode) {
 
     //load logged user info
 	$facebook.api('/me?fields=id,name,picture,email').then(function (me) {
@@ -134,10 +134,9 @@ var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $faceb
 	$scope.pickPrize = function(campaign) {
 		if (campaign.available) {
 			$scope.selectedCampaign = campaign;
-			$http({
-			  method: 'POST',
-			  url: 'http://localhost:8080/client/v1/prizecode/gk/123/fbid/ruda/email/' + $scope.me2.email + '/campaign/' + campaign._id + '?userKey=4b1469e3ff90b438ef0134b1cb266c06'
-			});
+			PrizeCode.save({
+				'email' : $scope.me2.email,
+				'campaignId' : campaign._id}, function(success) {alert('Prize was sent to ' + $scope.me2.email);});
 		} else {
 			$scope.openModal();
 		}

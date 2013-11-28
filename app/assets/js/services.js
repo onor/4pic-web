@@ -31,6 +31,10 @@ define(['angular'], function (angular) {
 			return $resource(
 				onorUrl + "/client/v1/scores/:fbid"
 			);
+		}).factory('PrizeCode', function($resource) {
+			return $resource(
+			    onorUrl + '/client/v1/prizecode'
+			)
 		}).factory('State', function ($resource) {
 			return $resource(
 				onorUrl + "/client/v1/games/lpgame/:points:docController/:hint", {},
