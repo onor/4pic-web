@@ -136,7 +136,8 @@ var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $faceb
 			$scope.selectedCampaign = campaign;
 			PrizeCode.save({
 				'email' : $scope.me2.email,
-				'campaignId' : campaign._id}, function(success) {alert('Prize was sent to ' + $scope.me2.email);});
+				'campaignId' : campaign._id,
+				'name' : $scope.me2.name}, function(success) {alert('Prize was sent to ' + $scope.me2.email);});
 		} else {
 			$scope.openModal();
 		}
