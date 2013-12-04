@@ -12,7 +12,7 @@ object Application extends Controller {
   val userKey = "4b1469e3ff90b438ef0134b1cb266c06"
 
   //todo it should be moved to facebook class
-  def callback(gameKey: Int, request:Request[_]) = s"http://${request.host}/gameKey/$gameKey/facebook/login"
+  def callback(gameKey: Int, request:Request[_]) = s"https://${request.host}/gameKey/$gameKey/facebook/login"
 
   /**
    * Handles first request made from facebook to ur app. gameKey is extracted from url, and added to session cookie.
