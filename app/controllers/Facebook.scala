@@ -40,8 +40,8 @@ case class FacebookUser(
  * @param appSecret
  */
 case class FacebookSettings(namespace:String, appId:String, appSecret:String) {
-  val appUrl = s"http://apps.facebook.com/$namespace"
-  val appHome = s"http://www.facebook.com/appcenter/$namespace"
+  val appUrl = s"https://apps.facebook.com/$namespace"
+  val appHome = s"https://www.facebook.com/appcenter/$namespace"
 }
 
 //todo: we should use either or scala.util.try
