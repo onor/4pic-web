@@ -10,8 +10,8 @@ GET         /lib/require.js                         controllers.WebJarAssets.req
 GET         /webjars/*file                          controllers.WebJarAssets.at(file)
 
 # Home page
-POST        /                       				controllers.Application.indexPost(gameKey:Int)
-GET         /gameKey/:gameKey/facebook/login        controllers.Facebook.fbLoginCode(gameKey:Int)
+POST        /:gameKey/                       		controllers.Application.indexPost(gameKey:Int)
+GET         /:gameKey/        						controllers.Facebook.fbLoginCode(gameKey:Int)
 GET         /css/app.css                            controllers.Application.appCss(gameKey:Int)
 
 # Map the JS resource paths
