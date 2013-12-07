@@ -107,7 +107,9 @@ var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $faceb
 	});
 
     //sum off all scores on all level packs. todo: rename it after prize redemption integration
-	$scope.wallet = $rootScope.state.scoreSummary.alltime;
+	$scope.alltime = $rootScope.state.scoreSummary.alltime;
+	$scope.usedpoints = PrizeCode.get({});
+	
 
 	//retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
 	Campaign.query(function (res) {
@@ -137,7 +139,9 @@ var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $faceb
 			PrizeCode.save({
 				'email' : $scope.me2.email,
 				'campaignId' : campaign._id,
-				'name' : $scope.me2.name}, function(success) {alert('Prize was sent to ' + $scope.me2.email);});
+				'name' : $scope.me2.name}, 
+				function(success) {alert('Prize was sent to ' + $scope.me2.email);},
+				function(error) {alert('Error ' + error);});
 		} else {
 			$scope.openModal();
 		}
