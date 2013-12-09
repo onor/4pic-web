@@ -115,7 +115,7 @@ var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $faceb
 	Campaign.query(function (res) {
 		//$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
 		$scope.campaigns = _.map(res, function (camp) {
-			camp.available = $scope.wallet >= (camp.prize.retail * 1000);
+			camp.available = ($scope.alltime - $scope.usedpoints.used) >= (camp.prize.retail * 1000);
 			camp.picked = false;
 			return camp;
 		});
