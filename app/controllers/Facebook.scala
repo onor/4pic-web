@@ -53,16 +53,10 @@ object Facebook extends Controller {
    * @param gameKey
    * @return
    */
-  def facebookSettings(gameKey:Int) = if (play.api.Play.isDev(play.api.Play.current)) {
-     FacebookSettings(
-       "fourpicbeauty-dev",
-       "304111289726859",
-       "bd5fa38e026ac2f5f65ce048d2d3f054")
-  } else {
-    FacebookSettings(
-      "fourpicweb",
-      "583608191697375",
-      "618a6da80479f556e7a72c9780fcbefa")
+  def facebookSettings(gameKey:Int) = (gameKey, play.api.Play.isDev(play.api.Play.current)) match {
+    case (116262036, true) => FacebookSettings("fourpicbeauty-dev","304111289726859","bd5fa38e026ac2f5f65ce048d2d3f054")
+    case (116262036, false) => FacebookSettings("fourpicweb", "583608191697375","618a6da80479f556e7a72c9780fcbefa")
+    case (101347603, true) => FacebookSettings("celebbistro-dev","1400328356875796","aef84bb41bceedb63dc0b2d3eb9cc9ea")
   }
 
   val NETWORK_NAME = "Facebook"
