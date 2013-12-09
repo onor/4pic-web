@@ -8,7 +8,7 @@
 		<meta name="language" content="en" />
 		<script type="text/javascript">
 			var client_id = '@client_id';
-			var callback = '@callback';
+			var callback = '@helper.urlEncode(callback)';
 			var scope = '@scope';
             window.top.location.href = "https://www.facebook.com/dialog/oauth?client_id=" + client_id + "&scope=" + scope + "&redirect_uri=" + callback;
         </script>
