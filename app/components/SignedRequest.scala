@@ -35,18 +35,20 @@ object SignedRequestUtils {
 
     val sig = base64UrlDecode(encodedSig)
     val decodedPayload = new String(base64UrlDecode(payload), "UTF-8")
-    Logger.warn("Decoded " + decodedPayload)
+    Logger.debug("Decoded " + decodedPayload)
     val json = Json.parse(decodedPayload)
     implicit val reads = Json.reads[SignedRequest]
     val signedRequest = reads.reads(json).fold(
       invalid => {
         Logger.error("Invalid Request" + invalid); None
       },
-      signed => Some(signed))
+      signed => {Logger.debug("Signed: " + signed); Some(signed)})
 
-    signedRequest.
+    val filtered = signedRequest.
       filter(_.algorithm == "HMAC-SHA256").
       filter(a => sig sameElements hash_hmac_sha256(payload, appSecret))
+    Logger.debug("filtered " + filtered)
+    filtered
   }
 }
 
