@@ -33,7 +33,13 @@ define(['angular'], function (angular) {
 			);
 		}).factory('PrizeCode', function($resource) {
 			return $resource(
-			    onorUrl + '/client/v1/prizecode'
+			    onorUrl + '/client/v1/prizecode/:campaignId',
+			    {},
+			    {
+			    	available: {
+			    		method: 'GET'
+			    	}
+			    }
 			)
 		}).factory('State', function ($resource) {
 			return $resource(
