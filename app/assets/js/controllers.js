@@ -51,7 +51,7 @@ var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, 
 			$scope.scores = [];
 			_.map(friends, function (friend) {
 				Score.get({fbid: friend.uid, weekly: false}, function (res) {
-					friend.score = res.value;				
+					friend.score = res.score;				
 					$scope.scores.push(friend);
 				});
 			});
@@ -61,9 +61,9 @@ var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, 
 	Score.query({weekly: true}, function (scores) {
 		$scope.weeklyScores = [];
 		_.map(scores, function (score) {
-			$facebook.api('/' + score._id.playerId.id + '?fields=id,name,picture').then(
+			$facebook.api('/' + score.playerId.id + '?fields=id,name,picture').then(
 				function (response) {
-					$scope.weeklyScores.push({user: response, score: score.value});
+					$scope.weeklyScores.push({user: response, score: score.score});
 				},
 				function (response) {
 					alert('error');
