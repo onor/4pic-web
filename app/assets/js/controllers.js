@@ -65,7 +65,7 @@ var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, 
 			$scope.scores = [];
 			_.map(friends, function (friend) {
 				Score.get({fbid: friend.uid, weekly: false}, function (res) {
-					friend.score = res.value;				
+					friend.score = res.score;				
 					$scope.scores.push(friend);
 				});
 			});
@@ -75,9 +75,9 @@ var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, 
 	Score.query({weekly: true}, function (scores) {
 		$scope.weeklyScores = [];
 		_.map(scores, function (score) {
-			$facebook.api('/' + score._id.playerId.id + '?fields=id,name,picture').then(
+			$facebook.api('/' + score.playerId.id + '?fields=id,name,picture').then(
 				function (response) {
-					$scope.weeklyScores.push({user: response, score: score.value});
+					$scope.weeklyScores.push({user: response, score: score.score});
 				},
 				function (response) {
 					alert('error');
@@ -129,7 +129,9 @@ var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $faceb
 	Campaign.query(function (res) {
 		//$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
 		$scope.campaigns = _.map(res, function (camp) {
-			camp.available = ($scope.alltime - $scope.usedpoints.used) >= (camp.prize.retail * 1000);
+			PrizeCode.available({campaignId:camp._id}, function(cnt) {
+				camp.available = ($scope.alltime - $scope.usedpoints.used) >= (camp.prize.retail * 1000);	
+			});
 			camp.picked = false;
 			return camp;
 		});
