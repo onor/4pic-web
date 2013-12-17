@@ -1,4 +1,10 @@
-<button ng-click="ld()">dev button</button>
-<div ng-repeat="friend in friendsWhoHavePlayed"><img ng-src="{{friend.pic_square}}"></div>
-<button ng-click="go()">play button</button>
+<div style="color:black;">
+  <div>{{game.description}}</div>
+  <button ng-click="ld()">dev button</button>
+  <div ng-repeat="friend in friendsWhoHavePlayed"><img src="{{friend.pic_square}}"></div>
+  <button ng-click="go()">play button</button>
+  <span ng-show="friendsWhoHavePlayed.length > 3"> and {{friendsWhoHavePlayed.length - 3}} others have played {{game.name}}</span>
+  <div st>toolTip:{{friendsWhoHavePlayed[toolTipped].name}}</div>
+  <img src="{{game.design.logo}}">
+</div>
 

@@ -5,10 +5,9 @@ define(['angular'], function (angular) {
 var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook) {
 	console.log('splashCtrlLoaded');
     //todo: refactor so that game def is loaded only once.
-	$rootScope.game = Game.get({}, function(){debugger;});
-	$rootScope.state = State.get({}, function(){debugger;});
+	$rootScope.game = Game.get({}, function(){});
+	$rootScope.state = State.get({}, function(){});
 	$scope.friendsWhoHavePlayed = [];
-
 	$scope.go = function () {
 		var levelPack = $rootScope.state.state.levelPack;
 		var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
@@ -29,6 +28,7 @@ var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $f
 			query: 'SELECT uid, name, is_app_user, pic_square FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
 		}).then(function (friends) {
 			$scope.friendsWhoHavePlayed = friends;
+			$scope.toolTipped = Math.floor(friends.length / 2);
 		});
 	});
 
