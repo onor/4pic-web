@@ -2,7 +2,7 @@
   <div fbprofilepic></div>
   <div>{{game.description}}</div>
   <button ng-click="ld()">dev button</button>
-  <div ng-repeat="friend in friendsWhoHavePlayed"><img ng-src="{{friend.pic_square}}"></div>
+  <div ng-repeat="friend in friendsWhoHavePlayed.slice(0,3)"><img ng-src="{{friend.pic_square}}"></div>
   <button ng-click="go()">play button</button>
   <span ng-show="friendsWhoHavePlayed.length > 3"> and {{friendsWhoHavePlayed.length - 3}} others have played {{game.name}}</span>
   <div>toolTip:{{friendsWhoHavePlayed[toolTipped].name}}</div>
