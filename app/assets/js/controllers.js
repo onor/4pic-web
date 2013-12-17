@@ -2,7 +2,7 @@
 
 define(['angular'], function (angular) {
 
-var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game) {
+var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook) {
 	console.log('splashCtrlLoaded');
     //todo: refactor so that game def is loaded only once.
 	$rootScope.game = Game.get({}, function(){});
@@ -40,12 +40,6 @@ var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game) {
 	$scope.prize = function () {
 		$location.path('/prize');
 	}
-
-
-
-
-
-
 }
 
 var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, Score, $filter) {
@@ -285,6 +279,13 @@ var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $loc
 	});	
 }
 
+
+
+
+
+
+
+
 var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route) {
 
     //when all four levelimages are loaded, timer is started
@@ -297,7 +298,6 @@ var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook
 	});
 
 	//load logged user info
-	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
 
 	var levelPack = $rootScope.state.state.levelPack;
 	var level = $rootScope.state.state.level;
@@ -493,6 +493,13 @@ var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook
 		$scope.remains = data.millis / 1000;
 	});
 }
+
+
+
+
+
+
+
 
 var HintCtrl = function($scope, $rootScope, $modalInstance) {
 	$scope.removeLettersEnabled = $rootScope.alltime >= 40;
