@@ -106,25 +106,21 @@ var NoLevelModalCtrl = function($scope, $modalInstance) {
   }
 }
 
-var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter, PrizeCode) {
+var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter, PrizeCode, Score) {
 
     //load logged user info
 	$facebook.api('/me?fields=id,name,picture,email').then(function (me) {
 		$scope.me = $filter('finfo')(me);
 		$scope.me2 = me;
+		$scope.alltime = Score.get({fbid: me.id, weekly: false});	
 	});
-
-    //sum off all scores on all level packs. todo: rename it after prize redemption integration
-	$scope.alltime = $rootScope.state.scoreSummary.alltime;
-	$scope.usedpoints = PrizeCode.get({});
-	
 
 	//retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
 	Campaign.query(function (res) {
 		//$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
 		$scope.campaigns = _.map(res, function (camp) {
 			PrizeCode.available({campaignId:camp._id}, function(cnt) {
-				camp.available = ($scope.alltime - $scope.usedpoints.used) >= (camp.prize.retail * 1000);	
+				camp.available = ($rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score - 0) >= (camp.prize.retail * 1000);	
 			});
 			camp.picked = false;
 			return camp;
