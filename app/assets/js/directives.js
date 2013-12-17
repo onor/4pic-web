@@ -17,8 +17,7 @@ define(['angular'], function (angular) {
 				});
 			}
 		};
-	});
-	angular.module('myApp.directives', []).directive('fbprofilepic', function ($facebook) {
+	}).directive('fbprofilepic', function ($facebook) {
 		return {
 			restrict: 'A',
 			template: '<img src="{{profPicUrl}}">',
