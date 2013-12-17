@@ -15,7 +15,7 @@
                 </div>
 
                 <div id="hudscore">
-                    <span class="score" ng-click="prizeList()">{{state.scoreSummary.lastLp}}</span>
+                    <span class="score" ng-click="prizeList()">{{state.state.lpScores[state.state.lpScores.length - 1].score}}</span>
                 </div>
             </div>
         </div>
