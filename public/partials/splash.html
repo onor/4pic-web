@@ -4,7 +4,7 @@
   <div ng-repeat="friend in friendsWhoHavePlayed"><img src="{{friend.pic_square}}"></div>
   <button ng-click="go()">play button</button>
   <span ng-show="friendsWhoHavePlayed.length > 3"> and {{friendsWhoHavePlayed.length - 3}} others have played {{game.name}}</span>
-  <div st>toolTip:{{friendsWhoHavePlayed[toolTipped].name}}</div>
+  <div>toolTip:{{friendsWhoHavePlayed[toolTipped].name}}</div>
   <img src="{{game.design.logo}}">
 </div>
 

@@ -34,7 +34,7 @@ var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $f
 
     //quick jump to leaderboard page from splash screen 
 	$scope.ld = function () {
-		$location.path('/leaderboard');
+		$location.path('/charity');
 	}
     //quick jump to prize page from splash screen
 	$scope.prize = function () {
@@ -192,7 +192,8 @@ var PrizeModalCtrl = function($scope, $modalInstance) {
 }
 
 var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, $modal, Votes) {
-	
+	$scope.aboutExpanded = [];
+	$scope.charities = Charity.query({});
 	//load logged user info
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {
 		$scope.me = $filter('finfo')(me);

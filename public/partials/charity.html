@@ -1,92 +1,19 @@
-<svg width="0" height="0" align="center">
-<defs>    
-<clipPath id="clipping5">
-
-<path d="M 263.41570,235.14588 C 197.17570,235.14588 143.41575,288.90587 143.41575,355.14588 C 143.41575,489.90139 279.34890,525.23318 371.97820,658.45392 C 459.55244,526.05056 600.54070,485.59932 600.54070,355.14588 C 600.54070,288.90588 546.78080,235.14587 480.54070,235.14588 C 432.49280,235.14588 391.13910,263.51631 371.97820,304.33338 C 352.81740,263.51630 311.46370,235.14587 263.41570,235.14588 z " id="path7" sodipodi:nodetypes="ccccccc" style="fill:#e60000;fill-opacity:1.0000000;stroke:#000000;stroke-width:18.700001;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"/>
-
-
-</clipPath>
-     </defs>
-    </svg>
-
-<div class="backgroundCharity">
-    <div class="container">
-        <div id="charity" class="clearfix">
-            <div class="row">
-                <div class="col-md-12 col-xs-12">
-                    <div class="header clearfix">
-                        <div class="player-pic-prizes">
-                            <img ng-src="{{me.avatar}}" width="83" height="83" class="img-circle" alt="">
-                        </div>
-                        <h1>{{me.name}}, you are doing good - thank you!</h1>
-                    </div>
-                </div>
+<div style="color:black;">
+    <!-- start of carousel -->
+    <div ng-repeat="item in charities" ng-model="aboutExpanded">
+        <img src="{{item.charity.logoColor}}">
+        <h3>{{item.name}}</h3>
+        <div ng-switch="aboutExpanded[$index]">
+            <div ng-switch-when="undefined">
+                <p>{{item.charity.about.split(' ').slice(0,25).join(' ')}}... (Minified)</p>
+                <label><a ng-click="aboutExpanded[$index] = true">Learn More</a></label>
             </div>
-            <div class="row">
-                <div class="col-md-12 col-xs-12">
-                    <div class="charity-caption clearfix">
-                        <img src="/img/charity/vote-charity.png" alt="">
-                    </div>
-                </div>
-            </div>
-
-            <div class="box-content">
-                <div class="row">
-                    <div class="col-md-3 col-xs-3">
-                        <ul id="charities">
-                            <li ng-repeat="charity in charities">
-                                <div class="charity-body clearfix">
-                                    <img ng-src="{{charity.charity.logoColor}}" alt="">
-                                    
-                                    <span class="charity-vote-tag" ng-click="vote(charity)"></span>
-
-                                    <span class="charity-badge">
-                                        <p>{{charity.name}}</p>
-                                    </span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-6 col-xs-6">
-                      <div id="heart-box">
-
-                      <table class="clip-animation" border="2" />
-
-									<tr ng-repeat="players in playerProfiles">
-										<td border="0" ng-repeat="player in players track by $index">
-										<img class="heart-player" ng-src="{{player.picture.data.url}}"/>
-
-										</td>
-									</tr>
-                      </table>                  
-
-                      </div>
-                    </div>
-
-                    <div class="col-md-3 col-xs-3">
-                        <div class="info-box-container clearfix">
-                            <p>Games Needed!</p>
-                            <span class="info-box">
-                                <p>{{votes.needed}}</p>
-                            </span>
-                        </div>
-
-                        <div class="info-box-container clearfix">
-                            <p>Filled!</p>
-                            <span class="info-box">
-                                <p>{{votes.filled}}</p>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="charity-note">For Every Filled Heart,<br>Philz will donate $50 to <br>the charity that collected the<br> most votes from you!</p>
-
-                <a  class="play-again-btn" ng-click="playAgain()">Play Again</a>
-                <a  class="quit-btn" ng-click="quit()">Quit</a>
+            <div ng-switch-when="true">
+                <p>{{item.charity.about}} (Expanded)</p>
+                <label><a ng-click="aboutExpanded[$index] = undefined">Learn Less</a></label>
             </div>
         </div>
     </div>
+    <!-- end of carousel -->
+    <img src="{{game.design.logo}}"></img>
 </div>
-
