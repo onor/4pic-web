@@ -1,4 +1,4 @@
-/*global define */
+	/*global define */
 
 'use strict';
 
@@ -52,5 +52,7 @@ define(['angular'], function (angular) {
 					}
 				}
 			);
+		}).factory('Facebook', function ($facebook) {
+			return ;
 		});
 });

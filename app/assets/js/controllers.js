@@ -3,11 +3,11 @@
 define(['angular'], function (angular) {
 
 var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook) {
-
+	console.log('splashCtrlLoaded');
     //todo: refactor so that game def is loaded only once.
-	$rootScope.game = Game.get({});
-
-	$rootScope.state = State.get();
+	$rootScope.game = Game.get({}, function(){debugger;});
+	$rootScope.state = State.get({}, function(){debugger;});
+	$scope.friendsWhoHavePlayed = [];
 
 	$scope.go = function () {
 		var levelPack = $rootScope.state.state.levelPack;
@@ -23,16 +23,29 @@ var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $f
 		 	 	});
 		}
 	}
+	$facebook.getLoginStatus().then(function(){
+		$facebook.api({
+			method: 'fql.query',
+			query: 'SELECT uid, name, is_app_user, pic_square FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
+		}).then(function (friends) {
+			$scope.friendsWhoHavePlayed = friends;
+		});
+	});
 
-    //quick jump to leaderboard page from splash screen
+    //quick jump to leaderboard page from splash screen 
 	$scope.ld = function () {
 		$location.path('/leaderboard');
 	}
-
     //quick jump to prize page from splash screen
 	$scope.prize = function () {
 		$location.path('/prize');
 	}
+
+
+
+
+
+
 }
 
 var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, Score, $filter) {
@@ -48,6 +61,7 @@ var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, 
 		method: 'fql.query',
 		query: 'SELECT uid, name, is_app_user, pic_square FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
 	}).then(function (friends) {
+		console.log(arguments);
 			$scope.scores = [];
 			_.map(friends, function (friend) {
 				Score.get({fbid: friend.uid, weekly: false}, function (res) {
