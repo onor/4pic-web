@@ -2,7 +2,7 @@
 
 define(['angular'], function (angular) {
 
-var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook) {
+var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game) {
 	console.log('splashCtrlLoaded');
     //todo: refactor so that game def is loaded only once.
 	$rootScope.game = Game.get({}, function(){});
