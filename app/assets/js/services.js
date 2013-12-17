@@ -1,4 +1,4 @@
-/*global define */
+	/*global define */
 
 'use strict';
 
@@ -19,9 +19,9 @@ define(['angular'], function (angular) {
 			return $resource(
 				onorUrl + "/client/v2/campaigns?page=1&perPage=3"
 			);
-		}).factory('Charity',function ($resource) {
+		}).factory('Charity', function ($resource) {
 			return $resource(
-				onorUrl + "/client/v1/charities?page=1&perPage=3"
+				onorUrl + "/client/v1/charities?page=1&perPage=3" // Todo: fix charity thing.
 			);
 		}).factory('Votes',function ($resource) {
 			return $resource(
@@ -58,5 +58,7 @@ define(['angular'], function (angular) {
 					}
 				}
 			);
+		}).factory('Facebook', function ($facebook) {
+			return ;
 		});
 });
