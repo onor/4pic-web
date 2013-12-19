@@ -120,7 +120,7 @@ var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $faceb
 		//$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
 		$scope.campaigns = _.map(res, function (camp) {
 			PrizeCode.available({campaignId:camp._id}, function(cnt) {
-				camp.available = ($rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score - 0) >= (camp.prize.retail * 1000);	
+				camp.available = ($rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score - 0) >= (camp.prize.points);	
 			});
 			camp.picked = false;
 			return camp;
