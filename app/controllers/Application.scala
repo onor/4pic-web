@@ -6,6 +6,11 @@ import play.api.libs.json._
 import play.api.libs.ws.WS
 import play.api.libs.concurrent.Execution.Implicits._
 
+case class FacebookSettings(namespace:String, appId:String, appSecret:String) {
+  val appUrl = s"https://apps.facebook.com/$namespace"
+  val appHome = s"https://www.facebook.com/appcenter/$namespace"
+}
+
 object Application extends Controller {
   
   val onorUrl = play.api.Play.current.configuration.getString("onorplatform.url").get
@@ -13,6 +18,12 @@ object Application extends Controller {
 
   //todo it should be moved to facebook class
   def callback(gameKey: Int, request:Request[_]) = s"https://${request.host}/$gameKey/"
+  
+  def facebookSettings(gameKey:Int) = (gameKey, play.api.Play.isDev(play.api.Play.current)) match {
+    case (116262036, true) => FacebookSettings("fourpicbeauty-dev","304111289726859","bd5fa38e026ac2f5f65ce048d2d3f054")
+    case (116262036, false) => FacebookSettings("fourpicweb", "583608191697375","618a6da80479f556e7a72c9780fcbefa")
+    case (101347603, true) => FacebookSettings("celebbistro-dev","1400328356875796","aef84bb41bceedb63dc0b2d3eb9cc9ea")
+  }
 
   /**
    * Handles first request made from facebook to ur app. gameKey is extracted from url, and added to session cookie.
@@ -20,12 +31,14 @@ object Application extends Controller {
    */
   def indexPost(gameKey:Int) = Action {
     implicit request =>
-      Logger.info("INDEX POST")
-
-      val settings = Facebook.facebookSettings(gameKey)
-     
+      val settings = facebookSettings(gameKey)     
+	  Ok(views.html.index(gameKey, settings.appId, onorUrl))			       
+  }
+  
+  def index(gameKey:Int) = Action {
+    implicit request =>
+      val settings = facebookSettings(gameKey)   
 	  Ok(views.html.index(gameKey, settings.appId, onorUrl))			
-       
   }
 
   /**
