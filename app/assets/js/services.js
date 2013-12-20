@@ -19,6 +19,10 @@ define(['angular'], function (angular) {
 			return $resource(
 				onorUrl + "/client/v2/campaigns?page=1&perPage=3"
 			);
+		}).factory('Tournament',function ($resource) {
+			return $resource(
+				onorUrl + "/client/v1/tournament"
+			);
 		}).factory('Charity', function ($resource) {
 			return $resource(
 				onorUrl + "/client/v1/charities?page=1&perPage=3" // Todo: fix charity thing.

@@ -42,9 +42,11 @@ var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $f
 	}
 }
 
-var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, Score, $filter) {
+var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, Score, $filter, Tournament) {
 	
 	$scope.fromnow = moment().endOf('week').fromNow();
+	
+	$scope.tournament = Tournament.get();
 
     //load logged user info
 	$facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
