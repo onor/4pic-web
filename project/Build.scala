@@ -14,8 +14,7 @@ object ApplicationBuild extends Build {
     "org.webjars" % "requirejs" % "2.1.1",
     "org.webjars" % "bootstrap" % "3.0.0",
     "org.webjars" % "angular-ui-bootstrap" % "0.6.0-1",
-    "org.webjars" %% "webjars-play" % "2.2.0",
-    "commons-codec" % "commons-codec" % "1.7" //needed for facebook signed_request parsing
+    "org.webjars" %% "webjars-play" % "2.2.0"
   )
 
   val main = play.Project(appName, appVersion, appDependencies)

@@ -6,18 +6,12 @@ import play.api.libs.json._
 import play.api.libs.ws.WS
 import play.api.libs.concurrent.Execution.Implicits._
 
-case class FacebookSettings(namespace:String, appId:String, appSecret:String) {
-  val appUrl = s"https://apps.facebook.com/$namespace"
-  val appHome = s"https://www.facebook.com/appcenter/$namespace"
-}
+case class FacebookSettings(namespace:String, appId:String, appSecret:String)
 
 object Application extends Controller {
   
   val onorUrl = play.api.Play.current.configuration.getString("onorplatform.url").get
   val userKey = "4b1469e3ff90b438ef0134b1cb266c06"
-
-  //todo it should be moved to facebook class
-  def callback(gameKey: Int, request:Request[_]) = s"https://${request.host}/$gameKey/"
   
   def facebookSettings(gameKey:Int) = (gameKey, play.api.Play.isDev(play.api.Play.current)) match {
     case (116262036, true) => FacebookSettings("fourpicbeauty-dev","304111289726859","bd5fa38e026ac2f5f65ce048d2d3f054")
@@ -25,10 +19,6 @@ object Application extends Controller {
     case (101347603, true) => FacebookSettings("celebbistro-dev","1400328356875796","aef84bb41bceedb63dc0b2d3eb9cc9ea")
   }
 
-  /**
-   * Handles first request made from facebook to ur app. gameKey is extracted from url, and added to session cookie.
-   * Also checks if user is authenticated. It should almost always be authenticated, because currently facebook handles permissions before it contacts app.
-   */
   def indexPost(gameKey:Int) = Action {
     implicit request =>
       val settings = facebookSettings(gameKey)     
