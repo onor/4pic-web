@@ -23,17 +23,9 @@ object Application extends Controller {
       Logger.info("INDEX POST")
 
       val settings = Facebook.facebookSettings(gameKey)
-      val sr = request.body.asFormUrlEncoded.get("signed_request").head
-      components.SignedRequestUtils.parseSignedRequest(sr, settings.appSecret) match {
-        case Some(signedRequest) => {
-          Logger.info("GOT SIGNED REQUEST")
-					Ok(views.html.index(gameKey, settings.appId, signedRequest.user_id, onorUrl))			
-        }
-        case None => {
-          Logger.info("DIDNT GET SIGNED REQUEST")
-          Ok(views.html.redirect(settings.appId, callback(gameKey, request), Facebook.fscope))
-        }
-      }
+     
+	  Ok(views.html.index(gameKey, settings.appId, onorUrl))			
+       
   }
 
   /**

@@ -6,8 +6,9 @@ var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $f
 	console.log('splashCtrlLoaded');
     //todo: refactor so that game def is loaded only once.
 	$rootScope.game = Game.get({}, function(){});
-	$rootScope.state = State.get({}, function(){});
+
 	$scope.friendsWhoHavePlayed = [];
+	
 	$scope.go = function () {
 		var levelPack = $rootScope.state.state.levelPack;
 		var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
@@ -22,7 +23,9 @@ var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $f
 		 	 	});
 		}
 	}
-	$facebook.getLoginStatus().then(function(){
+	$facebook.login().then(function(res){
+		appConfig.fbid = res.authResponse.userID;
+		$rootScope.state = State.get({fbid:appConfig.fbid}, function(){});
 		$facebook.api({
 			method: 'fql.query',
 			query: 'SELECT uid, name, is_app_user, pic_square FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
@@ -122,7 +125,10 @@ var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $faceb
 		//$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
 		$scope.campaigns = _.map(res, function (camp) {
 			PrizeCode.available({campaignId:camp._id}, function(cnt) {
-				camp.available = ($rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score - 0) >= (camp.prize.points);	
+				camp.available = true;
+				if (angular.isDefined(camp.prize.points)) {
+				  camp.available = ($rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score - 0) >= (camp.prize.points);
+				}
 			});
 			camp.picked = false;
 			return camp;
@@ -144,11 +150,11 @@ var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $faceb
 	$scope.pickPrize = function(campaign) {
 		if (campaign.available) {
 			$scope.selectedCampaign = campaign;
-			PrizeCode.save({
-				'email' : $scope.me2.email,
+			PrizeCode.save({'fbid':appConfig.fbid},{
+				'email' : 'rudolf.markulin@gmail.com',
 				'campaignId' : campaign._id,
 				'name' : $scope.me2.name}, 
-				function(success) {alert('Prize was sent to ' + $scope.me2.email);},
+				function(success) {alert('Prize was sent.');},
 				function(error) {alert('Error ' + error);});
 		} else {
 			$scope.openModal();
