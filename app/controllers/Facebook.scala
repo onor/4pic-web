@@ -80,9 +80,9 @@ object Facebook extends Controller {
 
     val authorizationUrl = service.getAuthorizationUrl(EMPTY_TOKEN);
 
-    Logger.error("SR " + request.body.asFormUrlEncoded.get("signed_request"))
-    Logger.error("CODE " + request.queryString.get("code"))
-    Logger.error("ERROR" + request.queryString.get("error_reason"))
+    Logger.error("SR " + request.body.asFormUrlEncoded.get("signed_request").orElse("DD"))
+    Logger.error("CODE " + request.queryString.get("code").getOrElse(Seq("CC")))
+    Logger.error("ERROR" + request.queryString.get("error_reason").getOrElse("FF"))
 
     try {
         (request.queryString.get("code"), request.queryString.get("error_reason")) match {
