@@ -153,7 +153,8 @@ var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $faceb
 			PrizeCode.save({'fbid':appConfig.fbid},{
 				'email' : 'rudolf.markulin@gmail.com',
 				'campaignId' : campaign._id,
-				'name' : $scope.me2.name}, 
+				'name' : $scope.me2.name,
+				'phoneNumber' : '+1 650-272-9246'},
 				function(success) {alert('Prize was sent.');},
 				function(error) {alert('Error ' + error);});
 		} else {
