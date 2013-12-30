@@ -1,17 +1,30 @@
 @(gameKey:Int, appId:String, onorUrl:String)
 <!doctype html>
-<html lang="en">
+<!--[if IE 9 ]>    <html class="ie9 no-js" lang="en"> <![endif]-->
+<!--[if IE 10 ]>   <html class="ie10 no-js" lang="en"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
     <head>
-        <meta charset="utf-8">
-        <title></title>       
-        <link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css'>
-        <link rel="stylesheet" href="@routes.Application.appCss(gameKey)">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PicPhilz</title>     
+          
+        <script type="text/javascript" src="//use.typekit.net/ynf4byp.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        
+        <link rel="stylesheet" href="../css/philz.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js"></script>
 		<script data-main="/js/app.min">var appConfig = {'appId':'@appId', 'gameKey':'@gameKey', 'onorUrl':'@onorUrl'};</script>
         <script data-main="/js/app.min" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.8/require.js"></script>
+        <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("modernizr.js"))'></script>
+        
     </head>
-    <body>
+    <body class="game philz">
         <div id="fb-root"></div>
-        <div class="slide-animation" ng-view></div>
+        <div ng-view></div>
+		<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+		<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("foundation.js"))'></script>
+		<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("foundation.interchange.js"))'></script>
+
+        <script src="../js/app2.js"></script>
     </body>
 </html>

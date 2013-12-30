@@ -1,11 +1,46 @@
-<div style="color:black;">
-  <div fbprofilepic></div>
-  <div>{{game.description}}</div>
-  <button ng-click="ld()">dev button</button>
-  <div ng-repeat="friend in friendsWhoHavePlayed.slice(0,3)"><img ng-src="{{friend.pic_square}}"></div>
-  <button ng-click="go()">play button</button>
-  <span ng-show="friendsWhoHavePlayed.length > 3"> and {{friendsWhoHavePlayed.length - 3}} others have played {{game.name}}</span>
-  <div>toolTip:{{friendsWhoHavePlayed[toolTipped].name}}</div>
-  <img ng-src="{{game.design.logo}}">
-</div>
+
+ <div class="game-background philz with-image start-page">
+
+      <div class="row section heading start-screen text-center">
+        <div class="large-6 columns center">
+          <img class='center brand-logo' ng-src="{{game.design.logo}}">
+          <hr class="dotted">
+          <p class="subhead text-center light">{{game.description}}</p>
+        </div>
+      </div>
+
+      <div class="row section start">
+        <div class="large-4 columns center text-center">
+          <a ng-click="go()" class="button large light-orange">Play Now</a>
+
+          <ul class="social-proofing large-block-grid-4 medium-block-grid-4 small-block-grid-4">
+            <li><img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" class="center circle"></li>
+            <li ng-repeat="friend in friendsWhoHavePlayed.slice(0,3)"><img ng-src="{{friend.pic_square}}" class="center circle"></li>
+          </ul>
+
+          <p class="lead white"><strong class="text-center" ng-show="friendsWhoHavePlayed.length > 3">and {{friendsWhoHavePlayed.length - 3}} others have played {{game.name}}</strong></p>
+
+
+           <!-- To Be Used to Facebook integration later -->
+          <div style="display:none;">
+            <div class="fb-facepile" data-href="http://facebook.com/FacebookDevelopers" data-max-rows="1" data-colorscheme="light" data-size="medium" data-show-count="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="left shape hide-for-small">
+        <div class="triangle">
+          <img src="../images/icon-heart-orange-start.png" class="start-screen-icon">
+          <h4 id="giveText">Give</h4>
+        </div>
+      </div>
+
+      <div class="right shape hide-for-small">
+        <div class="triangle">
+          <img src="../images/icon-reward-orange-start.png" class="start-screen-icon">
+          <h4 id="getText">Get</h4>
+        </div>
+      </div>
+
+    </div>
 
