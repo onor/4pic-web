@@ -1,0 +1,8 @@
+<ul class="social-proofing large-block-grid-4 medium-block-grid-4 small-block-grid-4"> 
+  <li ng-repeat="friend in friendsWhoHavePlayed.slice(0,4)">
+    <img ng-src="{{friend.pic_square}}" class="center circle">
+  </li>
+</ul> 
+<p class="lead white">
+  <strong class="text-center" ng-show="friendsWhoHavePlayed.length > 4">and {{friendsWhoHavePlayed.length - 4}} others have played {{game.name}}</strong>
+</p>

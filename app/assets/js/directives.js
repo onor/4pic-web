@@ -20,12 +20,37 @@ define(['angular'], function (angular) {
 	}).directive('fbprofilepic', function ($facebook) {
 		return {
 			restrict: 'A',
-			template: '<img src="{{profPicUrl}}">',
+			replace: true,
+			template: '<img ng-src="{{profPicUrl}}">',
 			link: function (scope, element, attrs) {
-				$facebook.getLoginStatus().then(function(response){
-					response.status === "connected" && $facebook.api('/me?fields=id,name,picture').then(function (me) {
-						scope.profPicUrl = me.picture.data.url;
-					});
+				scope.$watch('onLogin', function(){
+					if (scope.onLogin){
+						$facebook.getLoginStatus().then(function(response){
+							response.status === "connected" && $facebook.api('/me?fields=id,name,picture').then(function (me) {
+								scope.profPicUrl = me.picture.data.url;
+							});
+						});
+					}
+				});
+			}
+		};
+	}).directive('fbothersplayed', function ($facebook) {
+		return {
+			restrict: 'A',
+			templateUrl: '../partials/fbothersplayed.html',
+			scope: {
+				onLogin: '='
+			},
+			link: function (scope) {
+				scope.$watch('onLogin', function(){
+					if (scope.onLogin){
+						$facebook.api({
+							method: 'fql.query',
+							query: 'SELECT uid, name, is_app_user, pic_square FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
+						}).then(function (friends) {
+							scope.friendsWhoHavePlayed = friends;
+						});
+					}
 				});
 			}
 		};
