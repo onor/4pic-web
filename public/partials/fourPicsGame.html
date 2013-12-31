@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-md-12 col-xs-12 clearfix">
+        <div id="player-pic-container" fbprofilepic></div>
+
+        <div id="player-lives-container">
+            <ul class="player-lives">
+                <li class="player-life" ng-repeat="level in levels">
+                    <span class="heart" ng-class="{'active': state.state.level > {{$index}}}"></span>
+                </li>
+            </ul>
+        </div>
+
+        <div id="hudscore">
+            <span class="score" ng-click="prizeList()">{{state.state.lpScores[state.state.lpScores.length - 1].score}}</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-xs-12">
+        <timer autostart="false" interval="1000" countdown="countdownAvailable">
+        </timer>   
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-xs-6">
+        <div class="image-holder-container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="image-holder">
+                        <img ng-src="{{level.photo1}}" imageonload/>
+                    </div>
+                    <div class="image-holder">
+                        <img ng-src="{{level.photo2}}" imageonload/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="image-holder">
+                        <img ng-src="{{level.photo3}}" imageonload/>
+                    </div>
+                    <div class="image-holder">
+                        <img ng-src="{{level.photo4}}" imageonload/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-6 col-xs-6">
+
+        <div id="letter-board" class="clearfix">
+            <ul id="letter-placeholder" class="inline list-unstyled clearfix" ng-class="{'invalidClass': invalid}">
+                <li ng-repeat="letter in answer track by $index">
+                    <div ng-click="remove($index)">
+                        {{letter}}
+                    </div>
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-md-11">
+                    <div id="letter-selections" class="clearfix">
+                        <ul class="inline">
+                            <li ng-repeat="letter in other track by $index">
+                                <div ng-click="add($index)">
+                                    {{letter}}
+                                </div>
+                            </li>
+                        </ul> 
+                    </div>  
+                </div>     
+                <div class="col-md-1  col-md-pull-3">   
+                    <a ng-click="hint()" class="helpbutton" align="text-center">
+                    ?
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
