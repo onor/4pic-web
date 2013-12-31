@@ -19,9 +19,14 @@ define(['angular'], function (angular) {
 		};
 	}).directive('fbprofilepic', function ($facebook) {
 		return {
+<<<<<<< HEAD
 			restrict: 'A',
 			replace: true,
 			template: '<img ng-src="{{profPicUrl}}">',
+=======
+			restrict: 'E',
+			template: '<img class="circle profile-pic" src="{{profPicUrl}}">',
+>>>>>>> 4e9452b29d6ff7a22c1dfcd1833a8e7ce10aa82f
 			link: function (scope, element, attrs) {
 				scope.$watch('onLogin', function(){
 					if (scope.onLogin){
