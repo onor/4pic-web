@@ -1,0 +1,50 @@
+<div class="background points-counter">
+    <div class="row section points">
+
+      <div class="large-10 medium-12 columns center">
+        <ul class="points-counterboard">
+          <li class="hide-for-small">
+            <fbprofilepic/>
+          </li>
+          <li>
+            <div class="ix total-points">
+              {{state.state.lpScores[state.state.lpScores.length - 1].score}}<span>PTS</span>
+              <ul class="rank">
+                <li class="lbl">Rank</li>
+                <li class="rank">{{weekly.rank}}</li>
+              </ul>
+              <ul class="rank">
+                <li class="lbl">Weekly</li>
+                <li class="rank">{{weekly.score}}</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="ix timer">
+              <div id="game-timer-large"></div>
+              <div id="game-timer-small"></div>
+            </div>
+          </li>
+          <li class="text-center center">
+            <div class="ix heart-points">
+              <span class="points-container rewards">
+                <span class="points hearts white">100%</span>
+                <img src="../images/icon-heart-game-full-lg.png">
+              </span>
+              <span class="description">for FeedAmerica &bull; <a href="game-cause.php"><strong>Change</strong></a></span>
+            </div>
+          </li>
+          <li class="text-center center">
+            <div class="ix reward-points">
+              <span class="points-container rewards">
+                <span class="points rewards white">100%</span>
+                <img src="../images/icon-reward-game-full-lg.png">
+              </span>
+              <span class="description">for your first Philz reward</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>

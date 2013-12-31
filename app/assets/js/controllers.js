@@ -35,8 +35,8 @@ var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $f
 		});
 	});
 
-    //quick jump to leaderboard page from splash screen 
-	$scope.ld = function () {
+    //quick jump to charity page from splash screen 
+	$scope.charity = function () {
 		$location.path('/charity');
 	}
     //quick jump to prize page from splash screen
@@ -277,7 +277,14 @@ var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $loc
 
 
 
-var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route) {
+var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route, Score) {
+	
+	$facebook.api('/me?fields=id,name,picture').then(function (me) {
+		$scope.me = $filter('finfo')(me);
+		Score.get({fbid: me.id, weekly: true}, function (res) {
+			$scope.weekly = res;
+		});		
+	});
 
     //when all four levelimages are loaded, timer is started
 	$scope.loadedImages = [];
@@ -326,7 +333,7 @@ var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook
 
 	$scope.answer = [];
 
-	for (var i = 0; i < $scope.level.answer.length; i++) {
+	for (var i = 0; i < 12; i++) {
 		$scope.answer.push('');
 	}
 
@@ -418,33 +425,23 @@ var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook
 		}
 	}
 
+	//$scope.removeLettersEnabled = $rootScope.alltime >= 40;
+	//$scope.revealLettersEnabled = $rootScope.alltime >= 10;
+	
 	$scope.hintUsed = false;
 	$scope.hint = function() {
 		//User has selected Question Mark
 
 		if ($scope.hintUsed == false) {
-
-			var modalInstance = $modal.open({
-				templateUrl: '../../partials/hint.html',
-				controller: HintCtrl,
-				backdrop:true				
-				});
-
-			modalInstance.result.then(function (msg) {
-				if (msg == "revealLetters") {		
-					$rootScope.state.$hint({hint: 10}, function (res) {					
-						$scope.revealLetter();
-						$scope.hintUsed = true;
-					});
-				}
-				else if (msg == "removeLetters") {
-					$rootScope.state.$hint({hint: 40}, function (res) {					
-						$scope.removeLetters();
-						$scope.hintUsed = true;
-					});
-				}
-
+			$rootScope.state.$hint({hint: 10}, function (res) {					
+				$scope.removeLetters();
+				$scope.hintUsed = true;
 			});
+					
+			//$rootScope.state.$hint({hint: 10}, function (res) {					
+			//	$scope.revealLetter();
+			//	$scope.hintUsed = true;
+			//});
 		}
 	}
 	
@@ -455,29 +452,10 @@ var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook
 		if (level == $scope.levels.length - 1) { //todo take 4 from game definition, remove levelPack param
 			$location.path('/leaderboard');
 		} else {
-
-			var modalInstance = $modal.open({
-				templateUrl: '../../partials/nextlevel.html',
-				controller: NextLevelCtrl,
-				backdrop:true,
-				resolve: {
-					points: function () {
-						return points2;
-					}
-				}
-			});
-
-			modalInstance.result.then(function (points) {
-				if (points) {
-					$route.reload();
-				}
-			});
+			$route.reload();
 		}
 
 	}
-
-
-
 
   //timer text info refresh
 	$scope.$on('timer-tick', function (event, data) {
@@ -485,51 +463,13 @@ var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook
 	});
 }
 
-
-
-
-
-
-
-
-var HintCtrl = function($scope, $rootScope, $modalInstance) {
-	$scope.removeLettersEnabled = $rootScope.alltime >= 40;
-	$scope.revealLettersEnabled = $rootScope.alltime >= 10;
-	
-	$scope.removeLetters = function () {
-		$modalInstance.close("removeLetters");
-	}
-
-	$scope.revealLetters = function () {
-	   $modalInstance.close("revealLetters");
-	}
-	
-	$scope.dismiss = function() {
-		$modalInstance.dismiss();
-	};
-
-
-}
-
-//navigates to next level
-var NextLevelCtrl = function($scope, $modalInstance, points) {
-	$scope.points = points;
-	$scope.next = function () {
-		$modalInstance.close(points);
-	}
-
-}
-
-
 return {
 	SplashCtrl:SplashCtrl,
 	LeaderboardCtrl:LeaderboardCtrl,
 	CharityCtrl:CharityCtrl,
 	LevelCtrl:LevelCtrl,
-	HintCtrl:HintCtrl,
 	NoLevelModalCtrl:NoLevelModalCtrl,
 	PrizeCtrl:PrizeCtrl,
-	PrizeModalCtrl:PrizeModalCtrl,
-	NextLevelCtrl:NextLevelCtrl
+	PrizeModalCtrl:PrizeModalCtrl
 }
 });

@@ -1,90 +1,83 @@
-<div class="backgroundLevel">
-   <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-xs-12 clearfix">
-                <div id="player-pic-container" fbprofilepic></div>
+<div class="game-background philz with-image">
 
-                <div id="player-lives-container">
-                    <ul class="player-lives">
-                        <li class="player-life" ng-repeat="level in levels">
-                            <span class="heart" ng-class="{'active': state.state.level > {{$index}}}"></span>
-                        </li>
-                    </ul>
-                </div>
+	  <ng-include src="'../../partials/points.html'"></ng-include>
 
-                <div id="hudscore">
-                    <span class="score" ng-click="prizeList()">{{state.state.lpScores[state.state.lpScores.length - 1].score}}</span>
-                </div>
+      <div class="row section game">
+        <div class="large-10 medium-12 columns center">
+
+          <div class="row">
+            <div class="large-6 medium-6 columns">
+              <ul class="picture-grid large-block-grid-2 medium-block-grid-2 hide-for-small-only">
+                <li>
+                  <img class="rounded left-top full-width" ng-src="{{level.photo1}}" imageonload>
+                </li>
+                <li>
+                  <img class="rounded right-top full-width" ng-src="{{level.photo2}}" imageonload>
+                </li>
+                <li>
+                  <img class="rounded left-bottom full-width" ng-src="{{level.photo3}}" imageonload>
+                </li>
+                <li>
+                  <img class="rounded right-bottom full-width" ng-src="{{level.photo4}}" imageonload>
+                </li>
+              </ul>
+              <ul class="picture-grid small-block-grid-4 show-for-small-only">
+                <li>
+                  <img class="rounded full-width" ng-src="{{level.photo1}}" imageonload>
+                </li>
+                <li>
+                  <img class="rounded full-width" ng-src="{{level.photo2}}" imageonload>
+                </li>
+                <li>
+                  <img class="rounded full-width" ng-src="{{level.photo3}}" imageonload>
+                </li>
+                <li>
+                  <img class="rounded full-width" ng-src="{{level.photo4}}" imageonload>
+                </li>
+              </ul>
+              <a href="#" class="button large light-orange expand hide-for-small">Invite A Friend</a>
             </div>
+
+            <div class="large-6 medium-6 columns">
+
+              <div class="puzzle-board">
+                <ul class="large-block-grid-6 small-block-grid-6 rounded">
+                  <li ng-repeat="letter in answer track by $index" ng-click="remove($index)">{{letter}}</li>
+                </ul>
+              </div>
+
+              <div class="keyboard text-center">
+                <ul class="large-block-grid-6 small-block-grid-6 rounded">
+                  <li ng-repeat="letter in other track by $index" ng-click="add($index)">{{letter}}</li>
+                </ul>
+              </div>
+
+              <div class="keyboard extras text-center">
+                <ul>
+                  <li class="left">
+                    <a class="button medium light-orange" ng-click="hint()">Hint</a>
+                  </li>
+                  <li class="right">
+                    <a class="button medium light-orange">
+                      <i class="fi-x"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <a href="#" class="button large light-orange expand invite-friend show-for-small">Invite A Friend</a>
+
+              <a href="game-rewards.php">
+                <img class='right brand-logo' ng-src="{{game.design.logo}}">
+              </a>
+            </div>
+          </div>
+
         </div>
 
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <timer autostart="false" interval="1000" countdown="countdownAvailable">
-                </timer>   
-            </div>
-        </div>
+      </div>
 
-        <div class="row">
-            <div class="col-md-6 col-xs-6">
-                <div class="image-holder-container">
-                    <div class="row">
-                        <div class="col-md-12 col-xs-12">
-                            <div class="image-holder">
-                                <img ng-src="{{level.photo1}}" imageonload/>
-                            </div>
-                            <div class="image-holder">
-                                <img ng-src="{{level.photo2}}" imageonload/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-xs-12">
-                            <div class="image-holder">
-                                <img ng-src="{{level.photo3}}" imageonload/>
-                            </div>
-                            <div class="image-holder">
-                                <img ng-src="{{level.photo4}}" imageonload/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         
-         <div class="row">
-            <div class="col-md-6 col-xs-6">
 
-                <div id="letter-board" class="clearfix">
-                    <ul id="letter-placeholder" class="inline list-unstyled clearfix" ng-class="{'invalidClass': invalid}">
-                        <li ng-repeat="letter in answer track by $index">
-                            <div ng-click="remove($index)">
-                                {{letter}}
-                            </div>
-                        </li>
-                    </ul>
-                            <div class="row">
-                                <div class="col-md-11">
-                                <div id="letter-selections" class="clearfix">
-                                    <ul class="inline">
-                                        <li ng-repeat="letter in other track by $index">
-                                            <div ng-click="add($index)">
-                                                {{letter}}
-                                            </div>
-                                        </li>
-                                    </ul> 
-                                </div>  
-                                </div>     
-                                <div class="col-md-1  col-md-pull-3">   
-                                    <a ng-click="hint()" class="helpbutton" align="text-center">
-                                    ?
-                                    </a>
-                                </div>
-                             </div>
-                    </div>
-                </div>
-         </div>
-            </div>
-        </div>
-</div> 
+    </div>
 
 
