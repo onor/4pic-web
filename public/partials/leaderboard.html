@@ -97,11 +97,11 @@
                       <table>
                         <tbody>
                           <tr ng-repeat="value in weeklyScores | orderBy:'score':true">
-                            <td><img src="https://s3.amazonaws.com/uifaces/faces/twitter/guiiipontes/128.jpg" class="circle profile-pic"></td>
+                            <td><img ng-src="{{value.user.picture.data.url}}" class="circle profile-pic"></td>
                             <td>
                               <h5 class="philz-orange">
                                 <small class="philz-orange">#{{value.rank}}</small>
-                                {{value.name}}
+                                {{value.user.name}}
                               </h5>
                             </td>
                             <td><strong class="green">+{{value.score}}</strong></td>
