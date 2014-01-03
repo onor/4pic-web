@@ -16,15 +16,15 @@
     <div class="large-10 medium-12 columns center">
 
       <div class="panel rounded">
-        <dl class="tabs" data-tab>
-          <dd class="active"><a href="#friends-tab">Friends</a></dd>
-          <dd><a href="#week-tab">This Week</a></dd>
-          <dd><a href="#month-tab">All Time</a></dd>
+        <dl class="tabs">
+          <dd ng-class="{active:isActiveTab('friends-tab')}"><a ng-click="onClickTab('friends-tab')">Friends</a></dd>
+          <dd ng-class="{active:isActiveTab('week-tab')}"><a ng-click="onClickTab('week-tab')">This Week</a></dd>
+          <dd ng-class="{active:isActiveTab('alltime-tab')}"><a ng-click="onClickTab('alltime-tab')">All Time</a></dd>
         </dl>
 
         <div class="row">
           <div class="tabs-content">
-            <div class="content active" id="friends-tab">
+            <div class="content" ng-class="{active:isActiveTab('friends-tab')}" id="friends-tab">
 
               <!--leaders-->
               <div class="large-7 medium-7 columns">
@@ -86,7 +86,7 @@
 
             </div>
 
-            <div class="content" id="week-tab">
+            <div class="content" ng-class="{active:isActiveTab('week-tab')}" id="week-tab">
 
               <!--leaders-->
               <div class="large-7 medium-7 columns">

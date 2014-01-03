@@ -36,6 +36,16 @@ define(['angular'], function (angular) {
 }
 
   var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, Score, $filter, Tournament) {
+	  
+	$scope.currentTab = "friends-tab";  
+	  
+	$scope.onClickTab = function (tab) {
+	  $scope.currentTab = tab;
+	}
+	    
+	$scope.isActiveTab = function(tab) {
+	  return tab == $scope.currentTab;
+	}
     
     $scope.fromnow = moment().endOf('week').fromNow();
     

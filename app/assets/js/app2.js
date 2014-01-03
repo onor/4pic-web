@@ -3,6 +3,7 @@ $(document).on("ready", function () {
 
 
   //foundation orbitz settings
+	/*
 	$(document).foundation({
     orbit: {
       animation: 'slide',
@@ -15,7 +16,7 @@ $(document).on("ready", function () {
       slide_number: false,
       timer: false
     }
-  });
+  });*/
 
   //parallax effect
   if (!Modernizr.touch && !Modernizr.testAllProps('pointerevents')) {
