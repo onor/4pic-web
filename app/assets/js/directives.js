@@ -34,15 +34,31 @@ define(['angular'], function (angular) {
 				});
 			}
 		};
-	}).directive('resize', function($window) {
+	}).directive('resize', function($document, $window) {
 		return function (scope, element) {
+		    var d = angular.element($document);
 		    var w = angular.element($window);
 		    scope.getWindowDimensions = function () {
 		        return { 'h': w.height(), 'w': w.width() };
 		    };
+		    scope.getDocumentDimensions = function() {
+		    	return { 'h': d.height(), 'w': d.width() };
+		    };
 		    scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
 		        scope.windowHeight = newValue.h;
 		        scope.windowWidth = newValue.w;
+
+		        scope.style = function () {
+		            return { 
+		                'height': (newValue.h - 100) + 'px',
+		                'width': (newValue.w - 100) + 'px' 
+		            };
+		        };
+
+		    }, true);
+		    scope.$watch(scope.getDocumentDimensions, function (newValue, oldValue) {
+		        scope.documentHeight = newValue.h;
+		        scope.documentWidth = newValue.w;
 
 		        scope.style = function () {
 		            return { 
