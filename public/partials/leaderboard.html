@@ -156,28 +156,12 @@
                   </div>
 
                   <div class="prizes">
-                    <ul class="prize-item large-block-grid-2 medium-block-grid-2 small-block-grid-2 left-justified">
+                    <ul ng-repeat="prize in tournament.prizes" class="prize-item large-block-grid-2 medium-block-grid-2 small-block-grid-2 left-justified">
                       <li><img src="http://placehold.it/100x100" class="circle"></li>
                       <li>
-                        <h6>First Place</h6>
-                        <h4>A Philz Coffee Mug</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      </li>
-                    </ul>
-                    <ul class="prize-item large-block-grid-2 medium-block-grid-2 small-block-grid-2 left-justified">
-                      <li><img src="http://placehold.it/100x100" class="circle"></li>
-                      <li>
-                        <h6>Second Place</h6>
-                        <h4>A Philz Gift Card</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      </li>
-                    </ul>
-                    <ul class="prize-item large-block-grid-2 medium-block-grid-2 small-block-grid-2 left-justified">
-                      <li><img src="http://placehold.it/100x100" class="circle"></li>
-                      <li>
-                        <h6>Third Place</h6>
-                        <h4>A Philz Gift Card</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h6>{{$index + 1}} Place</h6>
+                        <h4>{{prize.title}}</h4>
+                        <p>{{prize.description}}</p>
                       </li>
                     </ul>
                   </div>
