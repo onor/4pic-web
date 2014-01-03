@@ -31,7 +31,7 @@ define(['angular'], function (angular) {
 
     //quick jump to charity page from splash screen 
 	$scope.debug = function () {
-		$location.path('/leaderboard');
+		$location.path('/charity');
 	}
 }
 
@@ -194,6 +194,34 @@ define(['angular'], function (angular) {
   };
 
   var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, $modal, Votes) {
+    var carousel;
+
+    $scope.hasPrevious = function() {
+      return carousel ? carousel.hasPrevious() : false;
+    };
+    $scope.previous = function() {
+      if (carousel) { carousel.prev(); }
+    };
+    $scope.hasNext = function() {
+      return carousel ? carousel.hasNext() : false;
+    };
+    $scope.next = function() {
+      if (carousel) { carousel.next(); }
+    };
+
+    var loadCharities = function(carouselScope, page) {
+      carousel.updatePageCount(6);
+      carouselScope.charities = Charity.query();
+    };
+    $scope.loadPage = function(page, tmplCb) {
+      var newScope = $scope.$new();
+      loadCharities(newScope, page);
+      tmplCb(newScope);
+    };
+    $scope.onCarouselAvailable = function(car) {
+      carousel = car;
+    };
+
     $scope.aboutExpanded = [];
     $scope.charities = Charity.query({});
     //load logged user info

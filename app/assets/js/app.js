@@ -12,10 +12,11 @@
  			"ui-bootstrap-tpls": ["angular"]
  		},
  		paths: {
-      "underscorejs" : "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min",
-      "ui-bootstrap-tpls" : "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min",
+ 			"carousel" : "carousel",
+      		"underscorejs" : "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min",
+      		"ui-bootstrap-tpls" : "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min",
 			"angular-animate" : "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-animate.min",
-		  "angular-resource" : "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-resource.min",
+		  	"angular-resource" : "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-resource.min",
 			"angular-route" : ["https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-route.min"]
      },
  		priority: ["angular"] // Make sure angular is loaded first
@@ -24,7 +25,7 @@
 	define('angular', ['https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js'], function () {return angular;});
  
  	require(['angular', "ui-bootstrap-tpls", './controllers', './directives', './filters.min', './services.min',
- 	'./angular-facebook.min', 'angular-timer.min', "angular-resource", "angular-route", "angular-animate", "underscorejs"],
+ 	'./angular-facebook.min', 'angular-timer.min', "angular-resource", "angular-route", "angular-animate", "underscorejs", "carousel"],
  		function (angular, xxx, controllers) {
  
  			angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngRoute' , 'ngAnimate', 'ui.bootstrap', 'facebook', 'timer']).
