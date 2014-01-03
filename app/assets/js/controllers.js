@@ -30,12 +30,8 @@ define(['angular'], function (angular) {
     });
 
     //quick jump to charity page from splash screen 
-	$scope.charity = function () {
-		$location.path('/charity');
-	}
-    //quick jump to prize page from splash screen
-	$scope.prize = function () {
-		$location.path('/prize');
+	$scope.debug = function () {
+		$location.path('/leaderboard');
 	}
 }
 
@@ -58,6 +54,7 @@ define(['angular'], function (angular) {
       $scope.scores = [];
       _.map(friends, function (friend) {
         Score.get({fbid: friend.uid, weekly: false}, function (res) {
+          friend.rank = res.rank;
           friend.score = res.score;
           $scope.scores.push(friend);
         });
@@ -70,7 +67,7 @@ define(['angular'], function (angular) {
       _.map(scores, function (score) {
         $facebook.api('/' + score.playerId.id + '?fields=id,name,picture').then(
           function (response) {
-            $scope.weeklyScores.push({user: response, score: score.score});
+            $scope.weeklyScores.push({user: response, score: score.score, rank: score.rank});
           },
           function (response) {
             alert('error');
