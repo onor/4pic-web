@@ -1,81 +1,207 @@
-<div class="backgroundLeaderboard">
-    <div class="container">
-        <div id="scoreboard" class="clearfix">
-            <div class="row">
-                <div class="col-md-12 col-xs-12">
-                    <div class="header clearfix">
-                        <div class="player-pic-scoreboard">
-                            <img ng-src="{{me.avatar}}" width="83" height="83" class="img-circle" alt="">
-                        </div>
+<div class="game-background philz with-image">
 
-                        <h1>Leaderboard</h1>
+  <div class="row section heading leaderboard-heading logo">
+    <div class="large-10 medium-12 columns center">
 
-                        <span class="mascot">
-                            <img src="/img/leaderboard/philzcoffee2.gif" alt="">
-                        </span>
+      <ul class="heading-grid">
+        <li><img src="../images/logo-game-philz-lg.png"></li>
+        <li><h3>Leaderboard</h3></li>
+      </ul>
 
-                    </div>
-                </div>
-            </div>
+    </div>
+  </div>
 
-            <!-- <div class="row"> -->
-            <!--     <div class="col-md-6 col-xs-6">
-                    <div class="score-container current-score">
-                        <p>Your Current Score</p>
-                        <span class="score-block">{{lpScore}}</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xs-6">
-                    <div class="score-block best-score">
-                        Your overall score {{state.scoreInt}}
-                    </div>
-                </div>
-            </div> -->
+  <div class="row section leaderboard">
 
-            <table>
-                <caption>Your Friends ? <span class="leader-count"><p>?</p></span></caption>
-                <tbody>
-                    <tr ng-repeat="value in scores | orderBy:'score':true">
-                        <td>{{$index + 1}}<img ng-src="{{value.pic_square}}" width="45" height="45" class="img-circle"/></td>
-                        <td>{{value.name}}</td>
-                        <td>{{value.score}}</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="large-10 medium-12 columns center">
 
-            <table>
-                <caption>Current Weekly Winners {{tournament.name}}<span class="leader-count"><p>?</p></span>Final winners declared {{fromnow}}</caption>
-                <tbody>
-                    <tr ng-repeat="value in weeklyScores | orderBy:'score':true">
-                        <td>{{$index + 1}}<img ng-src="{{value.user.picture.data.url}}" width="45" height="45" class="img-circle"//></td>
-                        <td>{{value.user.name}}</td>
-                        <td>{{value.score}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      <div class="panel rounded">
+        <dl class="tabs" data-tab>
+          <dd class="active"><a href="#friends-tab">Friends</a></dd>
+          <dd><a href="#week-tab">This Week</a></dd>
+          <dd><a href="#month-tab">All Time</a></dd>
+        </dl>
 
         <div class="row">
-            <div class="col-md-6 col-xs-6">
-                <div class="btn-scoreboard-container">
-                    <a  class="leader-btn" ng-click="playAgain()">
-                        <p>Play Again</p>
-                    </a>
-                    <a  class="leader-btn" ng-click="getPrize()">
-                        <p>Get Daily Prize!</p>
-                    </a>
+          <div class="tabs-content">
+            <div class="content active" id="friends-tab">
+
+              <!--leaders-->
+              <div class="large-7 medium-7 columns">
+                <div class="panel leaders rounded">
+                  <div class="table-wrapper">
+                    <div class="table-scroll">
+
+                      <table>
+                        <tbody>
+                          <tr ng-repeat="value in scores | orderBy:'score':true">
+                            <td><img ng-src="{{value.pic_square}}" class="circle profile-pic"></td>
+                            <td>
+                              <h5 class="philz-orange">
+                                <small class="philz-orange">#{{value.rank}}</small>
+                                {{value.name}}
+                              </h5>
+                            </td>
+                            <td><strong class="green">+{{value.score}}</strong></td>
+                            <td class="points">
+                              <div class="ix heart-points">
+                                <span class="points-container">
+                                  <span class="points">1 td</span>
+                                  <img src="../images/icon-heart-leaderboard-lg.png" class="icon heart">
+                                </span>
+                              </div>
+                            </td>
+                            <td class="points">
+                              <div class="ix reward-points">
+                                <span class="points-container">
+                                  <span class="points">1 td</span>
+                                  <img src="../images/icon-reward-leaderboard-lg.png" class="icon reward">
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-xs-6">
-                <div class="btn-scoreboard-container">
-                    <a  class="prize-btn" ng-click="playAgain()">
-                        <p>Invite Friends<br>(+10 points each)</p>
-                    </a>
-                    <a  class="prize-btn" ng-click="getPrize()">
-                        <p>Recommend<br>(+50 points)</p>
-                    </a>
+              </div>
+              <!--end leaders-->
+
+              <!--the heart -->
+              <div class="large-5 medium-5 columns text-center center">
+                <div class="share-heart">
+                  <img src="../images/heart-leaderboard.png">
+                  <p class="subhead philz-orange text-center">
+                    <strong>You're 400 points away from helping Philz Coffee donate
+                      $5.00 to FeedAmerica!</strong>
+                  </p>
+                  <a href="game-play.php" class="button dark-orange display-block text-center">Play Again</a>
+                  <span class="lead philz-orange philz-white">&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <a href="game-play.php" class="button dark-orange display-block text-center">Share Your Heart</a>
                 </div>
+              </div>
+              <!--end heart-->
+
             </div>
+
+            <div class="content" id="week-tab">
+
+              <!--leaders-->
+              <div class="large-7 medium-7 columns">
+                <div class="panel leaders rounded">
+                  <div class="table-wrapper">
+                    <div class="table-scroll">
+
+                      <table>
+                        <tbody>
+                          <tr ng-repeat="value in weeklyScores | orderBy:'score':true">
+                            <td><img src="https://s3.amazonaws.com/uifaces/faces/twitter/guiiipontes/128.jpg" class="circle profile-pic"></td>
+                            <td>
+                              <h5 class="philz-orange">
+                                <small class="philz-orange">#{{value.rank}}</small>
+                                {{value.name}}
+                              </h5>
+                            </td>
+                            <td><strong class="green">+{{value.score}}</strong></td>
+                            <td class="points">
+                              <div class="ix heart-points">
+                                <span class="points-container">
+                                  <span class="points">1 td</span>
+                                  <img src="../images/icon-heart-leaderboard-lg.png" class="icon heart">
+                                </span>
+                              </div>
+                            </td>
+                            <td class="points">
+                              <div class="ix reward-points">
+                                <span class="points-container">
+                                  <span class="points">1 td</span>
+                                  <img src="../images/icon-reward-leaderboard-lg.png" class="icon heart">
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--end leaders-->
+
+              <!--the heart -->
+              <div class="large-5 medium-5 columns text-center center">
+                <div class="share-heart weekly">
+                  <div class="timer panel rounded">
+                    <ul class="large-block-grid-4 medium-block-grid-4 small-block-grid-4">
+                      <li>
+                        <span class="metric"><strong>01</strong></span>
+                        <span class="unit">day</span>
+                      </li>
+                      <li>
+                        <span class="metric"><strong>23</strong></span>
+                        <span class="unit">hrs</span>
+                      </li>
+                      <li>
+                        <span class="metric"><strong>13</strong></span>
+                        <span class="unit">min</span>
+                      </li>
+                      <li>
+                        <span class="metric"><strong>33</strong></span>
+                        <span class="unit">sec</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="prizes">
+                    <ul class="prize-item large-block-grid-2 medium-block-grid-2 small-block-grid-2 left-justified">
+                      <li><img src="http://placehold.it/100x100" class="circle"></li>
+                      <li>
+                        <h6>First Place</h6>
+                        <h4>A Philz Coffee Mug</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      </li>
+                    </ul>
+                    <ul class="prize-item large-block-grid-2 medium-block-grid-2 small-block-grid-2 left-justified">
+                      <li><img src="http://placehold.it/100x100" class="circle"></li>
+                      <li>
+                        <h6>Second Place</h6>
+                        <h4>A Philz Gift Card</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      </li>
+                    </ul>
+                    <ul class="prize-item large-block-grid-2 medium-block-grid-2 small-block-grid-2 left-justified">
+                      <li><img src="http://placehold.it/100x100" class="circle"></li>
+                      <li>
+                        <h6>Third Place</h6>
+                        <h4>A Philz Gift Card</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <p class="subhead philz-orange text-center">
+                    <strong>You're 400 points away from helping Philz Coffee donate
+                      $5.00 to FeedAmerica!</strong>
+                  </p>
+                  <a href="game-play.php" class="button dark-orange display-block text-center">Play Again</a>
+                  <span class="lead philz-orange philz-white">&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <a href="game-play.php" class="button dark-orange display-block text-center">Share Your Heart</a>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
         </div>
+
+      </div>
+
     </div>
+
+  </div>
+
 </div>
