@@ -157,7 +157,7 @@
 
                   <div class="prizes">
                     <ul ng-repeat="prize in tournament.prizes" class="prize-item large-block-grid-2 medium-block-grid-2 small-block-grid-2 left-justified">
-                      <li><img src="http://placehold.it/100x100" class="circle"></li>
+                      <li><img ng-src="{{prize.image}}" class="circle"></li>
                       <li>
                         <h6>{{$index + 1}} Place</h6>
                         <h4>{{prize.title}}</h4>
