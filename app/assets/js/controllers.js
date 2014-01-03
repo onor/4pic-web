@@ -9,6 +9,16 @@ define(['angular'], function (angular) {
 
     $scope.friendsWhoHavePlayed = [];
     $scope.fbLoggedIn = false;
+    $scope.showGivePanel = false;
+    $scope.showGetPanel = false;
+
+    $scope.toggleGivePanel = function() {
+      $scope.showGivePanel = !$scope.showGivePanel;
+    };
+    $scope.toggleGetPanel = function() {
+      $scope.showGetPanel = !$scope.showGetPanel;
+    };
+
     $scope.go = function () {
       var levelPack = $rootScope.state.state.levelPack;
       var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);

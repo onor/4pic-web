@@ -1,4 +1,3 @@
-
 <div class="game-background philz with-image start-page" resize>
 
   <div class="row section heading start-screen text-center">
@@ -23,18 +22,73 @@
     </div>
   </div>
 
-  <div class="left shape hide-for-small">
+  <div class="left shape hide-for-small" ng-hide="showGivePanel">
     <div class="triangle" style="border-bottom-width:{{windowHeight}}px; height:{{windowHeight}}px;">
-      <img src="../images/icon-heart-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;">
+      <img src="../images/icon-heart-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;" ng-click="toggleGivePanel()">
       <h4 id="giveText" style="top: {{(windowHeight / 2) + 31}}px;">Give</h4>
     </div>
   </div>
 
-  <div class="right shape hide-for-small">
-    <div class="triangle" style="border-bottom-width:{{windowHeight}}px; height:{{windowHeight}}px;">
-      <img src="../images/icon-reward-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;">
+  <div class="left shape hide-for-small" ng-show="showGivePanel">
+    <div class="rectangle" style="border-bottom-width: {{windowHeight}}px; height: {{windowHeight}}px;">
+      <div class="row">
+        <div class="large-7 medium-7 columns center">
+          <h2 style="margin-top:30px;">Play &amp; Give</h2>
+          <span class="close" id="closeGive" ng-click="toggleGivePanel()">
+            <i class="fi-x"></i>
+          </span>
+          <ul class="panel-grid large-block-grid-2 medium-block-grid-2 small-block-grid-1" style="margin-top:50px;">
+            <li>
+              <img src="images/logo-charity-fa.jpg" class="circle">
+              <h4>Feeding America</h4>
+              <p class="brown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum, sem sit amet pellentesque dictum.</p>
+            </li>
+            <li>
+              <img src="images/logo-charity-red.jpg" class="circle">
+              <h4>Product Red</h4>
+              <p class="brown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum, sem sit amet pellentesque dictum.</p>
+            </li>
+            <li>
+              <img src="images/logo-charity-wwf.jpg" class="circle">
+              <h4>WWF</h4>
+              <p class="brown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum, sem sit amet pellentesque dictum.</p>
+            </li>
+            <li>
+              <img src="images/logo-charity-unicef.jpg" class="circle">
+              <h4>Unicef</h4>
+              <p class="brown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum, sem sit amet pellentesque dictum.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right shape hide-for-small" ng-hide="showGetPanel">
+    <div class="triangle" style="border-bottom-width:{{windowHeight + 10}}px; height: {{windowHeight}}px;">
+      <img src="../images/icon-reward-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;" ng-click="toggleGetPanel()">
       <h4 style="top: {{(windowHeight / 2) + 31}}px;" id="getText">Get</h4>
     </div>
   </div>
+
+  <div class="right shape hide-for-small" ng-show="showGetPanel">
+    <div class="rectangle" style="border-bottom-width: {{windowHeight + 10}}px; height: {{windowHeight}}px;">  
+      <div class="row">
+        <div class="large-7 medium-7 columns center">
+          <h2 style="margin-top:30px;">Play &amp; Get</h2>
+          <span class="close" id="closeGet" ng-click="toggleGetPanel()">
+            <i class="fi-x"></i>
+          </span>
+          <ul class="panel-grid large-block-grid-2 medium-block-grid-2 small-block-grid-1" style="margin-top:50px;">
+            <li><img src="images/reward-game-mojito.jpg" class="circle"><h4>Philz Mint Mojito</h4><p class="brown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum, sem sit amet pellentesque dictum.</p></li>
+            <li><img src="images/reward-game-mug-white.jpg" class="circle"><h4>Philz Coffee Mug</h4><p class="brown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum, sem sit amet pellentesque dictum.</p></li>
+            <li><img src="images/reward-game-packet-white.jpg" class="circle"><h4>Philz Sooo Good</h4><p class="brown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum, sem sit amet pellentesque dictum.</p></li>
+            <li><img src="images/reward-game-tshirt.jpg" class="circle"><h4>Philz T-Shirt</h4><p class="brown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum, sem sit amet pellentesque dictum.</p></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
