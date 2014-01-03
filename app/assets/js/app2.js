@@ -32,31 +32,6 @@ $(document).on("ready", function () {
     });*/
   }
 
-  //game timer
-  /*
-  $('#game-timer-large').pietimer({
-      seconds: 20,
-      color: 'rgba(119, 188, 45, 1)',
-      height: 63,
-      width: 63
-  },function(){
-
-  });
-
-  $('#game-timer-large').pietimer('start');
-
-  $('#game-timer-small').pietimer({
-      seconds: 20,
-      color: 'rgba(119, 188, 45, 1)',
-      height: 23,
-      width: 23
-  },function(){
-
-  });
-
-  $('#game-timer-small').pietimer('start');
-  */
-
   //game start screen
 
   $('.shape').on('click', function(e) {
