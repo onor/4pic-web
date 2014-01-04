@@ -1,4 +1,4 @@
-<div style="color:black;">
+<div style="color:black;" ng-show="false">
     <!-- start of carousel -->
     <div ng-repeat="item in charities" ng-model="aboutExpanded">
         <img ng-src="{{item.charity.logoColor}}">
@@ -38,41 +38,59 @@
 
   <div class="row section select-charity">
     <div class="large-10 medium-12 columns center text-center">
-
-      <div class='show-for-medium-up'>
-        <div data-carousel data-carousel-class="orbit-content charity text-center" data-on-page-upcoming="loadPage(page, tmplCb)" data-give-carousel-to="onCarouselAvailable(carousel)">
-            <ul class="large-block-grid-3 text-center">
-                <li data-ng-repeat="item in charities">
-                <a href="game-heart.php">
-                  <img src="../images/logo-charity-wwf.jpg" class="center circle hop">
-                  <h4>{{item.name}}</h4>
-                  <p class="lead small light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id magna dictum, dictum libero at, cursus ipsum.</p>
-                </a>
+      <div data-carousel data-carousel-class="orbit-content charity text-center" data-on-page-upcoming="loadPage(page, tmplCb)" data-give-carousel-to="onCarouselAvailable(carousel)">
+      <div class="orbit-container">
+        <ul data-orbit class="orbit-content charity text-center orbit-slides-container" style="height:300px;">
+          <li>
+            <div class="show-for-small-only">
+              <ul class="small-block-grid-1 text-center">
+                <li ng-repeat="item in charities | limitTo:1">
+                  <a href="game-heart.php">
+                    <img src="../images/logo-charity-wwf.jpg" class="center circle hop">
+                    <h4>{{item.name}}</h4>
+                    <p class="lead small light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id magna dictum, dictum libero at, cursus ipsum.
+                    </p>
+                  </a>
                 </li>
-            </ul>
-        </div>
-        <a style="float: left;" data-ng-show="hasPrevious()" data-ng-click="previous()">&lt;&lt; Previous</a>
-        <span style="float: left;" data-ng-hide="hasPrevious()">&lt;&lt; Previous</span>
-        <a style="float: left;" data-ng-show="hasNext()" data-ng-click="next()">Next &gt;&gt;</a>
-        <span style="float: left;" data-ng-hide="hasNext()">Next &gt;&gt;</span>
-
-        <ul class="orbit-content charity text-center" data-orbit>
-          <?php for($i=1; $i<=3; $i++) { ?>
-          <li data-orbit-slide="headline-<?php echo $i; ?>">
-            <ul class="large-block-grid-3 text-center">
-              <?php for($a=0; $a<=2; $a++) { ?>
-              <li>
-                <a href="game-heart.php">
-                  <img src="../images/logo-charity-wwf.jpg" class="center circle hop">
-                  <h4>Charity Name</h4>
-                  <p class="lead small light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id magna dictum, dictum libero at, cursus ipsum.</p>
-                </a>
-              </li>
-              <?php } ?>
-            </ul>
+              </ul>
+            </div>
+            <div class="show-for-medium-only">
+              <ul class="medium-block-grid-2 text-center">
+                <li ng-repeat="item in charities | limitTo:2">
+                  <a href="game-heart.php">
+                    <img src="../images/logo-charity-wwf.jpg" class="center circle hop">
+                    <h4>{{item.name}}</h4>
+                    <p class="lead small light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id magna dictum, dictum libero at, cursus ipsum.
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="show-for-large-only">
+              <ul class="large-block-grid-3 text-center">
+                <li ng-repeat="item in charities | limitTo:3">
+                  <a href="game-heart.php">
+                    <img src="../images/logo-charity-wwf.jpg" class="center circle hop">
+                    <h4>{{item.name}}</h4>
+                    <p class="lead small light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id magna dictum, dictum libero at, cursus ipsum.
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </li>
-          <?php } ?>
         </ul>
+
+        <!-- Navigation Arrows -->
+        <a class="orbit-prev" data-ng-show="hasPrevious()" data-ng-click="previous()">
+          Prev<span></span>
+        </a>
+        <a class="orbit-next" data-ng-show="hasNext()" data-ng-click="next()">
+          Next<span></span>
+        </a>
+      </div>
+      </div>
+        
       </div>
 
     </div>
