@@ -41,7 +41,7 @@ define(['angular'], function (angular) {
 
     //quick jump to charity page from splash screen 
 	$scope.debug = function () {
-		$location.path('/charity');
+		$location.path('/heart');
 	}
 }
 
@@ -202,6 +202,12 @@ define(['angular'], function (angular) {
       $modalInstance.close('');
     };
   };
+  
+  var HeartCtrl = function($scope, $rootScope, Votes) {
+	  $scope.votes = Votes.get({}, function(votes) {
+	      $scope.playerProfiles = votes.playerProfiles.reverse();
+	  });  
+  }
 
   var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, $modal, Votes) {
     var carousel;
@@ -472,9 +478,9 @@ var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook
 	$scope.hintUsed = false;
 	$scope.hint = function() {
 		//User has selected Question Mark
-
 		if ($scope.hintUsed == false) {
-			$rootScope.state.$hint({hint: 10}, function (res) {					
+			$rootScope.state.$hint({hint: 10}, function (res) {	
+        debugger;				
 				$scope.removeLetters();
 				$scope.hintUsed = true;
 			});
@@ -505,6 +511,7 @@ var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook
 }
 
 return {
+	HeartCtrl:HeartCtrl,
 	SplashCtrl:SplashCtrl,
 	LeaderboardCtrl:LeaderboardCtrl,
 	CharityCtrl:CharityCtrl,

@@ -30,6 +30,7 @@
  
  			angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngRoute' , 'ngAnimate', 'ui.bootstrap', 'facebook', 'timer']).
  				config(['$routeProvider', function ($routeProvider) {
+ 					$routeProvider.when('/heart', {templateUrl: '../../partials/heart.html', controller: controllers.HeartCtrl})
  					$routeProvider.when('/splash', {templateUrl: '../../partials/splash.html', controller: controllers.SplashCtrl});
  					$routeProvider.when('/prize', {templateUrl: '../../partials/prize.html', controller: controllers.PrizeCtrl});
  					$routeProvider.when('/charity', {templateUrl: '../../partials/charity.html', controller: controllers.CharityCtrl});
