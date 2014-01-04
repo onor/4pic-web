@@ -401,6 +401,7 @@ var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook
 
     //generates missing letters
     $scope.generated = randomString((12 - $scope.level.answer.length), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    $scope.showHint = $scope.generated.length > 0;
 
     //shuffle answer with additional letters
     $scope.other = _.shuffle(($scope.level.answer.toUpperCase() + $scope.generated).split(''));
