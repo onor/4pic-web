@@ -46,7 +46,7 @@ define(['angular'], function (angular) {
 
     $scope.go = function () {
     	if (!$scope.fbLoggedIn) {
-        	$facebook.login().then(goIfLogedin);
+        	$facebook.login({display:'touch'}).then(goIfLogedin);
     	} else {
     		$facebook.getLoginStatus().then(goIfLogedin);
     	}
