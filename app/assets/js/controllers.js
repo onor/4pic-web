@@ -2,10 +2,13 @@
 
 define(['angular'], function (angular) {
 
-  var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook) {
+  var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook, Charity, Campaign) {
       //todo: refactor so that game def is loaded only once.
       //todo: refactor all facebook stuff out into a seperate service.
     $rootScope.game = Game.get({}, function(){});
+    
+    $scope.charities = Charity.query({});
+    $scope.campaigns = Campaign.query({});
 
     $scope.friendsWhoHavePlayed = [];
     $scope.fbLoggedIn = false;
