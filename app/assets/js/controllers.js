@@ -11,7 +11,9 @@ define(['angular'], function (angular) {
     $scope.campaigns = Campaign.query({});
 
     $scope.friendsWhoHavePlayed = [];
-    $scope.fbLoggedIn = false;
+    $facebook.getLoginStatus().then(function(res) {
+    	$scope.fbLoggedIn = res.status == "connected";
+    });
     $scope.showGivePanel = false;
     $scope.showGetPanel = false;
 
@@ -21,26 +23,36 @@ define(['angular'], function (angular) {
     $scope.toggleGetPanel = function() {
       $scope.showGetPanel = !$scope.showGetPanel;
     };
+    
+    function goIfLogedin(res){
+    	
+		appConfig.fbid = res.authResponse.userID;
+		State.get({fbid:appConfig.fbid}, function(res){
+			$rootScope.state = res;
+			var levelPack = $rootScope.state.state.levelPack;
+			var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
+			if(hasMoreLevelPacks) {
+				$location.path('/level');
+			} else {
+				var modalInstance = $modal.open({
+					templateUrl: '../../partials/noLevelModal.html',
+					backdrop:false,
+					controller: NoLevelModalCtrl,
+					resolve: {}
+				});
+			}
+		});
+	}
 
     $scope.go = function () {
-      var levelPack = $rootScope.state.state.levelPack;
-      var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
-      if(hasMoreLevelPacks) {
-        $location.path('/level');
-      } else {
-        var modalInstance = $modal.open({
-          templateUrl: '../../partials/noLevelModal.html',
-          backdrop:false,
-          controller: NoLevelModalCtrl,
-          resolve: {}
-        });
-      }
+    	if (!$scope.fbLoggedIn) {
+        	$facebook.login().then(goIfLogedin);
+    	} else {
+    		$facebook.getLoginStatus().then(goIfLogedin);
+    	}
     };
-    $facebook.login().then(function(res){
-      appConfig.fbid = res.authResponse.userID;
-      $rootScope.state = State.get({fbid:appConfig.fbid}, function(){});
-      $scope.fbLoggedIn = true;
-    });
+    
+    
 
     //quick jump to charity page from splash screen 
 	$scope.debug = function () {
