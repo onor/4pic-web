@@ -34,7 +34,6 @@
  					$routeProvider.when('/splash', {templateUrl: '../../partials/splash.html', controller: controllers.SplashCtrl});
  					$routeProvider.when('/prize', {templateUrl: '../../partials/prize.html', controller: controllers.PrizeCtrl});
  					$routeProvider.when('/charity', {templateUrl: '../../partials/charity.html', controller: controllers.CharityCtrl});
- 					//todo: levelPack and level url parameters are not needed anymore. except for bugfix on level reloading on next button.
  					$routeProvider.when('/leaderboard', {templateUrl: '../../partials/leaderboard.html', controller: controllers.LeaderboardCtrl});
  					$routeProvider.when('/level', {templateUrl: '../../partials/level.html', controller: controllers.LevelCtrl});
  					$routeProvider.otherwise({redirectTo: '/splash'});
@@ -46,6 +45,7 @@
  					});
  				}]).config(function ($httpProvider) {
  						$httpProvider.defaults.headers.common = {
+ 							'Accept': 'application/json, text/plain, */*',
  		 					'userKey' : '4b1469e3ff90b438ef0134b1cb266c06',
  		 					'gameKey' : appConfig.gameKey,
  		 					'fbid' : appConfig.fbid
