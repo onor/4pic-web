@@ -209,11 +209,11 @@ define(['angular'], function (angular) {
   
   var HeartCtrl = function($scope, $rootScope, Votes, $location, $timeout) {
 	  $scope.votes = Votes.get({}, function(votes) {
-	      $scope.playerProfiles = votes.playerProfiles.reverse(); 
-	      $timeout(function(){
-		      $location.path('/level');
-		  }, 3000);
+	      $scope.playerProfiles = votes.playerProfiles.reverse(); 	      
 	  });	  
+	  $timeout(function(){
+	      $location.path('/level');
+	  }, 3000);
   }
 
   var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, $modal, Votes) {
