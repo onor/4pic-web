@@ -120,7 +120,7 @@ define(['angular'], function (angular) {
     });
 
     var levelPack = $rootScope.state.state.levelPack;
-    var $scope.hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
+    $scope.hasMoreLevelPacks = ($rootScope.game.levelPacks.length >= (levelPack + 1));
     
       //navigation
     $scope.playAgain = function () {      
