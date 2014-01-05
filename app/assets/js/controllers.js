@@ -8,7 +8,7 @@ define(['angular'], function (angular) {
 	    return isMobile;
 	}
 
-  var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook, Charity, Campaign) {
+  var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook, Charity, Campaign, $filter) {
       //todo: refactor so that game def is loaded only once.
       //todo: refactor all facebook stuff out into a seperate service.
     $rootScope.game = Game.get({}, function(){});
@@ -31,27 +31,33 @@ define(['angular'], function (angular) {
     };
     
     function goIfLogedin(res){
+    	    	
+        $facebook.api('/me?fields=id,name,picture,email').then(function (me) {
+        	$rootScope.me = $filter('finfo')(me);
+        	
+        	appConfig.fbid = res.authResponse.userID;
+    		State.get({fbid:appConfig.fbid}, function(res){
+    			$rootScope.state = res;
+    			var levelPack = $rootScope.state.state.levelPack;
+    			var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
+    			if(hasMoreLevelPacks) {
+    				if(angular.isDefined($rootScope.state.charityId)) {
+    					$location.path('/level');
+    				} else {
+    					$location.path('/charity');
+    				}
+    			} else {
+    				var modalInstance = $modal.open({
+    					templateUrl: '../../partials/noLevelModal.html',
+    					backdrop:false,
+    					controller: NoLevelModalCtrl,
+    					resolve: {}
+    				});
+    			}
+    		});
+        });
     	
-		appConfig.fbid = res.authResponse.userID;
-		State.get({fbid:appConfig.fbid}, function(res){
-			$rootScope.state = res;
-			var levelPack = $rootScope.state.state.levelPack;
-			var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
-			if(hasMoreLevelPacks) {
-				if(angular.isDefined($rootScope.state.charityId)) {
-					$location.path('/level');
-				} else {
-					$location.path('/charity');
-				}
-			} else {
-				var modalInstance = $modal.open({
-					templateUrl: '../../partials/noLevelModal.html',
-					backdrop:false,
-					controller: NoLevelModalCtrl,
-					resolve: {}
-				});
-			}
-		});
+		
 	}
 
     $scope.go = function () {
@@ -91,9 +97,6 @@ define(['angular'], function (angular) {
     $scope.fromnow = moment().endOf('week').fromNow();
     
     $scope.tournament = Tournament.get();
-
-      //load logged user info
-    $facebook.api('/me?fields=id,name,picture').then(function (me) {$scope.me = $filter('finfo')(me);});
 
       //retrieves all facebook friends that use the same app/game.
       //and for every retrieved facebook user, calls score service(by fbid) to fetch his current score.
@@ -155,12 +158,7 @@ define(['angular'], function (angular) {
 
   var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter, PrizeCode, Score) {
 
-      //load logged user info
-    $facebook.api('/me?fields=id,name,picture,email').then(function (me) {
-      $scope.me = $filter('finfo')(me);
-      $scope.me2 = me;
-      $scope.alltime = Score.get({fbid: me.id, weekly: false});
-    });
+    $scope.alltime = Score.get({fbid: $rootScope.me.id, weekly: false});
 
     //retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
     Campaign.query(function (res) {
@@ -195,7 +193,7 @@ define(['angular'], function (angular) {
         PrizeCode.save({'fbid':appConfig.fbid},{
           'email' : 'rudolf.markulin@gmail.com',
           'campaignId' : campaign._id,
-          'name' : $scope.me2.name,
+          'name' : $rootScope.me.name,
           'phoneNumber' : '+1 650-272-9246'
         },
           function(success) {alert('Prize was sent.');},
@@ -276,11 +274,6 @@ define(['angular'], function (angular) {
 
     $scope.aboutExpanded = [];
     $scope.charities = Charity.query({});
-    //load logged user info
-    $facebook.api('/me?fields=id,name,picture').then(function (me) {
-      $scope.me = $filter('finfo')(me);
-      $scope.meForVote = me;
-    });
     
     //navigation
     $scope.playAgain = function () {
@@ -362,11 +355,8 @@ define(['angular'], function (angular) {
 
 var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route, Score) {
 	
-	$facebook.api('/me?fields=id,name,picture').then(function (me) {
-		$scope.me = $filter('finfo')(me);
-		Score.get({fbid: me.id, weekly: true}, function (res) {
-			$scope.weekly = res;
-		});		
+	Score.get({fbid: $rootScope.me.id, weekly: true}, function (res) {
+		$scope.weekly = res;
 	});
 
       //when all four levelimages are loaded, timer is started

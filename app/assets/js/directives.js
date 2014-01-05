@@ -17,23 +17,6 @@ define(['angular'], function (angular) {
 				});
 			}
 		};
-	}).directive('fbprofilepic', function ($facebook) {
-		return {
-			restrict: 'A',
-			replace: true,
-			template: '<img ng-src="{{profPicUrl}}">',
-			link: function (scope, element, attrs) {
-				scope.$watch('onLogin', function(){
-					if (scope.onLogin){
-						$facebook.getLoginStatus().then(function(response){
-							response.status === "connected" && $facebook.api('/me?fields=id,name,picture').then(function (me) {
-								scope.profPicUrl = me.picture.data.url;
-							});
-						});
-					}
-				});
-			}
-		};
 	}).directive('resize', function($document, $window) {
 		return function (scope, element) {
 		    var d = angular.element($document);
