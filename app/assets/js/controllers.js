@@ -208,7 +208,7 @@ define(['angular'], function (angular) {
   };
   
   var HeartCtrl = function($scope, $rootScope, Votes, $location, $timeout) {
-	  $scope.votes = Votes.get({}, function(votes) {
+	  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
 	      $scope.playerProfiles = votes.playerProfiles.reverse(); 	      
 	  });	  
 	  $timeout(function(){
