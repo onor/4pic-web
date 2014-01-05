@@ -348,8 +348,8 @@ var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook
     $scope.prizeList = function () {
       $location.path('/prize');
     };
-    $scope.back = function () {
-      $location.path('/splash');
+    $scope.goToCharity = function () {
+      $location.path('/charity');
     };
 
     //generates random string of additional letters of specified length, from array of chars
