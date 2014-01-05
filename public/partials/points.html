@@ -25,8 +25,9 @@
           <li class="text-center center">
             <div class="ix heart-points">
               <span class="points-container rewards">
-                <span class="points hearts white">100%</span>
-                <img src="../images/icon-heart-game-full-lg.png">
+                <span class="points hearts" ng-class="{white:progressFull}">{{progress}}%</span>
+                <img src="../images/icon-heart-game-full-lg.png" ng-show="progressFull">
+                <img src="../images/icon-heart-game-lg.png" ng-hide="progressFull">
               </span>
               <span class="description">for FeedAmerica &bull; <a href="game-cause.php"><strong>Change</strong></a></span>
             </div>
@@ -34,8 +35,9 @@
           <li class="text-center center">
             <div class="ix reward-points">
               <span class="points-container rewards">
-                <span class="points rewards white">100%</span>
-                <img src="../images/icon-reward-game-full-lg.png">
+                <span class="points rewards" ng-class="{white:progressFull}">{{progress}}%</span>
+                <img src="../images/icon-reward-game-full-lg.png" ng-show="progressFull">
+                <img src="../images/icon-reward-game-lg.png" ng-hide="progressFull">
               </span>
               <span class="description">for your first Philz reward</span>
             </div>
