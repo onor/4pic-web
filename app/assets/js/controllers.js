@@ -42,7 +42,7 @@ define(['angular'], function (angular) {
     			var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
     			if(hasMoreLevelPacks) {
     				if(angular.isDefined($rootScope.state.charityId)) {
-    					$location.path('/level');
+    				    $location.path('/heart');
     				} else {
     					$location.path('/charity');
     				}
@@ -207,10 +207,13 @@ define(['angular'], function (angular) {
     };
   };
   
-  var HeartCtrl = function($scope, $rootScope, Votes) {
+  var HeartCtrl = function($scope, $rootScope, Votes, $location, $timeout) {
 	  $scope.votes = Votes.get({}, function(votes) {
-	      $scope.playerProfiles = votes.playerProfiles.reverse();
-	  });  
+	      $scope.playerProfiles = votes.playerProfiles.reverse(); 
+	      $timeout(function(){
+		      $location.path('/level');
+		  }, 3000);
+	  });	  
   }
 
   var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, $modal, Votes) {
@@ -244,7 +247,7 @@ define(['angular'], function (angular) {
     
     $scope.selectCharity = function(charity) {
       $rootScope.state.charityId = charity._id;	
-	  $location.path('/level');
+	  $location.path('/heart');
     }
 
     $scope.aboutExpanded = [];
