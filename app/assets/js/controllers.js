@@ -329,6 +329,10 @@ var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook
     var levelPack = $rootScope.state.state.levelPack;
     var level = $rootScope.state.state.level;
 
+	$scope.progress =  ($rootScope.state.state.level / $rootScope.game.levelPacks[levelPack].levels.length) * 100;
+	$scope.progressFull = false;
+
+
       //if user has already seen this question timer starts and ends from 1 second
     if ($rootScope.state.state.seen) {
       $scope.countdownAvailable = 1;
