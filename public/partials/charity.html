@@ -45,11 +45,10 @@
             <div class="show-for-small-only">
               <ul class="small-block-grid-1 text-center">
                 <li ng-repeat="item in charities | limitTo:1">
-                  <a href="game-heart.php">
-                    <img src="../images/logo-charity-wwf.jpg" class="center circle hop">
+                  <a ng-click="selectCharity(item)">
+                    <img ng-src="{{item.charity.logoColor}}" class="center circle hop">
                     <h4>{{item.name}}</h4>
-                    <p class="lead small light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id magna dictum, dictum libero at, cursus ipsum.
-                    </p>
+                    <p class="lead small light">{{item.charity.about}}</p>
                   </a>
                 </li>
               </ul>
@@ -57,11 +56,10 @@
             <div class="show-for-medium-only">
               <ul class="medium-block-grid-2 text-center">
                 <li ng-repeat="item in charities | limitTo:2">
-                  <a href="game-heart.php">
-                    <img src="../images/logo-charity-wwf.jpg" class="center circle hop">
+                  <a ng-click="selectCharity(item)">
+                    <img ng-src="{{item.charity.logoColor}}" class="center circle hop">
                     <h4>{{item.name}}</h4>
-                    <p class="lead small light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id magna dictum, dictum libero at, cursus ipsum.
-                    </p>
+                    <p class="lead small light">{{item.charity.about}}</p>
                   </a>
                 </li>
               </ul>
@@ -69,11 +67,10 @@
             <div class="show-for-large-only">
               <ul class="large-block-grid-3 text-center">
                 <li ng-repeat="item in charities | limitTo:3">
-                  <a href="game-heart.php">
-                    <img src="../images/logo-charity-wwf.jpg" class="center circle hop">
+                  <a ng-click="selectCharity(item)">
+                    <img ng-src="{{item.charity.logoColor}}" class="center circle hop">
                     <h4>{{item.name}}</h4>
-                    <p class="lead small light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id magna dictum, dictum libero at, cursus ipsum.
-                    </p>
+                    <p class="lead small light">{{item.charity.about}}</p>
                   </a>
                 </li>
               </ul>

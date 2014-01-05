@@ -38,7 +38,11 @@ define(['angular'], function (angular) {
 			var levelPack = $rootScope.state.state.levelPack;
 			var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
 			if(hasMoreLevelPacks) {
-				$location.path('/level');
+				if(angular.isDefined($rootScope.state.charityId)) {
+					$location.path('/level');
+				} else {
+					$location.path('/charity');
+				}
 			} else {
 				var modalInstance = $modal.open({
 					templateUrl: '../../partials/noLevelModal.html',
@@ -264,6 +268,11 @@ define(['angular'], function (angular) {
     $scope.onCarouselAvailable = function(car) {
       carousel = car;
     };
+    
+    $scope.selectCharity = function(charity) {
+      $rootScope.state.charityId = charity._id;	
+	  $location.path('/level');
+    }
 
     $scope.aboutExpanded = [];
     $scope.charities = Charity.query({});
