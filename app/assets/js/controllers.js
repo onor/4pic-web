@@ -1,6 +1,12 @@
 'use strict';
 
 define(['angular'], function (angular) {
+	
+	function isMobile(){
+	    var isMobile = (/iphone|ipod|android|ie|blackberry|fennec/).test
+	         (navigator.userAgent.toLowerCase());
+	    return isMobile;
+	}
 
   var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook, Charity, Campaign) {
       //todo: refactor so that game def is loaded only once.
@@ -46,7 +52,13 @@ define(['angular'], function (angular) {
 
     $scope.go = function () {
     	if (!$scope.fbLoggedIn) {
-        	$facebook.login({display:'touch'}).then(goIfLogedin);
+    		var opts = null;
+        	if (isMobile()) {
+        		opts = {display:'touch'};
+        	} else {
+        		opts = {};
+        	}
+        	$facebook.login(opts).then(goIfLogedin);
     	} else {
     		$facebook.getLoginStatus().then(goIfLogedin);
     	}
