@@ -47,12 +47,7 @@ define(['angular'], function (angular) {
     					$location.path('/charity');
     				}
     			} else {
-    				var modalInstance = $modal.open({
-    					templateUrl: '../../partials/noLevelModal.html',
-    					backdrop:false,
-    					controller: NoLevelModalCtrl,
-    					resolve: {}
-    				});
+    				alert('todo');
     			}
     		});
         });
@@ -73,13 +68,7 @@ define(['angular'], function (angular) {
     		$facebook.getLoginStatus().then(goIfLogedin);
     	}
     };
-    
-    
 
-    //quick jump to charity page from splash screen 
-	$scope.debug = function () {
-		$location.path('/heart');
-	}
 }
 
   var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, Score, $filter, Tournament) {
@@ -130,29 +119,15 @@ define(['angular'], function (angular) {
       });
     });
 
+    var levelPack = $rootScope.state.state.levelPack;
+    var $scope.hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
+    
       //navigation
-    $scope.playAgain = function () {
-      var levelPack = $rootScope.state.state.levelPack;
-      var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
-      if(hasMoreLevelPacks) {
-        $location.path('/level');
-      } else {
-        var modalInstance = $modal.open({
-          templateUrl: '../../partials/noLevelModal.html',
-          backdrop:false,
-          controller: NoLevelModalCtrl,
-          resolve: {}
-        });
-      }
+    $scope.playAgain = function () {      
+      $location.path('/level');
     };
     $scope.getPrize = function () {
       $location.path('/prize');
-    };
-  };
-
-  var NoLevelModalCtrl = function($scope, $modalInstance) {
-    $scope.close = function() {
-      $modalInstance.close('');
     };
   };
 
@@ -275,25 +250,6 @@ define(['angular'], function (angular) {
     $scope.aboutExpanded = [];
     $scope.charities = Charity.query({});
     
-    //navigation
-    $scope.playAgain = function () {
-      var levelPack = $rootScope.state.state.levelPack;
-      var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
-      if(hasMoreLevelPacks) {
-        $location.path('/level');
-      } else {
-        var modalInstance = $modal.open({
-          templateUrl: '../../partials/noLevelModal.html',
-          backdrop:false,
-          controller: NoLevelModalCtrl,
-          resolve: {}
-        });
-      }
-    };
-    $scope.quit = function() {
-      $location.path('/splash');
-    };
-
     //get lists of available charities to vote for
     $scope.charities = Charity.query();
     
@@ -543,7 +499,6 @@ return {
 	LeaderboardCtrl:LeaderboardCtrl,
 	CharityCtrl:CharityCtrl,
 	LevelCtrl:LevelCtrl,
-	NoLevelModalCtrl:NoLevelModalCtrl,
 	PrizeCtrl:PrizeCtrl,
 	PrizeModalCtrl:PrizeModalCtrl
 }
