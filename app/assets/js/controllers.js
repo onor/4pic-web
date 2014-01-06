@@ -55,7 +55,9 @@ define(['angular'], function (angular) {
 			} else {
 				$location.path('/charity');
 			}
-		}	
+		} else {
+			$location.path('/leaderboard');
+		}
 	}
 
     $scope.go = function () {
