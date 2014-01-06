@@ -1,0 +1,70 @@
+.tabs-content>.content { float:none !important; }
+
+.button-group {
+	background-color:lighten($gray,38%);
+	border-radius:6px;
+	padding:12px 20px 15px;
+	li {
+		margin:0 14px;
+		// &:first-child {
+		// 	margin-left:0 !important;
+		// 	a { padding-left:0px; }
+		// }
+		// &:last-child {
+		// 	margin-right:0 !important;
+		// 	a { padding-right:0px; }
+		// }
+		a {
+			@include tisa;
+			background:none !important;
+			font-size:rem-calc(18);
+			@media #{$small-only} { font-size:rem-calc(14); }
+			color:$gray;
+			padding-left:5px;
+			padding-right:5px;
+			padding-bottom:5px;
+			&:hover {
+				color:darken($gray,20%);
+			}
+		}
+
+		&.active {
+			border-bottom:3px solid $purple;
+			a {
+				color:$purple !important;
+				font-weight:bold;
+			}
+		}
+
+	}
+
+}
+
+.tabs {
+	dd {
+		margin:15px;
+		a {
+			@include tisa;
+			background:none !important;
+			font-size:rem-calc(24);
+			@media #{$small-only} { font-size:rem-calc(18); }
+			color:$gray;
+			padding-left:5px;
+			padding-right:5px;
+			padding-bottom:5px;
+			&:hover {
+				color:darken($gray,20%);
+			}
+		}
+
+		&.active {
+			border-bottom:3px solid $purple;
+			a {
+				color:$purple !important;
+				font-weight:bold;
+			}
+		}
+
+	}
+
+}

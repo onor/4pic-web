@@ -1,0 +1,160 @@
+body.game {
+	.heart-container {
+		// margin-top:0 !important;
+		// height: 1081px !important;
+    // position: static !important;
+    // width: auto  !important;
+    // overflow: hidden;
+
+		.heart-mask {
+			top: 40px !important;
+		}
+	}
+}
+
+.person-container {
+	white-space: nowrap;
+}
+
+.heart-container {
+	position:relative;
+	width: 99%;
+	// height:791px;
+	overflow:hidden;
+
+	//first div
+	.first {
+    @media #{$large-only} {
+			margin-top:70px;
+		}
+
+    @media #{$medium-only} {
+			margin-top:40px;
+		}
+
+    @media #{$small-only} {
+			margin-top:20px;
+		}
+
+	}
+
+	img.heart-person {
+		margin:0 !important;
+		padding:0 !important;
+    @media #{$large-only} {
+	    width:62px !important;
+	    height:62px !important;
+    }
+    @media #{$medium-only} {
+	    width:46px !important;
+	    height:46px !important;
+    }
+    @media #{$small-only} {
+	    width:38px !important;
+	    height:38px !important;
+    }
+	}
+
+	.heart-mask {
+		position:absolute;
+		top: 20px; left:0;
+		z-index:50;
+		overflow:hidden;
+	}
+
+
+	.heart {
+		position:absolute;
+		top:0; left:0;
+		overflow:hidden;
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+// *** OLD CODE *** //
+
+
+
+// .heart {
+	 //  -webkit-mask-image: url("../images/heart.png");
+	 //  -o-mask-image: url("../images/heart.png");
+	 //  -moz-mask-image: url("../images/heart.png");
+	 //  mask-image: url("../images/heart.png");
+
+		// @media screen and (min-width:0px) and (max-width:560px) {
+		//   -webkit-mask-image: url("../images/heart-medium.png");
+		//   -o-mask-image: url("../images/heart-medium.png");
+		//   -moz-mask-image: url("../images/heart-medium.png");
+		//   mask-image: url("../images/heart-medium.png");
+		// }
+
+		// @media screen and (min-width:560px) and (max-width:800px) {
+		//   -webkit-mask-image: url("../images/heart-medium.png");
+		//   -o-mask-image: url("../images/heart-medium.png");
+		//   -moz-mask-image: url("../images/heart-medium.png");
+		//   mask-image: url("../images/heart-medium.png");
+		// }
+
+		// @media screen and (min-width:560px) and (max-width:800px) {
+		// 	width: (770px / 1.4);
+		// 	height: (667px / 1.4);
+		// }
+
+		// @media screen and (min-width:0px) and (max-width:560px) {
+		// 	width: (770px / 1.8);
+		// 	height: (667px / 1.8);
+		// }
+
+		// float:none;
+		// margin:0 auto;
+
+
+// }
+
+
+// .heart:before,
+// .heart:after {
+//     background: transparent;
+//     position: absolute;
+//     content: "";
+//     left: (50px * 9);
+//     top: 0;
+//     width: (50px * 9);
+//     height: (80px * 9);
+//     -moz-border-radius: (50px * 9) (50px * 9) 0 0;
+//     border-radius: (50px * 9) (50px * 9) 0 0;
+//     -webkit-transform: rotate(-45deg);
+//        -moz-transform: rotate(-45deg);
+//         -ms-transform: rotate(-45deg);
+//          -o-transform: rotate(-45deg);
+//             transform: rotate(-45deg);
+//     -webkit-transform-origin: 0 100%;
+//        -moz-transform-origin: 0 100%;
+//         -ms-transform-origin: 0 100%;
+//          -o-transform-origin: 0 100%;
+//             transform-origin: 0 100%;
+// }
+// .heart:after {
+//     left: 0;
+//     -webkit-transform: rotate(45deg);
+//        -moz-transform: rotate(45deg);
+//         -ms-transform: rotate(45deg);
+//          -o-transform: rotate(45deg);
+//             transform: rotate(45deg);
+//     -webkit-transform-origin: 100% 100%;
+//        -moz-transform-origin: 100% 100%;
+//         -ms-transform-origin: 100% 100%;
+//          -o-transform-origin: 100% 100%;
+//             transform-origin: 100% 100%;
+// }

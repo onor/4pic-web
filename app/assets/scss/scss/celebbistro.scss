@@ -1,0 +1,31 @@
+@import "components/colors";
+@import "animate";
+@import "settings";
+@import "foundation";
+
+
+// Common Styles for Design Patterns
+@import
+  "components/animations",
+  "components/backgrounds",
+  "components/typography",
+  "components/global_styles",
+  "components/buttons",
+  "components/modals",
+  "components/orbitz",
+  "components/forms",
+  "components/tabs",
+  "components/icons",
+  "components/nav",
+  "components/heart",
+ 	"components/qa";
+
+// Game base styles
+@import
+  "components/sliding_panels",
+  "components/game_sections",
+  "components/typography_game.scss",
+  "components/tabs_game.scss";
+
+// CeleBistro specific styles
+@import "components/celeb_game";

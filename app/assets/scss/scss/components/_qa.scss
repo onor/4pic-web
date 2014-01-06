@@ -1,0 +1,27 @@
+@-moz-document url-prefix() {
+	.game.philz {
+		 .section.added-to-heart {
+		 		> .columns {
+		 			float:left;
+		 			margin:0;
+		 		}
+		 }
+	}
+}
+
+.ie9 {
+	.row.section.leaderboard {
+		.panel {
+			.timer {
+				height:50px !important;
+			}
+		}
+
+	}
+}
+
+.android {
+	.heart {
+		overflow-y:hidden;
+	}
+}

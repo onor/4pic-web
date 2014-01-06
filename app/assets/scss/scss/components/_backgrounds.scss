@@ -1,0 +1,70 @@
+
+
+//GENERIC CLASSES
+.purple-bg 	{ background-color: $purple; }
+.pink-bg 	{ background-color: $pink; }
+.red-bg 	{ background-color: $red; }
+.orange-bg 	{ background-color: $philz-orange; }
+.beige-bg 	{ background-color: $philz-beige; }
+
+
+.background {
+	overflow:hidden;
+	&.header {
+		background-color:$purple;
+		height:537px;
+		@media #{$small-only} {
+			height: 54px !important;
+		}
+		// @media screen and (min-width:1024px) and (max-width:1025px) {
+		// 	height:286px !important;
+		// }
+
+		&.not-home {
+			height: 144px !important;
+			@media #{$small-only} {
+				height: 54px !important;
+			}
+		}
+	}
+
+	&.header-mobile {
+		background-color:$purple;
+		height: 115px !important;
+	}
+
+	&.how-it-works {
+		background:url("../images/bg-how.jpg") no-repeat center top, $purple;
+	}
+
+	&.cta.first {
+		background-color:#27ae60;
+	}
+
+	&.cta.second {
+
+	}
+
+	&.customize-games {
+		&.picphilz { background-color:#fef4ec; }
+
+		&.celebbistro { background-color:#f1eef2; }
+	}
+
+	&.press { background-color:#f2f4f5; }
+
+	&.footer {
+		background-color:#d6dbdf;
+
+	}
+
+	//ABOUT
+	&.get-in-touch {
+		background: $purple url(../images/map-bg.jpg) no-repeat top center;
+	}
+
+
+}
+
+
+

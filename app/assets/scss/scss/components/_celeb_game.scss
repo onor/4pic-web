@@ -1,0 +1,157 @@
+// Links
+.game.celebbistro {
+	.light {
+	  color: rgba(#FFF, 0.7);
+	}
+
+	a {
+		color:$celeb-blue;
+		&:hover { color:lighten($celeb-blue, 10%); }
+		&:active { color:darken($celeb-blue, 20%); }
+	}
+}
+
+
+// Backgrounds and typography
+.game.celebbistro {
+	background-color:$celeb-blue;
+	.background {
+		&.points-counter {
+			background-color:lighten($celeb-beige,20%);
+			opacity:0.9;
+			height:212px;
+			&.rewards {
+				height:150px;
+			}
+		}
+	}
+
+	.game-background.celebbistro {
+		background-color:$celeb-blue;
+		&.with-image {
+			background: url("../images/bg-game-celebbistro-lg.jpg") no-repeat center top, $celeb-blue;
+		}
+	}
+
+}
+
+//Buttons
+.game.celebbistro {
+	button, .button {
+		&.light-blue {
+			border-color:#6784ad !important;
+			color:#ccd1da !important;
+			&:hover { background:rgba(255,255,255,.1) !important; }
+			&:active { background:rgba(255,255,255,.2) !important; }
+		}
+	}
+}
+
+
+// Typography
+.game {
+	&.celebbistro {
+
+		h1, h2, h3, h4, h5, h6 {
+			color:lighten($celeb-blue,42%);
+			small {
+				color:lighten($celeb-blue,42%);
+			}
+		}
+
+		.game-number { color:$celeb-blue !important; }
+		.subhead.small { margin-bottom: 10px; }
+		.subhead {
+			margin-bottom: 40px; width: 80.5%;
+			@media only screen and (min-width: 767px) and (max-width: 840px) {
+				width: 50%;
+			}
+		}
+		.start h4 { padding-top: 12px; }
+		.left .triangle { left: -5px; }
+		.right .triangle { right: -5px; }
+	}
+
+	.row.section {
+		&.points {
+			&.celebbistro {
+
+				ul.points-counterboard .total-points {
+					color:$celeb-blue !important;
+					span { color:$celeb-blue !important; }
+				}
+
+				ul.points-counterboard .total-points ul li {
+					color:$celeb-blue !important;
+				}
+
+			}
+		}
+
+		&.game {
+			&.celebbistro {
+				.row.selection-grid {
+					ul.large-block-grid-4 {
+						li { padding-bottom: 18px; }
+					}
+					&.last { margin-bottom: 20px; }
+					.large-4.columns { padding-right: 6px;
+						img.margin-bottom { margin-bottom: 20px }
+					}
+					.large-8.columns { padding-left: 11px; }
+					ul.left-stack {	list-style:none; margin-left:0px; margin-right: 5px;
+						li {
+							img.margin-bottom { margin-bottom:20px;padding-bottom: 20px;}
+						}
+					}
+				}
+				.numbered-question {
+					padding:20px 10px;
+					border: 3px solid #6683ac !important;
+					background-color: rgba(255, 255, 255, 0.84);
+					width: 100% !important;
+					margin-left: 0px !important; margin-top: -5px;
+					@include clearfix();
+				}
+				@media #{$small-only} {
+					.game-number { font-size: rem-calc(32) !important; }
+				}
+
+				//celebistro game
+				.game-radio-selections {
+					ul { list-style: none; }
+					input { display:none; width: 20px; height: 20px; border: #dddddd 1px solid; background-color: #aaaaaa; }
+					label { font-size: 1.5rem; color: #333; margin-left: 0px;}
+					label.selected span.checkbox { border-color: #666; text-indent: 0; text-indent: -9999px; background: #6683ac; width: 28px; line-height:0.7; height: 28px; box-shadow: 0 0 1px #666; border: 5px solid #fff; }
+					span.checkbox { display: inline-block; width: 28px; height: 28px; border: solid 1px #999; font-size: 20px; text-align: center; line-height: 1.2; margin-right: 10px; color: #fb0953; text-indent: -9999px; z-index: 1000; background: #fff; border-radius: 15px; }
+				}
+			}
+		}
+
+	}
+
+}
+
+
+//Tabs
+.game.philz {
+	.tabs {
+		dd {
+			a {
+				color:$gray;
+				&:hover {
+					color:darken($gray,20%);
+				}
+			}
+
+			&.active {
+				a {
+					color:$celeb-blue !important;
+				}
+			}
+		}
+
+	}
+}
+
+
