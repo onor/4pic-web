@@ -1,0 +1,163 @@
+@mixin tisa {
+    font-family: 'ff-tisa-sans-web-pro';
+}
+
+@font-face {
+		font-family: "ff-tisa-sans-web-pro", Helvetica, Arial, sans-serif !important;
+    font-weight: normal;
+    font-style: normal;
+}
+
+@mixin helvetica {
+    font-family: "nimbus-sans", helvetica, arial, sans-serif !important;
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+h1,h2,h3,h4,h5,h6 {
+	@include tisa;
+
+}
+
+body { -webkit-font-smoothing: antialiased; }
+
+.lead {
+	font-family: 'ff-tisa-sans-web-pro' !important;
+	&.white {
+		color:rgba(255,255,255,0.7) !important;
+	}
+	&.philz-white {
+		color:lighten($philz-orange,33%);
+		font-weight:500 !important;
+	}
+	color:$gray;
+	font-size:rem-calc(16) !important;
+	line-height:rem-calc(24);
+	width:100%;
+	float:none;
+	margin:0 auto;
+	font-weight:100 !important;
+
+}
+
+p {
+	@include helvetica;
+}
+
+
+.subhead {
+	color:#333333;
+	font-size:rem-calc(24);
+		@media #{$medium-only} { font-size:rem-calc(20); }
+		@media #{$small-only} { font-size: 1rem; }
+	line-height:rem-calc(36);
+		@media #{$medium-only} { line-height: rem-calc(24) !important; }
+		@media #{$small-only} { line-height: 1.6 !important; }
+	width:70%;
+		@media #{$medium-only} { width:90%; }
+		@media #{$small-only} { width:100%; }
+	float:none;
+	margin:0 auto;
+	font-weight:100 !important;
+	&.light { color:rgba(255,255,255,0.7) !important; }
+	&.dark { color:rgba(0,0,0,0.7) !important; }
+
+	&.small {
+		font-size:rem-calc(18);
+			@media #{$small-only} { font-size:rem-calc(14); }
+		line-height:rem-calc(30);
+			@media #{$small-only} { line-height:rem-calc(18) !important; }
+		margin-bottom:rem-calc(33);
+	}
+}
+
+
+h1 {
+	font-size:rem-calc(55);
+	font-weight: 200;
+}
+
+h2 {
+	font-size:rem-calc(55);
+	line-height: 55px;
+		@media #{$small-only} {
+			font-size: rem-calc(30);
+			line-height: 33px;
+		}
+	font-weight: 300;
+}
+
+h3 {
+	font-size:rem-calc(52);
+		@media #{$medium-only} { font-size: rem-calc(38); }
+		@media #{$small-only} { font-size: rem-calc(28); }
+	font-weight: 100 !important;
+}
+
+h4 {
+	font-size:rem-calc(24);
+	@media #{$small-only} { font-size: 22px !important; }
+	font-weight: 100;
+	em { color: $purple; }
+}
+
+h5 {
+	// font-size:rem-calc(36); why? create a specific class for this.
+	font-weight: 200;
+}
+
+h6 {
+	font-size:rem-calc(11);
+	font-weight: bold;
+	text-transform:uppercase;
+}
+
+address {
+	@include helvetica;
+	font-size:14px;
+	font-style:normal;
+	line-height:rem-calc(22);
+}
+
+.gray {
+	color:$gray !important;
+}
+
+.onor-gray {
+	color:#4f5456 !important;
+}
+
+.blue {
+	color:#262ba3;
+}
+
+.green {
+	color:#27ae60 !important;
+}
+
+.dark-purple {
+	color:#2e023d !important;
+}
+
+.brown {
+	color:#502506 !important;
+}
+
+.white {
+	color:#fff !important;
+}
+
+.purple {
+	color:#8e44ad !important;
+}
+
+hr.center {
+	width:83.33333%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.push-down { margin-bottom: rem-calc(30); }
+.big-bump { margin-bottom: rem-calc(60); }
+

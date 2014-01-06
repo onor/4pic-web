@@ -1,0 +1,15 @@
+
+@media #{$large-up} {
+	.hop {
+		cursor:pointer;
+		background-position: center center;
+
+		&:hover {
+			margin-top:-8px;
+			transition: all .35s;
+			-webkit-transition: all .35s;
+			-moz-transition: all .35s;
+			-o-transition: all .35s;
+		}
+	}
+}

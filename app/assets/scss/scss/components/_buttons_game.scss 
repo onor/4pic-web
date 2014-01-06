@@ -1,0 +1,23 @@
+body.game {
+	&.philz {
+		a {
+			color:$philz-orange;
+			&:hover { color:lighten($philz-orange, 10%); }
+			&:active { color:darken($philz-orange, 20%); }
+		}
+	}
+}
+
+button, .button {
+
+	&.light-orange {
+		border-color:#eaa66f !important;
+		color:#f6d9cf !important;
+
+		&:hover { background:rgba(255,255,255,.1) !important; }
+
+		&:active { background:rgba(255,255,255,.2) !important; }
+	}
+
+
+}

@@ -1,0 +1,111 @@
+// Stylistic class to be used in HTML
+.philz-orange {
+	color:$philz-orange !important;
+}
+
+// Links
+.game.philz {
+	.light {
+	  color: rgba(#FFF, 0.7);
+	}
+
+	a {
+		color:$philz-orange;
+		&:hover { color:lighten($philz-orange, 10%); }
+		&:active { color:darken($philz-orange, 20%); }
+	}
+}
+
+// Button Styles
+.game.philz {
+	button, .button {
+		&.light-orange {
+			border-color:#eaa66f !important;
+			color:#f6d9cf !important;
+
+			&:hover { background:rgba(255,255,255,.1) !important; }
+
+			&:active { background:rgba(255,255,255,.2) !important; }
+		}
+	}
+}
+
+// Background
+.game.philz {
+	background-color:$philz-orange;
+
+	.background {
+		&.points-counter {
+			background-color:$philz-beige;
+			opacity:0.9;
+			height:212px;
+			&.rewards {
+				height:150px;
+
+			}
+		}
+	}
+
+
+	.game-background.philz {
+		background-color:$philz-orange;
+		&.with-image {
+			background: url("../images/bg-game-philz-lg.jpg") no-repeat center top, $philz-orange;
+		}
+
+		&.start-page {
+			background: url("../images/bg-game-philz-contrast-lg.jpg") no-repeat center top, darken($philz-orange,5%) !important;
+		}
+	}
+}
+
+// Headings
+.game.philz {
+	h1, h2, h3, h4, h5, h6 {
+		color:lighten($philz-orange,42%);
+		small {
+			color:lighten($philz-orange,42%);
+		}
+
+	}
+
+	.subhead.small { margin-bottom: 10px; }
+	.subhead {
+		margin-bottom: 40px; width: 80.5%;
+		@media only screen and (min-width: 767px) and (max-width: 840px) {
+			width: 50%;
+		}
+	}
+	.start h4 { padding-top: 12px; }
+	.left .triangle { left: -5px; }
+	.right .triangle { right: -5px; }
+}
+
+//Tabs
+.game.philz {
+	.tabs {
+		dd {
+			a {
+				color:$gray;
+				&:hover {
+					color:darken($gray,20%);
+				}
+			}
+
+			&.active {
+				a {
+					color:$philz-orange !important;
+				}
+			}
+		}
+
+	}
+}
+
+//Sections
+
+.game.philz {
+	.rectangle {
+		h2,h3,h4,h5,h6 { color:$philz-orange !important; }
+	}
+}

@@ -1,0 +1,33 @@
+.touch {
+	.orbit-container {
+		.orbit-prev,
+		.orbit-next {
+			display:block;
+		}
+	}
+}
+
+.orbit-container {
+	.large-block-grid-3 { width:90%; }
+	.orbit-prev, .orbit-next {
+		margin-top: -65px !important;
+	}
+
+	@media #{$medium-only} {
+		.orbit-prev span { }
+
+		.orbit-next span { }
+
+	}
+
+	.orbit-prev { }
+	.orbit-next { }
+
+	.orbit-bullets-container {
+		.orbit-bullets {
+			li { background:lighten($philz-orange,23%); }
+			li.active { background: #fff; }
+		}
+	}
+
+}

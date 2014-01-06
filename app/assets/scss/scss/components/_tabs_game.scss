@@ -1,0 +1,35 @@
+
+body.game {
+	.tabs {
+		dd {
+			margin:0 10px;
+			@media #{$small-only} { margin:0 5px; }
+			&:first-child { margin-left:0 !important; }
+			&:last-child { margin-right:0 !important; }
+
+			a {
+				@include tisa;
+				background:none !important;
+				font-size:rem-calc(24);
+				@media #{$small-only} { font-size:rem-calc(16); }
+				color:$gray;
+				padding-left:5px;
+				padding-right:5px;
+				padding-bottom:5px;
+				&:hover {
+					color:darken($gray,20%);
+				}
+			}
+
+			&.active {
+				border-bottom:3px solid $philz-orange;
+				a {
+					color:$philz-orange !important;
+					font-weight:bold;
+				}
+			}
+
+		}
+
+	}
+}

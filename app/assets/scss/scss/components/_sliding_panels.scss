@@ -1,0 +1,167 @@
+@mixin transform($type,$degree) {
+  -webkit-transform: #{$type}(#{$degree});
+  -ms-transform: #{$type}(#{$degree});
+  transform: #{$type}(#{$degree});
+}
+
+@mixin triangle($dir,$amt,$color) {
+  border-#{$dir}: #{$amt} #{$color};
+}
+.game.philz {
+  .button {
+    z-index: 1001;
+  }
+}
+
+.left {
+  float: left;
+  .triangle {
+    .start-screen-icon { position:absolute; left:58px; margin-top:-20px; z-index: 999; }
+    z-index: 1;
+    @include single-transition(width, 100ms);
+    @include triangle($dir:right,$amt:360px,$color:transparent);
+    @include triangle($dir:bottom,$amt:845px,$color:rgba(242, 236, 219, 0.75));
+    position: absolute;
+    top: -10px;
+    left: 0;
+    border-style: solid;
+  }
+  .rectangle {
+    overflow-y:scroll;
+    #giveText { display:none; }
+    z-index: 1002;
+    @include single-transition(width, 300ms);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1000px;
+    // height: 780px;
+    background-color: rgba(242,236,219,0.95);
+    text-align: center;
+    hr.dotted { border-color: #e17f31; }
+    h2, h4 { color: #e17f31; }
+    .row {
+      position:relative;
+      .close {
+        position: absolute;
+        top: 0;
+        right: -173px;
+        &:hover { cursor:pointer; }
+        i {
+          color:#fff;
+          padding:5px 12px;
+          background-color:$philz-orange;
+          -webkit-border-radius:50%;
+          border-radius:50%;
+        }
+      }
+    }
+
+  }
+}
+
+.right {
+  float: right;
+  .triangle {
+    .start-screen-icon { position:absolute; right:50px; margin-top:-20px; z-index: 999; }
+    z-index: 1;
+    @include triangle($dir:left,$amt:360px,$color:transparent);
+    @include triangle($dir:bottom,$amt:845px,$color:rgba(242, 236, 219, 0.75));
+    @include single-transition(width, 100ms);
+    position: absolute;
+    top: -10px;
+    right: 0;
+    border-style: solid;
+  }
+  .rectangle {
+    overflow-y:scroll;
+    #getText { display:none; }
+    z-index: 1002;
+    @include single-transition(width, 300ms);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1000px;
+    // height: 780px;
+    background-color: rgba(242,236,219,0.95);
+    text-align: center;
+    hr.dotted { border-color: #e17f31; }
+    h2, h4 { color: #e17f31; }
+    .row {
+      position:relative;
+      .close {
+        position: absolute;
+        top: 0;
+        left: -173px;
+        &:hover { cursor:pointer; }
+        i {
+          color:#fff;
+          padding:5px 12px;
+          background-color:$philz-orange;
+          -webkit-border-radius:50%;
+          border-radius:50%;
+        }
+      }
+    }
+
+
+
+  }
+}
+
+.sliding-panel {
+
+  @include single-transition(left, 300ms);
+  position: absolute;
+  top: 0;
+  z-index:1000;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 90%;
+  background: #eee;
+  &.give { left: -67%; }
+  &.get { right: -67%; }
+
+  &.give {
+
+    &:after {
+      @include transform($type:skewX, $degree:45deg);
+      position: absolute;
+      // height: 50px;
+      top: -2px;
+      right: -29px;
+      z-index: -1;
+      display: block;
+      width: 100px;
+      border: 2px solid transparent;
+      background-color: #FFF;
+      content:" ";
+    }
+
+    &:before {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      display: block;
+      // height: 50px;
+      width: 10px;
+      border-top: 2px solid transparent;
+      border-bottom: 2px solid transparent;
+      background-color: #FFF;
+      content:" ";
+    }
+
+    &.open {
+      left: 0%;
+    }
+  }
+
+  &.get {
+    &.open {
+      right: 0%;
+    }
+  }
+
+
+}

@@ -1,0 +1,26 @@
+body.game {
+
+	@media #{$small-only} {
+		h1, h2, h3 {
+			font-size:rem-calc(24) !important;
+		}
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		&.game-number { color: #333; }
+		&.game-description { font-size: 2.0rem; color: #333; line-height: 1.1;}
+
+		small {
+			margin-top:10px;
+			display:block;
+			line-height:rem-calc(24);
+		}
+	}
+
+	h5 {
+		font-weight:700;
+		line-height: 22px;
+		small { margin-top:2px; }
+	}
+
+}
