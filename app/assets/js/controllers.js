@@ -133,9 +133,7 @@ define(['angular'], function (angular) {
     $scope.playAgain = function () {      
       $location.path('/level');
     };
-    $scope.getPrize = function () {
-      $location.path('/prize');
-    };
+   
   };
 
   var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter, PrizeCode, Score) {

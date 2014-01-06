@@ -4,7 +4,7 @@
     <div class="large-6 columns center">
       <img class='center brand-logo' ng-src="{{game.design.logo}}">
       <hr class="dotted">
-      <p class="subhead text-center light">{{game.description}}</p>
+      <p class="subhead text-center light">{{hasMoreLevelPacks ? game.description : 'Congratulations ' + me.name + '! You finished the current game. New games will start soon. In the meantime, check out your impact and rankings. Thank you!'}}</p>
     </div>
   </div>
 
