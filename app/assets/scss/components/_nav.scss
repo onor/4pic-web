@@ -7,8 +7,6 @@
 	.header-mobile .video img { height:115px; min-height:115px; }
 }
 
-//if you want to edge to edge video get rid of this fixed video height, and restore the app.js dynamic resizing based on video height.
-#headerDesktop { height:537px; }
 
 .header-content {
 	position:relative;
@@ -78,13 +76,10 @@
 	.messaging {
 		z-index:50;
 		position:absolute;
-		width:98%;
+		width:50%;
 		left:50%;
 		margin-top:200px;
-		margin-left:-49%;
-
-		.orbit-bullets { display:none !important; }
-		.orbit-timer { display:none !important; }
+		margin-left:-25%;
 
 		@media #{$medium-only} {
 			margin-top: 69px;
@@ -100,21 +95,21 @@
 
 
 
-		// @media screen and (min-width:1451px) and (max-width:1600px) {
-		// 	margin-top: 191px !important;
-		// }
+		@media screen and (min-width:1451px) and (max-width:1600px) {
+			margin-top: 191px !important;
+		}
 
-		// @media screen and (min-width:1301px) and (max-width:1450px) {
-		// 	margin-top: 150px !important;
-		// }
+		@media screen and (min-width:1301px) and (max-width:1450px) {
+			margin-top: 150px !important;
+		}
 
-		// @media screen and (min-width:1024px) and (max-width:1300px) {
-		// 	margin-top: 150px !important;
-		// }
+		@media screen and (min-width:1024px) and (max-width:1300px) {
+			margin-top: 150px !important;
+		}
 
-		// @media screen and (min-width:1024px) and (max-width:1180px) {
-		// 	margin-top: 135px !important;
-		// }
+		@media screen and (min-width:1024px) and (max-width:1180px) {
+			margin-top: 135px !important;
+		}
 
 		@media screen and (min-width:521px) and (max-width:767px) {
 			margin-top: 40px !important;
@@ -134,15 +129,15 @@
 			line-height: rem-calc(55);
 			color:#fff;
 
-			// @media screen and (min-width:1301px) and (max-width:1600px) {
-			// 	font-size: rem-calc(38);
-			// 	line-height: rem-calc(38);
-			// }
+			@media screen and (min-width:1301px) and (max-width:1600px) {
+				font-size: rem-calc(38);
+				line-height: rem-calc(38);
+			}
 
-			// @media screen and (min-width:1024px) and (max-width:1300px) {
-			// 	font-size: rem-calc(38);
-			// 	line-height: rem-calc(38);
-			// }
+			@media screen and (min-width:1024px) and (max-width:1300px) {
+				font-size: rem-calc(38);
+				line-height: rem-calc(38);
+			}
 
 			@media #{$medium-only} {
 				font-size: rem-calc(35);
@@ -168,17 +163,17 @@
 			@include helvetica;
 			font-weight:200;
 
-			// @media screen and (min-width:1301px) and (max-width:1600px) {
-			// 	margin-top:10px;
-			// 	font-size:rem-calc(21);
-			// 	line-height: rem-calc(28);
-			// }
+			@media screen and (min-width:1301px) and (max-width:1600px) {
+				margin-top:10px;
+				font-size:rem-calc(21);
+				line-height: rem-calc(28);
+			}
 
-			// @media screen and (min-width:1024px) and (max-width:1300px) {
-			// 	margin-top:20px;
-			// 	font-size:rem-calc(21);
-			// 	line-height: rem-calc(28);
-			// }
+			@media screen and (min-width:1024px) and (max-width:1300px) {
+				margin-top:20px;
+				font-size:rem-calc(21);
+				line-height: rem-calc(28);
+			}
 
 			@media #{$medium-only} {
 				margin-top:20px;
@@ -192,6 +187,10 @@
 				line-height: rem-calc(16);
 			}
 
+			// @media screen and (min-width:0px) and (max-width:870px) {
+			// 	display:none;
+			// }
+
 		}
 
 		a.learn-more {
@@ -202,9 +201,9 @@
 				display:none;
 			}
 
-			// @media screen and (min-width:1024px) and (max-width:1110px) {
-			// 	display:none;
-			// }
+			@media screen and (min-width:1024px) and (max-width:1110px) {
+				display:none;
+			}
 
 			text-transform:uppercase;
 			color:#fff;
@@ -242,18 +241,11 @@
 				position:absolute;
 				width: 50% !important;
 				left: 0; top:0;
-				// background:url("../images/bg-well.jpg") center top no-repeat;
-				// background-size: 100%;
+				background:url("../images/bg-well.jpg") center top no-repeat;
+				background-size: 100%;
 
 				img { width: 100%; }
-				video {
-					//if you want to edge to edge video bring this back, and get right of everything below.
-					//width:100% !important;
-					height:100% !important;
-					position: absolute;
-					right: 0;
-					top:0;
-				}
+				video { width:100% !important; }
 
 
 			}
@@ -262,18 +254,11 @@
 				position:absolute;
 				width: 50% !important;
 				left: 50%; top:0;
-				// background:url("../images/bg-good.jpg") center top no-repeat;
-				// background-size: 100%;
+				background:url("../images/bg-good.jpg") center top no-repeat;
+				background-size: 100%;
 
 				img { width: 100%; }
-				video {
-					//if you want to edge to edge video bring this back, and get right of everything below.
-					//width:100% !important;
-					height:100% !important;
-					position: absolute;
-					left: 0;
-					top:0;
-				}
+				video { width:100% !important; }
 
 
 			}
