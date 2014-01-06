@@ -1,5 +1,6 @@
 import sbt._
 import play.Project._
+import net.litola.SassPlugin
 
 object ApplicationBuild extends Build {
 
@@ -20,6 +21,6 @@ object ApplicationBuild extends Build {
     "org.webjars" %% "webjars-play" % "2.2.0"
   )
 
-  val main = play.Project(appName, appVersion, appDependencies)
+  val main = play.Project(appName, appVersion, appDependencies).settings( SassPlugin.sassSettings:_* )
 
 }
