@@ -1,74 +1,37 @@
-<div class="backgroundPrize">
-<!--     <carousel interval="-1">
-        <slide ng-repeat="campaignGroup in campaigns" active="image.isActive">
-            <div class="span2"></div>
-            <ul class="thumbnails">
-            <li ng-repeat="campaign in campaignGroup" class="span2">
-            <img ng-src="{{campaign.prize.image}}">
-            <div class="carousel-caption">
-                <h4>TODO</h4>
-            </div>
-            </li>
-            </ul>
-        </slide>
-    </carousel> -->
+<div class="game-background philz with-image">
 
+	  <ng-include src="'../../partials/points.html'"></ng-include>
 
-    <div class="container">
-        <div id="prize">
-            <div class="row">
-                <div class="col-md-12 col-xs-12">
-                    <div class="header clearfix">
-                        <div class="player-pic-prizes">
-                            <img ng-src="{{me.avatar}}" width="83" height="83" class="img-circle" alt="">
-                        </div>
-
-                        <h1>{{me.name}}, you are winning!</h1>
-                    </div>
-
-                    <div class="box-content">
-                        <ul id="img-prizes" class="row">
-                            <li class="col-md-3 col-xs-3" ng-repeat="campaign in campaigns | orderBy:'prize.retail'" active="image.isActive">
-                                
-                                <div class="prize-body" ng-class="{available:campaign.available, picked:campaign.picked}" ng-click="pickPrize(campaign)">
-                                    <span class="top-tag-prize"></span>
-                                    <img ng-src="{{campaign.prize.image}}" alt="">
-                                    <p>{{campaign.description}}</p>
-                                    <span class="point-required-prize">{{campaign.prize.points}} pts. required</span>
-                                </div>
-                                
-                            </li>
-                            <li class="col-md-3 col-xs-3">
-                                <div id="prize-plus-btn">
-                                    <a ng-click="charity()">
-                                        <img src="/img/prizes/plus-btn.png" alt="">
-                                    </a>
-                                </div>
-                            </li>
-                        </ul> 
-                    </div>
-
-                    <div class="footer">
-                        <div class="prize-current-score clearfix">
-                            <p>Available points</p>
-                            <span class="score-block">
-                                <p>{{state.state.lpScores[state.state.lpScores.length - 1].score}}</p>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- <div class="col-md-6 col-xs-6">
-                    <div class="btn-scoreboard-container">
-                       <a  class="prize-btn" ng-click="playAgain()">
-                            <p>Invite Friends<br>(+10 points each)</p>
-                        </a>
-                        <a  class="prize-btn" ng-click="getCharity()">
-                            <p>Help Philz Do Good</p>
-                        </a>
-                    </div>
-                </div> -->
-            </div>
+      <div class="row section goal">
+        <div class="large-10 medium-12 columns center text-center">
+          <h3>{{me.name}}, you've played 13 of 50 games for Philz to write a check of $10 for FeedAmerica!</h3>
+          <a href="game-leaderboard.php" class="button light-orange">Keep Playing &nbsp;&amp;&nbsp; Do Good</a>
+          <span class="lead philz-white">&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <a href="#" class="button light-orange">Invite Your Friends</a>
         </div>
+      </div>
+
+
+      <div class="row section rewards">
+
+        <div class="large-10 medium-12 columns center text-center">
+          <div class='hide-for-small'>
+            <ul class="orbit-content rewards text-center center" data-orbit>
+              <li>
+                <ul class="large-block-grid-3 medium-block-grid-3 text-center center">
+                  <li class="hop" ng-repeat="campaign in campaigns | limitTo:3">
+                    <span class="label rounded">{{campaign.prize.points}} <span>points</span></span>
+                    <img ng-src="{{campaign.prize.image}}" class="center circle">
+                    <h4>{{campaign.description}}</h4>
+                    <p class="lead philz-white">A $3.00 reward with a $3.00 donation to FeedAmerica</p>
+                    <a href="#" class="button light-orange">Claim Reward</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
     </div>
-</div>

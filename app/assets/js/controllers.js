@@ -137,8 +137,13 @@ define(['angular'], function (angular) {
   };
 
   var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter, PrizeCode, Score) {
+	  
+    $scope.showTimer = false;
 
     $scope.alltime = Score.get({fbid: $rootScope.me.id, weekly: false});
+    Score.get({fbid: $rootScope.me.id, weekly: true}, function (res) {
+		$scope.weekly = res;
+	});
 
     //retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
     Campaign.query(function (res) {
@@ -264,6 +269,8 @@ define(['angular'], function (angular) {
   };
 
 var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route, Score) {
+	
+	$scope.showTimer = true;
 	
 	function callback(response) {
 		response.to.length > 0
