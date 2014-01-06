@@ -260,6 +260,16 @@ define(['angular'], function (angular) {
 
 var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route, Score) {
 	
+	function callback(response) {
+		response.to.length > 0
+	}
+	
+	$scope.inviteFriend = function() {
+		$facebook.ui({method: 'apprequests',
+			  message: 'My Great Request'
+		}).then(callback);
+	}
+	
 	Score.get({fbid: $rootScope.me.id, weekly: true}, function (res) {
 		$scope.weekly = res;
 	});

@@ -35,7 +35,7 @@
                   <img class="rounded full-width" ng-src="{{level.photo4}}" imageonload>
                 </li>
               </ul>
-              <a href="#" class="button large light-orange expand hide-for-small">Invite A Friend</a>
+              <a ng-click="inviteFriend()" class="button large light-orange expand hide-for-small">Invite A Friend</a>
             </div>
 
             <div class="large-6 medium-6 columns">
@@ -65,9 +65,9 @@
                 </ul>
               </div>
 
-              <a href="#" class="button large light-orange expand invite-friend show-for-small">Invite A Friend</a>
+              <a ng-click="inviteFriend()" class="button large light-orange expand invite-friend show-for-small">Invite A Friend</a>
 
-              <a href="game-rewards.php">
+              <a>
                 <img class='right brand-logo' ng-src="{{game.design.logo}}">
               </a>
             </div>
