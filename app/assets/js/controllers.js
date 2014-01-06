@@ -9,17 +9,19 @@ define(['angular'], function (angular) {
 	}
 
   var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook, Charity, Campaign, $filter) {
-      //todo: refactor so that game def is loaded only once.
-      //todo: refactor all facebook stuff out into a seperate service.
-    $rootScope.game = Game.get({}, function(){});
+    $rootScope.game = Game.get({}, function(){
+    	$facebook.getLoginStatus().then(function(res) {
+        	if(res.status == "connected") {
+        		setState(res);
+        	}
+        });
+    });
     
     $scope.charities = Charity.query({});
     $scope.campaigns = Campaign.query({});
 
     $scope.friendsWhoHavePlayed = [];
-    $facebook.getLoginStatus().then(function(res) {
-    	$scope.fbLoggedIn = res.status == "connected";
-    });
+    
     $scope.showGivePanel = false;
     $scope.showGetPanel = false;
 
@@ -30,29 +32,32 @@ define(['angular'], function (angular) {
       $scope.showGetPanel = !$scope.showGetPanel;
     };
     
-    function goIfLogedin(res){
-    	    	
-        $facebook.api('/me?fields=id,name,picture,email').then(function (me) {
-        	$rootScope.me = $filter('finfo')(me);
-        	
+    function setState(res, goFun){
+    	$facebook.api('/me?fields=id,name,picture,email').then(function (me) {
         	appConfig.fbid = res.authResponse.userID;
-    		State.get({fbid:appConfig.fbid}, function(res){
-    			$rootScope.state = res;
+        	$rootScope.me = $filter('finfo')(me);      	
+    		State.get({fbid:appConfig.fbid}, function(res2){
+    			$rootScope.state = res2;
     			var levelPack = $rootScope.state.state.levelPack;
-    			var hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
-    			if(hasMoreLevelPacks) {
-    				if(angular.isDefined($rootScope.state.charityId)) {
-    				    $location.path('/heart');
-    				} else {
-    					$location.path('/charity');
-    				}
-    			} else {
-    				alert('todo');
-    			}
+    			$scope.hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1); 
+    	    	$scope.fbLoggedIn = true;
     		});
+    		if(angular.isDefined(goFun)) {
+    			goFun();
+    		}
         });
-    	
-		
+    }
+    
+    function goIfLogedin(){   
+    	if($scope.hasMoreLevelPacks) {
+			if(angular.isDefined($rootScope.state.charityId)) {
+			    $location.path('/heart');
+			} else {
+				$location.path('/charity');
+			}
+		} else {
+			$location.path('/leaderboard');
+		}
 	}
 
     $scope.go = function () {
@@ -63,9 +68,11 @@ define(['angular'], function (angular) {
         	} else {
         		opts = {};
         	}
-        	$facebook.login(opts).then(goIfLogedin);
+        	$facebook.login(opts).then(function(res) {
+        		setState(res, goIfLogedin);
+        	});
     	} else {
-    		$facebook.getLoginStatus().then(goIfLogedin);
+    		goIfLogedin();
     	}
     };
 
@@ -126,9 +133,7 @@ define(['angular'], function (angular) {
     $scope.playAgain = function () {      
       $location.path('/level');
     };
-    $scope.getPrize = function () {
-      $location.path('/prize');
-    };
+   
   };
 
   var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter, PrizeCode, Score) {
