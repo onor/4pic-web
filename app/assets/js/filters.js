@@ -9,7 +9,7 @@ define(['angular'], function (angular) {
 	angular.module('myApp.filters', []).
 		filter('finfo', function() {
 			return function (fuser) {
-				var avatar = "img/ingame/player-pic-holder.png";
+				var avatar = "../images/player-pic-holder.png";
 				if (!fuser.picture.data.is_silhouette) {
 					avatar = fuser.picture.data.url;
 				}
@@ -18,6 +18,16 @@ define(['angular'], function (angular) {
 					avatar:avatar,
 					name:fuser.name
 				};
+			}
+		}).
+		filter('avatar', function() {
+			return function(url) {
+				//debugger;
+				if (angular.isDefined(url)) {
+					return url;
+				} else {
+					return "../images/player-pic-holder.png";
+				}
 			}
 		});
 

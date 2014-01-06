@@ -211,9 +211,9 @@ define(['angular'], function (angular) {
 	  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
 	      $scope.playerProfiles = votes.playerProfiles.reverse(); 	      
 	  });	  
-	  $timeout(function(){
-	      $location.path('/level');
-	  }, 3000);
+	  //$timeout(function(){
+	  //    $location.path('/level');
+	  //}, 3000);
   }
 
   var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, $modal, Votes) {
