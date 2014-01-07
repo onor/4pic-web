@@ -19,8 +19,6 @@ define(['angular'], function (angular) {
     
     $scope.charities = Charity.query({});
     $scope.campaigns = Campaign.query({});
-
-    $scope.friendsWhoHavePlayed = [];
     
     $scope.showGivePanel = false;
     $scope.showGetPanel = false;
@@ -41,10 +39,10 @@ define(['angular'], function (angular) {
     			var levelPack = $rootScope.state.state.levelPack;
     			$scope.hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1); 
     	    	$scope.fbLoggedIn = true;
-    		});
-    		if(angular.isDefined(goFun)) {
-    			goFun();
-    		}
+    	    	if(angular.isDefined(goFun)) {
+        			goFun();
+        		}
+    		});    		
         });
     }
     
