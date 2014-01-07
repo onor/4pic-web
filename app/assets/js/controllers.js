@@ -231,10 +231,18 @@ define(['angular'], function (angular) {
 	  }, 3000);
   }
 
-  var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, Votes) {
-
+  var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, Votes, screenSize) {
+	  
 	$scope.charities = Charity.query({}, function(charities){
-	  $scope.perPage = 2;
+	  if (screenSize.is('small')) {
+	    $scope.perPage = 1;
+	  }
+	  if (screenSize.is('medium')) {
+		$scope.perPage = 2;
+	  }
+	  if (screenSize.is('large')) {
+	    $scope.perPage = 3;
+	  }
 	  $scope.page = 0;
 	  $scope.pageNo = charities.length / $scope.perPage;
 	  $scope.charities = charities;
