@@ -8,7 +8,7 @@ define(['angular'], function (angular) {
 	    return isMobile;
 	}
 
-  var SplashCtrl = function($scope, $rootScope, State, $location, $modal, Game, $facebook, Charity, Campaign, $filter) {
+  var SplashCtrl = function($scope, $rootScope, State, $location, Game, $facebook, Charity, Campaign, $filter) {
     $rootScope.game = Game.get({}, function(){
     	$facebook.getLoginStatus().then(function(res) {
         	if(res.status == "connected") {
@@ -76,7 +76,7 @@ define(['angular'], function (angular) {
 
 }
 
-  var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook,$modal, Score, $filter, Tournament) {
+  var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook, Score, $filter, Tournament) {
 	  
 	$scope.currentTab = "friends-tab";  
 	  
@@ -134,7 +134,7 @@ define(['angular'], function (angular) {
    
   };
 
-  var PrizeCtrl = function($scope, $rootScope, $modal, $location, Campaign, $facebook, $filter, PrizeCode, Score) {
+  var PrizeCtrl = function($scope, $rootScope, $location, Campaign, $facebook, $filter, PrizeCode, Score) {
 	  
     $scope.showTimer = false;
 
@@ -193,26 +193,9 @@ define(['angular'], function (angular) {
     };
     
     $scope.openModal = function() {
-      var modalInstance = $modal.open({
-        templateUrl: '../../partials/prizeModal.html',
-        backdrop:false,
-        controller: PrizeModalCtrl,
-        resolve: {
-          points: function () {return true;}
-        }
-      });
-
-      modalInstance.result.then(function (res) {
-        $location.path('/charity');
-      });
+      //todo
     };
 
-  };
-
-  var PrizeModalCtrl = function($scope, $modalInstance) {
-    $scope.close = function() {
-      $modalInstance.close('');
-    };
   };
   
   var HeartCtrl = function($scope, $rootScope, Votes, $location, $timeout) {
@@ -224,33 +207,26 @@ define(['angular'], function (angular) {
 	  }, 3000);
   }
 
-  var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, $modal, Votes) {
-    var carousel;
-
-    $scope.hasPrevious = function() {
-      return carousel ? carousel.hasPrevious() : false;
-    };
+  var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, Votes) {
+	  	  
+	$scope.charities = Charity.query({}, function(charities){
+	  $scope.perPage = 2;
+	  $scope.page = 0;
+	  $scope.pageNo = charities.length / $scope.perPage;
+	  $scope.charities = charities;
+	});
+	
+    $scope.$watch('page', function (newValue) {
+    	$scope.hasPrevious = newValue > 0;
+        $scope.hasNext = newValue < $scope.pageNo - 1;
+    });
+    
     $scope.previous = function() {
-      if (carousel) { carousel.prev(); }
+      $scope.page = $scope.page - 1;
     };
-    $scope.hasNext = function() {
-      return carousel ? carousel.hasNext() : false;
-    };
+      
     $scope.next = function() {
-      if (carousel) { carousel.next(); }
-    };
-
-    var loadCharities = function(carouselScope, page) {
-      carousel.updatePageCount(6);
-      carouselScope.charities = Charity.query();
-    };
-    $scope.loadPage = function(page, tmplCb) {
-      var newScope = $scope.$new();
-      loadCharities(newScope, page);
-      tmplCb(newScope);
-    };
-    $scope.onCarouselAvailable = function(car) {
-      carousel = car;
+      $scope.page = $scope.page + 1;
     };
     
     $scope.selectCharity = function(charity) {
@@ -258,15 +234,9 @@ define(['angular'], function (angular) {
 	  $location.path('/heart');
     }
 
-    $scope.aboutExpanded = [];
-    $scope.charities = Charity.query({});
-    
-    //get lists of available charities to vote for
-    $scope.charities = Charity.query();
-
   };
 
-var LevelCtrl = function($scope, $rootScope, $modal, State, $location, $facebook, $filter, $route, Score) {
+var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filter, $route, Score) {
 	
 	$scope.showTimer = true;
 	
@@ -472,7 +442,6 @@ return {
 	LeaderboardCtrl:LeaderboardCtrl,
 	CharityCtrl:CharityCtrl,
 	LevelCtrl:LevelCtrl,
-	PrizeCtrl:PrizeCtrl,
-	PrizeModalCtrl:PrizeModalCtrl
+	PrizeCtrl:PrizeCtrl
 }
 });

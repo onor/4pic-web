@@ -44,7 +44,7 @@
           <li>
             <div class="show-for-small-only">
               <ul class="small-block-grid-1 text-center">
-                <li ng-repeat="item in charities | limitTo:1">
+                <li ng-repeat="item in charities.slice(page * perPage, (page + 1) * perPage)">
                   <a ng-click="selectCharity(item)">
                     <img ng-src="{{item.charity.logoColor}}" class="center circle hop">
                     <h4>{{item.name}}</h4>
@@ -55,7 +55,7 @@
             </div>
             <div class="show-for-medium-only">
               <ul class="medium-block-grid-2 text-center">
-                <li ng-repeat="item in charities | limitTo:2">
+                <li ng-repeat="item in charities.slice(page * perPage, (page + 1) * perPage)">
                   <a ng-click="selectCharity(item)">
                     <img ng-src="{{item.charity.logoColor}}" class="center circle hop">
                     <h4>{{item.name}}</h4>
@@ -66,7 +66,7 @@
             </div>
             <div class="show-for-large-only">
               <ul class="large-block-grid-3 text-center">
-                <li ng-repeat="item in charities | limitTo:3">
+                <li ng-repeat="item in charities.slice(page * perPage, (page + 1) * perPage)">
                   <a ng-click="selectCharity(item)">
                     <img ng-src="{{item.charity.logoColor}}" class="center circle hop">
                     <h4>{{item.name}}</h4>
@@ -79,10 +79,10 @@
         </ul>
 
         <!-- Navigation Arrows -->
-        <a class="orbit-prev" data-ng-show="hasPrevious()" data-ng-click="previous()">
+        <a class="orbit-prev" data-ng-show="hasPrevious" data-ng-click="previous()">
           Prev<span></span>
         </a>
-        <a class="orbit-next" data-ng-show="hasNext()" data-ng-click="next()">
+        <a class="orbit-next" data-ng-show="hasNext" data-ng-click="next()">
           Next<span></span>
         </a>
       </div>
