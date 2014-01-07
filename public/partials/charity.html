@@ -1,22 +1,3 @@
-<div style="color:black;" ng-show="false">
-    <!-- start of carousel -->
-    <div ng-repeat="item in charities" ng-model="aboutExpanded">
-        <img ng-src="{{item.charity.logoColor}}">
-        <h3>{{item.name}}</h3>
-        <div ng-switch="aboutExpanded[$index]">
-            <div ng-switch-when="undefined">
-                <p>{{item.charity.about.split(' ').slice(0,25).join(' ')}}... (Minified)</p>
-                <label><a ng-click="aboutExpanded[$index] = true">Learn More</a></label>
-            </div>
-            <div ng-switch-when="true">
-                <p>{{item.charity.about}} (Expanded)</p>
-                <label><a ng-click="aboutExpanded[$index] = undefined">Learn Less</a></label>
-            </div>
-        </div>
-    </div>
-    <!-- end of carousel -->
-</div>
-
 <div class="game-background philz with-image">
 
   <div class="row section heading select-charity-heading logo">
