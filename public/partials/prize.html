@@ -19,7 +19,7 @@
             <ul class="orbit-content rewards text-center center" data-orbit>
               <li>
                 <ul class="large-block-grid-3 medium-block-grid-3 text-center center">
-                  <li class="hop" ng-repeat="campaign in campaigns | limitTo:3">
+                  <li class="hop" ng-repeat="campaign in campaigns.slice(page * perPage, (page + 1) * perPage)">
                     <span class="label rounded">{{campaign.prize.points}} <span>points</span></span>
                     <img ng-src="{{campaign.prize.image}}" class="center circle">
                     <h4>{{campaign.description}}</h4>

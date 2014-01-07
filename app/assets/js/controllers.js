@@ -142,6 +142,19 @@ define(['angular'], function (angular) {
     Score.get({fbid: $rootScope.me.id, weekly: true}, function (res) {
 		$scope.weekly = res;
 	});
+    
+    $scope.$watch('page', function (newValue) {
+    	$scope.hasPrevious = newValue > 0;
+        $scope.hasNext = newValue < $scope.pageNo - 1;
+    });
+    
+    $scope.previous = function() {
+      $scope.page = $scope.page - 1;
+    };
+      
+    $scope.next = function() {
+      $scope.page = $scope.page + 1;
+    };
 
     //retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
     Campaign.query(function (res) {
@@ -156,6 +169,11 @@ define(['angular'], function (angular) {
         camp.picked = false;
         return camp;
       });
+      
+      $scope.perPage = 2;
+	  $scope.page = 0;
+	  $scope.pageNo = $scope.campaigns.length / $scope.perPage;
+	  
       $scope.hasAvailable = _.some($scope.campaigns, function(campaign) {
         return campaign.available;
       });
