@@ -27,7 +27,9 @@
               <ul class="small-block-grid-1 text-center">
                 <li ng-repeat="item in charities.slice(page * perPage, (page + 1) * perPage)">
                   <a ng-click="selectCharity(item)">
-                    <img ng-src="{{item.charity.logoColor}}" class="center circle hop">
+                    <img src="{{item.charity.logoColor}}" class="center circle hop">
+
+<!--                     <img ng-src="{{item.charity.logoColor}}" class="center circle hop"> -->
                     <h4>{{item.name}}</h4>
                     <p class="lead small light">{{item.charity.about}}</p>
                   </a>
@@ -68,7 +70,7 @@
         </a>
       </div>
       </div>
-        
+
       </div>
 
     </div>

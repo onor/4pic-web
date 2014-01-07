@@ -6,19 +6,33 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PicPhilz</title>     
-          
+        <title>PicPhilz</title>
+
         <script type="text/javascript" src="//use.typekit.net/ynf4byp.js"></script>
         <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-        
+
         <link rel="stylesheet" href="../scss/philz.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js"></script>
 		<script data-main="/js/app.min">var appConfig = {'appId':'@appId', 'gameKey':'@gameKey', 'onorUrl':'@onorUrl'};</script>
         <script data-main="/js/app.min" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.8/require.js"></script>
         <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("modernizr.js"))'></script>
         <style type="text/css">
+        .shape.ng-hide-add {
+          -webkit-transition: all 100ms ease-out;
+          -moz-transition: all 100ms ease-out;
+          transition: all 100ms ease-out;
+        }
+        .shape.ng-hide-remove {
+          -webkit-transition: all 100ms ease-out;
+          -moz-transition: all 100ms ease-out;
+          transition: all 100ms ease-out;
+        }
+        .shape.ng-hide {visibility:hidden !important;}
+
+
+
         .puzzle-board li {line-height:0;}
-        .ng-hide {display:none !important;}
+
         .pie-container {
           position:relative;
         }
@@ -31,7 +45,7 @@
           -webkit-border-radius: 50px;
           -o-border-radius: 50px;
           border-radius: 50px;
-        } 
+        }
         .pie {
           position: absolute;
           width: 100px;
@@ -60,7 +74,7 @@
           transform:rotate(60deg);
         }
         </style>
-        
+
     </head>
     <body class="game philz" resize>
         <div id="fb-root"></div>
