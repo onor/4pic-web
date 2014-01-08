@@ -25,10 +25,15 @@
 			                <ul class="large-block-grid-3 medium-block-grid-3 text-center center">
 			                  <li class="hop" ng-repeat="campaign in campaigns.slice(page * perPage, (page + 1) * perPage)">
 			                    <span class="label rounded">{{campaign.prize.points}} <span>points</span></span>
-			                    <img ng-src="{{campaign.prize.image}}" class="center circle"/>
-			                    <h4>{{campaign.prize.title}}</h4>
+			                    <img ng-show="campaign.available" ng-src="{{campaign.prize.image}}" class="center circle"/>
+			                    <div ng-show="!campaign.available" class="locked-container circle center">
+                      				<i class="fi-lock"></i>
+                      				<div class="circle shader"></div>
+                      				<img ng-src="{{campaign.prize.image}}" class="center circle">
+                    			</div>
+			                    <h4>{{campaign.prize.title}}</h4>			                    
 			                    <p class="lead philz-white">{{campaign.prize.description}}</p>
-			                    <a ng-click="claimReward(campaign)" class="button light-orange">Claim Reward</a>
+			                    <a ng-show="campaign.available" ng-click="claimReward(campaign)" class="button light-orange">Claim Reward</a>
 			                  </li>
 			                </ul>
 			              </li>
@@ -54,19 +59,22 @@
           			<li>
 			          <div class='show-for-small'>
 			            <ul class="orbit-content rewards text-center center" data-orbit>
-			              <?php for($z=0; $z<=8; $z++) { ?>
 			              <li ng-repeat="campaign in campaigns.slice(page * perPage, (page + 1) * perPage)">
 			                <ul class="small-block-grid-1 text-center center">
 			                  <li>
 			                    <span class="label rounded">{{campaign.prize.points}} <span>points</span></span>
-			                    <img ng-src="{{campaign.prize.image}}" class="center circle hop">
+			                    <img ng-show="campaign.available" ng-src="{{campaign.prize.image}}" class="center circle hop">
+			                    <div ng-show="!campaign.available" class="locked-container circle center">
+                      				<i class="fi-lock"></i>
+                      				<div class="circle shader"></div>
+                      				<img ng-src="{{campaign.prize.image}}" class="center circle">
+                    			</div>
 			                    <h4>{{campaign.prize.title}}</h4>
 			                    <p class="lead philz-white">{{campaign.prize.description}}</p>
-			                    <a ng-click="claimReward(campaign)" class="button light-orange">Claim Reward</a>
+			                    <a ng-show="campaign.available" ng-click="claimReward(campaign)" class="button light-orange">Claim Reward</a>
 			                  </li>
 			                </ul>
 			              </li>
-			              <?php } ?>
 			            </ul>
 			          </div>
 			        </li>
