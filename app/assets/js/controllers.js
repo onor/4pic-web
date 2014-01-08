@@ -271,7 +271,9 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 	$scope.showTimer = true;
 
 	function callback(response) {
-		response.to.length > 0
+		if(response.to.length > 0) {
+			removeLetters();
+		}
 	}
 
 	$scope.inviteFriend = function() {
@@ -404,7 +406,7 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 		return false;
 	}
 
-	$scope.removeLetters = function () {
+	function removeLetters() {
 		for (var i = 0; i < $scope.generated.length; i++) {
 			var letter = $scope.generated[i];
 			var removedFromOther = removeLetter(letter, $scope.other);
@@ -413,6 +415,7 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 			}
 		}
 	}
+	
 	$scope.revealLetter = function () {
 		var answer = $scope.level.answer.toUpperCase();
 		var letter = _.first(_.shuffle(_.intersection(answer.split(''), $scope.other)));
