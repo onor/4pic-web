@@ -23,14 +23,14 @@
   </div>
 
   <div class="left shape hide-for-small" ng-hide="showGivePanel">
-    <div class="triangle" style="border-bottom-width:{{windowHeight + 10}}px; height:{{windowHeight}}px;">
+    <div class="triangle animate-show" style="border-bottom-width:{{windowHeight + 10}}px; height:{{windowHeight}}px;">
       <img src="../images/icon-heart-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;" ng-click="showTheGivePanel()">
       <h4 id="giveText" style="top: {{(windowHeight / 2) + 45}}px;">Give</h4>
     </div>
   </div>
 
   <div class="left shape hide-for-small" ng-show="showGivePanel" ng-click="hideTheGivePanel()">
-    <div class="rectangle" style="border-bottom-width: {{windowHeight}}px; height: {{windowHeight}}px;">
+    <div class="rectangle animate-show" style="border-bottom-width: {{windowHeight}}px; height: {{windowHeight}}px;">
       <div class="row">
         <div class="large-7 medium-7 columns center">
           <h2 style="margin-top:30px;">Play &amp; Give</h2>
@@ -59,14 +59,14 @@
   </div>
 
   <div class="right shape hide-for-small" ng-hide="showGetPanel">
-    <div class="triangle" style="border-bottom-width:{{windowHeight + 10}}px; height: {{windowHeight}}px;">
+    <div class="triangle animate-show" style="border-bottom-width:{{windowHeight + 10}}px; height: {{windowHeight}}px;">
       <img src="../images/icon-reward-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;" ng-click="showTheGetPanel()">
       <h4 style="top: {{(windowHeight / 2) + 45}}px;" id="getText">Get</h4>
     </div>
   </div>
 
   <div class="right shape hide-for-small" ng-show="showGetPanel" ng-click="hideTheGetPanel()">
-    <div class="rectangle" style="border-bottom-width: {{windowHeight + 10}}px; height: {{windowHeight}}px;">
+    <div class="rectangle animate-show" style="border-bottom-width: {{windowHeight + 10}}px; height: {{windowHeight}}px;">
       <div class="row">
         <div class="large-7 medium-7 columns center">
           <h2 style="margin-top:30px;">Play &amp; Get</h2>

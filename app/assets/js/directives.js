@@ -5,9 +5,9 @@
 define(['angular'], function (angular) {
 
 	/* Directives */
-	
 
-	
+
+
 	angular.module('myApp.directives', []).directive('imageonload', function () {
 		return {
 			restrict: 'A',
@@ -21,20 +21,40 @@ define(['angular'], function (angular) {
 		return function (scope, element) {
 		    var d = angular.element($document);
 		    var w = angular.element($window);
+		    var el = angular.element(element);
+
 		    scope.getWindowDimensions = function () {
 		        return { 'h': w.height(), 'w': w.width() };
 		    };
 		    scope.getDocumentDimensions = function() {
 		    	return { 'h': d.height(), 'w': d.width() };
 		    };
+		    scope.getElementDimensions = function(element) {
+		    	if (el.find('.heart-mask').length === 1) {
+		    		el = el.find('.heart-mask').first();
+		    	}
+		    	return { 'h': el.height(), 'w': el.width() };
+		    };
+		    scope.$watch(scope.getElementDimensions, function (newValue, oldValue) {
+		        scope.elHeight = newValue.h;
+		        scope.elWidth = newValue.w;
+
+		        scope.style = function () {
+		            return {
+		                'height': (newValue.h - 100) + 'px',
+		                'width': (newValue.w - 100) + 'px'
+		            };
+		        };
+
+		    }, true);
 		    scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
 		        scope.windowHeight = newValue.h;
 		        scope.windowWidth = newValue.w;
 
 		        scope.style = function () {
-		            return { 
+		            return {
 		                'height': (newValue.h - 100) + 'px',
-		                'width': (newValue.w - 100) + 'px' 
+		                'width': (newValue.w - 100) + 'px'
 		            };
 		        };
 
@@ -44,9 +64,9 @@ define(['angular'], function (angular) {
 		        scope.documentWidth = newValue.w;
 
 		        scope.style = function () {
-		            return { 
+		            return {
 		                'height': (newValue.h - 100) + 'px',
-		                'width': (newValue.w - 100) + 'px' 
+		                'width': (newValue.w - 100) + 'px'
 		            };
 		        };
 

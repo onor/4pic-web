@@ -1,4 +1,19 @@
-<div class="game-background philz with-image">
+<div class="game-background philz with-image" style="height:{{windowHeight}}px;">
+
+    <!--points alerts-->
+    <div class="row point-alert">
+        <div class="col-md-12 col-xs-12">
+          <div class="row">
+            <div class="col-md-10 col-xs-12">
+              <div data-alert class="alert-box text-center">
+                <strong>Sally, you are 3 word puzzles away from feeding 5 people!</strong>
+                <a href="#" class="close">&times;</a>
+              </div>
+              <div class="triangle"></div>
+            </div>
+          </div>
+        </div>
+    </div>
 
 	  <ng-include src="'../../partials/points.html'"></ng-include>
 
@@ -42,12 +57,14 @@
 
               <div class="puzzle-board">
                 <ul class="large-block-grid-6 small-block-grid-6 rounded">
+                  <!-- add a non-breaking space (&nbsp;) when letters are removed so the keyboard doesn't collapse-->
                   <li ng-repeat="letter in answer track by $index" ng-click="remove($index)">{{letter}}</li>
                 </ul>
               </div>
 
               <div class="keyboard text-center">
                 <ul class="large-block-grid-6 small-block-grid-6 rounded">
+                  <!-- add a non-breaking space (&nbsp;) when letters are removed so the keyboard doesn't collapse-->
                   <li ng-repeat="letter in other track by $index" ng-click="add($index)"><span>{{letter}}</span></li>
                 </ul>
               </div>

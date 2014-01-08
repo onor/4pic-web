@@ -1,16 +1,51 @@
 body.game {
-	.heart-container {
-		// margin-top:0 !important;
-		// height: 1081px !important;
-    // position: static !important;
-    // width: auto  !important;
-    // overflow: hidden;
+	.last-0 {
+		@media screen and (min-width:1282px) and (max-width:1316px) {
+			display:none !important;
+		}
 
+		@media #{$small-only} { display:none !important; }
+		@media #{$medium-only} { }
+
+	}
+
+	.last-1 {
+		@media screen and (min-width:1282px) and (max-width:1316px) {
+			display:none !important;
+		}
+		@media #{$small-only} {  display:none !important; }
+		@media #{$medium-only} { }
+	}
+
+
+	.last-2 {
+		@media screen and (min-width:1316px) and (max-width:1415px) {
+			display:none !important;
+		}
+		@media #{$small-only} { display:none !important; }
+		@media #{$medium-only} { }
+	}
+
+
+	.last-3 {
+		@media screen and (min-width:1415px) and (max-width:1515px) {
+			display:none !important;
+		}
+		@media #{$small-only} { display:none !important; }
+		@media #{$medium-only} { }
+	}
+
+
+
+	.heart-container {
 		.heart-mask {
 			top: 40px !important;
 		}
 	}
 }
+
+
+
 
 .person-container {
 	white-space: nowrap;

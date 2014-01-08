@@ -18,7 +18,7 @@
   .triangle {
     .start-screen-icon { position:absolute; left:58px; margin-top:-20px; z-index: 999; }
     z-index: 1;
-    @include single-transition(width, 100ms);
+    @include single-transition(width, 1000ms);
     @include triangle($dir:right,$amt:360px,$color:transparent);
     @include triangle($dir:bottom,$amt:845px,$color:rgba(242, 236, 219, 0.75));
     position: absolute;
@@ -30,7 +30,7 @@
     overflow-y:scroll;
     #giveText { display:none; }
     z-index: 1002;
-    @include single-transition(width, 300ms);
+    @include single-transition(width, 1000ms);
     position: absolute;
     top: 0;
     left: 0;

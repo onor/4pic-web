@@ -1,4 +1,31 @@
 .game {
+	.point-alert {
+		background-color:$philz-orange !important;
+		.alert-box {
+			@include tisa;
+			background-color:$philz-orange;
+			margin-bottom:0 !important;
+			font-size:14px;
+			border:none !important;
+			border-bottom:1px solid $philz-orange;
+
+			.close {
+				margin-right:20px;
+				color:darken($philz-orange,40%);
+			}
+		}
+
+		// .triangle {
+		// 	width:12px;
+		// 	height:12px;
+		// 	position:absolute;
+		// 	top:42px;
+		// 	left:50%;
+		// 	margin-left:-6px;
+		// 	@include css-triangle(12px, darken($philz-orange,10%), up);
+		// }
+
+	}
 
 	.game-background {
 		.panel-grid {
@@ -153,8 +180,6 @@
 				position:relative;
 
 				li {
-					float:left;
-					display:inline;
 					margin-right:25px;
 					@media #{$small-only} { margin-right:0px; }
 				}
@@ -162,27 +187,37 @@
 
 				//profile pic
 				> li:first-child {
+					float:left !important;
+					display:inline;
 					padding-left: 0 !important;
 					display:none;
 				}
 
 				//total points
 				> li:nth-child(2) {
+					float:left !important;
+					display:inline;
 					width:100px;
 					@media #{$small-only} { width: 138px !important; }
 				}
 
 				//timer
 				> li:nth-child(3) {
+					float:left !important;
+					display:inline;
+					width: 100px;
+					height: 100px;
 					@media #{$small-only} {
 						position:absolute;
 						left: 4px;
-						top:-44px
+						top:-44px;
 					}
 				}
 
 				//heart points
 				> li:nth-child(4) {
+					float:left !important;
+					display:inline;
 					@media #{$small-up} { width:auto; }
 					@media #{$small-only} {
 						width:70px;
@@ -192,6 +227,8 @@
 
 				//reward points
 				> li:nth-child(5) {
+					float:right !important;
+					display:inline;
 					@media #{$small-up} {
 						float:right;
 						width:auto;
@@ -278,7 +315,7 @@
 						top:50%;
 						left:50%;
 						margin-top: -11%;
-						margin-left: -18%;
+						margin-left: -13%;
 						&.hearts { margin-top: -13%; color:#ff2424; }
 						&.rewards { color:#e17f31; }
 						@include tisa;
@@ -358,7 +395,8 @@
 					background-color:rgba(255,255,255,.84);
 
 					li {
-						color:lighten(#eaa66f,20%);
+						text-align:center;
+						color:$philz-orange;
 						padding: 1.55rem 0.625rem 1.55rem !important;
 						vertical-align:middle;
 						border-right:3px solid #eaa66f;
@@ -378,7 +416,8 @@
 					margin: 0 !important;
 					border: 3px solid #eaa66f !important;
 					li {
-						a {
+
+						a, span {
 							padding: 1rem 0.625rem 1rem;
 							color:lighten(#eaa66f,20%);
 							display:block;
@@ -408,7 +447,6 @@
 					li { border:none !important; }
 				}
 			}
-
 		}
 
 		&.goal {
@@ -705,8 +743,6 @@
 					h6,h4,h5 { color:$philz-orange; }
 				}
 			}
-
-
 		}
 
 

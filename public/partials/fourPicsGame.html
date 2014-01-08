@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col-md-12 col-xs-12">
         <timer autostart="false" interval="1000" countdown="countdownAvailable">
-        </timer>   
+        </timer>
     </div>
 </div>
 
@@ -54,7 +54,7 @@
 
         <div id="letter-board" class="clearfix">
             <ul id="letter-placeholder" class="inline list-unstyled clearfix" ng-class="{'invalidClass': invalid}">
-                <li ng-repeat="letter in answer track by $index">
+                <li class="text-center" ng-repeat="letter in answer track by $index">
                     <div ng-click="remove($index)">
                         {{letter}}
                     </div>
@@ -64,15 +64,15 @@
                 <div class="col-md-11">
                     <div id="letter-selections" class="clearfix">
                         <ul class="inline">
-                            <li ng-repeat="letter in other track by $index">
+                            <li class="text-center" ng-repeat="letter in other track by $index">
                                 <div ng-click="add($index)">
                                     {{letter}}
                                 </div>
                             </li>
-                        </ul> 
-                    </div>  
-                </div>     
-                <div class="col-md-1  col-md-pull-3">   
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-1  col-md-pull-3">
                     <a ng-click="hint()" class="helpbutton" align="text-center">
                     ?
                     </a>
