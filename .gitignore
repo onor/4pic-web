@@ -5,6 +5,7 @@ project/target
 target
 logs
 dist
+.DS_Store
 .target
 .history
 .settings

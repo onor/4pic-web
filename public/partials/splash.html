@@ -10,7 +10,7 @@
 
   <div class="row section start">
     <div class="large-4 columns center text-center">
-      <a ng-click="go()" class="button large light-orange">{{(hasMoreLevelPacks || !fbLoggedIn) ? 'Play Now':'See rankings'}}</a>
+      <a analytics-on ng-click="go()" class="button large light-orange">{{(hasMoreLevelPacks || !fbLoggedIn) ? 'Play Now':'See rankings'}}</a>
 
       <div fbothersplayed on-login="fbLoggedIn"></div>
 
@@ -24,7 +24,7 @@
 
   <div class="left shape hide-for-small" ng-hide="showGivePanel">
     <div class="triangle animate-show" style="border-bottom-width:{{windowHeight + 10}}px; height:{{windowHeight}}px;">
-      <img src="../images/icon-heart-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;" ng-click="showTheGivePanel()">
+      <img src="../images/icon-heart-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;" analytics-on ng-click="showTheGivePanel()">
       <h4 id="giveText" style="top: {{(windowHeight / 2) + 45}}px;">Give</h4>
     </div>
   </div>
@@ -34,7 +34,7 @@
       <div class="row">
         <div class="large-7 medium-7 columns center">
           <h2 style="margin-top:30px;">Play &amp; Give</h2>
-          <span class="close" id="closeGive" ng-click="hideTheGivePanel()">
+          <span class="close" id="closeGive" analytics-on ng-click="hideTheGivePanel()">
             <i class="fi-x"></i>
           </span>
           <ul class="panel-grid large-block-grid-2 medium-block-grid-2 small-block-grid-1" style="margin-top:50px;">
@@ -60,7 +60,7 @@
 
   <div class="right shape hide-for-small" ng-hide="showGetPanel">
     <div class="triangle animate-show" style="border-bottom-width:{{windowHeight + 10}}px; height: {{windowHeight}}px;">
-      <img src="../images/icon-reward-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;" ng-click="showTheGetPanel()">
+      <img src="../images/icon-reward-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;"  analytics-on ng-click="showTheGetPanel()">
       <h4 style="top: {{(windowHeight / 2) + 45}}px;" id="getText">Get</h4>
     </div>
   </div>
@@ -70,7 +70,7 @@
       <div class="row">
         <div class="large-7 medium-7 columns center">
           <h2 style="margin-top:30px;">Play &amp; Get</h2>
-          <span class="close" id="closeGet" ng-click="hideTheGetPanel()">
+          <span class="close" id="closeGet" analytics-on ng-click="hideTheGetPanel()">
             <i class="fi-x"></i>
           </span>
           <ul class="panel-grid large-block-grid-2 medium-block-grid-2 small-block-grid-1" style="margin-top:50px;">

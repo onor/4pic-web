@@ -4,7 +4,7 @@
 
       <div class="row section goal">
         <div class="large-10 medium-12 columns center text-center">
-          <h3>{{me.name}}, you've played 13 of 50 games for Philz to write a check of $10 for FeedAmerica!</h3>
+          <h3>{{me.name}} {{votes.heartSize - votes.needed}} out of {{votes.heartSize}} games are played for {{game.name}} to write a check of {{votes.donationPer * 50}}$ for {{pickedCharity.name}}!</h3>
           <a href="game-leaderboard.php" class="button light-orange">Keep Playing &nbsp;&amp;&nbsp; Do Good</a>
           <span class="lead philz-white">&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <a href="#" class="button light-orange">Invite Your Friends</a>
@@ -15,21 +15,79 @@
       <div class="row section rewards">
 
         <div class="large-10 medium-12 columns center text-center">
-          <div class='hide-for-small'>
-            <ul class="orbit-content rewards text-center center" data-orbit>
-              <li>
-                <ul class="large-block-grid-3 medium-block-grid-3 text-center center">
-                  <li class="hop" ng-repeat="campaign in campaigns | limitTo:3">
-                    <span class="label rounded">{{campaign.prize.points}} <span>points</span></span>
-                    <img ng-src="{{campaign.prize.image}}" class="center circle">
-                    <h4>{{campaign.description}}</h4>
-                    <p class="lead philz-white">A $3.00 reward with a $3.00 donation to FeedAmerica</p>
-                    <a href="#" class="button light-orange">Claim Reward</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+        	<div data-carousel data-carousel-class="orbit-content charity text-center">
+      			<div class="orbit-container">
+        			<ul data-orbit class="orbit-content charity text-center orbit-slides-container" style="height:500px;">
+          			<li>
+			          <div class='hide-for-small'>
+			            <ul class="orbit-content rewards text-center center" data-orbit>
+			              <li>
+			                <ul class="large-block-grid-3 medium-block-grid-3 text-center center">
+			                  <li class="hop" ng-repeat="campaign in campaigns.slice(page * perPage, (page + 1) * perPage)">
+			                    <span class="label rounded">{{campaign.prize.points}} <span>points</span></span>
+			                    <img ng-show="campaign.available" ng-src="{{campaign.prize.image}}" class="center circle"/>
+			                    <div ng-show="!campaign.available" class="locked-container circle center">
+                      				<i class="fi-lock"></i>
+                      				<div class="circle shader"></div>
+                      				<img ng-src="{{campaign.prize.image}}" class="center circle">
+                    			</div>
+			                    <h4>{{campaign.prize.title}}</h4>			                    
+			                    <p class="lead philz-white">{{campaign.prize.description}}</p>
+			                    <a ng-show="campaign.available" ng-click="claimReward(campaign)" class="button light-orange">Claim Reward</a>
+			                  </li>
+			                </ul>
+			              </li>
+			            </ul>
+			          </div>
+			         </li>
+			         </ul>
+			         <!-- Navigation Arrows -->
+			        <a class="orbit-prev" data-ng-show="hasPrevious" data-ng-click="previous()">
+			          Prev<span></span>
+			        </a>
+			        <a class="orbit-next" data-ng-show="hasNext" data-ng-click="next()">
+			          Next<span></span>
+			        </a>
+			     </div>
+			 </div>
+        </div>
+        
+        <div class="large-10 columns center text-center">
+        	<div data-carousel data-carousel-class="orbit-content charity text-center">
+      			<div class="orbit-container">
+        			<ul data-orbit class="orbit-content charity text-center orbit-slides-container">
+          			<li>
+			          <div class='show-for-small'>
+			            <ul class="orbit-content rewards text-center center" data-orbit>
+			              <li ng-repeat="campaign in campaigns.slice(page * perPage, (page + 1) * perPage)">
+			                <ul class="small-block-grid-1 text-center center">
+			                  <li>
+			                    <span class="label rounded">{{campaign.prize.points}} <span>points</span></span>
+			                    <img ng-show="campaign.available" ng-src="{{campaign.prize.image}}" class="center circle hop">
+			                    <div ng-show="!campaign.available" class="locked-container circle center">
+                      				<i class="fi-lock"></i>
+                      				<div class="circle shader"></div>
+                      				<img ng-src="{{campaign.prize.image}}" class="center circle">
+                    			</div>
+			                    <h4>{{campaign.prize.title}}</h4>
+			                    <p class="lead philz-white">{{campaign.prize.description}}</p>
+			                    <a ng-show="campaign.available" ng-click="claimReward(campaign)" class="button light-orange">Claim Reward</a>
+			                  </li>
+			                </ul>
+			              </li>
+			            </ul>
+			          </div>
+			        </li>
+			        </ul>
+			        <!-- Navigation Arrows -->
+			        <a class="orbit-prev" data-ng-show="hasPrevious" data-ng-click="previous()">
+			          Prev<span></span>
+			        </a>
+			        <a class="orbit-next" data-ng-show="hasNext" data-ng-click="next()">
+			          Next<span></span>
+			        </a>
+			    </div>
+			 </div>
         </div>
 
       </div>

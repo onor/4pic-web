@@ -20,7 +20,13 @@
             </div>
           </li>
           <li>
-            <timer ng-show="showTimer" autostart="false" interval="1000" countdown="countdownAvailable"></timer>
+            <timer ng-show="showTimer" autostart="false" interval="1000" countdown="countdownAvailable">
+              <div class="pie-timer"
+                ng-class="{'under-half':(((countdownattr - seconds) / countdownattr) < 0.5), 'over-half': (((countdownattr - seconds) / countdownattr) >= 0.5)}">
+                <div class="before" style="-moz-transform: rotate({{(((countdownattr - seconds) / countdownattr) * 360)}}deg);-ms-transform: rotate({{(((countdownattr - seconds) / countdownattr) * 360)}}deg);-webkit-transform: rotate({{(((countdownattr - seconds) / countdownattr) * 360)}}deg);-o-transform: rotate({{(((countdownattr - seconds) / countdownattr) * 360)}}deg);transform: rotate({{(((countdownattr - seconds) / countdownattr) * 360)}}deg);"></div>
+                <div class="after"></div>
+              </div>
+            </timer>
           </li>
           <li class="text-center center">
             <div class="ix heart-points">
@@ -29,7 +35,7 @@
                 <img src="../images/icon-heart-game-full-lg.png" ng-show="progressFull">
                 <img src="../images/icon-heart-game-lg.png" ng-hide="progressFull">
               </span>
-              <span class="description">for FeedAmerica &bull; <a ng-click="goToCharity()"><strong>Change</strong></a></span>
+              <span class="description">for {{pickedCharity.name}} &bull; <a ng-click="goToCharity()"><strong>Change</strong></a></span>
             </div>
           </li>
           <li class="text-center center">
@@ -39,7 +45,7 @@
                 <img src="../images/icon-reward-game-full-lg.png" ng-show="progressFull">
                 <img src="../images/icon-reward-game-lg.png" ng-hide="progressFull">
               </span>
-              <span class="description">for your first Philz reward</span>
+              <span class="description">for your first {{game.name}} reward</span>
             </div>
           </li>
         </ul>
