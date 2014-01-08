@@ -140,7 +140,7 @@ define(['angular'], function (angular) {
 
   };
 
-  var PrizeCtrl = function($scope, $rootScope, $location, Campaign, $facebook, $filter, PrizeCode, Score) {
+  var PrizeCtrl = function($scope, $rootScope, $location, Campaign, $facebook, $filter, PrizeCode, Score, screenSize) {
 
     $scope.showTimer = false;
 
@@ -176,7 +176,15 @@ define(['angular'], function (angular) {
         return camp;
       });
       
-      $scope.perPage = 2;
+      if (screenSize.is('small')) {
+  	    $scope.perPage = 1;
+  	  }
+  	  if (screenSize.is('medium')) {
+  		$scope.perPage = 3;
+  	  }
+  	  if (screenSize.is('large')) {
+  	    $scope.perPage = 3;
+  	  }
 	  $scope.page = 0;
 	  $scope.pageNo = $scope.campaigns.length / $scope.perPage;
 	  
