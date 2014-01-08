@@ -55,7 +55,7 @@ define(['angular'], function (angular) {
     function goIfLogedin(){
     	if($scope.hasMoreLevelPacks) {
 			if(angular.isDefined($rootScope.state.charityId)) {
-			    $location.path('/prize');
+			    $location.path('/heart');
 			} else {
 				$location.path('/charity');
 			}
