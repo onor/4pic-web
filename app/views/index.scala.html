@@ -19,46 +19,74 @@
         <style type="text/css">
         .puzzle-board li {line-height:0;}
         .ng-hide {display:none !important;}
-        .pie-container {
-          position:relative;
+
+
+        .pie-timer {
+          position: relative;
+          width: 5em;
+          height: 5em;
         }
-        .pie-background {
-          background-color: #ccc;
+        .pie-timer.under-half {
+          left: 2.5em;
+          -moz-transform-origin: left center;
+          -ms-transform-origin: left center;
+          -o-transform-origin: left center;
+          -webkit-transform-origin: left center;
+          transform-origin: left center;
+        }
+        .pie-timer.over-half {
+          left: 0;
+          -moz-transform-origin: center center;
+          -ms-transform-origin: center center;
+          -o-transform-origin: center center;
+          -webkit-transform-origin: center center;
+          transform-origin: center center;
+        }
+        .pie-timer .before {
+          content: '';
           position: absolute;
-          width: 100px;
-          height: 100px;
-          -moz-border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -o-border-radius: 50px;
-          border-radius: 50px;
-        } 
-        .pie {
+          width: 2.5em;
+          height: 5em;
+          border-radius: 2.5em 0 0 2.5em;
+          background: #cccccc;
+          -moz-transform-origin: right center;
+          -ms-transform-origin: right center;
+          -o-transform-origin: right center;
+          -webkit-transform-origin: right center;
+          transform-origin: right center;
+          -moz-transform: rotate(72deg);
+          -ms-transform: rotate(72deg);
+          -webkit-transform: rotate(72deg);
+          -o-transform: rotate(72deg);
+          transform: rotate(72deg);
+        }
+        .pie-timer.under-half .before {
+          left: -2.5em;
+        }
+        .pie-timer.over-half .before {
+          left: 0;
+        }
+        .pie-timer .after {
+          content: '';
           position: absolute;
-          width: 100px;
-          height: 100px;
-          -moz-border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -o-border-radius: 50px;
-          border-radius: 50px;
-          clip: rect(0px, 50px, 100px, 0px);
+          width: 2.5em;
+          height: 5em;
+          text-align: center;
+          line-height: 5em;
         }
-        .hold {
-          position: absolute;
-          width: 100px;
-          height: 100px;
-          -moz-border-radius: 50px;
-          -webkit-border-radius: 50px;
-          -o-border-radius: 50px;
-          border-radius: 50px;
-          clip: rect(0px, 100px, 100px, 50px);
+        .pie-timer.under-half .after {
+          left: -2.5em;
+          background: #f2ecdb;
+          outline: 1px solid #f2ecdb;
+          box-shadow: none;
         }
-        #pieSlice1 .pie {
-          background-color: orange;
-          -webkit-transform:rotate(60deg);
-          -moz-transform:rotate(60deg);
-          -o-transform:rotate(60deg);
-          transform:rotate(60deg);
+        .pie-timer.over-half .after {
+          left: 2.5em;
+          text-indent: -2.5em;
+          background: #cccccc;
+          border-radius: 0 2.5em 2.5em 0;
         }
+
         </style>
         
     </head>
