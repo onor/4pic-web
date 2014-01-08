@@ -147,8 +147,12 @@ define(['angular'], function (angular) {
 
   };
 
-  var PrizeCtrl = function($scope, $rootScope, $location, Campaign, $facebook, $filter, PrizeCode, Score, screenSize) {
+  var PrizeCtrl = function($scope, $rootScope, $location, Campaign, $facebook, $filter, PrizeCode, Score, screenSize, Votes) {
 
+	$scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
+		$scope.votes = votes;
+	});
+	  
     $scope.showTimer = false;
 	$scope.progress =  100;
 	$scope.progressFull = true;
