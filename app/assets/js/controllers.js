@@ -143,6 +143,8 @@ define(['angular'], function (angular) {
   var PrizeCtrl = function($scope, $rootScope, $location, Campaign, $facebook, $filter, PrizeCode, Score, screenSize) {
 
     $scope.showTimer = false;
+	$scope.progress =  100;
+	$scope.progressFull = true;
 
     $scope.alltime = Score.get({fbid: $rootScope.me.id, weekly: false});
     Score.get({fbid: $rootScope.me.id, weekly: true}, function (res) {
@@ -161,6 +163,8 @@ define(['angular'], function (angular) {
     $scope.next = function() {
       $scope.page = $scope.page + 1;
     };
+    
+    $scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
 
     //retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
     Campaign.query(function (res) {
@@ -169,7 +173,7 @@ define(['angular'], function (angular) {
         PrizeCode.available({campaignId:camp._id}, function(cnt) {
           camp.available = true;
           if (angular.isDefined(camp.prize.points)) {
-            camp.available = ($rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score - 0) >= (camp.prize.points);
+            camp.available = $scope.score >= (camp.prize.points);
           }
         });
         camp.picked = false;
@@ -446,7 +450,6 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 		//User has selected Question Mark
 		if ($scope.hintUsed == false) {
 			$rootScope.state.$hint({hint: 10}, function (res) {
-        debugger;
 				$scope.removeLetters();
 				$scope.hintUsed = true;
 			});
@@ -463,7 +466,7 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 	$scope.nextLevel = function (points2) {
 
 		if (level == $scope.levels.length - 1) { //todo take 4 from game definition, remove levelPack param
-			$location.path('/leaderboard');
+			$location.path('/prize');
 		} else {
 			$route.reload();
 		}
