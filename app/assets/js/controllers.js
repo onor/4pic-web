@@ -55,7 +55,7 @@ define(['angular'], function (angular) {
     function goIfLogedin(){
     	if($scope.hasMoreLevelPacks) {
 			if(angular.isDefined($rootScope.state.charityId)) {
-			    $location.path('/heart');
+			    $location.path('/prize');
 			} else {
 				$location.path('/charity');
 			}
@@ -168,7 +168,6 @@ define(['angular'], function (angular) {
 
     //retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
     Campaign.query(function (res) {
-      //$scope.campaigns = _.groupBy(res, function(a){ return Math.floor(_.indexOf(res,a)/1)});
       $scope.campaigns = _.map(res, function (camp) {
         PrizeCode.available({campaignId:camp._id}, function(cnt) {
           camp.available = true;
@@ -176,7 +175,6 @@ define(['angular'], function (angular) {
             camp.available = $scope.score >= (camp.prize.points);
           }
         });
-        camp.picked = false;
         return camp;
       });
       
@@ -197,18 +195,9 @@ define(['angular'], function (angular) {
       });
     });
 
-      //watches selectcampaign model, and changes picked state in campaigns collection based on it
-    $scope.selectedCampaign = null;
-    $scope.$watch('selectedCampaign', function (selected) {
-      _.each($scope.campaigns, function(campaign) {
-        campaign.picked = selected._id === campaign._id;
-      });
-    }, true);
-
       //user can pick prize if he has enough points
-    $scope.pickPrize = function(campaign) {
+    $scope.claimReward = function(campaign) {
       if (campaign.available) {
-        $scope.selectedCampaign = campaign;
         PrizeCode.save({'fbid':appConfig.fbid},{
           'email' : 'rudolf.markulin@gmail.com',
           'campaignId' : campaign._id,
@@ -218,18 +207,7 @@ define(['angular'], function (angular) {
           function(success) {alert('Prize was sent.');},
           function(error) {alert('Error ' + error);}
         );
-      } else {
-        $scope.openModal();
       }
-    };
-
-      //navigation
-    $scope.charity = function () {
-      $location.path('/charity');
-    };
-
-    $scope.openModal = function() {
-      //todo
     };
 
   };
