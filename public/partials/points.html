@@ -35,7 +35,7 @@
                 <img src="../images/icon-heart-game-full-lg.png" ng-show="progressFull">
                 <img src="../images/icon-heart-game-lg.png" ng-hide="progressFull">
               </span>
-              <span class="description">for FeedAmerica &bull; <a ng-click="goToCharity()"><strong>Change</strong></a></span>
+              <span class="description">for {{pickedCharity.name}} &bull; <a ng-click="goToCharity()"><strong>Change</strong></a></span>
             </div>
           </li>
           <li class="text-center center">
@@ -45,7 +45,7 @@
                 <img src="../images/icon-reward-game-full-lg.png" ng-show="progressFull">
                 <img src="../images/icon-reward-game-lg.png" ng-hide="progressFull">
               </span>
-              <span class="description">for your first Philz reward</span>
+              <span class="description">for your first {{game.name}} reward</span>
             </div>
           </li>
         </ul>

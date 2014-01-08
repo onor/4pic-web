@@ -46,13 +46,19 @@
         position: absolute;
         top: 0;
         right: -173px;
+
+        height:30px;
+        width:30px;
+        background-color:$philz-orange;
+        -webkit-border-radius:50%;
+        border-radius:50%;
+
         &:hover { cursor:pointer; }
         i {
+          vertical-align: middle;
+          position: relative;
+          top: 5px;
           color:#fff;
-          padding:5px 12px;
-          background-color:$philz-orange;
-          -webkit-border-radius:50%;
-          border-radius:50%;
         }
       }
     }
@@ -93,13 +99,19 @@
         position: absolute;
         top: 0;
         left: -173px;
+
+        height:30px;
+        width:30px;
+        background-color:$philz-orange;
+        -webkit-border-radius:50%;
+        border-radius:50%;
+
         &:hover { cursor:pointer; }
         i {
+          vertical-align: middle;
+          position: relative;
+          top: 5px;
           color:#fff;
-          padding:5px 12px;
-          background-color:$philz-orange;
-          -webkit-border-radius:50%;
-          border-radius:50%;
         }
       }
     }
