@@ -10,14 +10,16 @@ define(['angular'], function (angular) {
 
   var SplashCtrl = function($scope, $rootScope, State, $location, Game, $facebook, Charity, Campaign, $filter) {
     $rootScope.game = Game.get({}, function(){
-    	$facebook.getLoginStatus().then(function(res) {
-        	if(res.status == "connected") {
-        		setState(res);
-        	}
-        });
+        $scope.charities = Charity.query({}, function(charities) {
+        	$scope.charities = charities;//todo in conflict with 20 charities per query
+        	$facebook.getLoginStatus().then(function(res) {
+            	if(res.status == "connected") {
+            		setState(res);
+            	}
+            });
+        });   	
     });
 
-    $scope.charities = Charity.query({});
     $scope.campaigns = Campaign.query({});
 
     $scope.showGivePanel = false;
@@ -42,6 +44,11 @@ define(['angular'], function (angular) {
         	$rootScope.me = $filter('finfo')(me);
     		State.get({fbid:appConfig.fbid}, function(res2){
     			$rootScope.state = res2;
+    			if(angular.isDefined($rootScope.state.charityId)) {
+    				$rootScope.pickedCharity = _.find($scope.charities, function(charity) {
+    					return charity._id == $rootScope.state.charityId
+    				});
+    			}
     			var levelPack = $rootScope.state.state.levelPack;
     			$scope.hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
     	    	$scope.fbLoggedIn = true;
@@ -253,6 +260,7 @@ define(['angular'], function (angular) {
 
     $scope.selectCharity = function(charity) {
       $rootScope.state.charityId = charity._id;
+      $rootScope.pickedCharity = charity;
 	  $location.path('/heart');
     }
 
