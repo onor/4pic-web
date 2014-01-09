@@ -73,12 +73,7 @@
               <div class="large-5 medium-5 columns text-center center">
                 <div class="share-heart">
                   <img src="../images/heart-leaderboard.png">
-                  <p class="subhead philz-orange text-center">
-                    <strong>{{me.name}} {{votes.heartSize - votes.needed}} out of {{votes.heartSize}} games are played for {{game.name}} to write a check of {{votes.donationPer * 50}}$ for {{pickedCharity.name}}!</strong>
-                  </p>
-                  <a ng-click="playAgain()" ng-show="hasMoreLevelPacks" class="button dark-orange display-block text-center">Play Again</a>
-                  <span ng-show="hasMoreLevelPacks" class="lead philz-orange philz-white">&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  <a href="game-play.php" class="button dark-orange display-block text-center">Share Your Heart</a>
+                  <ng-include src="'../../partials/shareHeart.html'"/>
                 </div>
               </div>
               <!--end heart-->
@@ -165,12 +160,8 @@
                     </ul>
                   </div>
 
-                  <p class="subhead philz-orange text-center">
-                    <strong>{{me.name}} {{votes.heartSize - votes.needed}} out of {{votes.heartSize}} games are played for {{game.name}} to write a check of {{votes.donationPer * 50}}$ for {{pickedCharity.name}}!</strong>
-                  </p>
-                  <a ng-click="playAgain()" ng-show="hasMoreLevelPacks" class="button dark-orange display-block text-center">Play Again</a>
-                  <span ng-show="hasMoreLevelPacks" class="lead philz-orange philz-white">&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  <a href="game-play.php" class="button dark-orange display-block text-center">Share Your Heart</a>
+                  <ng-include src="'../../partials/shareHeart.html'"/>
+
                 </div>
 
               </div>
