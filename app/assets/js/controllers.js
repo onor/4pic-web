@@ -339,19 +339,23 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
     $scope.level = $rootScope.game.levelPacks[levelPack].levels[level];
 
-    $scope.answer = [];
+    function setLetters() {
+    	$scope.answer = [];
 
-	for (var i = 0; i < 12; i++) {
-		$scope.answer.push('');
-	}
+    	for (var i = 0; i < 12; i++) {
+    		$scope.answer.push('');
+    	}
 
-    //generates missing letters
-    $scope.generated = randomString((12 - $scope.level.answer.length), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    $scope.showHint = $scope.generated.length > 0;
+        //generates missing letters
+        $scope.generated = randomString((12 - $scope.level.answer.length), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        $scope.showHint = $scope.generated.length > 0;
 
-    //shuffle answer with additional letters
-    $scope.other = _.shuffle(($scope.level.answer.toUpperCase() + $scope.generated).split(''));
-
+        //shuffle answer with additional letters
+        $scope.other = _.shuffle(($scope.level.answer.toUpperCase() + $scope.generated).split(''));    	
+    }
+    
+    setLetters();
+    
     //logic to check if answer is correct one
     //css is changed based on 'scope.correct' model
     $scope.invalid = false;
@@ -433,6 +437,10 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 				}
 			}
 		}
+	}
+	
+	$scope.revertLetters = function() {
+		setLetters();
 	}
 
 	//$scope.removeLettersEnabled = $rootScope.alltime >= 40;
