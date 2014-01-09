@@ -65,7 +65,10 @@
               <div class="keyboard text-center">
                 <ul class="large-block-grid-6 small-block-grid-6 rounded">
                   <!-- add a non-breaking space (&nbsp;) when letters are removed so the keyboard doesn't collapse-->
-                  <li ng-repeat="letter in other track by $index" analytics-on ng-click="add($index)"><span>{{letter}}</span></li>
+                  <li ng-repeat="letter in other track by $index" analytics-on ng-click="add($index)">
+                  	<span ng-show="letter == ''">&nbsp;</span>
+                  	<span ng-show="letter != ''">{{letter}}</span>
+                  </li>
                 </ul>
               </div>
 
