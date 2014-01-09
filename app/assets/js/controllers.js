@@ -153,6 +153,16 @@ define(['angular'], function (angular) {
 
   var PrizeCtrl = function($scope, $rootScope, $location, Campaign, $facebook, $filter, PrizeCode, Score, screenSize, Votes) {
 
+	$scope.inviteFriend = function() {
+		$facebook.ui({method: 'apprequests', message: 'My Great Request'}).then(function() {
+			$location.path('/leaderboard');	
+		});
+	} 
+	
+	$scope.keepPlaying = function() {
+		$location.path('/leaderboard');	
+	}
+	  
 	$scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
 		$scope.votes = votes;
 	});
