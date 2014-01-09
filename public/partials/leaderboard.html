@@ -74,8 +74,7 @@
                 <div class="share-heart">
                   <img src="../images/heart-leaderboard.png">
                   <p class="subhead philz-orange text-center">
-                    <strong>You're 400 points away from helping Philz Coffee donate
-                      $5.00 to FeedAmerica!</strong>
+                    <strong>{{me.name}} {{votes.heartSize - votes.needed}} out of {{votes.heartSize}} games are played for {{game.name}} to write a check of {{votes.donationPer * 50}}$ for {{pickedCharity.name}}!</strong>
                   </p>
                   <a ng-click="playAgain()" ng-show="hasMoreLevelPacks" class="button dark-orange display-block text-center">Play Again</a>
                   <span ng-show="hasMoreLevelPacks" class="lead philz-orange philz-white">&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -167,8 +166,7 @@
                   </div>
 
                   <p class="subhead philz-orange text-center">
-                    <strong>You're 400 points away from helping Philz Coffee donate
-                      $5.00 to FeedAmerica!</strong>
+                    <strong>{{me.name}} {{votes.heartSize - votes.needed}} out of {{votes.heartSize}} games are played for {{game.name}} to write a check of {{votes.donationPer * 50}}$ for {{pickedCharity.name}}!</strong>
                   </p>
                   <a ng-click="playAgain()" ng-show="hasMoreLevelPacks" class="button dark-orange display-block text-center">Play Again</a>
                   <span ng-show="hasMoreLevelPacks" class="lead philz-orange philz-white">&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;</span>

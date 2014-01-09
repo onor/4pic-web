@@ -89,8 +89,12 @@ define(['angular'], function (angular) {
 
 }
 
-  var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook, Score, $filter, Tournament) {
+  var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook, Score, $filter, Tournament, Votes) {
 
+	$scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
+	  $scope.votes = votes;
+	});  
+	  
 	$scope.currentTab = "friends-tab";
 
 	$scope.onClickTab = function (tab) {
