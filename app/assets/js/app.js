@@ -10,9 +10,11 @@
  			"angular-resource": ["angular"], // make angular available to ngResource
  			"angular-animate": ["angular"], // make angular available to ngAnimate
  			"angulartics": ["angular"],
- 			"angulartics.google.analytics": ["angular"]
+ 			"angulartics.google.analytics": ["angular"],
+ 			"angular-timer" : ["angular"]
  		},
  		paths: {
+ 			"angular-timer" : "angular-timer.min",
  			"angulartics" : "angulartics.min",
  			"angulartics.google.analytics" : "angulartics-google-analytics.min",
       		"underscorejs" : "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min",
@@ -26,7 +28,7 @@
 	define('angular', ['https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js'], function () {return angular;});
  
  	require(['angular', './controllers', './directives', './filters.min', './services.min',
- 	'./angular-facebook.min', 'angular-timer.min', "angular-resource", "angular-route", "angular-animate", "underscorejs", "angulartics", "angulartics.google.analytics"],
+ 	'./angular-facebook.min', 'angular-timer', "angular-resource", "angular-route", "angular-animate", "underscorejs", "angulartics", "angulartics.google.analytics"],
  		function (angular, controllers) {
  
  			angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngRoute' , 'ngAnimate', 'facebook', 'timer', 'angulartics', 'angulartics.google.analytics']).
