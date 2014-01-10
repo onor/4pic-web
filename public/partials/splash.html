@@ -22,9 +22,9 @@
     </div>
   </div>
 
-  <div class="left shape hide-for-small" ng-hide="showGivePanel">
+  <div class="left shape hide-for-small" ng-hide="showGivePanel" ng-click="showTheGivePanel()">
     <div class="triangle animate-show" style="border-bottom-width:{{windowHeight + 10}}px; height:{{windowHeight}}px;">
-      <img src="../images/icon-heart-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;" analytics-on ng-click="showTheGivePanel()">
+      <img src="../images/icon-heart-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;" analytics-on>
       <h4 id="giveText" style="top: {{(windowHeight / 2) + 45}}px;">Give</h4>
     </div>
   </div>
@@ -38,7 +38,7 @@
             <i class="fi-x"></i>
           </span>
           <ul class="panel-grid large-block-grid-2 medium-block-grid-2 small-block-grid-1" style="margin-top:50px;">
-            <li ng-repeat="charity in charities">
+            <li ng-repeat="charity in charities.slice(0,4)">
               <!-- images must be sqaure at least 200x200 px for the circle class to round the images properly. Cheers!
               To get you started we've added images in this format for:
               -Kids in need: logo-charity-kids.jpg
@@ -47,7 +47,7 @@
               -Greenpeace: logo-charity-greenpeace.jpg
               -Philz Gift Card: reward-game-philz-gift.jpg
             -->
-              <img src="../images/logo-charity-unicef.jpg" class="circle"/>
+              <img ng-src="{{charity.charity.logoColor}}" class="circle"/>
               <!-- <img ng-src="{{charity.charity.logoColor}}" class="circle"/> -->
               <h4>{{charity.name}}</h4>
               <p class="brown">{{charity.charity.about}}</p>
@@ -58,9 +58,9 @@
     </div>
   </div>
 
-  <div class="right shape hide-for-small" ng-hide="showGetPanel">
+  <div class="right shape hide-for-small" ng-hide="showGetPanel" ng-click="showTheGetPanel()">
     <div class="triangle animate-show" style="border-bottom-width:{{windowHeight + 10}}px; height: {{windowHeight}}px;">
-      <img src="../images/icon-reward-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;"  analytics-on ng-click="showTheGetPanel()">
+      <img src="../images/icon-reward-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;"  analytics-on>
       <h4 style="top: {{(windowHeight / 2) + 45}}px;" id="getText">Get</h4>
     </div>
   </div>
@@ -74,7 +74,7 @@
             <i class="fi-x"></i>
           </span>
           <ul class="panel-grid large-block-grid-2 medium-block-grid-2 small-block-grid-1" style="margin-top:50px;">
-            <li ng-repeat="campaign in campaigns">
+            <li ng-repeat="campaign in campaigns.slice(0,4)">
             <img ng-src="{{campaign.prize.image}}" class="circle">
             <h4>{{campaign.name}}</h4>
             <p class="brown">{{campaign.description}}</p>

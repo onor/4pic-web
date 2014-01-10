@@ -113,7 +113,7 @@ define(['angular'], function (angular) {
       //and for every retrieved facebook user, calls score service(by fbid) to fetch his current score.
     $facebook.api({
       method: 'fql.query',
-      query: 'SELECT uid, name, is_app_user, pic_square FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
+      query: 'SELECT uid, name, is_app_user, pic_square FROM user WHERE (uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1) or uid = me()'
     }).then(function (friends) {
       console.log(arguments);
       $scope.scores = [];
