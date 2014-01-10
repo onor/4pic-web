@@ -45,7 +45,7 @@
             <div class="show-for-small-only">
               <ul class="small-block-grid-1 text-center">
                 <li ng-repeat="item in charities.slice(page * perPage, (page + 1) * perPage)">
-                  <a ng-click="selectCharity(item)">
+                  <a analytics-on"SelectCharity1" ng-click="selectCharity(item)">
                     <img src="{{item.charity.logoColor}}" class="center circle hop">
 
 <!--                     <img ng-src="{{item.charity.logoColor}}" class="center circle hop"> -->
@@ -58,7 +58,7 @@
             <div class="show-for-medium-only">
               <ul class="medium-block-grid-2 text-center">
                 <li ng-repeat="item in charities.slice(page * perPage, (page + 1) * perPage)">
-                  <a ng-click="selectCharity(item)">
+                  <a analytics-on"SelectCharity2" ng-click="selectCharity(item)">
                     <img ng-src="{{item.charity.logoColor}}" class="center circle hop">
                     <h4>{{item.name}}</h4>
                     <p class="lead small light">{{item.charity.about}}</p>
@@ -69,7 +69,7 @@
             <div class="show-for-large-only">
               <ul class="large-block-grid-3 text-center">
                 <li ng-repeat="item in charities.slice(page * perPage, (page + 1) * perPage)">
-                  <a ng-click="selectCharity(item)">
+                  <a analytics-on"SelectCharity3" ng-click="selectCharity(item)">
                     <img ng-src="{{item.charity.logoColor}}" class="center circle hop">
                     <h4>{{item.name}}</h4>
                     <p class="lead small light">{{item.charity.about}}</p>

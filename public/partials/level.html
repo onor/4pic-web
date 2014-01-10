@@ -58,14 +58,14 @@
               <div class="puzzle-board">
                 <ul class="large-block-grid-6 small-block-grid-6 rounded">
                   <!-- add a non-breaking space (&nbsp;) when letters are removed so the keyboard doesn't collapse-->
-                  <li ng-repeat="letter in answer track by $index" analytics-on ng-click="remove($index)">{{letter}}</li>
+                  <li ng-repeat="letter in answer track by $index" analytics-on="removeLetter" ng-click="remove($index)">{{letter}}</li>
                 </ul>
               </div>
 
               <div class="keyboard text-center">
                 <ul class="large-block-grid-6 small-block-grid-6 rounded">
                   <!-- add a non-breaking space (&nbsp;) when letters are removed so the keyboard doesn't collapse-->
-                  <li ng-repeat="letter in other track by $index" analytics-on ng-click="add($index)">
+                  <li ng-repeat="letter in other track by $index" analytics-on="addLetter" ng-click="add($index)">
                   	<span ng-show="letter == ''">&nbsp;</span>
                   	<span ng-show="letter != ''">{{letter}}</span>
                   </li>
@@ -78,14 +78,14 @@
                     <a class="button medium light-orange" ng-click="hint()" ng-show="showHint">Hint</a>
                   </li>
                   <li class="right">
-                    <a class="button medium light-orange" ng-click="revertLetters()">
+                    <a class="button medium light-orange" analytics-on="revertLetters" ng-click="revertLetters()">
                       <i class="fi-x"></i>
                     </a>
                   </li>
                 </ul>
               </div>
 
-              <a analytics-on ng-click="inviteFriend()" class="button large light-orange expand invite-friend show-for-small">Invite A Friend</a>
+              <a analytics-on="inviteFriend" ng-click="inviteFriend()" class="button large light-orange expand invite-friend show-for-small">Invite A Friend</a>
 
               <a>
                 <img class='right brand-logo' ng-src="{{game.design.logo}}">

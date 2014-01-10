@@ -17,9 +17,9 @@
 
       <div class="panel rounded">
         <dl class="tabs">
-          <dd ng-class="{active:isActiveTab('friends-tab')}"><a ng-click="onClickTab('friends-tab')">Friends</a></dd>
-          <dd ng-class="{active:isActiveTab('week-tab')}"><a ng-click="onClickTab('week-tab')">This Week</a></dd>
-          <dd ng-class="{active:isActiveTab('alltime-tab')}"><a ng-click="onClickTab('alltime-tab')">All Time</a></dd>
+          <dd ng-class="{active:isActiveTab('friends-tab')}"><a analytics-on="friends" ng-click="onClickTab('friends-tab')">Friends</a></dd>
+          <dd ng-class="{active:isActiveTab('week-tab')}"><a analytics-on="week" ng-click="onClickTab('week-tab')">This Week</a></dd>
+          <dd ng-class="{active:isActiveTab('alltime-tab')}"><a analytics-on="allTime" ng-click="onClickTab('alltime-tab')">All Time</a></dd>
         </dl>
 
         <div class="row">
