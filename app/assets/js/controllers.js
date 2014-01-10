@@ -107,7 +107,11 @@ define(['angular'], function (angular) {
 
     $scope.fromnow = moment().endOf('week').fromNow();
 
-    $scope.tournament = Tournament.get();
+    
+    $scope.tournament = Tournament.get({}, function(tournament) {
+    	$scope.remains = moment.duration(moment.utc(tournament.week.end) - moment().utc())._data;
+    	$scope.tournament = tournament;
+    });
 
       //retrieves all facebook friends that use the same app/game.
       //and for every retrieved facebook user, calls score service(by fbid) to fetch his current score.
