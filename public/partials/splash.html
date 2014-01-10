@@ -22,9 +22,9 @@
     </div>
   </div>
 
-  <div class="left shape hide-for-small" ng-hide="showGivePanel">
+  <div class="left shape hide-for-small" ng-hide="showGivePanel" ng-click="showTheGivePanel()">
     <div class="triangle animate-show" style="border-bottom-width:{{windowHeight + 10}}px; height:{{windowHeight}}px;">
-      <img src="../images/icon-heart-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;" analytics-on ng-click="showTheGivePanel()">
+      <img src="../images/icon-heart-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;" analytics-on>
       <h4 id="giveText" style="top: {{(windowHeight / 2) + 45}}px;">Give</h4>
     </div>
   </div>
@@ -58,9 +58,9 @@
     </div>
   </div>
 
-  <div class="right shape hide-for-small" ng-hide="showGetPanel">
+  <div class="right shape hide-for-small" ng-hide="showGetPanel" ng-click="showTheGetPanel()">
     <div class="triangle animate-show" style="border-bottom-width:{{windowHeight + 10}}px; height: {{windowHeight}}px;">
-      <img src="../images/icon-reward-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;"  analytics-on ng-click="showTheGetPanel()">
+      <img src="../images/icon-reward-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;"  analytics-on>
       <h4 style="top: {{(windowHeight / 2) + 45}}px;" id="getText">Get</h4>
     </div>
   </div>
