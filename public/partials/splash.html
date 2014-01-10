@@ -38,7 +38,7 @@
             <i class="fi-x"></i>
           </span>
           <ul class="panel-grid large-block-grid-2 medium-block-grid-2 small-block-grid-1" style="margin-top:50px;">
-            <li ng-repeat="charity in charities">
+            <li ng-repeat="charity in charities.slice(0,4)">
               <!-- images must be sqaure at least 200x200 px for the circle class to round the images properly. Cheers!
               To get you started we've added images in this format for:
               -Kids in need: logo-charity-kids.jpg
@@ -74,7 +74,7 @@
             <i class="fi-x"></i>
           </span>
           <ul class="panel-grid large-block-grid-2 medium-block-grid-2 small-block-grid-1" style="margin-top:50px;">
-            <li ng-repeat="campaign in campaigns">
+            <li ng-repeat="campaign in campaigns.slice(0,4)">
             <img ng-src="{{campaign.prize.image}}" class="circle">
             <h4>{{campaign.name}}</h4>
             <p class="brown">{{campaign.description}}</p>
