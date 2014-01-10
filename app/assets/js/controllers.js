@@ -362,7 +362,6 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
         //generates missing letters
         $scope.generated = randomString((12 - $scope.level.answer.length), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-        $scope.showHint = $scope.generated.length > 0;
 
         //shuffle answer with additional letters
         $scope.other = _.shuffle(($scope.level.answer.toUpperCase() + $scope.generated).split(''));    	
@@ -465,14 +464,9 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 		//User has selected Question Mark
 		if ($scope.hintUsed == false) {
 			$rootScope.state.$hint({hint: 10}, function (res) {
-				$scope.removeLetters();
+				$scope.revealLetter();
 				$scope.hintUsed = true;
 			});
-
-			//$rootScope.state.$hint({hint: 10}, function (res) {
-			//	$scope.revealLetter();
-			//	$scope.hintUsed = true;
-			//});
 		}
 	}
 
