@@ -10,7 +10,7 @@
 
   <div class="row section start">
     <div class="large-4 columns center text-center">
-      <a analytics-on ng-click="go()" class="button large light-orange">{{(hasMoreLevelPacks || !fbLoggedIn) ? 'Play Now':'See rankings'}}</a>
+      <a analytics-on="PlayNow" ng-click="go()" class="button large light-orange">{{(hasMoreLevelPacks || !fbLoggedIn) ? 'Play Now':'See rankings'}}</a>
 
       <div fbothersplayed on-login="fbLoggedIn"></div>
 
@@ -34,7 +34,7 @@
       <div class="row">
         <div class="large-7 medium-7 columns center">
           <h2 style="margin-top:30px;">Play &amp; Give</h2>
-          <span class="close" id="closeGive" analytics-on ng-click="hideTheGivePanel()">
+          <span class="close" id="closeGive" analytics-on="hideTheGivePanel" ng-click="hideTheGivePanel()">
             <i class="fi-x"></i>
           </span>
           <ul class="panel-grid large-block-grid-2 medium-block-grid-2 small-block-grid-1" style="margin-top:50px;">
@@ -58,14 +58,14 @@
     </div>
   </div>
 
-  <div class="right shape hide-for-small" ng-hide="showGetPanel" ng-click="showTheGetPanel()">
+  <div class="right shape hide-for-small" analytics-on="showGetPanel" ng-hide="showGetPanel" ng-click="showTheGetPanel()">
     <div class="triangle animate-show" style="border-bottom-width:{{windowHeight + 10}}px; height: {{windowHeight}}px;">
       <img src="../images/icon-reward-orange-start.png" class="start-screen-icon" style="top: {{windowHeight / 2}}px;"  analytics-on>
       <h4 style="top: {{(windowHeight / 2) + 45}}px;" id="getText">Get</h4>
     </div>
   </div>
 
-  <div class="right shape hide-for-small" ng-show="showGetPanel" ng-click="hideTheGetPanel()">
+  <div class="right shape hide-for-small" analytics-on"hideGetPanel" ng-show="showGetPanel" ng-click="hideTheGetPanel()">
     <div class="rectangle animate-show" style="border-bottom-width: {{windowHeight + 10}}px; height: {{windowHeight}}px;">
       <div class="row">
         <div class="large-7 medium-7 columns center">
