@@ -282,8 +282,10 @@ define(['angular'], function (angular) {
 
   };
 
-var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filter, $route, Score) {
+var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filter, $route, Score, $timeout) {
 
+	$timeout(function() {$scope.hideToastr = true;}, 2000);
+	
 	$scope.showTimer = true;
 
 	function callback(response) {
