@@ -15,6 +15,8 @@ define(['angular'], function (angular) {
         	$facebook.getLoginStatus().then(function(res) {
             	if(res.status == "connected") {
             		setState(res);
+            	} else {
+            		$scope.fbLoggedIn = false;
             	}
             });
         });   	
