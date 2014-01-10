@@ -356,7 +356,7 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
     function setLetters() {
     	$scope.answer = [];
 
-    	for (var i = 0; i < 12; i++) {
+    	for (var i = 0; i < $scope.level.answer.length; i++) {
     		$scope.answer.push('');
     	}
 
