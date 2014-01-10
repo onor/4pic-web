@@ -10,7 +10,7 @@
 
   <div class="row section start">
     <div class="large-4 columns center text-center">
-      <a analytics-on="PlayNow" ng-click="go()" class="button large light-orange">{{(hasMoreLevelPacks || !fbLoggedIn) ? 'Play Now':'See rankings'}}</a>
+      <a analytics-on="PlayNow" ng-show = "goEnabled" ng-click="go()" class="button large light-orange">{{(hasMoreLevelPacks || !fbLoggedIn) ? 'Play Now':'See rankings'}}</a>
 
       <div fbothersplayed on-login="fbLoggedIn"></div>
 

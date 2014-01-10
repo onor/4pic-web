@@ -9,6 +9,8 @@ define(['angular'], function (angular) {
 	}
 
   var SplashCtrl = function($scope, $rootScope, State, $location, Game, $facebook, Charity, Campaign, $filter) {
+	$scope.goEnabled = false;
+	
     $rootScope.game = Game.get({}, function(){
         $scope.charities = Charity.query({}, function(charities) {
         	$scope.charities = charities;//todo in conflict with 20 charities per query
@@ -18,6 +20,7 @@ define(['angular'], function (angular) {
             	} else {
             		$scope.fbLoggedIn = false;
             	}
+            	$scope.goEnabled = true;
             });
         });   	
     });
