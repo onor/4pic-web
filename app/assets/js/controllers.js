@@ -110,14 +110,36 @@ define(['angular'], function (angular) {
 	  return tab == $scope.currentTab;
 	}
 
-    $scope.fromnow = moment().endOf('week').fromNow();
-
+    function calculateTimeUnits() {
+        $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
+        $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
+        $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
+        $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
+    }
     
-    $scope.tournament = Tournament.get({}, function(tournament) {
-    	$scope.remains = moment.duration(moment.utc(tournament.week.end) - moment().utc())._data;
-    	$scope.tournament = tournament;
+    var timer = null;    	
+    $scope.$on("$destroy", function() {
+    	clearTimeout(timer);
     });
-
+   
+    Tournament.get({}, function(tournament) {
+    	$scope.tournament = tournament;
+    	$scope.millis = tournament.week.end - new Date().getTime();
+    	
+    	function tick() {   
+    	  calculateTimeUnits();
+    	  
+    	  timer = setTimeout(function () {
+    	    tick();
+    	    $scope.$digest();
+    	  }, 1000);
+    	  
+    	  $scope.millis = $scope.millis - 1000;
+    	}
+    	tick();
+    	
+    });
+    
       //retrieves all facebook friends that use the same app/game.
       //and for every retrieved facebook user, calls score service(by fbid) to fetch his current score.
     $facebook.api({
