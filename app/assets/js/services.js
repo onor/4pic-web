@@ -19,6 +19,10 @@ define(['angular'], function (angular) {
 			return $resource(
 				onorUrl + "/client/v2/campaigns?page=1&perPage=20"
 			);
+		}).factory('CampaignPrize',function ($resource) {
+			return $resource(
+				onorUrl + "/client/v2/campaignsavailable"
+			);
 		}).factory('Tournament',function ($resource) {
 			return $resource(
 				onorUrl + "/client/v1/tournament"

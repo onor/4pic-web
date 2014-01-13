@@ -197,7 +197,7 @@ define(['angular'], function (angular) {
 
   };
 
-  var PrizeCtrl = function($scope, $rootScope, $location, Campaign, $facebook, $filter, PrizeCode, Score, screenSize, Votes) {
+  var PrizeCtrl = function($scope, $rootScope, $location, CampaignPrize, $facebook, $filter, PrizeCode, Score, screenSize, Votes) {
 
 	$scope.seeLeaderboard = function() {
 		$location.path('/leaderboard');	
@@ -236,17 +236,15 @@ define(['angular'], function (angular) {
     $scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
 
     //retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
-    Campaign.query(function (res) {
+    CampaignPrize.query(function (res) {
       res = _.sortBy(res, function(camp) {
         return camp.prize.points;  
       });
       $scope.campaigns = _.map(res, function (camp) {
-        PrizeCode.available({campaignId:camp._id}, function(cnt) {
-          camp.available = true;
-          if (angular.isDefined(camp.prize.points)) {
-            camp.available = $scope.score >= (camp.prize.points);
-          }
-        });
+        camp.available = true;
+        if (angular.isDefined(camp.prize.points)) {
+          camp.available = $scope.score >= (camp.prize.points);
+        }
         return camp;
       });
       
