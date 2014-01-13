@@ -163,7 +163,7 @@ define(['angular'], function (angular) {
       _.map(scores, function (score) {
         $facebook.api('/' + score.playerId.id + '?fields=id,name,picture').then(
           function (response) {
-            $scope.weeklyScores.push({user: response, score: score.score, rank: score.rank});
+            $scope.weeklyScores.push({user: response, score: score.score, rank: score.rank, hearts: score.hearts});
           },
           function (response) {
             alert('error');
@@ -171,6 +171,20 @@ define(['angular'], function (angular) {
         );
       });
     });
+    
+    Score.query({weekly: false}, function (scores) {
+        $scope.alltimeScores = [];
+        _.map(scores, function (score) {
+          $facebook.api('/' + score.playerId.id + '?fields=id,name,picture').then(
+            function (response) {
+              $scope.alltimeScores.push({user: response, score: score.score, rank: score.rank, hearts: score.hearts});
+            },
+            function (response) {
+              alert('error');
+            }
+          );
+        });
+      });
 
     var levelPack = $rootScope.state.state.levelPack;
     $scope.hasMoreLevelPacks = ($rootScope.game.levelPacks.length >= (levelPack + 1));
