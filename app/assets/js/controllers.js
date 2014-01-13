@@ -237,6 +237,9 @@ define(['angular'], function (angular) {
 
     //retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
     Campaign.query(function (res) {
+      res = _.sortBy(res, function(camp) {
+        return camp.prize.points;  
+      });
       $scope.campaigns = _.map(res, function (camp) {
         PrizeCode.available({campaignId:camp._id}, function(cnt) {
           camp.available = true;
