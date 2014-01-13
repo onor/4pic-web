@@ -152,6 +152,7 @@ define(['angular'], function (angular) {
         Score.get({fbid: friend.uid, weekly: false}, function (res) {
           friend.rank = res.rank;
           friend.score = res.score;
+          friend.hearts = res.hearts;
           $scope.scores.push(friend);
         });
       });
