@@ -370,6 +370,11 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
     $scope.away = $rootScope.game.levelPacks[levelPack].levels.length - $rootScope.state.state.level;
 	$scope.progress =  ($rootScope.state.state.level / $rootScope.game.levelPacks[levelPack].levels.length) * 100;
 	$scope.progressFull = false;
+    
+	$scope.score = '00';
+	if ($rootScope.state.state.level != 0) {
+		$scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
+	}
 
 
       //if user has already seen this question timer starts and ends from 1 second
