@@ -1,6 +1,5 @@
 'use strict';
 
-define(['angular'], function (angular) {
 
 	function isMobile(){
 	    var isMobile = (/iphone|ipod|android|ie|blackberry|fennec/).test
@@ -164,7 +163,12 @@ define(['angular'], function (angular) {
       _.map(scores, function (score) {
         $facebook.api('/' + score.playerId.id + '?fields=id,name,picture').then(
           function (response) {
-            $scope.weeklyScores.push({user: response, score: score.score, rank: score.rank, hearts: score.hearts});
+            $scope.weeklyScores.push({
+            	user: response, 
+            	score: score.score, 
+            	rank: score.rank, 
+            	hearts: score.hearts,
+            	prizes: score.prizes});
           },
           function (response) {
             alert('error');
@@ -178,7 +182,12 @@ define(['angular'], function (angular) {
         _.map(scores, function (score) {
           $facebook.api('/' + score.playerId.id + '?fields=id,name,picture').then(
             function (response) {
-              $scope.alltimeScores.push({user: response, score: score.score, rank: score.rank, hearts: score.hearts});
+              $scope.alltimeScores.push({
+            	  user: response, 
+            	  score: score.score, 
+            	  rank: score.rank, 
+            	  hearts: score.hearts,
+            	  prizes: score.prizes});
             },
             function (response) {
               alert('error');
@@ -331,7 +340,7 @@ define(['angular'], function (angular) {
 
 var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filter, $route, Score, $timeout) {
 
-	$timeout(function() {$scope.hideToastr = true;}, 2000);
+	$timeout(function() {$scope.hideToastr = true;}, 6000);
 	
 	$scope.showTimer = true;
 
@@ -541,12 +550,3 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 	});
 }
 
-return {
-	HeartCtrl:HeartCtrl,
-	SplashCtrl:SplashCtrl,
-	LeaderboardCtrl:LeaderboardCtrl,
-	CharityCtrl:CharityCtrl,
-	LevelCtrl:LevelCtrl,
-	PrizeCtrl:PrizeCtrl
-}
-});

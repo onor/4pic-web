@@ -2,7 +2,6 @@
 
 'use strict';
 
-define(['angular'], function (angular) {
 
 	/* Filters */
 
@@ -31,4 +30,3 @@ define(['angular'], function (angular) {
 			}
 		});
 
-});

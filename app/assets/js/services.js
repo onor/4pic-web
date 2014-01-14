@@ -2,7 +2,6 @@
 
 'use strict';
 
-define(['angular'], function (angular) {
 
 	/* Services */
 	var onorUrl = appConfig.onorUrl;
@@ -17,7 +16,7 @@ define(['angular'], function (angular) {
 			);
 		}).factory('Campaign',function ($resource) {
 			return $resource(
-				onorUrl + "/client/v2/campaigns?page=1&perPage=20"
+				onorUrl + "/client/v2/campaigns"
 			);
 		}).factory('CampaignPrize',function ($resource) {
 			return $resource(
@@ -69,4 +68,3 @@ define(['angular'], function (angular) {
 		}).factory('Facebook', function ($facebook) {
 			return ;
 		});
-});

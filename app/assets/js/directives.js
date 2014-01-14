@@ -2,7 +2,6 @@
 
 'use strict';
 
-define(['angular'], function (angular) {
 
 	/* Directives */
 
@@ -97,4 +96,3 @@ define(['angular'], function (angular) {
 			}
 		};
 	});
-});

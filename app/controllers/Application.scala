@@ -5,6 +5,8 @@ import play.api.Logger
 import play.api.libs.json._
 import play.api.libs.ws.WS
 import play.api.libs.concurrent.Execution.Implicits._
+import play.api.cache.Cached
+import play.api.Play.current
 
 case class FacebookSettings(namespace:String, appId:String, appSecret:String)
 
@@ -18,33 +20,23 @@ object Application extends Controller {
     case (116262036, false) => FacebookSettings("fourpicweb", "583608191697375","618a6da80479f556e7a72c9780fcbefa")
     case (101347603, true) => FacebookSettings("celebbistro-dev","1400328356875796","aef84bb41bceedb63dc0b2d3eb9cc9ea")
   }
-
-  def indexPost(gameKey:Int) = Action {
-    implicit request =>
-      val settings = facebookSettings(gameKey)     
-	  Ok(views.html.index(gameKey, settings.appId, onorUrl))			       
-  }
   
-  def index(gameKey:Int) = Action {
-    implicit request =>
-      val settings = facebookSettings(gameKey)   
-	  Ok(views.html.index(gameKey, settings.appId, onorUrl))			
+  def loadTestAuth = Action {
+    Ok("42")
   }
 
-  /**
-   * Returns css for 4pics1word specific to gameKey.
-   * todo support for other types of games.
-   * @param gameKey
-   */
-  def appCss(gameKey:Int) = Action.async(parse.anyContent) {
-    implicit request => {
-        WS.
-          url(s"$onorUrl/client/v1/games/4pics1word/${gameKey}?userKey=$userKey").
-          get.map(res => {
-            val backgrounds = (res.json \ "design" \ "backgrounds").as[Option[Map[String,String]]].getOrElse(Map())
-            Ok(views.txt.app((res.json \ "backgroundUrl").as[String], backgrounds)).as(CSS)
-          })
-      }
+  def indexPost(gameKey: Int) = Cached(s"indexPost$gameKey", duration = 5) {
+    Action { implicit request =>
+      val settings = facebookSettings(gameKey)
+      Ok(views.html.index(gameKey, settings.appId, onorUrl))
+    }
+  }
+
+  def index(gameKey: Int) = Cached(s"index$gameKey", duration = 5) {
+    Action { implicit request =>
+      val settings = facebookSettings(gameKey)
+      Ok(views.html.index(gameKey, settings.appId, onorUrl))
+    }
   }
 
 }
