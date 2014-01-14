@@ -1,46 +1,11 @@
- (function () {
- 
- 	/*global define, angular */
- 
- 	'use strict';
- //todo package everything even angular ad dependent libraries in one file
- 	requirejs.config({
- 		shim: {
- 			"angular-route": ["angular"], // make angular available to ngRoute
- 			"angular-resource": ["angular"], // make angular available to ngResource
- 			"angular-animate": ["angular"], // make angular available to ngAnimate
- 			"angulartics": ["angular"],
- 			"angulartics.google.analytics": ["angular"],
- 			"angular-timer" : ["angular"],
- 			"angular-facebook" : ["angular"]
- 		},
- 		paths: {
- 			"angular-facebook" : "angular-facebook.min",
- 			"angular-timer" : "angular-timer.min",
- 			"angulartics" : "angulartics.min",
- 			"angulartics.google.analytics" : "angulartics-google-analytics.min",
-      		"underscorejs" : "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min",
-			"angular-animate" : "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-animate.min",
-		  	"angular-resource" : "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-resource.min",
-			"angular-route" : ["https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-route.min"]
-     },
- 		priority: ["angular"] // Make sure angular is loaded first
- 	});
-
-	define('angular', ['https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js'], function () {return angular;});
- 
- 	require(['angular', './controllers', './directives', './filters.min', './services.min',
- 	'angular-facebook', 'angular-timer', "angular-resource", "angular-route", "angular-animate", "underscorejs", "angulartics", "angulartics.google.analytics"],
- 		function (angular, controllers) {
- 
  			angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngRoute' , 'ngAnimate', 'facebook', 'timer', 'angulartics', 'angulartics.google.analytics']).
  				config(['$routeProvider', function ($routeProvider) {
- 					$routeProvider.when('/heart', {templateUrl: '../../partials/heart.html', controller: controllers.HeartCtrl})
- 					$routeProvider.when('/splash', {templateUrl: '../../partials/splash.html', controller: controllers.SplashCtrl});
- 					$routeProvider.when('/prize', {templateUrl: '../../partials/prize.html', controller: controllers.PrizeCtrl});
- 					$routeProvider.when('/charity', {templateUrl: '../../partials/charity.html', controller: controllers.CharityCtrl});
- 					$routeProvider.when('/leaderboard', {templateUrl: '../../partials/leaderboard.html', controller: controllers.LeaderboardCtrl});
- 					$routeProvider.when('/level', {templateUrl: '../../partials/level.html', controller: controllers.LevelCtrl});
+ 					$routeProvider.when('/heart', {templateUrl: '../../partials/heart.html', controller: HeartCtrl})
+ 					$routeProvider.when('/splash', {templateUrl: '../../partials/splash.html', controller: SplashCtrl});
+ 					$routeProvider.when('/prize', {templateUrl: '../../partials/prize.html', controller: PrizeCtrl});
+ 					$routeProvider.when('/charity', {templateUrl: '../../partials/charity.html', controller: CharityCtrl});
+ 					$routeProvider.when('/leaderboard', {templateUrl: '../../partials/leaderboard.html', controller: LeaderboardCtrl});
+ 					$routeProvider.when('/level', {templateUrl: '../../partials/level.html', controller: LevelCtrl});
  					$routeProvider.otherwise({redirectTo: '/splash'});
  				}]).
  				config(['$facebookProvider', function ($facebookProvider) {
@@ -143,9 +108,4 @@
  					    });
  					  };
  					});
- 
- 			angular.bootstrap(document, ['myApp']);
- 
- 		});
- 
- })();
+  

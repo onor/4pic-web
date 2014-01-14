@@ -1,6 +1,5 @@
 'use strict';
 
-define(['angular'], function (angular) {
 
 	function isMobile(){
 	    var isMobile = (/iphone|ipod|android|ie|blackberry|fennec/).test
@@ -551,12 +550,3 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 	});
 }
 
-return {
-	HeartCtrl:HeartCtrl,
-	SplashCtrl:SplashCtrl,
-	LeaderboardCtrl:LeaderboardCtrl,
-	CharityCtrl:CharityCtrl,
-	LevelCtrl:LevelCtrl,
-	PrizeCtrl:PrizeCtrl
-}
-});

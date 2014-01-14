@@ -2,7 +2,6 @@
 
 'use strict';
 
-define(['angular'], function (angular) {
 
 	/* Services */
 	var onorUrl = appConfig.onorUrl;
@@ -69,4 +68,3 @@ define(['angular'], function (angular) {
 		}).factory('Facebook', function ($facebook) {
 			return ;
 		});
-});
