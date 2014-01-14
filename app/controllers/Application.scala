@@ -18,6 +18,10 @@ object Application extends Controller {
     case (116262036, false) => FacebookSettings("fourpicweb", "583608191697375","618a6da80479f556e7a72c9780fcbefa")
     case (101347603, true) => FacebookSettings("celebbistro-dev","1400328356875796","aef84bb41bceedb63dc0b2d3eb9cc9ea")
   }
+  
+  def loadTestAuth = Action {
+    Ok("42")
+  }
 
   def indexPost(gameKey:Int) = Action {
     implicit request =>
