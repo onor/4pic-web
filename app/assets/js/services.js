@@ -16,7 +16,7 @@
 			);
 		}).factory('Campaign',function ($resource) {
 			return $resource(
-				onorUrl + "/client/v2/campaigns?page=1&perPage=20"
+				onorUrl + "/client/v2/campaigns"
 			);
 		}).factory('CampaignPrize',function ($resource) {
 			return $resource(
