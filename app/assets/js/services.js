@@ -28,7 +28,7 @@
 			);
 		}).factory('Charity', function ($resource) {
 			return $resource(
-				onorUrl + "/client/v1/charities?page=1&perPage=20" // Todo: fix charity thing.
+				onorUrl + "/client/v1/charities"
 			);
 		}).factory('Votes',function ($resource) {
 			return $resource(
