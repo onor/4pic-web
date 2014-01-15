@@ -9,10 +9,7 @@
 	angular.module('myApp.services', ['ngResource']).
 		value('version', '0.1').factory('Game',function ($resource) {
 			return $resource(
-				onorUrl + "/client/v1/games/4pics1word/" + appConfig.gameKey,
-				{
-					userKey:'4b1469e3ff90b438ef0134b1cb266c06'
-				}
+				onorUrl + "/client/v2/games/" + appConfig.gameKey
 			);
 		}).factory('Campaign',function ($resource) {
 			return $resource(
