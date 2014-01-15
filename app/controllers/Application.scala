@@ -26,20 +26,16 @@ object Application extends Controller {
   }
 
   def indexPost(gameKey: Int) = Cached(s"indexPost$gameKey", duration = 60) {
-    Action.async { implicit request =>
-      Future {
-        val settings = facebookSettings(gameKey)
-        Ok(views.html.index(gameKey, settings.appId, onorUrl))
-      }
+    Action { implicit request =>
+      val settings = facebookSettings(gameKey)
+      Ok(views.html.index(gameKey, settings.appId, onorUrl))
     }
   }
 
   def index(gameKey: Int) = Cached(s"index$gameKey", duration = 60) {
-    Action.async { implicit request =>
-      Future {
-        val settings = facebookSettings(gameKey)
-        Ok(views.html.index(gameKey, settings.appId, onorUrl))
-      }
+    Action { implicit request =>
+      val settings = facebookSettings(gameKey)
+      Ok(views.html.index(gameKey, settings.appId, onorUrl))
     }
   }
 
