@@ -24,6 +24,10 @@ object Application extends Controller {
   def loadTestAuth = Action {
     Ok("42")
   }
+  
+  def loadTestAuth2 = Action {
+    Ok("42")
+  }
 
   def indexPost(gameKey: Int) =  {
     Action { implicit request =>

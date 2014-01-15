@@ -4,6 +4,7 @@
 
 # blitz.io
 GET            /mu-dc1919c6-32cda903-c35ae534-d0609dd0                          controllers.Application.loadTestAuth
+GET			   /mu-dc1919c6-32cda903-c35ae534-d0607b14							controllers.Application.loadTestAuth2
 
 # Obtain require.js with built-in knowledge of how webjars resources can be
 # resolved
