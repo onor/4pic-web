@@ -83,6 +83,7 @@
         	} else {
         		opts = {};
         	}
+
         	$facebook.login(opts).then(function(res) {
         		setState(res, goIfLogedin);
         	});
