@@ -8,7 +8,7 @@ resolvers ++= Seq(
 )
 
 // Use the Play sbt plugin for Play projects
-addSbtPlugin("play" % "sbt-plugin" % "2.1.3")
+addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.2.0")
 
 //sass compilation
-addSbtPlugin("net.litola" % "play-sass" % "0.2.0")
+addSbtPlugin("net.litola" % "play-sass" % "0.3.0")
