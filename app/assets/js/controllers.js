@@ -454,6 +454,8 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
     //adds letter to answer
     $scope.add = function (index) {
+    	
+      if($scope.invalid) return;
 
       var item = $scope.other[index];
       $scope.other[index] = '';
@@ -518,9 +520,6 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 	$scope.revertLetters = function() {
 		setLetters();
 	}
-
-	//$scope.removeLettersEnabled = $rootScope.alltime >= 40;
-	//$scope.revealLettersEnabled = $rootScope.alltime >= 10;
 
 	$scope.hintUsed = false;
 	$scope.hint = function() {

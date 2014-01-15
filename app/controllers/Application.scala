@@ -7,13 +7,13 @@ import play.api.libs.ws.WS
 import play.api.libs.concurrent.Execution.Implicits._
 import play.api.cache.Cached
 import play.api.Play.current
+import scala.concurrent.Future
 
 case class FacebookSettings(namespace:String, appId:String, appSecret:String)
 
 object Application extends Controller {
   
   val onorUrl = play.api.Play.current.configuration.getString("onorplatform.url").get
-  val userKey = "4b1469e3ff90b438ef0134b1cb266c06"
   
   def facebookSettings(gameKey:Int) = (gameKey, play.api.Play.isDev(play.api.Play.current)) match {
     case (116262036, true) => FacebookSettings("fourpicbeauty-dev","304111289726859","bd5fa38e026ac2f5f65ce048d2d3f054")
@@ -25,14 +25,14 @@ object Application extends Controller {
     Ok("42")
   }
 
-  def indexPost(gameKey: Int) = Cached(s"indexPost$gameKey", duration = 5) {
+  def indexPost(gameKey: Int) =  {
     Action { implicit request =>
       val settings = facebookSettings(gameKey)
       Ok(views.html.index(gameKey, settings.appId, onorUrl))
     }
   }
 
-  def index(gameKey: Int) = Cached(s"index$gameKey", duration = 5) {
+  def index(gameKey: Int) = {
     Action { implicit request =>
       val settings = facebookSettings(gameKey)
       Ok(views.html.index(gameKey, settings.appId, onorUrl))
