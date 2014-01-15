@@ -8,6 +8,8 @@
 	}
 
   var SplashCtrl = function($scope, $rootScope, State, $location, Game, $facebook, Charity, Campaign, $filter) {
+	$rootScope.splashLoaded = true;
+	
 	$scope.goEnabled = false;
 	
     $rootScope.game = Game.get({}, function(){
@@ -94,6 +96,10 @@
 }
 
   var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook, Score, $filter, Tournament, Votes) {
+	  
+	if(!$rootScope.splashLoaded) {
+      $location.path('/');
+    }
 
 	$scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
 	  $scope.votes = votes;
@@ -208,6 +214,10 @@
 
   var PrizeCtrl = function($scope, $rootScope, $location, CampaignPrize, $facebook, $filter, PrizeCode, Score, screenSize, Votes) {
 
+	if(!$rootScope.splashLoaded) {
+	  $location.path('/');
+	}
+	  
 	$scope.seeLeaderboard = function() {
 		$location.path('/leaderboard');	
 	} 
@@ -278,10 +288,10 @@
     $scope.claimReward = function(campaign) {
       if (campaign.available) {
         PrizeCode.save({'fbid':appConfig.fbid},{
-          'email' : 'piyush@onor.net',
+          'email' : 'rudolf.markulin@gmail.com',
           'campaignId' : campaign._id,
           'name' : $rootScope.me.name,
-          'phoneNumber' : '+1 415 866 4194'
+          'phoneNumber' : '+49 162 4879759'
         },
           function(success) {alert('Prize was sent.');},
           function(error) {alert('Error ' + error);}
@@ -292,6 +302,11 @@
   };
 
   var HeartCtrl = function($scope, $rootScope, Votes, $location, $timeout) {
+	  
+	  if(!$rootScope.splashLoaded) {
+	      $location.path('/');
+	  }
+	  
 	  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
 	      $scope.playerProfiles = votes.playerProfiles.reverse();
 	  });
@@ -301,6 +316,10 @@
   }
 
   var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, Votes, screenSize) {
+	  
+	if(!$rootScope.splashLoaded) {
+	  $location.path('/');
+	}
 	  
 	$scope.charities = Charity.query({}, function(charities){
 	  if (screenSize.is('small')) {
@@ -340,6 +359,10 @@
 
 var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filter, $route, Score, $timeout) {
 
+	if(!$rootScope.splashLoaded) {
+	  $location.path('/');
+	}
+	
 	$timeout(function() {$scope.hideToastr = true;}, 6000);
 	
 	$scope.showTimer = true;
