@@ -63,7 +63,7 @@
         });
     }
 
-    function goIfLogedin(){
+    function goIfLoggedin(){
     	if($scope.hasMoreLevelPacks) {
 			if(angular.isDefined($rootScope.state.charityId)) {
 			    $location.path('/heart');
@@ -85,10 +85,10 @@
         	}
 
         	$facebook.login(opts).then(function(res) {
-        		setState(res, goIfLogedin);
+        		setState(res, goIfLoggedin);
         	});
     	} else {
-    		goIfLogedin();
+    		goIfLoggedin();
     	}
     };
 
