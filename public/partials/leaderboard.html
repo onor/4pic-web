@@ -46,7 +46,7 @@
                             <td class="points">
                               <div class="ix heart-points">
                                 <span class="points-container">
-                                  <span class="points">1 td</span>
+                                  <span class="points">{{value.hearts}}</span>
                                   <img src="../images/icon-heart-leaderboard-lg.png" class="icon heart">
                                 </span>
                               </div>
@@ -54,7 +54,7 @@
                             <td class="points">
                               <div class="ix reward-points">
                                 <span class="points-container">
-                                  <span class="points">1 td</span>
+                                  <span class="points">{{value.prizes}}</span>
                                   <img src="../images/icon-reward-leaderboard-lg.png" class="icon reward">
                                 </span>
                               </div>
@@ -102,7 +102,7 @@
                             <td class="points">
                               <div class="ix heart-points">
                                 <span class="points-container">
-                                  <span class="points">1 td</span>
+                                  <span class="points">{{value.hearts}}</span>
                                   <img src="../images/icon-heart-leaderboard-lg.png" class="icon heart">
                                 </span>
                               </div>
@@ -110,7 +110,7 @@
                             <td class="points">
                               <div class="ix reward-points">
                                 <span class="points-container">
-                                  <span class="points">1 td</span>
+                                  <span class="points">{{value.prizes}}</span>
                                   <img src="../images/icon-reward-leaderboard-lg.png" class="icon heart">
                                 </span>
                               </div>
@@ -131,19 +131,19 @@
                   <div class="timer panel rounded">
                     <ul class="large-block-grid-4 medium-block-grid-4 small-block-grid-4">
                       <li>
-                        <span class="metric"><strong>{{remains.days}}</strong></span>
+                        <span class="metric"><strong>{{days}}</strong></span>
                         <span class="unit">day</span>
                       </li>
                       <li>
-                        <span class="metric"><strong>{{remains.hours}}</strong></span>
+                        <span class="metric"><strong>{{hours}}</strong></span>
                         <span class="unit">hrs</span>
                       </li>
                       <li>
-                        <span class="metric"><strong>{{remains.minutes}}</strong></span>
+                        <span class="metric"><strong>{{minutes}}</strong></span>
                         <span class="unit">min</span>
                       </li>
                       <li>
-                        <span class="metric"><strong>{{remains.seconds}}</strong></span>
+                        <span class="metric"><strong>{{seconds}}</strong></span>
                         <span class="unit">sec</span>
                       </li>
                     </ul>
@@ -165,6 +165,62 @@
                 </div>
 
               </div>
+
+            </div>
+
+            <div class="content" ng-class="{active:isActiveTab('alltime-tab')}" id="alltime-tab">
+
+              <!--leaders-->
+              <div class="large-7 medium-7 columns">
+                <div class="panel leaders rounded">
+                  <div class="table-wrapper">
+                    <div class="table-scroll">
+
+                      <table>
+                        <tbody>
+                          <tr ng-repeat="value in alltimeScores | orderBy:'score':true">
+                            <td><img ng-src="{{value.user.picture.data.url}}" class="circle profile-pic"></td>
+                            <td>
+                              <h5 class="philz-orange">
+                                <small class="philz-orange">#{{value.rank}}</small>
+                                {{value.user.name}}
+                              </h5>
+                            </td>
+                            <td><strong class="green">+{{value.score}}</strong></td>
+                            <td class="points">
+                              <div class="ix heart-points">
+                                <span class="points-container">
+                                  <span class="points">{{value.hearts}}</span>
+                                  <img src="../images/icon-heart-leaderboard-lg.png" class="icon heart">
+                                </span>
+                              </div>
+                            </td>
+                            <td class="points">
+                              <div class="ix reward-points">
+                                <span class="points-container">
+                                  <span class="points">{{value.prizes}}</span>
+                                  <img src="../images/icon-reward-leaderboard-lg.png" class="icon reward">
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--end leaders-->
+
+              <!--the heart -->
+              <div class="large-5 medium-5 columns text-center center">
+                <div class="share-heart">
+                  <img src="../images/heart-leaderboard.png">
+                  <ng-include src="'../../partials/shareHeart.html'"/>
+                </div>
+              </div>
+              <!--end heart-->
 
             </div>
 

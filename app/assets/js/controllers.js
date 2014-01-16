@@ -1,6 +1,5 @@
 'use strict';
 
-define(['angular'], function (angular) {
 
 	function isMobile(){
 	    var isMobile = (/iphone|ipod|android|ie|blackberry|fennec/).test
@@ -9,6 +8,8 @@ define(['angular'], function (angular) {
 	}
 
   var SplashCtrl = function($scope, $rootScope, State, $location, Game, $facebook, Charity, Campaign, $filter) {
+	$rootScope.splashLoaded = true;
+	
 	$scope.goEnabled = false;
 	
     $rootScope.game = Game.get({}, function(){
@@ -64,7 +65,7 @@ define(['angular'], function (angular) {
         });
     }
 
-    function goIfLogedin(){
+    function goIfLoggedin(){
     	if($scope.hasMoreLevelPacks) {
 			if(angular.isDefined($rootScope.state.charityId)) {
 			    $location.path('/heart');
@@ -84,17 +85,22 @@ define(['angular'], function (angular) {
         	} else {
         		opts = {};
         	}
+
         	$facebook.login(opts).then(function(res) {
-        		setState(res, goIfLogedin);
+        		setState(res, goIfLoggedin);
         	});
     	} else {
-    		goIfLogedin();
+    		goIfLoggedin();
     	}
     };
 
 }
 
   var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook, Score, $filter, Tournament, Votes) {
+	  
+	if(!$rootScope.splashLoaded) {
+      $location.path('/');
+    }
 
 	$scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
 	  $scope.votes = votes;
@@ -110,14 +116,36 @@ define(['angular'], function (angular) {
 	  return tab == $scope.currentTab;
 	}
 
-    $scope.fromnow = moment().endOf('week').fromNow();
-
+    function calculateTimeUnits() {
+        $scope.seconds = Math.floor(($scope.millis / 1000) % 60);
+        $scope.minutes = Math.floor((($scope.millis / (60000)) % 60));
+        $scope.hours = Math.floor((($scope.millis / (3600000)) % 24));
+        $scope.days = Math.floor((($scope.millis / (3600000)) / 24));
+    }
     
-    $scope.tournament = Tournament.get({}, function(tournament) {
-    	$scope.remains = moment.duration(moment.utc(tournament.week.end) - moment().utc())._data;
-    	$scope.tournament = tournament;
+    var timer = null;    	
+    $scope.$on("$destroy", function() {
+    	clearTimeout(timer);
     });
-
+   
+    Tournament.get({}, function(tournament) {
+    	$scope.tournament = tournament;
+    	$scope.millis = tournament.week.end - new Date().getTime();
+    	
+    	function tick() {   
+    	  calculateTimeUnits();
+    	  
+    	  timer = setTimeout(function () {
+    	    tick();
+    	    $scope.$digest();
+    	  }, 1000);
+    	  
+    	  $scope.millis = $scope.millis - 1000;
+    	}
+    	tick();
+    	
+    });
+    
       //retrieves all facebook friends that use the same app/game.
       //and for every retrieved facebook user, calls score service(by fbid) to fetch his current score.
     $facebook.api({
@@ -130,6 +158,7 @@ define(['angular'], function (angular) {
         Score.get({fbid: friend.uid, weekly: false}, function (res) {
           friend.rank = res.rank;
           friend.score = res.score;
+          friend.hearts = res.hearts;
           $scope.scores.push(friend);
         });
       });
@@ -141,7 +170,12 @@ define(['angular'], function (angular) {
       _.map(scores, function (score) {
         $facebook.api('/' + score.playerId.id + '?fields=id,name,picture').then(
           function (response) {
-            $scope.weeklyScores.push({user: response, score: score.score, rank: score.rank});
+            $scope.weeklyScores.push({
+            	user: response, 
+            	score: score.score, 
+            	rank: score.rank, 
+            	hearts: score.hearts,
+            	prizes: score.prizes});
           },
           function (response) {
             alert('error');
@@ -149,6 +183,25 @@ define(['angular'], function (angular) {
         );
       });
     });
+    
+    Score.query({weekly: false}, function (scores) {
+        $scope.alltimeScores = [];
+        _.map(scores, function (score) {
+          $facebook.api('/' + score.playerId.id + '?fields=id,name,picture').then(
+            function (response) {
+              $scope.alltimeScores.push({
+            	  user: response, 
+            	  score: score.score, 
+            	  rank: score.rank, 
+            	  hearts: score.hearts,
+            	  prizes: score.prizes});
+            },
+            function (response) {
+              alert('error');
+            }
+          );
+        });
+      });
 
     var levelPack = $rootScope.state.state.levelPack;
     $scope.hasMoreLevelPacks = ($rootScope.game.levelPacks.length >= (levelPack + 1));
@@ -160,8 +213,12 @@ define(['angular'], function (angular) {
 
   };
 
-  var PrizeCtrl = function($scope, $rootScope, $location, Campaign, $facebook, $filter, PrizeCode, Score, screenSize, Votes) {
+  var PrizeCtrl = function($scope, $rootScope, $location, CampaignPrize, $facebook, $filter, PrizeCode, Score, screenSize, Votes) {
 
+	if(!$rootScope.splashLoaded) {
+	  $location.path('/');
+	}
+	  
 	$scope.seeLeaderboard = function() {
 		$location.path('/leaderboard');	
 	} 
@@ -199,14 +256,15 @@ define(['angular'], function (angular) {
     $scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
 
     //retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
-    Campaign.query(function (res) {
+    CampaignPrize.query(function (res) {
+      res = _.sortBy(res, function(camp) {
+        return camp.prize.points;  
+      });
       $scope.campaigns = _.map(res, function (camp) {
-        PrizeCode.available({campaignId:camp._id}, function(cnt) {
-          camp.available = true;
-          if (angular.isDefined(camp.prize.points)) {
-            camp.available = $scope.score >= (camp.prize.points);
-          }
-        });
+        camp.available = true;
+        if (angular.isDefined(camp.prize.points)) {
+          camp.available = $scope.score >= (camp.prize.points);
+        }
         return camp;
       });
       
@@ -234,7 +292,7 @@ define(['angular'], function (angular) {
           'email' : 'rudolf.markulin@gmail.com',
           'campaignId' : campaign._id,
           'name' : $rootScope.me.name,
-          'phoneNumber' : '+1 650-272-9246'
+          'phoneNumber' : '+49 162 4879759'
         },
           function(success) {alert('Prize was sent.');},
           function(error) {alert('Error ' + error);}
@@ -245,15 +303,29 @@ define(['angular'], function (angular) {
   };
 
   var HeartCtrl = function($scope, $rootScope, Votes, $location, $timeout) {
-	  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
-	      $scope.playerProfiles = votes.playerProfiles.reverse();
-	  });
-	  $timeout(function(){
+	  
+	  if(!$rootScope.splashLoaded) {
+	      $location.path('/');
+	  } else {
+		  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
+		      $scope.playerProfiles = votes.playerProfiles.reverse();
+		  }); 
+	  }
+	  
+	  $scope.timer = $timeout(function(){
 	      $location.path('/level');
 	  }, 3000);
+	  
+	  $scope.$on("$destroy", function() {
+		  $timeout.cancel($scope.timer)
+	  });
   }
 
   var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, Votes, screenSize) {
+	  
+	if(!$rootScope.splashLoaded) {
+	  $location.path('/');
+	}
 	  
 	$scope.charities = Charity.query({}, function(charities){
 	  if (screenSize.is('small')) {
@@ -293,7 +365,11 @@ define(['angular'], function (angular) {
 
 var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filter, $route, Score, $timeout) {
 
-	$timeout(function() {$scope.hideToastr = true;}, 2000);
+	if(!$rootScope.splashLoaded) {
+	  $location.path('/');
+	}
+	
+	$timeout(function() {$scope.hideToastr = true;}, 6000);
 	
 	$scope.showTimer = true;
 
@@ -327,8 +403,14 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
     var levelPack = $rootScope.state.state.levelPack;
     var level = $rootScope.state.state.level;
 
+    $scope.away = $rootScope.game.levelPacks[levelPack].levels.length - $rootScope.state.state.level;
 	$scope.progress =  ($rootScope.state.state.level / $rootScope.game.levelPacks[levelPack].levels.length) * 100;
 	$scope.progressFull = false;
+    
+	$scope.score = '00';
+	if ($rootScope.state.state.level != 0) {
+		$scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
+	}
 
 
       //if user has already seen this question timer starts and ends from 1 second
@@ -400,6 +482,8 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
     //adds letter to answer
     $scope.add = function (index) {
+    	
+      if($scope.invalid) return;
 
       var item = $scope.other[index];
       $scope.other[index] = '';
@@ -465,9 +549,6 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 		setLetters();
 	}
 
-	//$scope.removeLettersEnabled = $rootScope.alltime >= 40;
-	//$scope.revealLettersEnabled = $rootScope.alltime >= 10;
-
 	$scope.hintUsed = false;
 	$scope.hint = function() {
 		//User has selected Question Mark
@@ -497,12 +578,3 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 	});
 }
 
-return {
-	HeartCtrl:HeartCtrl,
-	SplashCtrl:SplashCtrl,
-	LeaderboardCtrl:LeaderboardCtrl,
-	CharityCtrl:CharityCtrl,
-	LevelCtrl:LevelCtrl,
-	PrizeCtrl:PrizeCtrl
-}
-});

@@ -2,6 +2,10 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+# blitz.io
+GET            /mu-dc1919c6-32cda903-c35ae534-d0609dd0                          controllers.Application.loadTestAuth
+GET			   /mu-dc1919c6-32cda903-c35ae534-d0607b14							controllers.Application.loadTestAuth2
+
 # Obtain require.js with built-in knowledge of how webjars resources can be
 # resolved
 GET         /lib/require.js                         controllers.WebJarAssets.requirejs
@@ -12,7 +16,6 @@ GET         /webjars/*file                          controllers.WebJarAssets.at(
 # Home page
 POST        /:gameKey/                       		controllers.Application.indexPost(gameKey:Int)
 GET         /:gameKey/        						controllers.Application.index(gameKey:Int)
-GET         /css/app.css                            controllers.Application.appCss(gameKey:Int)
 
 # Map the JS resource paths
 GET         /*file                                  controllers.Assets.at(path="/public", file)
