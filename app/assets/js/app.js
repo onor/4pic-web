@@ -20,7 +20,24 @@
  		 					'gameKey' : appConfig.gameKey,
  		 					'fbid' : appConfig.fbid
  		 				}; 					
- 				}).run(function () {
+ 				}).run(function($rootScope, $location){
+               		$rootScope.$on('$routeChangeStart', function(event, next, current){
+             
+             
+             		  });
+    			$rootScope.$on('$locationChangeSuccess', function(){
+    				console.log("Current 1: " + $location.path());
+    		    $rootScope.actualLocation = $location.path();
+    		});
+
+   			 $rootScope.$watch(function() {return $location.path()}, function(newLocation, oldLocation){
+   			     if($rootScope.actualLocation == newLocation){
+   			     	console.log("redirecting to Splash on Browser Back");
+					window.location.reload();
+					return false;
+        		}
+    		});
+
  					  /*! matchMedia() polyfill - Test a CSS media type/query in JS.
  					   * Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas, David Knight.
  					   * Dual MIT/BSD license
