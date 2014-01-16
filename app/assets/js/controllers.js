@@ -306,14 +306,19 @@
 	  
 	  if(!$rootScope.splashLoaded) {
 	      $location.path('/');
+	  } else {
+		  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
+		      $scope.playerProfiles = votes.playerProfiles.reverse();
+		  }); 
 	  }
 	  
-	  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
-	      $scope.playerProfiles = votes.playerProfiles.reverse();
-	  });
-	  $timeout(function(){
+	  $scope.timer = $timeout(function(){
 	      $location.path('/level');
 	  }, 3000);
+	  
+	  $scope.$on("$destroy", function() {
+		  $timeout.cancel($scope.timer)
+	  });
   }
 
   var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, Votes, screenSize) {
