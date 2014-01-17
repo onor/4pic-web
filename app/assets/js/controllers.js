@@ -294,10 +294,10 @@
     $scope.claimReward = function(campaign) {
       if (campaign.available) {
         PrizeCode.save({'fbid':appConfig.fbid},{
-          'email' : 'rudolf.markulin@gmail.com',
+          'email' : 'piyush@onor.net',
           'campaignId' : campaign._id,
           'name' : $rootScope.me.name,
-          'phoneNumber' : '+49 162 4879759'
+          'phoneNumber' : '+1 4158664194'
         },
           function(success) {alert('Prize was sent.');},
           function(error) {alert('Error ' + error.data);}
