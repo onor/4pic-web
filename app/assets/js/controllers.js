@@ -218,6 +218,11 @@
 	if(!$rootScope.splashLoaded) {
 	  $location.path('/');
 	}
+	
+	$scope.visible = false;
+	$scope.openModal = function() {
+	  $scope.visible = true;
+	}
 	  
 	$scope.seeLeaderboard = function() {
 		$location.path('/leaderboard');	
@@ -295,7 +300,7 @@
           'phoneNumber' : '+49 162 4879759'
         },
           function(success) {alert('Prize was sent.');},
-          function(error) {alert('Error ' + error);}
+          function(error) {alert('Error ' + error.data);}
         );
       }
     };
