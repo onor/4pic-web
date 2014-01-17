@@ -420,7 +420,7 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
       //if user has already seen this question timer starts and ends from 1 second
     if ($rootScope.state.state.seen) {
-      $scope.countdownAvailable = 1;
+      $scope.countdownAvailable = 30;
     } else {
       $scope.countdownAvailable = 30;
     }
