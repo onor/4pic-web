@@ -61,11 +61,11 @@ http://blog.typekit.com/2011/05/25/loading-typekit-fonts-asynchronously/
 
         .pie-timer {
           position: relative;
-          width: 5em;
-          height: 5em; 
+          width: 4em;
+          height: 4em; 
         }
         .pie-timer.under-half {
-          left: 2.5em;
+          left: 2em;
           -moz-transform-origin: left center;
           -ms-transform-origin: left center;
           -o-transform-origin: left center;
@@ -83,10 +83,10 @@ http://blog.typekit.com/2011/05/25/loading-typekit-fonts-asynchronously/
         .pie-timer .before {
           content: '';
           position: absolute;
-          width: 2.5em;
-          height: 5em;
-          border-radius: 2.5em 0 0 2.5em;
-          background: #cccccc;
+          width: 2em;
+          height: 4em;
+          border-radius: 2em 0 0 2em;
+          background: #81b52d;
           -moz-transform-origin: right center;
           -ms-transform-origin: right center;
           -o-transform-origin: right center;
@@ -99,7 +99,7 @@ http://blog.typekit.com/2011/05/25/loading-typekit-fonts-asynchronously/
           transform: rotate(72deg);
         }
         .pie-timer.under-half .before {
-          left: -2.5em;
+          left: -2em;
         }
         .pie-timer.over-half .before {
           left: 0;
@@ -107,24 +107,107 @@ http://blog.typekit.com/2011/05/25/loading-typekit-fonts-asynchronously/
         .pie-timer .after {
           content: '';
           position: absolute;
-          width: 2.5em;
-          height: 5em;
+          width: 2em;
+          height: 4em;
           text-align: center;
-          line-height: 5em;
+          line-height: 4em;
         }
         .pie-timer.under-half .after {
-          left: -2.5em;
+          left: -2em;
           background: #f2ecdb;
           outline: 1px solid #f2ecdb;
           box-shadow: none;
         }
         .pie-timer.over-half .after {
-          left: 2.5em;
-          text-indent: -2.5em;
-          background: #cccccc;
-          border-radius: 0 2.5em 2.5em 0;
+          left: 2em;
+          text-indent: -2em;
+          background: #81b52d;
+          border-radius: 0 2em 2em 0;
         }
 
+
+@@media (max-width: 768px) {
+
+
+div.points-counterboard {clear:both;}
+ .shape.ng-hide {
+          display: none !important;
+        }
+        
+        .invalid-answer {
+          color: red !important;
+        }
+
+        .puzzle-board li {line-height:0;}
+
+        .pie-timer {
+          position: relative;
+          width: 2em;
+          height: 2em; 
+        }
+        .pie-timer.under-half {
+          left: 1em;
+          -moz-transform-origin: left center;
+          -ms-transform-origin: left center;
+          -o-transform-origin: left center;
+          -webkit-transform-origin: left center;
+          transform-origin: left center;
+        }
+        .pie-timer.over-half {
+          left: 0;
+          -moz-transform-origin: center center;
+          -ms-transform-origin: center center;
+          -o-transform-origin: center center;
+          -webkit-transform-origin: center center;
+          transform-origin: center center;
+        }
+        .pie-timer .before {
+          content: '';
+          position: absolute;
+          width: 1em;
+          height: 2em;
+          border-radius: 1em 0 0 1em;
+          background: #81b52d;
+          -moz-transform-origin: right center;
+          -ms-transform-origin: right center;
+          -o-transform-origin: right center;
+          -webkit-transform-origin: right center;
+          transform-origin: right center;
+          -moz-transform: rotate(72deg);
+          -ms-transform: rotate(72deg);
+          -webkit-transform: rotate(72deg);
+          -o-transform: rotate(72deg);
+          transform: rotate(72deg);
+        }
+        .pie-timer.under-half .before {
+          left: -1em;
+        }
+        .pie-timer.over-half .before {
+          left: 0;
+        }
+        .pie-timer .after {
+          content: '';
+          position: absolute;
+          width: 1em;
+          height: 2em;
+          text-align: center;
+          line-height: 2em;
+        }
+        .pie-timer.under-half .after {
+          left: -1em;
+          background: #f2ecdb;
+          outline: 1px solid #f2ecdb;
+          box-shadow: none;
+        }
+        .pie-timer.over-half .after {
+          left: 1em;
+          text-indent: -1em;
+          background: #81b52d;
+          border-radius: 0 1em 1em 0;
+        }
+
+
+}
 
         </style>
 
