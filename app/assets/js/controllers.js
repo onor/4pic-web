@@ -396,9 +396,12 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
       //when all four levelimages are loaded, timer is started
     $scope.loadedImages = [];
+
     $scope.$on('levelimageloaded', function () {
+      console.log("image load event received");
       $scope.loadedImages.push(true);
       if ($scope.loadedImages.length == 4) {
+        console.log("starting timer");
         $scope.$broadcast('timer-start');
       }
     });
