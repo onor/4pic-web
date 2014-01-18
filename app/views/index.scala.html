@@ -128,9 +128,7 @@ http://blog.typekit.com/2011/05/25/loading-typekit-fonts-asynchronously/
 
 @@media (max-width: 768px) {
 
-
-div.points-counterboard {clear:both;}
- .shape.ng-hide {
+   .shape.ng-hide {
           display: none !important;
         }
         
@@ -142,11 +140,11 @@ div.points-counterboard {clear:both;}
 
         .pie-timer {
           position: relative;
-          width: 2em;
-          height: 2em; 
+          width: 1.5em;
+          height: 1.5em; 
         }
         .pie-timer.under-half {
-          left: 1em;
+          left: 0.75em;
           -moz-transform-origin: left center;
           -ms-transform-origin: left center;
           -o-transform-origin: left center;
@@ -164,9 +162,9 @@ div.points-counterboard {clear:both;}
         .pie-timer .before {
           content: '';
           position: absolute;
-          width: 1em;
-          height: 2em;
-          border-radius: 1em 0 0 1em;
+          width: 0.75em;
+          height: 1.5em;
+          border-radius: 0.75em 0 0 0.75em;
           background: #81b52d;
           -moz-transform-origin: right center;
           -ms-transform-origin: right center;
@@ -180,7 +178,7 @@ div.points-counterboard {clear:both;}
           transform: rotate(72deg);
         }
         .pie-timer.under-half .before {
-          left: -1em;
+          left: -0.75em;
         }
         .pie-timer.over-half .before {
           left: 0;
@@ -188,23 +186,24 @@ div.points-counterboard {clear:both;}
         .pie-timer .after {
           content: '';
           position: absolute;
-          width: 1em;
-          height: 2em;
+          width: 0.75em;
+          height: 1.5em;
           text-align: center;
-          line-height: 2em;
+          line-height: 1.5em;
         }
         .pie-timer.under-half .after {
-          left: -1em;
+          left: -0.75em;
           background: #f2ecdb;
           outline: 1px solid #f2ecdb;
           box-shadow: none;
         }
         .pie-timer.over-half .after {
-          left: 1em;
-          text-indent: -1em;
+          left: 0.75em;
+          text-indent: -0.75em;
           background: #81b52d;
-          border-radius: 0 1em 1em 0;
+          border-radius: 0 0.75em 0.75em 0;
         }
+
 
 
 }
