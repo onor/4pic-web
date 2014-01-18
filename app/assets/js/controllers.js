@@ -218,12 +218,7 @@
 	if(!$rootScope.splashLoaded) {
 	  $location.path('/');
 	}
-	
-	$scope.visible = false;
-	$scope.openModal = function() {
-	  $scope.visible = true;
-	}
-	  
+		  
 	$scope.seeLeaderboard = function() {
 		$location.path('/leaderboard');	
 	} 
@@ -234,7 +229,12 @@
 	  
 	$scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
 		$scope.votes = votes;
+		$(document).foundation('orbit', {});
+		setTimeout(function(){
+		  $(window).trigger('resize');        
+		}, 500);
 	});
+	
 	  
     $scope.showTimer = false;
 	$scope.progress =  100;
@@ -259,6 +259,8 @@
     };
     
     $scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
+	$scope.prizeUrl = 'prizes.html?points=' + $scope.score;
+
 
     //retrieves all campaigns, checks if user can take the prize. and enables/disables gui accordingly.
     CampaignPrize.query(function (res) {
@@ -297,7 +299,7 @@
           'email' : 'piyush@onor.net',
           'campaignId' : campaign._id,
           'name' : $rootScope.me.name,
-          'phoneNumber' : '+1 4158664194'
+          'phoneNumber' : '+1 415 866 4194'
         },
           function(success) {alert('Prize was sent.');},
           function(error) {alert('Error ' + error.data);}

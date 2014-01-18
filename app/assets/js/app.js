@@ -20,7 +20,12 @@
  		 					'gameKey' : appConfig.gameKey,
  		 					'fbid' : appConfig.fbid
  		 				}; 					
- 				}).run(function($rootScope, $location){
+ 				}).run(function($rootScope, $location, $timeout){
+ 					
+ 					$rootScope.$on('$viewContentLoaded', function () {
+ 				        $(document).foundation();
+ 				       
+ 				    });
                		$rootScope.$on('$routeChangeStart', function(event, next, current){
              
              

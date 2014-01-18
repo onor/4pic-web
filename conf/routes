@@ -17,5 +17,7 @@ GET         /webjars/*file                          controllers.WebJarAssets.at(
 POST        /:gameKey/                       		controllers.Application.indexPost(gameKey:Int)
 GET         /:gameKey/        						controllers.Application.index(gameKey:Int)
 
+GET			/:gameKey/prizes.html				    controllers.Application.prizes(gameKey:Int, points:Int)
+
 # Map the JS resource paths
 GET         /*file                                  controllers.Assets.at(path="/public", file)
