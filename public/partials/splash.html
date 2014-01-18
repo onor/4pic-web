@@ -76,8 +76,8 @@
           <ul class="panel-grid large-block-grid-2 medium-block-grid-2 small-block-grid-1" style="margin-top:50px;">
             <li ng-repeat="campaign in campaigns.slice(0,4)">
             <img ng-src="{{campaign.prize.image}}" class="circle">
-            <h4>{{campaign.name}}</h4>
-            <p class="brown">{{campaign.description}}</p>
+            <h4>{{campaign.prize.title}}</h4>
+            <p class="brown">{{campaign.prize.description}}</p>
             </li>
           </ul>
         </div>
