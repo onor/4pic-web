@@ -1,0 +1,61 @@
+@(campaigns:List[Campaign], grouped:Vector[List[Campaign]], groupedSmall:Vector[List[Campaign]], points:Int, locked: Option[Prize] => Boolean)
+<div class="large-10 medium-12 columns center text-center">
+	<div class='hide-for-small'>
+		<ul class="orbit-content rewards text-center center" data-orbit>
+		  @for(i <- 0 until grouped.length) {
+			<li data-orbit-slide="headline-@i">
+				<ul class="large-block-grid-3 medium-block-grid-3 text-center center">
+					@for(campaign <- grouped(i)) {
+					<li class="@{if(locked(campaign.prize)) "locked hop" else "hop"}">
+						<span class="label rounded">@{campaign.prize.get.points.get}<span>points</span></span>
+						@if(locked(campaign.prize)) {
+						  <div class="locked-container circle center">
+							<i class="fi-lock"></i>
+							<div class="circle shader"></div>
+							<img src="@{campaign.prize.get.image}" class="center circle">
+						  </div>
+						} else {
+						  <img src="@{campaign.prize.get.image}" class="center circle hop">
+						}
+						<h4>@{campaign.prize.get.title}</h4>
+						<p class="lead philz-white">@{campaign.prize.get.description}</p> 
+						<div data-reveal-id="myModal" class="button light-orange">Claim Reward</div>
+					</li>
+					}
+				</ul>
+			</li>
+		  }
+			
+		</ul>
+	</div>
+</div>
+<div class="large-10 columns center text-center">
+	<div class='show-for-small'>
+		<ul class="orbit-content rewards text-center center" data-orbit>
+		  @for(i <- 0 until groupedSmall.length) {
+			<li data-orbit-slide="headline-@i">
+				<ul class="small-block-grid-1 text-center center">
+					@for(campaign <- groupedSmall(i)) {
+					<li class="@{if(locked(campaign.prize)) "locked hop" else "hop"}">
+						<span class="label rounded">@{campaign.prize.get.points.get}<span>points</span></span>
+						@if(locked(campaign.prize)) {
+						  <div class="locked-container circle center">
+							<i class="fi-lock"></i>
+							<div class="circle shader"></div>
+							<img src="@{campaign.prize.get.image}" class="center circle">
+						  </div>
+						} else {
+						  <img src="@{campaign.prize.get.image}" class="center circle hop">
+						}
+						<h4>@{campaign.prize.get.title}</h4>
+						<p class="lead philz-white">@{campaign.prize.get.description}</p> 
+						<div data-reveal-id="myModal" class="button light-orange">Claim Reward</div>
+					</li>
+					}
+				</ul>
+			</li>
+		  }
+			
+		</ul>
+	</div>
+</div>

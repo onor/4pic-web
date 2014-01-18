@@ -11,7 +11,33 @@ import scala.concurrent.Future
 
 case class FacebookSettings(namespace:String, appId:String, appSecret:String)
 
+case class Prize(
+  _id: String,
+  prizetype: String = "real",
+  version: Int,
+  title: String,
+  tags: Seq[String],
+  brand: String,
+  sku: String,
+  description: String,
+  retail: Double,
+  cost: Double,
+  image: String,
+  logo: String,
+  points: Option[Int])
+
+case class Campaign(
+  _id: String,
+  version: Int,
+  prize: Option[Prize],
+  giveAway: Option[Prize],
+  name: String,
+  description: String)
+
 object Application extends Controller {
+  
+  private implicit val format = Json.format[Prize]
+  private implicit val format2 = Json.format[Campaign]
   
   val onorUrl = play.api.Play.current.configuration.getString("onorplatform.url").get
   
@@ -41,6 +67,16 @@ object Application extends Controller {
       val settings = facebookSettings(gameKey)
       Ok(views.html.index(gameKey, settings.appId, onorUrl))
     }
+  }
+    
+  def prizes(gameKey:Int, points:Int) = Action.async {
+    def locked(prize:Option[Prize]) = {prize.get.points.get > points}
+
+    WS.url(onorUrl + "/client/v2/campaignsavailable").withHeaders("gameKey" -> gameKey.toString).get.map{ res =>
+      val campaigns = res.json.as[List[Campaign]]
+      Logger.error("cc" + campaigns)
+      Ok(views.html.prizes(campaigns, campaigns.grouped(3).toVector, campaigns.grouped(1).toVector, points, locked _))
+    }  
   }
 
 }
