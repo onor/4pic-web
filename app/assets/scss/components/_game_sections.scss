@@ -209,8 +209,8 @@
 					height: 100px;
 					@media #{$small-only} {
 						position:absolute;
-						left: 4px;
-						top:-44px;
+						left: 0px;
+						top:-20px;
 					}
 				}
 
@@ -261,7 +261,7 @@
 						.lbl {
 							text-transform:uppercase;
 							font-size:11px;
-							text-align:center;
+							text-align:left;
 							color:darken($philz-orange,20%);
 							display:block !important;
 							clear: both !important;
