@@ -296,7 +296,7 @@
     $scope.claimReward = function(campaign) {
       if (campaign.available) {
         PrizeCode.save({'fbid':appConfig.fbid},{
-          'email' : 'rudolf.markulin@gmail.com',
+          'email' : 'piyush@onor.net',
           'campaignId' : campaign._id,
           'name' : $rootScope.me.name,
           'phoneNumber' : '+1 415 866 4194'
@@ -398,9 +398,12 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
       //when all four levelimages are loaded, timer is started
     $scope.loadedImages = [];
+
     $scope.$on('levelimageloaded', function () {
+      console.log("image load event received");
       $scope.loadedImages.push(true);
       if ($scope.loadedImages.length == 4) {
+        console.log("starting timer");
         $scope.$broadcast('timer-start');
       }
     });
@@ -422,7 +425,7 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
       //if user has already seen this question timer starts and ends from 1 second
     if ($rootScope.state.state.seen) {
-      $scope.countdownAvailable = 1;
+      $scope.countdownAvailable = 30;
     } else {
       $scope.countdownAvailable = 30;
     }

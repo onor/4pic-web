@@ -12,6 +12,7 @@
 			restrict: 'A',
 			link: function (scope, element, attrs) {
 				element.bind('load', function () {
+					console.log("image loaded");
 					scope.$emit("levelimageloaded");
 				});
 			}
