@@ -284,18 +284,16 @@
     }
 
       //user can pick prize if he has enough points
-    $scope.claimReward = function(campaign) {
-      if (campaign.available) {
+    $scope.claimReward = function(campaignId) {
         PrizeCode.save({'fbid':appConfig.fbid},{
-          'email' : 'piyush@onor.net',
-          'campaignId' : campaign._id,
+          'email' : $('#email-' + campaignId).val(),
+          'campaignId' : campaignId,
           'name' : $rootScope.me.name,
-          'phoneNumber' : '+1 415 866 4194'
+          'phoneNumber' : $('#email-' + campaignId).val()
         },
-          function(success) {alert('Prize was sent.');},
+          function(success) {$location.path('/leaderboard');},
           function(error) {alert('Error ' + error.data);}
         );
-      }
     };
 
   };

@@ -72,10 +72,10 @@
   			<p>@{campaign.prize.get.description}</p> 
   		</div>
   		<div class="medium-8 columns">
-      		<input type="text" placeholder="Your Email Address" />
+      		<input id="email-@{campaign._id}" type="text" placeholder="Your Email Address" />
       		<p>Or</p>
-      		<input type="text" placeholder="Your Cellphone Number" />
-     		<button>Redeem Rewards</button>
+      		<input id="phoneNumber-@{campaign._id}" type="text" placeholder="Your Cellphone Number" />
+     		<button ng-click="claimReward('@{campaign._id}')">Redeem Rewards</button>
   		</div>
 	</div>
 </div>
