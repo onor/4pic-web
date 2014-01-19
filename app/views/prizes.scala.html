@@ -59,3 +59,24 @@
 		</ul>
 	</div>
 </div>
+
+@for(campaign <- campaigns) {
+
+<div id="modal-@{campaign._id}" class="reveal-modal">
+	<h2> Redeem Reward </h2>
+ 	<hr>
+ 		<div class="row">
+  		<div class="medium-4 columns">
+  			<img src="@{campaign.prize.get.image}">
+  			<h4>@{campaign.prize.get.title}</h4>
+  			<p>@{campaign.prize.get.description}</p> 
+  		</div>
+  		<div class="medium-8 columns">
+      		<input type="text" placeholder="Your Email Address" />
+      		<p>Or</p>
+      		<input type="text" placeholder="Your Cellphone Number" />
+     		<button>Redeem Rewards</button>
+  		</div>
+	</div>
+</div>
+}

@@ -280,7 +280,7 @@
     });
     
     $scope.openModal = function(id) {
-    	$('#myModal').foundation('reveal', 'open');
+    	$('#modal-' + id).foundation('reveal', 'open');
     }
 
       //user can pick prize if he has enough points
