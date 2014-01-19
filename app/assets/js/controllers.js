@@ -226,13 +226,16 @@
 	$scope.keepPlaying = function() {
 		$location.path('/level');	
 	}
-	  
-	$scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
-		$scope.votes = votes;
+	
+	$scope.whenLoaded = function() {
 		$(document).foundation('orbit', {});
 		setTimeout(function(){
 		  $(window).trigger('resize');        
-		}, 500);
+	    }, 0);
+	}
+	  
+	$scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
+		$scope.votes = votes;
 	});
 	
 	  
@@ -244,20 +247,7 @@
     Score.get({fbid: $rootScope.me.id, weekly: true}, function (res) {
 		$scope.weekly = res;
 	});
-    
-    $scope.$watch('page', function (newValue) {
-    	$scope.hasPrevious = newValue > 0;
-        $scope.hasNext = newValue < $scope.pageNo - 1;
-    });
-    
-    $scope.previous = function() {
-      $scope.page = $scope.page - 1;
-    };
-      
-    $scope.next = function() {
-      $scope.page = $scope.page + 1;
-    };
-    
+     
     $scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
 	$scope.prizeUrl = 'prizes.html?points=' + $scope.score;
 
@@ -275,21 +265,6 @@
         return camp;
       });
       
-      if (screenSize.is('small')) {
-  	    $scope.perPage = 1;
-  	  }
-  	  if (screenSize.is('medium')) {
-  		$scope.perPage = 3;
-  	  }
-  	  if (screenSize.is('large')) {
-  	    $scope.perPage = 3;
-  	  }
-	  $scope.page = 0;
-	  $scope.pageNo = $scope.campaigns.length / $scope.perPage;
-	  
-      $scope.hasAvailable = _.some($scope.campaigns, function(campaign) {
-        return campaign.available;
-      });
     });
 
       //user can pick prize if he has enough points
