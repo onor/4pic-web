@@ -228,7 +228,19 @@
 	}
 	
 	$scope.whenLoaded = function() {
-		$(document).foundation('orbit', {});
+		$(document).foundation({
+			'orbit':{
+		      animation: 'slide',
+		      pause_on_hover: true,
+		      stack_on_small: false,
+		      navigation_arrows: true,
+		      bullets: true,
+		      next_on_click: true,
+		      swipe: true,
+		      slide_number: false,
+		      timer: false
+		    }, 
+		    'reveal':{}});
 		setTimeout(function(){
 		  $(window).trigger('resize');        
 	    }, 0);
@@ -266,6 +278,10 @@
       });
       
     });
+    
+    $scope.openModal = function(id) {
+    	$('#myModal').foundation('reveal', 'open');
+    }
 
       //user can pick prize if he has enough points
     $scope.claimReward = function(campaign) {

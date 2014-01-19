@@ -19,7 +19,7 @@
 						}
 						<h4>@{campaign.prize.get.title}</h4>
 						<p class="lead philz-white">@{campaign.prize.get.description}</p> 
-						<div data-reveal-id="myModal" class="button light-orange">Claim Reward</div>
+						<a ng-click="openModal('@{campaign._id}')" class="button light-orange">Claim Reward</a>
 					</li>
 					}
 				</ul>
@@ -49,7 +49,7 @@
 						}
 						<h4>@{campaign.prize.get.title}</h4>
 						<p class="lead philz-white">@{campaign.prize.get.description}</p> 
-						<div data-reveal-id="myModal" class="button light-orange">Claim Reward</div>
+						<a ng-click="openModal('@{campaign._id}')" class="button light-orange">Claim Reward</a>
 					</li>
 					}
 				</ul>
