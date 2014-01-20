@@ -284,7 +284,7 @@
     function isEmpty(str) { return (str == null || str == '')};
     
     $scope.oneIsRequired = function(){
-      return isEmpty($scope.rewardPost.email) && isEmpty($scope.rewardPost.phoneNumber);
+      return !isEmpty($scope.rewardPost.email) || isEmpty($scope.rewardPost.phoneNumber);
     };
     
 	$scope.reedem = false;
