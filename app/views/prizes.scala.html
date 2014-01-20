@@ -12,13 +12,13 @@
 						  <div class="locked-container circle center">
 							<i class="fi-lock"></i>
 							<div class="circle shader"></div>
-							<img src="@{campaign.prize.get.image}" class="center circle">
+							<img id="image-@{campaign._id}" src="@{campaign.prize.get.image}" class="center circle">
 						  </div>
 						} else {
 						  <img src="@{campaign.prize.get.image}" class="center circle hop">
 						}
-						<h4>@{campaign.prize.get.title}</h4>
-						<p class="lead philz-white">@{campaign.prize.get.description}</p> 
+						<h4 id="title-@{campaign._id}">@{campaign.prize.get.title}</h4>
+						<p id="description-@{campaign._id}" class="lead philz-white">@{campaign.prize.get.description}</p> 
 						<a ng-click="openModal('@{campaign._id}')" class="button light-orange">Claim Reward</a>
 					</li>
 					}
@@ -59,24 +59,3 @@
 		</ul>
 	</div>
 </div>
-
-@for(campaign <- campaigns) {
-
-<div id="modal-@{campaign._id}" class="reveal-modal">
-	<h2> Redeem Reward </h2>
- 	<hr>
- 		<div class="row">
-  		<div class="medium-4 columns">
-  			<img src="@{campaign.prize.get.image}">
-  			<h4>@{campaign.prize.get.title}</h4>
-  			<p>@{campaign.prize.get.description}</p> 
-  		</div>
-  		<div class="medium-8 columns">
-      		<input id="email-@{campaign._id}" type="text" placeholder="Your Email Address" />
-      		<p>Or</p>
-      		<input id="phoneNumber-@{campaign._id}" type="text" placeholder="Your Cellphone Number" />
-     		<button ng-click="claimReward('@{campaign._id}')">Redeem Rewards</button>
-  		</div>
-	</div>
-</div>
-}

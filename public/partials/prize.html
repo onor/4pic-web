@@ -12,7 +12,29 @@
 	</div>
 	
 	<div class="row section rewards">    
-	  <div ng-include src="prizeUrl" onload="whenLoaded()"></div>
+	  <div ng-show="!reedem" ng-include src="prizeUrl" onload="whenLoaded()"></div>
+	  <div ng-show="reedem">
+	    <h2> Redeem Reward </h2>
+ 		<hr>
+ 		<div class="row">
+  		<div class="medium-4 columns">
+  			<img ng-src="{{reward.image}}">
+  			<h4>{{reward.title}}</h4>
+  			<p>{{reward.description}}</p> 
+  		</div>
+  		<form name="myForm" novalidate>
+  		<div class="medium-8 columns">
+      		<input name="email" type="email" placeholder="Your Email Address" ng-model="rewardPost.email"/>
+      		<span ng-show="submitted && myForm.email.$error.email">Invalid email!</span>
+      		<p>Or</p>
+      		<input name="phoneNumber" type="text" placeholder="Your Cellphone Number" ng-pattern="phoneNumberPattern" ng-model="rewardPost.phoneNumber"/>
+     		<span ng-show="submitted && myForm.phoneNumber.$error.pattern">Invalid phone number!</span>
+     		<span ng-show="submitted && oneIsRequired()">Enter email or phone or both!</span>
+     		<button ng-click="sendReward()">Send Rewards</button>
+  		</div>
+  		</form>
+		</div>
+	  </div>
 	</div>
 
 </div>

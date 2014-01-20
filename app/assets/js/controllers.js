@@ -81,9 +81,9 @@
     	if (!$scope.fbLoggedIn) {
     		var opts = null;
         	if (isMobile()) {
-        		opts = {display:'touch'};
+        		opts = {display:'touch', scope: 'email'};
         	} else {
-        		opts = {};
+        		opts = {scope: 'email'};
         	}
 
         	$facebook.login(opts).then(function(res) {
@@ -279,21 +279,44 @@
       
     });
     
+    $scope.phoneNumberPattern = /^\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})$/;
+    
+    function isEmpty(str) { return (str == null || str == '')};
+    
+    $scope.oneIsRequired = function(){
+      return isEmpty($scope.rewardPost.email) && isEmpty($scope.rewardPost.phoneNumber);
+    };
+    
+	$scope.reedem = false;
     $scope.openModal = function(id) {
-    	$('#modal-' + id).foundation('reveal', 'open');
+    	$scope.reedem = true;
+    	$scope.reward = {
+    	  image:$('#image-' + id).prop('src'),
+    	  title:$('#title-' + id).text(),
+    	  description:$('#description-' + id).text()
+    	}
+    	$scope.rewardPost = {
+    	  email: $rootScope.me.email,
+    	  campaignId: id,
+    	  name: $rootScope.me.name,
+    	  phoneNumber: ""
+    	}
     }
 
-      //user can pick prize if he has enough points
-    $scope.claimReward = function(campaignId) {
-        PrizeCode.save({'fbid':appConfig.fbid},{
-          'email' : $('#email-' + campaignId).val(),
-          'campaignId' : campaignId,
-          'name' : $rootScope.me.name,
-          'phoneNumber' : $('#email-' + campaignId).val()
-        },
-          function(success) {$location.path('/leaderboard');},
-          function(error) {alert('Error ' + error.data);}
-        );
+    $scope.submitted = false;
+    $scope.sendReward = function(campaignId) {
+    	$scope.submitted = true;
+    	if($scope.myForm.$valid && $scope.oneIsRequired()) {
+            PrizeCode.save({'fbid':appConfig.fbid}, $scope.rewardPost,
+              function(success) {
+            	$location.path('/leaderboard');
+              },
+              function(error) {alert('Error ' + error.data);}
+            );
+    	} else {
+    		$scope.submitted = true;
+    	}
+    	
     };
 
   };
