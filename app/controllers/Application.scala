@@ -34,10 +34,22 @@ case class Campaign(
   name: String,
   description: String)
 
+case class PartyCharity(
+  _id:String,
+  name: String,
+  charity: Charity)
+
+case class Charity(
+  about: String,
+  heartImpact: Option[String],
+  logoColor: String)
+
 object Application extends Controller {
   
   private implicit val format = Json.format[Prize]
   private implicit val format2 = Json.format[Campaign]
+  private implicit val format3 = Json.format[Charity]
+  private implicit val format4 = Json.format[PartyCharity]
   
   val onorUrl = play.api.Play.current.configuration.getString("onorplatform.url").get
   
@@ -74,8 +86,14 @@ object Application extends Controller {
 
     WS.url(onorUrl + "/client/v2/campaignsavailable").withHeaders("gameKey" -> gameKey.toString).get.map{ res =>
       val campaigns = res.json.as[List[Campaign]].sortBy(_.prize.get.points.getOrElse(0))
-      Logger.error("cc" + campaigns)
       Ok(views.html.prizes(campaigns, campaigns.grouped(3).toVector, campaigns.grouped(1).toVector, points, locked _))
+    }  
+  }
+  
+  def charities(gameKey:Int) = Action.async {
+    WS.url(onorUrl + "/client/v1/charities").withHeaders("gameKey" -> gameKey.toString).get.map{ res =>
+      val charities = res.json.as[List[PartyCharity]]
+      Ok(views.html.charities(charities = charities, grouped2 = charities.grouped(2).toVector, grouped3 = charities.grouped(3).toVector))
     }  
   }
 

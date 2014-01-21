@@ -16,63 +16,6 @@
     </div>
   </div>
 
-  <div class="row section select-charity">
-    <div class="large-10 medium-12 columns center text-center">
-      <div data-carousel data-carousel-class="orbit-content charity text-center">
-      <div class="orbit-container">
-        <ul data-orbit class="orbit-content charity text-center orbit-slides-container" style="height:300px;">
-          <li>
-            <div class="show-for-small-only">
-              <ul class="small-block-grid-1 text-center">
-                <li ng-repeat="item in charities.slice(page * perPage, (page + 1) * perPage)">
-                  <a analytics-on"SelectCharity1" ng-click="selectCharity(item)">
-                    <img src="{{item.charity.logoColor}}" class="center circle hop">
-
-<!--                     <img ng-src="{{item.charity.logoColor}}" class="center circle hop"> -->
-                    <h4>{{item.name}}</h4>
-                    <p class="lead small light">{{item.charity.about}}</p>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="show-for-medium-only">
-              <ul class="medium-block-grid-2 text-center">
-                <li ng-repeat="item in charities.slice(page * perPage, (page + 1) * perPage)">
-                  <a analytics-on"SelectCharity2" ng-click="selectCharity(item)">
-                    <img ng-src="{{item.charity.logoColor}}" class="center circle hop">
-                    <h4>{{item.name}}</h4>
-                    <p class="lead small light">{{item.charity.about}}</p>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="show-for-large-only">
-              <ul class="large-block-grid-3 text-center">
-                <li ng-repeat="item in charities.slice(page * perPage, (page + 1) * perPage)">
-                  <a analytics-on"SelectCharity3" ng-click="selectCharity(item)">
-                    <img ng-src="{{item.charity.logoColor}}" class="center circle hop">
-                    <h4>{{item.name}}</h4>
-                    <p class="lead small light">{{item.charity.about}}</p>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-
-        <!-- Navigation Arrows -->
-        <a class="orbit-prev" data-ng-show="hasPrevious" data-ng-click="previous()">
-          Prev<span></span>
-        </a>
-        <a class="orbit-next" data-ng-show="hasNext" data-ng-click="next()">
-          Next<span></span>
-        </a>
-      </div>
-      </div>
-
-      </div>
-
-    </div>
-  </div>
-
+  <div ng-include src="'charities.html'" onload="whenLoaded()"></div>
+  
 </div>

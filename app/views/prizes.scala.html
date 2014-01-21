@@ -3,7 +3,7 @@
 	<div class='hide-for-small'>
 		<ul class="orbit-content rewards text-center center" data-orbit>
 		  @for(i <- 0 until grouped.length) {
-			<li data-orbit-slide="headline-@i">
+			<li data-orbit-slide="headline-@{i + 1}">
 				<ul class="large-block-grid-3 medium-block-grid-3 text-center center">
 					@for(campaign <- grouped(i)) {
 					<li class="@{if(locked(campaign.prize)) "locked hop" else "hop"}">
@@ -33,7 +33,7 @@
 	<div class='show-for-small'>
 		<ul class="orbit-content rewards text-center center" data-orbit>
 		  @for(i <- 0 until groupedSmall.length) {
-			<li data-orbit-slide="headline-@i">
+			<li data-orbit-slide="headline-@{i + 1}">
 				<ul class="small-block-grid-1 text-center center">
 					@for(campaign <- groupedSmall(i)) {
 					<li class="@{if(locked(campaign.prize)) "locked hop" else "hop"}">

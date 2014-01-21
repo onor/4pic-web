@@ -1,0 +1,64 @@
+@(charities:List[PartyCharity], grouped2:Vector[List[PartyCharity]], grouped3:Vector[List[PartyCharity]])
+<div class="row section select-charity">
+    <div class="large-10 medium-12 columns center text-center">
+
+      <div class='show-for-small-only'>
+        <ul class="orbit-content charity text-center" data-orbit>
+		  @for(charity <- charities) {
+          <li data-orbit-slide="headline-1">
+            <ul class="small-block-grid-1">
+              <li>
+                <a analytics-on"SelectCharity1" ng-click="selectCharity('@{charity._id}')">
+                  <img src="@{charity.charity.logoColor}" class="center circle hop">
+                  <h4>@{charity.name}</h4>
+                  <p class="lead small light">@{charity.charity.about}</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          }
+        </ul>
+      </div>
+
+      <div class='show-for-large-up'>
+        <ul class="orbit-content charity text-center" data-orbit>
+		  @for(i <- 0 until grouped3.length) {
+          <li data-orbit-slide="headline-<?php echo $i; ?>">
+            <ul class="large-block-grid-3 text-center">
+			  @for(charity <- grouped3(i)) {
+              <li>
+                <a analytics-on"SelectCharity1" ng-click="selectCharity('@{charity._id}')">
+                  <img src="@{charity.charity.logoColor}" class="center circle hop">
+                  <h4>@{charity.name}</h4>
+                  <p class="lead small light">@{charity.charity.about}</p>
+                </a>
+              </li>
+              }
+            </ul>
+          </li>
+          }
+        </ul>
+      </div>
+
+      <div class='show-for-medium-only'>
+        <ul class="orbit-content charity text-center" data-orbit>
+		  @for(i <- 0 until grouped2.length) {
+          <li data-orbit-slide="headline-<?php echo $x; ?>">
+            <ul class="medium-block-grid-2 text-center">
+			  @for(charity <- grouped2(i)) {
+              <li>
+                <a analytics-on"SelectCharity1" ng-click="selectCharity('@{charity._id}')">
+                  <img src="@{charity.charity.logoColor}" class="center circle hop">
+                  <h4>@{charity.name}</h4>
+                  <p class="lead small light">@{charity.charity.about}</p>
+                </a>
+              </li>
+              }
+            </ul>
+          </li>
+          }
+        </ul>
+      </div>
+
+    </div>
+  </div>

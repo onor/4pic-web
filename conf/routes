@@ -18,6 +18,7 @@ POST        /:gameKey/                       		controllers.Application.indexPost
 GET         /:gameKey/        						controllers.Application.index(gameKey:Int)
 
 GET			/:gameKey/prizes.html				    controllers.Application.prizes(gameKey:Int, points:Int)
+GET			/:gameKey/charities.html				controllers.Application.charities(gameKey:Int)
 
 # Map the JS resource paths
 GET         /*file                                  controllers.Assets.at(path="/public", file)

@@ -13,8 +13,8 @@
 	$scope.goEnabled = false;
 	
     $rootScope.game = Game.get({}, function(){
-        $scope.charities = Charity.query({}, function(charities) {
-        	$scope.charities = charities;//todo in conflict with 20 charities per query
+        $rootScope.charities = Charity.query({}, function(charities) {
+        	$rootScope.charities = charities;//todo in conflict with 20 charities per query
         	$facebook.getLoginStatus().then(function(res) {
             	if(res.status == "connected") {
             		setState(res);
@@ -51,7 +51,7 @@
     		State.get({fbid:appConfig.fbid}, function(res2){
     			$rootScope.state = res2;
     			if(angular.isDefined($rootScope.state.charityId)) {
-    				$rootScope.pickedCharity = _.find($scope.charities, function(charity) {
+    				$rootScope.pickedCharity = _.find($rootScope.charities, function(charity) {
     					return charity._id == $rootScope.state.charityId
     				});
     			}
@@ -345,38 +345,29 @@
 	if(!$rootScope.splashLoaded) {
 	  $location.path('/');
 	}
+	
+	$scope.whenLoaded = function() {
+		$(document).foundation({
+			'orbit':{
+		      animation: 'slide',
+		      pause_on_hover: true,
+		      stack_on_small: false,
+		      navigation_arrows: true,
+		      bullets: true,
+		      next_on_click: true,
+		      swipe: true,
+		      slide_number: false,
+		      timer: false
+		    }, 
+		    'reveal':{}});
+		setTimeout(function(){
+		  $(window).trigger('resize');        
+	    }, 0);
+	}
 	  
-	$scope.charities = Charity.query({}, function(charities){
-	  if (screenSize.is('small')) {
-	    $scope.perPage = 1;
-	  }
-	  if (screenSize.is('medium')) {
-		$scope.perPage = 2;
-	  }
-	  if (screenSize.is('large')) {
-	    $scope.perPage = 3;
-	  }
-	  $scope.page = 0;
-	  $scope.pageNo = charities.length / $scope.perPage;
-	  $scope.charities = charities;
-	});
-
-    $scope.$watch('page', function (newValue) {
-    	$scope.hasPrevious = newValue > 0;
-        $scope.hasNext = newValue < $scope.pageNo - 1;
-    });
-
-    $scope.previous = function() {
-      $scope.page = $scope.page - 1;
-    };
-
-    $scope.next = function() {
-      $scope.page = $scope.page + 1;
-    };
-
-    $scope.selectCharity = function(charity) {
-      $rootScope.state.charityId = charity._id;
-      $rootScope.pickedCharity = charity;
+    $scope.selectCharity = function(id) {
+      $rootScope.state.charityId = id;
+      $rootScope.pickedCharity = _.find($rootScope.charities, function(charity) {return charity._id == id;});
 	  $location.path('/heart');
     }
 
