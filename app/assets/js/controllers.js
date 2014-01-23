@@ -361,7 +361,7 @@
 	  }
 	  
 	  $scope.profile = function(row,col) {
-		 if($scope.playerProfiles != null && $scope.playerProfiles[row] != null && ($scope.playerProfiles[row][col] == 0 || $scope.playerProfiles[row][col] == 1)) {
+		 if($scope.playerProfiles != null && ($scope.playerProfiles[row][col] == 0 || $scope.playerProfiles[row][col] == 1)) {
 			 return "http://sinclaire.ca/clients/onor-app/placeholder.jpg";
 		 } else {
 			 return $scope.playerProfiles[row][col].picture.data.url;
@@ -369,7 +369,7 @@
 	  }
 	  
 	  $scope.opacity = function(row,col) {
-		 if($scope.playerProfiles != null && $scope.playerProfiles[row] != null && ($scope.playerProfiles[row][col] == 0 || $scope.playerProfiles[row][col] == 1)) {
+		 if($scope.playerProfiles != null && ($scope.playerProfiles[row][col] == 0 || $scope.playerProfiles[row][col] == 1)) {
 		   return "opacity:" + parseInt(Math.random() * 10, 10) / 10;
 		 } else {
 		   return "";
