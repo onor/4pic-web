@@ -527,7 +527,10 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
       $scope.correct = $scope.level.answer.toUpperCase() == newValue.join('');
       if ($scope.correct) {
         $scope.$broadcast('timer-stop');
-        var points2 = $scope.remains * 10;
+        var points2 = 10;
+        if(angular.isDefined($scope.reamins)) {
+        	points2 = $scope.remains * 10;
+        }
         $rootScope.state.$resolveLevel({points: points2}, function () {
           $scope.nextLevel(points2);
         });
