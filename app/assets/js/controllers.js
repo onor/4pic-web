@@ -260,7 +260,7 @@
 		$scope.weekly = res;
 	});
      
-    $scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
+    $scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 2].score;
 	$scope.prizeUrl = 'prizes.html?points=' + $scope.score;
 
 
@@ -465,11 +465,7 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 	$scope.progress =  ($rootScope.state.state.level / $rootScope.game.levelPacks[levelPack].levels.length) * 100;
 	$scope.progressFull = false;
     
-	$scope.score = '00';
-	if ($rootScope.state.state.level != 0) {
-		$scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
-	}
-
+	$scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
 
       //if user has already seen this question timer starts and ends from 1 second
     if ($rootScope.state.state.seen) {
@@ -528,7 +524,7 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
       if ($scope.correct) {
         $scope.$broadcast('timer-stop');
         var points2 = 10;
-        if(angular.isDefined($scope.reamins)) {
+        if(angular.isDefined($scope.remains)) {
         	points2 = $scope.remains * 10;
         }
         $rootScope.state.$resolveLevel({points: points2}, function () {
