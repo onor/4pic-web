@@ -100,11 +100,7 @@
 	  
 	if(!$rootScope.splashLoaded) {
       $location.path('/');
-    }
-
-	$scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
-	  $scope.votes = votes;
-	});  
+    }  
 	  
 	$scope.currentTab = "friends-tab";
 
@@ -210,20 +206,7 @@
     $scope.playAgain = function () {
       $location.path('/level');
     };
-    
-    
-    
-    function addPlayer(matrix, prof) {
-	    for (var i = matrix.length - 1; i >=0; i--) {
-		  for (var j = 0; j < matrix[i].length; j++) {
-		    if (matrix[i][j] == 1) {
-		      matrix[i][j] = prof;
-		      return;
-		    }
-		  }
-		}
-	  }
-	  
+      
 	  var matrix=[[0,0,0,0,0,0,0,0,0,0],
 	              [0,1,1,1,0,0,1,1,1,0],	//6
 	              [0,1,1,1,1,1,1,1,1,0],	//8
@@ -238,29 +221,37 @@
 	  
 	  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
 		  var reversed = votes.playerProfiles.reverse();
-		  for (var i = 0; i < reversed.length; i++) {
-		    addPlayer(matrix, reversed[i]);
+		  for (var i = matrix.length - 1; i >=0; i--) {
+			for (var j = 0; j < matrix[i].length; j++) {
+			  if (matrix[i][j] == 1 && reversed.length > 0) {
+			    matrix[i][j] = reversed[reversed.length - 1];
+			    reversed.splice(reversed.length - 1, 1);
+			  } else {
+				matrix[i][j] = parseInt(Math.random() * 10, 10) / 10;
+			  }
+			}
 		  }
 		  $scope.playerProfiles = matrix;
 		  $scope.range = _.range(0, 10);
+		  $scope.votes = votes;
 	  }); 
 	  
 	  
 	  $scope.profile = function(row,col) {
-		 if($scope.playerProfiles != null && ($scope.playerProfiles[row][col] == 0 || $scope.playerProfiles[row][col] == 1)) {
-			 return "http://sinclaire.ca/clients/onor-app/placeholder.jpg";
-		 } else {
-			 return $scope.playerProfiles[row][col].picture.data.url;
-		 }
-	  }
-	  
-	  $scope.opacity = function(row,col) {
-		 if($scope.playerProfiles != null && ($scope.playerProfiles[row][col] == 0 || $scope.playerProfiles[row][col] == 1)) {
-		   return "opacity:" + parseInt(Math.random() * 10, 10) / 10;
-		 } else {
-		   return "";
-	     } 
-	  }
+			 if($scope.playerProfiles != null && !_.isObject($scope.playerProfiles[row][col])) {
+				 return "http://sinclaire.ca/clients/onor-app/placeholder.jpg";
+			 } else {
+				 return $scope.playerProfiles[row][col].picture.data.url;
+			 }
+		  }
+		  
+		  $scope.opacity = function(row,col) {
+			 if($scope.playerProfiles != null && !_.isObject($scope.playerProfiles[row][col])) {
+			   return "opacity:" + $scope.playerProfiles[row][col];
+			 } else {
+			   return "";
+		     } 
+		  }
     
     
     
@@ -377,17 +368,6 @@
 
   var HeartCtrl = function($scope, $rootScope, Votes, $location, $timeout) {
 	  
-	  function addPlayer(matrix, prof) {
-	    for (var i = matrix.length - 1; i >=0; i--) {
-		  for (var j = 0; j < matrix[i].length; j++) {
-		    if (matrix[i][j] == 1) {
-		      matrix[i][j] = prof;
-		      return;
-		    }
-		  }
-		}
-	  }
-	  
 	  var matrix=[[0,0,0,0,0,0,0,0,0,0],
 	              [0,1,1,1,0,0,1,1,1,0],	//6
 	              [0,1,1,1,1,1,1,1,1,0],	//8
@@ -399,15 +379,21 @@
 	  			      [0,0,0,1,1,1,1,0,0,0],    //2
 	  			      [0,0,0,0,1,1,0,0,0,0]]
 	  
-	  //$scope.playerProfiles = matrix;
 	  
 	  if(!$rootScope.splashLoaded) {
 	      $location.path('/');
 	  } else {
 		  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
 			  var reversed = votes.playerProfiles.reverse();
-			  for (var i = 0; i < reversed.length; i++) {
-			    addPlayer(matrix, reversed[i]);
+			  for (var i = matrix.length - 1; i >=0; i--) {
+				for (var j = 0; j < matrix[i].length; j++) {
+				  if (matrix[i][j] == 1 && reversed.length > 0) {
+				    matrix[i][j] = reversed[reversed.length - 1];
+				    reversed.splice(reversed.length - 1, 1);
+				  } else {
+					matrix[i][j] = parseInt(Math.random() * 10, 10) / 10;
+				  }
+				}
 			  }
 			  $scope.playerProfiles = matrix;
 			  $scope.range = _.range(0, 10);
@@ -415,7 +401,7 @@
 	  }
 	  
 	  $scope.profile = function(row,col) {
-		 if($scope.playerProfiles != null && ($scope.playerProfiles[row][col] == 0 || $scope.playerProfiles[row][col] == 1)) {
+		 if($scope.playerProfiles != null && !_.isObject($scope.playerProfiles[row][col])) {
 			 return "http://sinclaire.ca/clients/onor-app/placeholder.jpg";
 		 } else {
 			 return $scope.playerProfiles[row][col].picture.data.url;
@@ -423,8 +409,8 @@
 	  }
 	  
 	  $scope.opacity = function(row,col) {
-		 if($scope.playerProfiles != null && ($scope.playerProfiles[row][col] == 0 || $scope.playerProfiles[row][col] == 1)) {
-		   return "opacity:" + parseInt(Math.random() * 10, 10) / 10;
+		 if($scope.playerProfiles != null && !_.isObject($scope.playerProfiles[row][col])) {
+		   return "opacity:" + $scope.playerProfiles[row][col];
 		 } else {
 		   return "";
 	     } 
