@@ -210,6 +210,60 @@
     $scope.playAgain = function () {
       $location.path('/level');
     };
+    
+    
+    
+    function addPlayer(matrix, prof) {
+	    for (var i = matrix.length - 1; i >=0; i--) {
+		  for (var j = 0; j < matrix[i].length; j++) {
+		    if (matrix[i][j] == 1) {
+		      matrix[i][j] = prof;
+		      return;
+		    }
+		  }
+		}
+	  }
+	  
+	  var matrix=[[0,0,0,0,0,0,0,0,0,0],
+	              [0,1,1,1,0,0,1,1,1,0],	//6
+	              [0,1,1,1,1,1,1,1,1,0],	//8
+	  			      [1,1,1,1,1,1,1,1,1,1],	//10
+	  			      [0,1,1,1,1,1,1,1,1,0],	//8
+	  			      [0,0,1,1,1,1,1,1,0,0],	//6
+	  			      [0,0,1,1,1,1,1,1,0,0],	//6
+	  			      [0,0,0,1,1,1,1,0,0,0],	//4
+	  			      [0,0,0,1,1,1,1,0,0,0],    //2
+	  			      [0,0,0,0,1,1,0,0,0,0]]
+	  
+	  
+	  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
+		  var reversed = votes.playerProfiles.reverse();
+		  for (var i = 0; i < reversed.length; i++) {
+		    addPlayer(matrix, reversed[i]);
+		  }
+		  $scope.playerProfiles = matrix;
+		  $scope.range = _.range(0, 10);
+	  }); 
+	  
+	  
+	  $scope.profile = function(row,col) {
+		 if($scope.playerProfiles != null && ($scope.playerProfiles[row][col] == 0 || $scope.playerProfiles[row][col] == 1)) {
+			 return "http://sinclaire.ca/clients/onor-app/placeholder.jpg";
+		 } else {
+			 return $scope.playerProfiles[row][col].picture.data.url;
+		 }
+	  }
+	  
+	  $scope.opacity = function(row,col) {
+		 if($scope.playerProfiles != null && ($scope.playerProfiles[row][col] == 0 || $scope.playerProfiles[row][col] == 1)) {
+		   return "opacity:" + parseInt(Math.random() * 10, 10) / 10;
+		 } else {
+		   return "";
+	     } 
+	  }
+    
+    
+    
 
   };
 
