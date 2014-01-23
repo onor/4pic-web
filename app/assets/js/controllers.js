@@ -356,6 +356,7 @@
 			    addPlayer(matrix, reversed[i]);
 			  }
 			  $scope.playerProfiles = matrix;
+			  $scope.range = _.range(0, 10);
 		  }); 
 	  }
 	  
