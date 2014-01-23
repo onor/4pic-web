@@ -283,8 +283,8 @@
     
     function isEmpty(str) { return (str == null || str == '')};
     
-    $scope.oneIsRequired = function(){
-      return !isEmpty($scope.rewardPost.email) || isEmpty($scope.rewardPost.phoneNumber);
+    $scope.oneIsRequiredValid = function(){
+      return !isEmpty($scope.rewardPost.email) || !isEmpty($scope.rewardPost.phoneNumber);
     };
     
 	$scope.reedem = false;
@@ -306,7 +306,7 @@
     $scope.submitted = false;
     $scope.sendReward = function(campaignId) {
     	$scope.submitted = true;
-    	if($scope.myForm.$valid && $scope.oneIsRequired()) {
+    	if($scope.myForm.$valid && $scope.oneIsRequiredValid()) {
             PrizeCode.save({'fbid':appConfig.fbid}, $scope.rewardPost,
               function(success) {
             	$location.path('/leaderboard');

@@ -54,7 +54,7 @@
       		<p>Or</p>
       		<input name="phoneNumber" type="text" placeholder="Your Cellphone Number" ng-pattern="phoneNumberPattern" ng-model="rewardPost.phoneNumber"/>
      		<span ng-show="submitted && myForm.phoneNumber.$error.pattern">Invalid phone number!</span>
-     		<span ng-show="submitted && oneIsRequired()">Enter email or phone or both!</span>
+     		<span ng-show="submitted && !oneIsRequiredValid()">Enter email or phone or both!</span>
      		<button ng-click="sendReward()" class="button light-orange">Send Rewards</button>
   		</form>
   		</div>
