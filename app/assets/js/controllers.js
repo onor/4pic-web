@@ -652,6 +652,9 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 		if ($scope.hintUsed == false) {
 			$rootScope.state.$hint({hint: 10}, function (res) {
 				$scope.revealLetter();
+				$scope.revealLetter();
+				$scope.revealLetter();
+
 				$scope.hintUsed = true;
 			});
 		}
