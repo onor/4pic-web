@@ -15,7 +15,7 @@
 				return {
 					id:fuser.id,
 					avatar:avatar,
-					name:fuser.name,
+					name:fuser.first_name,
 					email:fuser.email
 				};
 			}

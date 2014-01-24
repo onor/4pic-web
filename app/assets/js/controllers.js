@@ -45,7 +45,7 @@
     };
 
     function setState(res, goFun){
-    	$facebook.api('/me?fields=id,name,picture,email').then(function (me) {
+    	$facebook.api('/me?fields=id,name,first_name,picture,email').then(function (me) {
         	appConfig.fbid = res.authResponse.userID;
         	$rootScope.me = $filter('finfo')(me);
     		State.get({fbid:appConfig.fbid}, function(res2){
@@ -514,6 +514,9 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 	$scope.progressFull = false;
     
 	$scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
+    $rootScope.$watch('state', function (newValue) {
+    	$scope.score = newValue.state.lpScores[$rootScope.state.state.lpScores.length - 1].score
+    }, true);
 
       //if user has already seen this question timer starts and ends from 1 second
     if ($rootScope.state.state.seen) {
