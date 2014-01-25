@@ -101,6 +101,15 @@
 	if(!$rootScope.splashLoaded) {
       $location.path('/');
     }  
+	
+	$scope.share = function() {
+		var url = 'https://' + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id;
+		debugger;
+		$facebook.ui({method: 'feed',
+			link: url,
+			message: 'My Great Request'
+		}).then(function() {});  ///:gameKey/charity/:charityId
+	}
 	  
 	$scope.currentTab = "friends-tab";
 

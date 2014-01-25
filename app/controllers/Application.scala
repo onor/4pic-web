@@ -9,7 +9,9 @@ import play.api.cache.Cached
 import play.api.Play.current
 import scala.concurrent.Future
 
-case class FacebookSettings(namespace:String, appId:String, appSecret:String)
+case class FacebookSettings(namespace:String, appId:String, appSecret:String) {
+  val appUrl = s"https://apps.facebook.com/$namespace"
+}
 
 case class Prize(
   _id: String,
@@ -69,15 +71,19 @@ object Application extends Controller {
 
   def indexPost(gameKey: Int) =  {
     Action { implicit request =>
+      Logger.error(s"host ${request.host} domain ${request.domain} uri ${request.uri}" )
+      val baseUrl = request.host
       val settings = facebookSettings(gameKey)
-      Ok(views.html.index(gameKey, settings.appId, onorUrl))
+      Ok(views.html.index(gameKey, settings.appId, onorUrl, baseUrl))
     }
   }
 
   def index(gameKey: Int) = {
     Action { implicit request =>
+      Logger.error(s"host ${request.host} domain ${request.domain} uri ${request.uri}" )
+      val baseUrl = request.host
       val settings = facebookSettings(gameKey)
-      Ok(views.html.index(gameKey, settings.appId, onorUrl))
+      Ok(views.html.index(gameKey, settings.appId, onorUrl, baseUrl))
     }
   }
     
@@ -95,6 +101,11 @@ object Application extends Controller {
       val charities = res.json.as[List[PartyCharity]]
       Ok(views.html.charities(charities = charities, grouped2 = charities.grouped(2).toVector, grouped3 = charities.grouped(3).toVector))
     }  
+  }
+  
+  def charityGame(gameKey:Int, charityId:String, fbid:String) = Action {
+    val settings = facebookSettings(gameKey)
+    Ok(views.html.charityGame(appUrl = settings.appUrl))
   }
 
 }
