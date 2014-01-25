@@ -1,12 +1,19 @@
-@(appUrl:String)
+@(appUrl:String, charity:PartyCharity)
 <!doctype html>
 <html lang="en">
     <head>
+    
+        <meta property="og:title" content="@{charity.name}" />
+		<meta property="og:description" content="@{charity.charity.about}" />
+		<meta property="og:image" content="@{charity.charity.logoColor}"/>
+
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title></title>
     </head>
     <body class="game philz" resize>
-       gggg
+       Name: @{charity.name}
+       About: @{charity.charity.about}
+       <img src="@{charity.charity.logoColor}"/>
     </body>
 </html>
