@@ -76,9 +76,9 @@
     	if (!$scope.fbLoggedIn) {
     		var opts = null;
         	if (isMobile()) {
-        		opts = {display:'touch', scope: 'email'};
+        		opts = {display:'touch', scope: 'email,publish_actions'};
         	} else {
-        		opts = {scope: 'email'};
+        		opts = {scope: 'email,publish_actions'};
         	}
 
         	$facebook.login(opts).then(function(res) {
@@ -104,6 +104,28 @@
 			link: url,
 			message: 'My Great Request'
 		}).then(function() {});  ///:gameKey/charity/:charityId
+		/*
+		var url = "https://" + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id;
+		$facebook.api(['me/objects/fourpicbeauty-dev:charity','post', 
+			{  object: {
+				app_id: 304111289726859,
+				url: url,
+				title: "Sample Charity",
+				image: "https://s3.amazonaws.com/onorassets.onor.net/522ccb2f490122bc02eb0929/9a2302fe-9fcd-446f-bc7b-485e1ce65d2a.png",
+				description: ""
+			}
+			}
+		]).then(function(res) {
+		$facebook.api(['me/fourpicbeauty-dev:onored','post',{charity: url}]).then(
+			function(response) {
+				// handle the response
+			}, function(err) {
+				console.log("code " + err.error.code + " message " + err.error.message + " type " + err.error.type);
+			}
+		);
+		}, function(err) {
+			console.log("code " + err.error.code + " message " + err.error.message + " type " + err.error.type);
+		});*/
 	}
 	  
 	$scope.currentTab = "friends-tab";

@@ -1,10 +1,11 @@
-@(appUrl:String, charity:PartyCharity)
+@(settings:FacebookSettings, charity:PartyCharity)
 <!doctype html>
 <html lang="en">
-    <head>
+
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# @{settings.namespace}: http://ogp.me/ns/fb/@{settings.namespace}#">
     
+        <meta property="fb:app_id" content="@{settings.appId}" /> 
         <meta property="og:title" content="@{charity.name}" />
-        <meta property="og:type" content="charity"/>
 		<meta property="og:description" content="@{charity.charity.about}" />
 		<meta property="og:image" content="@{charity.charity.logoColor}"/>
 

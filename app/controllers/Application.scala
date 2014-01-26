@@ -74,7 +74,7 @@ object Application extends Controller {
       Logger.error(s"host ${request.host} domain ${request.domain} uri ${request.uri}" )
       val baseUrl = request.host
       val settings = facebookSettings(gameKey)
-      Ok(views.html.index(gameKey, settings.appId, onorUrl, baseUrl))
+      Ok(views.html.index(gameKey, settings, onorUrl, baseUrl))
     }
   }
 
@@ -83,7 +83,7 @@ object Application extends Controller {
       Logger.error(s"host ${request.host} domain ${request.domain} uri ${request.uri}" )
       val baseUrl = request.host
       val settings = facebookSettings(gameKey)
-      Ok(views.html.index(gameKey, settings.appId, onorUrl, baseUrl))
+      Ok(views.html.index(gameKey, settings, onorUrl, baseUrl))
     }
   }
     
@@ -107,7 +107,7 @@ object Application extends Controller {
     WS.url(onorUrl + "/client/v1/charities/" + charityId).withHeaders("gameKey" -> gameKey.toString).get.map{ res =>
       val charity = res.json.as[PartyCharity]
       val settings = facebookSettings(gameKey)
-      Ok(views.html.charityGame(appUrl = settings.appUrl, charity = charity))    
+      Ok(views.html.charityGame(settings = settings, charity = charity))    
     }
   }
 
