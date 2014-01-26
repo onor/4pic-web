@@ -1,6 +1,6 @@
 <style>
 		body {margin:0;background-color:#efe2cb !important;text-align:center;}
-		.heart-container-lorea {border-radius:5px;margin-top:20px;margin-bottom:75px;padding:70px 60px 0 60px;position:relative;display:inline-block;width:550px;height:auto;background-color:rgba(0,0,0,0.2);}
+		.heart-container-lorea {border-radius:5px;margin-top:20px;margin-bottom:70px;padding:70px 60px 0 60px;position:relative;display:inline-block;width:550px;height:auto;background-color:rgba(0,0,0,0.2);}
 		img.heart-mask {z-index:1000;position:absolute;top:0;left:0;width:100%;height:auto;border-radius:5px;}
 		
 		.heart-pic-row {background-color:#fff;}
@@ -8,15 +8,15 @@
 
 		.heart-share-title {position:absolute;left:0;top:0;z-index:1001;text-align:center;width:100%;color:#fff;}
 		.heart-share-stats {position:absolute;top:433px;right:30px;z-index:1002;text-align:right;color:#fff;}
-		.heart-share-cause {position:absolute;top:90px;right:30px;z-index:1002;text-align:right;color:#fff;}
+		.heart-share-cause {position:absolute;top:390px;right:30px;z-index:1002;text-align:right;color:#fff;}
 		.heart-share-brand {position:absolute;top:427px;left:30px;z-index:1002;text-align:right;color:#fff;}
-		.heart-share-cause img {width:100px;height:100px;border-radius:100%;border:5px solid #bf6d2c;}
+		.heart-share-cause img {width:130px;height:130px;border-radius:100%;}
 		.heart-share-player {position:absolute;top:163px;right:151px;z-index:1002;text-align:right;color:#fff;}
 		.heart-share-player {width:93px;height:93px;}
 		</style>
 	
 
-<h1 style="color:#e17f31">Thank you!</h1>	
+<h2 style="color:#e17f31">Thank you!</h2>	
 	
 <div class="heart-container-lorea">
 	<img src="http://sinclaire.ca/clients/onor-app/heart-game-mask-square-8.jpg" class="heart-mask">
@@ -36,21 +36,31 @@
 	<div class="heart-share-cause">
 	<img src="http://sinclaire.ca/clients/onor-app/cause.jpg">
 	</div>
-	
+	<!--
 	<div class="heart-share-stats">
 	<span style="font-size:10px;">GAMES PLAYED</span><BR>
 	<span style="font-size:36px;"><b>30/150</b></span><BR>
 	Towards a 15$ donation for<BR>
 	Rainforest Alliance
 	</div>
-	
+	-->
 	<div class="heart-row-container">
 		<div class="heart-pic-row" ng-repeat="row in range">
 			<img ng-repeat="col in range" ng-src="{{profile(row,col)}}" style="{{opacity(row, col)}}">
 		</div>
 	</div>
 </div>
+<BR>
+<div style="width:550px;display:inline-block;position:relative;overflow:hidden;">
+<div style="width:50%;float:left;text-align:left;">
+<span style="font-size:10px;">GAMES PLAYED</span><BR>
+	<span style="font-size:36px;"><b>30/150</b></span><BR>
+	Towards a 15$ donation for<BR>
+	Rainforest Alliance
+</div>
+<div style="width:50%;float:left;text-align:right;">
 
-<p>
 <a class="button light-orange" style="color:#e17f31 !important">PLAY AGAIN</a>
-</p>
+
+</div>
+</div>
