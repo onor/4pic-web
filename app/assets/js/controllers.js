@@ -510,20 +510,19 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
     //load logged user info
 
     if($rootScope.state.state.levelPack > $rootScope.game.levelPacks.length) {
-        $scope.countdownAvailable = 30;
         var levelPack = parseInt(Math.random() * $rootScope.game.levelPacks.length, 10);
-    } else {
-    	 //if user has already seen this question timer starts and ends from 1 second
-        if ($rootScope.state.state.seen) {
-          $scope.countdownAvailable = 1;
-        } else {
-          $scope.countdownAvailable = 30;
-        }
+    } else {        
     	var levelPack = $rootScope.state.state.levelPack;
-    	//todo move this to occur after all images are loaded
-        $rootScope.state.$seenLevel({}, function () {});
     }
     var level = $rootScope.state.state.level;
+    
+	 //if user has already seen this question timer starts and ends from 1 second
+    if ($rootScope.state.state.seen) {
+        $scope.countdownAvailable = 1;
+    } else {
+        $scope.countdownAvailable = 30;
+    }
+    $rootScope.state.$seenLevel({}, function () {});
 
     $scope.away = $rootScope.game.levelPacks[levelPack].levels.length - $rootScope.state.state.level;
 	$scope.progress =  ($rootScope.state.state.level / $rootScope.game.levelPacks[levelPack].levels.length) * 100;
