@@ -31,6 +31,10 @@
 			return $resource(
 				onorUrl + "/client/v1/charityvotes"
 			);
+		}).factory('Heart',function ($resource) {
+			return $resource(
+				onorUrl + "/v1/generateHeart"
+			);
 		}).factory('Score',function ($resource) {
 			return $resource(
 				onorUrl + "/client/v1/scores/:fbid"

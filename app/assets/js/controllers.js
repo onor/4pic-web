@@ -463,7 +463,7 @@
 	  });
   }
 
-  var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, Votes, screenSize) {
+  var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, Votes, screenSize, Heart) {
 	  
 	if(!$rootScope.splashLoaded) {
 	  $location.path('/');
@@ -491,6 +491,13 @@
     $scope.selectCharity = function(id) {
       $rootScope.state.charityId = id;
       $rootScope.pickedCharity = _.find($rootScope.charities, function(charity) {return charity._id == id;});
+      Heart.save({
+    	  fbid:$rootScope.me.id, 
+    	  profileUrl:$rootScope.me.avatar
+    	},{}, 
+    	function(){console.log('ok')}, 
+    	function(){console.log('not ok')}
+      );
 	  $location.path('/heart');
     }
 
