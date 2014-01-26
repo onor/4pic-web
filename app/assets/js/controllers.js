@@ -99,7 +99,7 @@
 	
 	$scope.share = function() {
 		var url = 'https://' + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id;
-		debugger;
+
 		$facebook.ui({method: 'feed',
 			link: url,
 			message: 'My Great Request'
@@ -347,17 +347,21 @@
     	  title:$('#title-' + id).text(),
     	  description:$('#description-' + id).text()
     	}
+
     	$scope.rewardPost = {
     	  email: $rootScope.me.email,
     	  campaignId: id,
     	  name: $rootScope.me.name,
-    	  phoneNumber: ""
+    	  phoneNumber: "",
+        charity: $rootScope.pickedCharity.name,
+        votesneeded: $scope.votes.needed
     	}
     }
 
     $scope.submitted = false;
-    $scope.sendReward = function(campaignId) {
+    $scope.sendReward = function(campaignId) {      
     	$scope.submitted = true;
+   
     	if($scope.myForm.$valid && $scope.oneIsRequiredValid()) {
             PrizeCode.save({'fbid':appConfig.fbid}, $scope.rewardPost,
               function(success) {
@@ -366,6 +370,7 @@
               function(error) {alert('Error ' + error.data);}
             );
     	} else {
+      
     		$scope.submitted = true;
     	}
     	
@@ -428,7 +433,7 @@
 	  }
 	  
 	  $scope.timer = $timeout(function(){
-	     $location.path('/level');
+	     $location.path('/prize');
 	  }, 8000);
 	  
 	  $scope.$on("$destroy", function() {
