@@ -56,7 +56,6 @@
     				});
     			}
     			var levelPack = $rootScope.state.state.levelPack;
-    			$scope.hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
     	    	$scope.fbLoggedIn = true;
     	    	if(angular.isDefined(goFun)) {
         			goFun();
@@ -66,14 +65,10 @@
     }
 
     function goIfLoggedin(){
-    	if($scope.hasMoreLevelPacks) {
-			if(angular.isDefined($rootScope.state.charityId)) {
-			    $location.path('/heart');
-			} else {
-				$location.path('/charity');
-			}
+		if(angular.isDefined($rootScope.state.charityId)) {
+			$location.path('/heart');
 		} else {
-			$location.path('/leaderboard');
+			$location.path('/charity');
 		}
 	}
 
@@ -104,7 +99,7 @@
 	
 	$scope.share = function() {
 		var url = 'https://' + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id;
-		debugger;
+
 		$facebook.ui({method: 'feed',
 			link: url,
 			message: 'My Great Request'
@@ -209,7 +204,6 @@
       });
 
     var levelPack = $rootScope.state.state.levelPack;
-    $scope.hasMoreLevelPacks = ($rootScope.game.levelPacks.length >= (levelPack + 1));
 
       //navigation
     $scope.playAgain = function () {
@@ -353,17 +347,21 @@
     	  title:$('#title-' + id).text(),
     	  description:$('#description-' + id).text()
     	}
+
     	$scope.rewardPost = {
     	  email: $rootScope.me.email,
     	  campaignId: id,
     	  name: $rootScope.me.name,
-    	  phoneNumber: ""
+    	  phoneNumber: "",
+        charity: $rootScope.pickedCharity.name,
+        votesneeded: $scope.votes.needed
     	}
     }
 
     $scope.submitted = false;
-    $scope.sendReward = function(campaignId) {
+    $scope.sendReward = function(campaignId) {      
     	$scope.submitted = true;
+   
     	if($scope.myForm.$valid && $scope.oneIsRequiredValid()) {
             PrizeCode.save({'fbid':appConfig.fbid}, $scope.rewardPost,
               function(success) {
@@ -372,6 +370,7 @@
               function(error) {alert('Error ' + error.data);}
             );
     	} else {
+      
     		$scope.submitted = true;
     	}
     	
@@ -434,7 +433,7 @@
 	  }
 	  
 	  $scope.timer = $timeout(function(){
-	     $location.path('/level');
+	     $location.path('/prize');
 	  }, 8000);
 	  
 	  $scope.$on("$destroy", function() {
@@ -515,8 +514,20 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
     //load logged user info
 
-    var levelPack = $rootScope.state.state.levelPack;
+    if($rootScope.state.state.levelPack > $rootScope.game.levelPacks.length) {
+        var levelPack = parseInt(Math.random() * $rootScope.game.levelPacks.length, 10);
+    } else {        
+    	var levelPack = $rootScope.state.state.levelPack;
+    }
     var level = $rootScope.state.state.level;
+    
+	 //if user has already seen this question timer starts and ends from 1 second
+    if ($rootScope.state.state.seen) {
+        $scope.countdownAvailable = 1;
+    } else {
+        $scope.countdownAvailable = 30;
+    }
+    $rootScope.state.$seenLevel({}, function () {});
 
     $scope.away = $rootScope.game.levelPacks[levelPack].levels.length - $rootScope.state.state.level;
 	$scope.progress =  ($rootScope.state.state.level / $rootScope.game.levelPacks[levelPack].levels.length) * 100;
@@ -526,17 +537,6 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
     $rootScope.$watch('state', function (newValue) {
     	$scope.score = newValue.state.lpScores[$rootScope.state.state.lpScores.length - 1].score
     }, true);
-
-      //if user has already seen this question timer starts and ends from 1 second
-    if ($rootScope.state.state.seen) {
-      $scope.countdownAvailable = 1;
-    } else {
-      $scope.countdownAvailable = 30;
-    }
-
-      //todo move this to occur after all images are loaded
-    $rootScope.state.$seenLevel({}, function () {
-    });
 
     //navigation
     $scope.prizeList = function () {
