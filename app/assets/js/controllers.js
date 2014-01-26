@@ -56,7 +56,6 @@
     				});
     			}
     			var levelPack = $rootScope.state.state.levelPack;
-    			$scope.hasMoreLevelPacks = $rootScope.game.levelPacks.length >= (levelPack + 1);
     	    	$scope.fbLoggedIn = true;
     	    	if(angular.isDefined(goFun)) {
         			goFun();
@@ -66,14 +65,10 @@
     }
 
     function goIfLoggedin(){
-    	if($scope.hasMoreLevelPacks) {
-			if(angular.isDefined($rootScope.state.charityId)) {
-			    $location.path('/heart');
-			} else {
-				$location.path('/charity');
-			}
+		if(angular.isDefined($rootScope.state.charityId)) {
+			$location.path('/heart');
 		} else {
-			$location.path('/leaderboard');
+			$location.path('/charity');
 		}
 	}
 
@@ -209,7 +204,6 @@
       });
 
     var levelPack = $rootScope.state.state.levelPack;
-    $scope.hasMoreLevelPacks = ($rootScope.game.levelPacks.length >= (levelPack + 1));
 
       //navigation
     $scope.playAgain = function () {
@@ -515,7 +509,20 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
     //load logged user info
 
-    var levelPack = $rootScope.state.state.levelPack;
+    if($rootScope.state.state.levelPack > $rootScope.game.levelPacks.length) {
+        $scope.countdownAvailable = 30;
+        var levelPack = parseInt(Math.random() * $rootScope.game.levelPacks.length, 10);
+    } else {
+    	 //if user has already seen this question timer starts and ends from 1 second
+        if ($rootScope.state.state.seen) {
+          $scope.countdownAvailable = 1;
+        } else {
+          $scope.countdownAvailable = 30;
+        }
+    	var levelPack = $rootScope.state.state.levelPack;
+    	//todo move this to occur after all images are loaded
+        $rootScope.state.$seenLevel({}, function () {});
+    }
     var level = $rootScope.state.state.level;
 
     $scope.away = $rootScope.game.levelPacks[levelPack].levels.length - $rootScope.state.state.level;
@@ -526,17 +533,6 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
     $rootScope.$watch('state', function (newValue) {
     	$scope.score = newValue.state.lpScores[$rootScope.state.state.lpScores.length - 1].score
     }, true);
-
-      //if user has already seen this question timer starts and ends from 1 second
-    if ($rootScope.state.state.seen) {
-      $scope.countdownAvailable = 1;
-    } else {
-      $scope.countdownAvailable = 30;
-    }
-
-      //todo move this to occur after all images are loaded
-    $rootScope.state.$seenLevel({}, function () {
-    });
 
     //navigation
     $scope.prizeList = function () {
