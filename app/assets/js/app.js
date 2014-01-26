@@ -10,8 +10,10 @@
  				}]).
  				config(['$facebookProvider', function ($facebookProvider) {
  					$facebookProvider.init({
- 						appId: appConfig.appId//,
- 						//channel: '//path/to/channel.html'  todo: what is channel?
+ 						appId: appConfig.appId,
+ 						status     : true,
+ 					    cookie     : true,
+ 					    xfbml      : true
  					});
  				}]).config(function ($httpProvider) {
  						$httpProvider.defaults.headers.common = {
