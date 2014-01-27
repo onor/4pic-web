@@ -98,8 +98,7 @@
     }  
 	
 	$scope.share = function() {
-		var url = 'https://' + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id;
-
+		var url = 'https://' + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id + '&firstname=' + $rootScope.me.name + '&noOfVotes=' + ($scope.votes.heartSize - $scope.votes.needed);
 		$facebook.ui({method: 'feed',
 			link: url,
 			message: 'My Great Request'
