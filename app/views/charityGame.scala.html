@@ -5,8 +5,8 @@
     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# @{settings.namespace}: http://ogp.me/ns/fb/@{settings.namespace}#">
     
         <meta property="fb:app_id" content="@{settings.appId}" /> 
-        <meta property="og:title" content="@{charity.name}" />
-		<meta property="og:description" content="@{firstname} played @{noOfVotes} games for @{charity.name}" />
+        <meta property="og:title" content="@{firstname} is doing good at Philz Coffee!" />
+		<meta property="og:description" content="@{firstname} is helping @{charity.name} to raise funds by playing Philz Coffe Puzzle! @{noOfVotes} of 150 games are played to fill the heart!" />
 		<meta property="og:image" content="@{heartAvatarUrl}"/>
 
         <meta charset="utf-8"/>
@@ -36,32 +36,8 @@
 	
 		<div class="heart-container-lorea">
 			<img src="@{heartAvatarUrl}">
-			
-			<div class="heart-share-brand">
-			<img src="https://s3.amazonaws.com/onorassets.onor.net/522ccb2f490122bc02eb0929/9a2302fe-9fcd-446f-bc7b-485e1ce65d2a.png">
-			</div>
-			
-			<div class="heart-share-title">
-			<h3 style="font-size:50px;">@{firstname}, you rock!</h3>
-			</div>
-			
-			<div class="heart-share-cause">
-			<img src="@{charity.charity.logoColor}">
-			</div>
-			
-			<div class="heart-share-stats">
-			<span style="font-size:10px;">GAMES PLAYED</span><BR>
-			<span style="font-size:36px;"><b>@{noOfVotes}/150</b></span><BR>
-			Towards a 15$ donation for<BR>
-			Rainforest Alliance
-			</div>
-			
-			<div class="heart-row-container">
-				<div class="heart-pic-row" ng-repeat="row in range">
-					<img ng-repeat="col in range" ng-src="{{profile(row,col)}}" style="{{opacity(row, col)}}">
-				</div>
-			</div>
 		</div>
+		
 		<BR>
 			<div style="width:550px;display:inline-block;position:relative;overflow:hidden;">
 			<div style="width:50%;float:left;text-align:left;">
