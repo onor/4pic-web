@@ -490,13 +490,22 @@
     $scope.selectCharity = function(id) {
       $rootScope.state.charityId = id;
       $rootScope.pickedCharity = _.find($rootScope.charities, function(charity) {return charity._id == id;});
+  	  
+      $facebook.api('/me/picture?redirect=0&type=normal').then(function (picture) {
       Heart.save({
     	  fbid:$rootScope.me.id, 
-    	  profileUrl:$rootScope.me.avatar
+    	  profileUrl:picture.data.url,
+    	  gameUrl:'http:' + $rootScope.game.design.logo, // todo unsafe adding of http
+    	  gameKey: $rootScope.game.gameKey,
+    	  charityUrl:$rootScope.pickedCharity.charity.logoColor,
+    	  charityId:$rootScope.state.charityId,
+    	  title: $rootScope.me.name + ', you rock!'
     	},{}, 
     	function(){console.log('ok')}, 
     	function(){console.log('not ok')}
       );
+      });
+      
 	  $location.path('/heart');
     }
 
