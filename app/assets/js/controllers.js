@@ -735,9 +735,13 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
 	}
 
+	$scope.showSkip = false;//todo refresh controller
   //timer text info refresh
 	$scope.$on('timer-tick', function (event, data) {
 		$scope.remains = data.millis / 1000;
+		if($scope.remains < 2) {
+			$scope.showSkip = true;
+		}
 	});
 }
 
