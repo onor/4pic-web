@@ -625,7 +625,7 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
         	points2 = $scope.remains * 10;
         }
         $rootScope.state.$resolveLevel({points: points2}, function () {
-          $scope.nextLevel(points2);
+          $scope.nextLevel();
         });
       }
 
@@ -716,10 +716,16 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 			});
 		}
 	}
+	
+	$scope.skip = function() {
+		$rootScope.state.$resolveLevel({points: 0}, function () {
+			$scope.nextLevel();
+	    });
+	}
 
 	$scope.levels = $rootScope.game.levelPacks[levelPack].levels;
 
-	$scope.nextLevel = function (points2) {
+	$scope.nextLevel = function () {
 
 		if (level == $scope.levels.length - 1) { //todo take 4 from game definition, remove levelPack param
 			$location.path('/prize');
