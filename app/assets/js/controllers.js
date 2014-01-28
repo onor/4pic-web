@@ -99,7 +99,13 @@
 	
 	$scope.share = function() {
 		var url = 'https://' + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id + '&firstname=' + $rootScope.me.name + '&noOfVotes=' + ($scope.votes.heartSize - $scope.votes.needed) + '&donation=' + ($scope.votes.donationPer * $scope.votes.heartSize);
-		$facebook.ui({method: 'feed',
+	    var avatarUrl = 'https://s3.amazonaws.com/onorassets.onor.net/profiles/' + $rootScope.game.gameKey + '_' + $rootScope.state.charityId + '_' + $rootScope.me.id + '.png';
+
+	    $facebook.ui({method: 'feed',
+			name : $rootScope.me.name + ' is doing good at Philz Coffee!',
+			caption: $rootScope.me.name + ' is helping ' + $rootScope.pickedCharity.name + ' to raise funds by playing ' + $rootScope.game.name + '!',
+			description: ($scope.votes.heartSize - $scope.votes.needed) + ' of 150 games are played to fill the heart!',
+			picture: avatarUrl,
 			link: url,
 			message: 'My Great Request'
 		}).then(function() {});  ///:gameKey/charity/:charityId
