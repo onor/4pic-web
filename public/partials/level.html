@@ -55,7 +55,7 @@
             <div class="large-6 medium-6 columns">
 
               <div class="puzzle-board">
-                <ul class="large-block-grid-6 small-block-grid-6 rounded">
+                <ul class="large-block-grid-12 small-block-grid-12 rounded">
                   <!-- add a non-breaking space (&nbsp;) when letters are removed so the keyboard doesn't collapse-->
                   <li ng-repeat="letter in answer track by $index" analytics-on="removeLetter" ng-click="remove($index)" ng-class="{'invalid-answer':invalid}">{{letter}}</li>
                 </ul>
