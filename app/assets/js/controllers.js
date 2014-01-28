@@ -495,7 +495,7 @@
       Heart.save({
     	  fbid:$rootScope.me.id, 
     	  profileUrl:picture.data.url,
-    	  gameUrl:'http:' + $rootScope.game.design.logo, // todo unsafe adding of http
+    	  gameUrl: $rootScope.game.design.logo, // todo unsafe adding of http
     	  gameKey: $rootScope.game.gameKey,
     	  charityUrl:$rootScope.pickedCharity.charity.logoColor,
     	  charityId:$rootScope.state.charityId,
