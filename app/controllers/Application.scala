@@ -103,7 +103,7 @@ object Application extends Controller {
     }  
   }
   
-  def charityGame(gameKey:Int, charityId:String, fbid:String, firstname:String, noOfVotes:Int) = Action.async {
+  def charityGame(gameKey:Int, charityId:String, fbid:String, firstname:String, noOfVotes:Int, donation:Int) = Action.async {
     val avatarUrl = s"//s3.amazonaws.com/onorassets.onor.net/profiles/${gameKey.toString}_${charityId}_$fbid.png"
     WS.url(onorUrl + "/client/v1/charities/" + charityId).withHeaders("gameKey" -> gameKey.toString).get.map{ res =>
       val charity = res.json.as[PartyCharity]
@@ -114,7 +114,8 @@ object Application extends Controller {
           charity = charity, 
           heartAvatarUrl = avatarUrl, 
           firstname = firstname,
-          noOfVotes = noOfVotes))    
+          noOfVotes = noOfVotes,
+          donation = donation))    
     }
   }
 

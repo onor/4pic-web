@@ -1,4 +1,4 @@
-@(settings:FacebookSettings, charity:PartyCharity, heartAvatarUrl:String, firstname:String, noOfVotes:Int)
+@(settings:FacebookSettings, charity:PartyCharity, heartAvatarUrl:String, firstname:String, noOfVotes:Int, donation:Int)
 <!doctype html>
 <html lang="en">
 
@@ -44,7 +44,7 @@
 			<span style="font-size:10px;">GAMES PLAYED</span><BR>
 			<span style="font-size:36px;"><b>@{noOfVotes}/150</b></span><BR>
 				Towards a 15$ donation for<BR>
-				Rainforest Alliance
+				@{charity.name}
 			</div>
 			<div style="width:50%;float:left;text-align:right;">
 				<a class="button light-orange" style="color:#e17f31 !important">PLAY AGAIN</a>
