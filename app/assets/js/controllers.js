@@ -374,8 +374,8 @@
     	  campaignId: id,
     	  name: $rootScope.me.name,
     	  phoneNumber: "",
-        charity: $rootScope.pickedCharity.name,
-        votesneeded: $scope.votes.needed
+    	  charityId: $rootScope.pickedCharity._id,
+          votesneeded: $scope.votes.needed
     	}
     }
 
