@@ -98,16 +98,17 @@
     }  
 	
 	$scope.share = function() {
-		var url = 'https://' + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id + '&firstname=' + $rootScope.me.name + '&noOfVotes=' + ($scope.votes.heartSize - $scope.votes.needed) + '&donation=' + ($scope.votes.donationPer * $scope.votes.heartSize);
+		var time = (new Date()).getMilliseconds();
+		//var url = 'https://' + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id + '&firstname=' + $rootScope.me.name + '&noOfVotes=' + ($scope.votes.heartSize - $scope.votes.needed) + '&donation=' + ($scope.votes.donationPer * $scope.votes.heartSize);
 	    var avatarUrl = 'https://s3.amazonaws.com/onorassets.onor.net/profiles/' + $rootScope.game.gameKey + '_' + $rootScope.state.charityId + '_' + $rootScope.me.id + '.png';
-
+	    var url = "https://apps.facebook.com/" + appConfig.appNamespace;
+	    
 	    $facebook.ui({method: 'feed',
 			name : $rootScope.me.name + ' is doing good at Philz Coffee!',
-			caption: $rootScope.me.name + ' is helping ' + $rootScope.pickedCharity.name + ' to raise funds by playing ' + $rootScope.game.name + '!',
-			description: ($scope.votes.heartSize - $scope.votes.needed) + ' of 150 games are played to fill the heart!',
-			picture: avatarUrl,
-			link: url,
-			message: 'My Great Request'
+			description: $rootScope.me.name + ' is helping ' + $rootScope.pickedCharity.name + ' to raise funds by playing ' + $rootScope.game.name + '!',
+			caption: ($scope.votes.heartSize - $scope.votes.needed) + ' of 150 games are played to fill the heart!',
+			picture: avatarUrl + '?time=' + time,
+			link: url
 		}).then(function() {});  ///:gameKey/charity/:charityId
 		/*
 		var url = "https://" + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id;
@@ -497,7 +498,7 @@
       $rootScope.state.charityId = id;
       $rootScope.pickedCharity = _.find($rootScope.charities, function(charity) {return charity._id == id;});
   	  
-      $facebook.api('/me/picture?redirect=0&type=normal').then(function (picture) {
+      $facebook.api('/me/picture?redirect=0&type=normal&height=132&width=132').then(function (picture) {
       Heart.save({
     	  fbid:$rootScope.me.id, 
     	  profileUrl:picture.data.url,
@@ -746,7 +747,9 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 	$scope.$on('timer-tick', function (event, data) {
 		$scope.remains = data.millis / 1000;
 		if($scope.remains < 2) {
-			$scope.showSkip = true;
+	        $scope.$apply(function () {
+			  $scope.showSkip = true;
+	        });
 		}
 	});
 }
