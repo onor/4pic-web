@@ -187,6 +187,7 @@
           friend.rank = res.rank;
           friend.score = res.score;
           friend.hearts = res.hearts;
+          friend.prizes = res.prizes;
           $scope.scores.push(friend);
         });
       });
