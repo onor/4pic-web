@@ -206,7 +206,7 @@
             	prizes: score.prizes});
           },
           function (response) {
-            alert('error');
+            console.log('no access to facebook user');
           }
         );
       });
@@ -225,7 +225,7 @@
             	  prizes: score.prizes});
             },
             function (response) {
-              alert('error');
+                console.log('no access to facebook user');
             }
           );
         });
