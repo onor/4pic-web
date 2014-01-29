@@ -245,9 +245,9 @@
 
 
 				.profile-pic {
-					min-width:42px; min-height:42px;
+					min-width:73px; min-height:73px;
 					max-width:74px; max-width:74px;
-					margin-top:11px;
+					/*margin-top:11px;*/
 				}
 
 				.total-points {
@@ -398,8 +398,9 @@
 						background-color:rgba(255,255,255,.84);
 						text-align:center;
 						color:$philz-orange;
-						padding: 1.55rem 0.625rem 1.55rem !important;
+						padding: 1.55rem 0.312rem 1.55rem !important;
 						vertical-align:middle;
+						@media #{$small-only} { font-size:11px; }
 						
 						&:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6) {
 							border-bottom:3px solid #eaa66f;
@@ -697,7 +698,7 @@
 								&:first-child {
 									@media #{$small-only} { display:none; }
 									width:10%;
-									min-width:50px; min-height:50px;
+									min-width:70px; min-height:70px;
 								}
 
 								//name
