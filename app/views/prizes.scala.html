@@ -1,4 +1,4 @@
-@(campaigns:List[Campaign], grouped:Vector[List[Campaign]], groupedSmall:Vector[List[Campaign]], points:Int, locked: Option[Prize] => Boolean)
+@(campaigns:List[Campaign], grouped:Vector[List[Campaign]], groupedSmall:Vector[List[Campaign]], locked: Option[Prize] => Boolean)
 <div class="large-10 medium-12 columns center text-center">
 	<div class='hide-for-small'>
 		<ul class="orbit-content rewards text-center center" data-orbit>
@@ -19,7 +19,9 @@
 						}
 						<h4 id="title-@{campaign._id}">@{campaign.prize.get.title}</h4>
 						<p id="description-@{campaign._id}" class="lead philz-white">@{campaign.prize.get.description}</p> 
-						<a ng-click="openModal('@{campaign._id}')" class="button light-orange">Claim Reward</a>
+						@if(!locked(campaign.prize)){
+						  <a ng-click="openModal('@{campaign._id}')" class="button light-orange">Claim Reward</a>
+						}
 					</li>
 					}
 				</ul>
@@ -49,7 +51,9 @@
 						}
 						<h4>@{campaign.prize.get.title}</h4>
 						<p class="lead philz-white">@{campaign.prize.get.description}</p> 
-						<a ng-click="openModal('@{campaign._id}')" class="button light-orange">Claim Reward</a>
+						@if(!locked(campaign.prize)){
+							<a ng-click="openModal('@{campaign._id}')" class="button light-orange">Claim Reward</a>
+						}
 					</li>
 					}
 				</ul>
