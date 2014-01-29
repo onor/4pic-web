@@ -98,6 +98,7 @@
     }  
 	
 	$scope.share = function() {
+		var time = (new Date()).getMilliseconds();
 		//var url = 'https://' + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id + '&firstname=' + $rootScope.me.name + '&noOfVotes=' + ($scope.votes.heartSize - $scope.votes.needed) + '&donation=' + ($scope.votes.donationPer * $scope.votes.heartSize);
 	    var avatarUrl = 'https://s3.amazonaws.com/onorassets.onor.net/profiles/' + $rootScope.game.gameKey + '_' + $rootScope.state.charityId + '_' + $rootScope.me.id + '.png';
 	    var url = "https://apps.facebook.com/" + appConfig.appNamespace;
@@ -106,7 +107,7 @@
 			name : $rootScope.me.name + ' is doing good at Philz Coffee!',
 			description: $rootScope.me.name + ' is helping ' + $rootScope.pickedCharity.name + ' to raise funds by playing ' + $rootScope.game.name + '!',
 			caption: ($scope.votes.heartSize - $scope.votes.needed) + ' of 150 games are played to fill the heart!',
-			picture: avatarUrl,
+			picture: avatarUrl + '?time=' + time,
 			link: url
 		}).then(function() {});  ///:gameKey/charity/:charityId
 		/*
@@ -497,7 +498,7 @@
       $rootScope.state.charityId = id;
       $rootScope.pickedCharity = _.find($rootScope.charities, function(charity) {return charity._id == id;});
   	  
-      $facebook.api('/me/picture?redirect=0&type=normal').then(function (picture) {
+      $facebook.api('/me/picture?redirect=0&type=normal&height=132&width=132').then(function (picture) {
       Heart.save({
     	  fbid:$rootScope.me.id, 
     	  profileUrl:picture.data.url,
