@@ -559,7 +559,7 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
     //load logged user info
 
-    if($rootScope.state.state.levelPack > $rootScope.game.levelPacks.length) {
+    if($rootScope.state.state.levelPack >= $rootScope.game.levelPacks.length) {
         var levelPack = parseInt(Math.random() * $rootScope.game.levelPacks.length, 10);
     } else {        
     	var levelPack = $rootScope.state.state.levelPack;
