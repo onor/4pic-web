@@ -2,7 +2,12 @@
 <!doctype html>
 <html lang="en">
 
-    <head>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# @{settings.namespace}: http://ogp.me/ns/fb/@{settings.namespace}#">   
+		<meta property="fb:app_id" content="@{settings.appId}" /> 
+		<meta property="og:title" content="@{firstname} is doing good at Philz Coffee!" />
+		<meta property="og:description" content="@{firstname} is helping @{charity.name} to raise funds by playing Philz Coffe Puzzle! @{noOfVotes} of 150 games are played to fill the heart!" />
+		<meta property="og:image" content="@{heartAvatarUrl}"/>
+		<meta property="og:type" content="article"/>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title></title>

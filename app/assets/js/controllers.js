@@ -187,6 +187,7 @@
           friend.rank = res.rank;
           friend.score = res.score;
           friend.hearts = res.hearts;
+          friend.prizes = res.prizes;
           $scope.scores.push(friend);
         });
       });
@@ -206,7 +207,7 @@
             	prizes: score.prizes});
           },
           function (response) {
-            alert('error');
+            console.log('no access to facebook user');
           }
         );
       });
@@ -225,7 +226,7 @@
             	  prizes: score.prizes});
             },
             function (response) {
-              alert('error');
+                console.log('no access to facebook user');
             }
           );
         });
@@ -558,7 +559,7 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
     //load logged user info
 
-    if($rootScope.state.state.levelPack > $rootScope.game.levelPacks.length) {
+    if($rootScope.state.state.levelPack >= $rootScope.game.levelPacks.length) {
         var levelPack = parseInt(Math.random() * $rootScope.game.levelPacks.length, 10);
     } else {        
     	var levelPack = $rootScope.state.state.levelPack;
@@ -627,10 +628,13 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
       $scope.correct = $scope.level.answer.toUpperCase() == newValue.join('');
       if ($scope.correct) {
         $scope.$broadcast('timer-stop');
-        var points2 = 10;
-        if(angular.isDefined($scope.remains)) {
-        	points2 = $scope.remains * 10;
+        
+        if(!angular.isDefined($scope.remains)) {
+        	$scope.remains = 1;
         }
+        
+        var points2 = Math.max($scope.remains * 10, 30) - ($scope.hintUsed ? 1 : 0) * 10;
+        
         $rootScope.state.$resolveLevel({points: points2}, function () {
           $scope.nextLevel();
         });
@@ -714,18 +718,18 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 	$scope.hint = function() {
 		//User has selected Question Mark
 		if ($scope.hintUsed == false) {
-			$rootScope.state.$hint({hint: 10}, function (res) {
+			//$rootScope.state.$hint({hint: 10}, function (res) {
 				$scope.revealLetter();
 				$scope.revealLetter();
 				$scope.revealLetter();
 
 				$scope.hintUsed = true;
-			});
+			//});
 		}
 	}
 	
 	$scope.skip = function() {
-		$rootScope.state.$resolveLevel({points: 0}, function () {
+		$rootScope.state.$resolveLevel({points: 10}, function () {
 			$scope.nextLevel();
 	    });
 	}

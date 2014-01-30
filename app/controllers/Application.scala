@@ -92,7 +92,7 @@ object Application extends Controller {
 
     WS.url(onorUrl + "/client/v2/campaignsavailable").withHeaders("gameKey" -> gameKey.toString).get.map{ res =>
       val campaigns = res.json.as[List[Campaign]].sortBy(_.prize.get.points.getOrElse(0))
-      Ok(views.html.prizes(campaigns, campaigns.grouped(3).toVector, campaigns.grouped(1).toVector, points, locked _))
+      Ok(views.html.prizes(campaigns, campaigns.grouped(3).toVector, campaigns.grouped(1).toVector, locked _))
     }  
   }
   
