@@ -256,12 +256,12 @@
 	  
 	  
 	  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
-		  var reversed = votes.playerProfiles.reverse();
+		  var picList = votes.playerProfiles;
 		  for (var i = matrix.length - 1; i >=0; i--) {
 			for (var j = 0; j < matrix[i].length; j++) {
-			  if (matrix[i][j] == 1 && reversed.length > 0) {
-			    matrix[i][j] = reversed[reversed.length - 1];
-			    reversed.splice(reversed.length - 1, 1);
+			  if (matrix[i][j] == 1 && picList.length > 0) {
+			    matrix[i][j] = picList[picList.length - 1];
+			    picList.splice(picList.length - 1, 1);
 			  } else {
 				matrix[i][j] = parseInt(Math.random() * 10, 10) / 10;
 			  }
@@ -429,12 +429,12 @@
 	      $location.path('/');
 	  } else {
 		  $scope.votes = Votes.get({charityId:$rootScope.state.charityId}, function(votes) {
-			  var reversed = votes.playerProfiles.reverse();
+			  var picList = votes.playerProfiles;
 			  for (var i = matrix.length - 1; i >=0; i--) {
 				for (var j = 0; j < matrix[i].length; j++) {
-				  if (matrix[i][j] == 1 && reversed.length > 0) {
-				    matrix[i][j] = reversed[reversed.length - 1];
-				    reversed.splice(reversed.length - 1, 1);
+				  if (matrix[i][j] == 1 && picList.length > 0) {
+				    matrix[i][j] = picList[picList.length - 1];
+				    picList.splice(picList.length - 1, 1);
 				  } else {
 					matrix[i][j] = parseInt(Math.random() * 10, 10) / 10;
 				  }
@@ -442,7 +442,7 @@
 			  }
 			  $scope.playerProfiles = matrix;
 			  $scope.range = _.range(0, 14);
-		  }); 
+		  });
 	  }
 	  
 	  $scope.profile = function(row,col) {
@@ -499,6 +499,8 @@
       $rootScope.state.charityId = id;
       $rootScope.pickedCharity = _.find($rootScope.charities, function(charity) {return charity._id == id;});
   	  
+  	  //THIS IS TO GENERATE THE CUSTOME HEART
+
       $facebook.api('/me/picture?redirect=0&type=normal&height=132&width=132').then(function (picture) {
       Heart.save({
     	  fbid:$rootScope.me.id, 
