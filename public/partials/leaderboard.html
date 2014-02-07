@@ -230,14 +230,24 @@
               </div>
               <!--end leaders-->
 
+
+
               <!--the heart -->
               <div class="large-5 medium-5 columns text-center center">
                 <div class="share-heart">
-                  <img src="../images/heart-leaderboard.png">
+                  <div class="heart-container-lorea">
+          <img src="http://sinclaire.ca/clients/onor-app/heart-game-mask-square-leaderboard.png" class="heart-mask">
+          <div class="heart-row-container">
+            <div class="heart-pic-row" ng-repeat="row in range">
+              <img ng-repeat="col in range" ng-src="{{profile(row,col)}}" style="{{opacity(row, col)}}">
+            </div>
+          </div>
+          </div>
                   <ng-include src="'../../partials/shareHeart.html'"/>
                 </div>
               </div>
               <!--end heart-->
+
 
             </div>
 
