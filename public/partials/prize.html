@@ -26,7 +26,7 @@
 	
 	<div class="row section goal">
 	  <div class="large-10 medium-12 columns center text-center">
-	    <h3>{{me.name}} {{votes.heartSize - votes.needed}} out of {{votes.heartSize}} games are played for {{game.name}} to write a check of {{votes.donationPer * votes.heartSize}}$ for {{pickedCharity.name}}!</h3>
+	    <h3>{{me.name}}, Congratulations! You are helping {{pickedCharity.name}}!<br>{{votes.heartSize - votes.needed}} out of {{votes.heartSize}} games are played to fill a heart!</h3>
 	    <a ng-click="keepPlaying()" class="button light-orange">Keep Playing &nbsp;&amp;&nbsp; Do Good</a>
 	    <span class="lead philz-white">&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	    <a ng-click="seeLeaderboard()" class="button light-orange">See Leaderboard</a>
