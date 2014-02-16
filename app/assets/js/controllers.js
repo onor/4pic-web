@@ -578,6 +578,9 @@ var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filte
 
     $scope.away = $rootScope.game.levelPacks[levelPack].levels.length - $rootScope.state.state.level;
 	$scope.progress =  ($rootScope.state.state.level / $rootScope.game.levelPacks[levelPack].levels.length) * 100;
+	
+	$scope.progress = Math.round($scope.progress);
+
 	$scope.progressFull = false;
     
 	$scope.score = $rootScope.state.state.lpScores[$rootScope.state.state.lpScores.length - 1].score;
