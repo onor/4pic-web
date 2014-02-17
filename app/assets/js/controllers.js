@@ -533,9 +533,6 @@ $analytics.eventTrack('PlayAgain', {  category: 'Playing', label: 'Control' });
   	  
   	  //THIS IS TO GENERATE THE CUSTOME HEART
 
-
-$analytics.eventTrack('CustomHeart', {  category: 'GenerateHeart', label: 'You Rock' });
-
       $facebook.api('/me/picture?redirect=0&type=normal&height=132&width=132').then(function (picture) {
       Heart.save({
     	  fbid:$rootScope.me.id, 
