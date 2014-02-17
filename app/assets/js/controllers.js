@@ -7,9 +7,11 @@
 	    return isMobile;
 	}
 
-  var SplashCtrl = function($scope, $rootScope, State, $location, Game, $facebook, Charity, Campaign, $filter) {
+  var SplashCtrl = function($scope, $rootScope, State, $location, Game, $facebook, Charity, Campaign, $filter, $analytics) {
 	$rootScope.splashLoaded = true;
 	
+$analytics.eventTrack('splashLoaded', {  category: 'splash', label: 'Startup' });
+
 	$scope.goEnabled = false;
 	
     $rootScope.game = Game.get({}, function(){
@@ -68,7 +70,10 @@
 		if(angular.isDefined($rootScope.state.charityId)) {
 			$location.path('/heart');
 		} else {
+
+$analytics.eventTrack('CharitySelection', {  category: 'splash', label: 'CharityFirstSelection' });						
 			$location.path('/charity');
+
 		}
 	}
 
@@ -91,12 +96,14 @@
 
 }
 
-  var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook, Score, $filter, Tournament, Votes) {
+  var LeaderboardCtrl = function($scope, $rootScope, $location, $facebook, Score, $filter, Tournament, Votes, $analytics) {
 	  
 	if(!$rootScope.splashLoaded) {
       $location.path('/');
     }  
 	
+$analytics.eventTrack('Leaderboard', {  category: 'LeaderboardCtrl', label: 'Control' });
+
     $scope.heartUrl = 'https://s3.amazonaws.com/onorassets.onor.net/profiles/' + $rootScope.game.gameKey + '_' + $rootScope.state.charityId + '_' + $rootScope.me.id + '.png';
 	    
 	$scope.heartText = $rootScope.me.name + ' is doing good at Philz Coffee!' + 
@@ -110,6 +117,10 @@
 	}
 
 	$scope.share = function() {
+
+$analytics.eventTrack('ShareHeart', {  category: 'Viral', label: 'Share' });
+
+
 		var time = (new Date()).getMilliseconds();
 		//var url = 'https://' + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id + '&firstname=' + $rootScope.me.name + '&noOfVotes=' + ($scope.votes.heartSize - $scope.votes.needed) + '&donation=' + ($scope.votes.donationPer * $scope.votes.heartSize);
 	    var avatarUrl = 'https://s3.amazonaws.com/onorassets.onor.net/profiles/' + $rootScope.game.gameKey + '_' + $rootScope.state.charityId + '_' + $rootScope.me.id + '.png';
@@ -193,6 +204,8 @@
       query: 'SELECT uid, name, is_app_user, pic_square FROM user WHERE (uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1) or uid = me()'
     }).then(function (friends) {
       console.log(arguments);
+
+$analytics.eventTrack('GenerateHeart', {  category: 'Heart', label: 'Generate' });
       $scope.scores = [];
       _.map(friends, function (friend) {
         Score.get({fbid: friend.uid, weekly: false}, function (res) {
@@ -306,17 +319,21 @@
 
   };
 
-  var PrizeCtrl = function($scope, $rootScope, $location, CampaignPrize, $facebook, $filter, PrizeCode, Score, screenSize, Votes) {
+  var PrizeCtrl = function($scope, $rootScope, $location, CampaignPrize, $facebook, $filter, PrizeCode, Score, screenSize, Votes, $analytics) {
 
 	if(!$rootScope.splashLoaded) {
 	  $location.path('/');
 	}
 		  
 	$scope.seeLeaderboard = function() {
+
+$analytics.eventTrack('SeeLeaderboard', {  category: 'LeaderboardView', label: 'Navigation' });		
 		$location.path('/leaderboard');	
 	} 
 	
 	$scope.keepPlaying = function() {
+
+$analytics.eventTrack('PlayAgain', {  category: 'Playing', label: 'Control' });		
 		$location.path('/level');	
 	}
 	
@@ -419,7 +436,7 @@
 
   };
 
-  var HeartCtrl = function($scope, $rootScope, Votes, $location, $timeout) {
+  var HeartCtrl = function($scope, $rootScope, Votes, $location, $timeout, $analytics) {
 	  
 	  var matrix=[    [0,1,1,1,1,0,0,0,0,1,1,1,1,0],
 	                  [1,1,1,1,1,1,1,1,1,1,1,1,1,1],	//6
@@ -474,6 +491,9 @@
 	  }
 	  
 	  $scope.timer = $timeout(function(){
+
+	  	$analytics.eventTrack('heartSeen', {  category: 'heart', label: 'HeartLoad' });
+
 	     $location.path('/level');
 	  }, 8000);
 	  
@@ -482,7 +502,7 @@
 	  });
   }
 
-  var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, Votes, screenSize, Heart) {
+  var CharityCtrl = function($scope, $rootScope, Charity, $facebook, $filter, $location, Votes, screenSize, Heart, $analytics) {
 	  
 	if(!$rootScope.splashLoaded) {
 	  $location.path('/');
@@ -513,6 +533,9 @@
   	  
   	  //THIS IS TO GENERATE THE CUSTOME HEART
 
+
+$analytics.eventTrack('CustomHeart', {  category: 'GenerateHeart', label: 'You Rock' });
+
       $facebook.api('/me/picture?redirect=0&type=normal&height=132&width=132').then(function (picture) {
       Heart.save({
     	  fbid:$rootScope.me.id, 
@@ -533,19 +556,24 @@
 
   };
 
-var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filter, $route, Score, $timeout) {
+var LevelCtrl = function($scope, $rootScope, State, $location, $facebook, $filter, $route, Score, $timeout, $analytics) {
 
 	if(!$rootScope.splashLoaded) {
 	  $location.path('/');
 	}
+
 	
 	$timeout(function() {$scope.hideToastr = true;}, 6000);
 	
 	$scope.showTimer = true;
 
 	function callback(response) {
+	  if(!response)	{
 		if(response.to.length > 0) {
 			removeLetters();
+
+$analytics.eventTrack('InvitedFriend', {  category: 'Viral', label: 'Invite' });			
+			}
 		}
 	}
 
