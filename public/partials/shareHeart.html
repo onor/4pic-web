@@ -5,7 +5,7 @@
 </p>
 <a analytics-on="playAgain" ng-click="playAgain()" class="button dark-orange display-block text-center">Play Again</a>
 <span class="lead philz-orange philz-white">&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<a analytics-on="shareHeart" ng-click="share()" class="button dark-orange display-block text-center">Share Your Heart</a>
+<a analytics-on="shareHeart" analytics-event="shareHeart" ng-click="share()" class="button dark-orange display-block text-center">Share Your Heart</a>
 
 <a twitter data-lang="en" data-count='vertical' data-url='{{ heartUrl }}'  data-size="medium" data-text='{{heartText}}' ></a>
 

@@ -8,7 +8,7 @@
           <li data-orbit-slide="headline-1">
             <ul class="small-block-grid-1">
               <li>
-                <a analytics-on"SelectCharity1" ng-click="selectCharity('@{charity._id}')">
+                <a analytics-on="SelectCharity1" ng-click="selectCharity('@{charity._id}')">
                   <img src="@{charity.charity.logoColor}" class="center circle hop">
                   <h4>@{charity.name}</h4>
                   <p class="lead small light">@{charity.charity.about}</p>
@@ -27,7 +27,7 @@
             <ul class="large-block-grid-3 text-center">
 			  @for(charity <- grouped3(i)) {
               <li>
-                <a analytics-on"SelectCharity1" ng-click="selectCharity('@{charity._id}')">
+                <a analytics-on="SelectCharity1" ng-click="selectCharity('@{charity._id}')">
                   <img src="@{charity.charity.logoColor}" class="center circle hop">
                   <h4>@{charity.name}</h4>
                   <p class="lead small light">@{charity.charity.about}</p>
@@ -47,7 +47,7 @@
             <ul class="medium-block-grid-2 text-center">
 			  @for(charity <- grouped2(i)) {
               <li>
-                <a analytics-on"SelectCharity1" ng-click="selectCharity('@{charity._id}')">
+                <a analytics-on="SelectCharity1" ng-click="selectCharity('@{charity._id}')">
                   <img src="@{charity.charity.logoColor}" class="center circle hop">
                   <h4>@{charity.name}</h4>
                   <p class="lead small light">@{charity.charity.about}</p>
