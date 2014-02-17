@@ -27,10 +27,10 @@
 
       <div class="panel rounded">
         <dl class="tabs">
-          <dd ng-class="{active:isActiveTab('friends-tab')}"><a analytics-on="friends" analytics-event="friends" ng-click="onClickTab('friends-tab')">Friends</a></dd>
-          <dd ng-class="{active:isActiveTab('week-tab')}"><a analytics-on="week" analytics-event="week" ng-click="onClickTab('week-tab')">This Week</a></dd>
+          <dd ng-class="{active:isActiveTab('friends-tab')}"><a analytics-category="Commands" analytics-on="friends" analytics-event="friends" ng-click="onClickTab('friends-tab')">Friends</a></dd>
+          <dd ng-class="{active:isActiveTab('week-tab')}"><a analytics-category="Commands" analytics-on="week" analytics-event="week" ng-click="onClickTab('week-tab')">This Week</a></dd>
           <dd ng-class="{active:isActiveTab('alltime-tab')}">
-          <a analytics-on="allTime" analytics-event="allTime" ng-click="onClickTab('alltime-tab')">All Time</a></dd>
+          <a analytics-category="Commands" analytics-on="allTime" analytics-event="allTime" ng-click="onClickTab('alltime-tab')">All Time</a></dd>
         </dl>
 
         <div class="row">
