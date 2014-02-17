@@ -474,7 +474,7 @@
 	  }
 	  
 	  $scope.timer = $timeout(function(){
-	     $location.path('/prize');
+	     $location.path('/level');
 	  }, 8000);
 	  
 	  $scope.$on("$destroy", function() {
