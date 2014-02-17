@@ -97,6 +97,18 @@
       $location.path('/');
     }  
 	
+    $scope.heartUrl = 'https://s3.amazonaws.com/onorassets.onor.net/profiles/' + $rootScope.game.gameKey + '_' + $rootScope.state.charityId + '_' + $rootScope.me.id + '.png';
+	    
+	$scope.heartText = $rootScope.me.name + ' is doing good at Philz Coffee!' + 
+	$rootScope.me.name + ' is helping ' + $rootScope.pickedCharity.name + 
+	' to raise funds by playing ' + $rootScope.game.name + '!';
+
+	$scope.tweet = function  () {
+		// body...
+
+		
+	}
+
 	$scope.share = function() {
 		var time = (new Date()).getMilliseconds();
 		//var url = 'https://' + appConfig.baseUrl + '/' + appConfig.gameKey + '/charity/' + $rootScope.state.charityId + '?fbid=' + $rootScope.me.id + '&firstname=' + $rootScope.me.name + '&noOfVotes=' + ($scope.votes.heartSize - $scope.votes.needed) + '&donation=' + ($scope.votes.donationPer * $scope.votes.heartSize);
@@ -462,7 +474,7 @@
 	  }
 	  
 	  $scope.timer = $timeout(function(){
-	     $location.path('/level');
+	     $location.path('/prize');
 	  }, 8000);
 	  
 	  $scope.$on("$destroy", function() {

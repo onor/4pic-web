@@ -1,4 +1,4 @@
- 			angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngRoute' , 'ngAnimate', 'facebook', 'timer', 'angulartics', 'angulartics.google.analytics']).
+ 			angular.module('myApp', [ 'djds4rce.angular-socialshare','myApp.filters', 'myApp.services', 'myApp.directives', 'ngResource', 'ngRoute' , 'ngAnimate', 'facebook', 'timer', 'angulartics', 'angulartics.google.analytics']).
  				config(['$routeProvider', function ($routeProvider) {
  					$routeProvider.when('/heart', {templateUrl: '../../partials/heart.html', controller: HeartCtrl})
  					$routeProvider.when('/splash', {templateUrl: '../../partials/splash.html', controller: SplashCtrl});
